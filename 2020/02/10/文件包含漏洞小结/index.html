@@ -15,12 +15,12 @@
 
 
 
-<meta name="description" content="0x01、什么是文件包含?为了更好地使用代码的重用性，引入了文件包含函数，通过文件包含函数将文件包含进来，直接使用包含文件的代码，简单点来说就是一个文件里面包含另外一个或多个文件。 0x02、漏洞成因文件包含函数加载的参数没有经过过滤或者严格的定义，可以被用户控制，包含其他恶意文件，导致了执行了非预期的代码。 0x03、php引发文件包含漏洞的四个函数12345678include()includ">
+<meta name="description" content="0x01、什么是文件包含?">
 <meta property="og:type" content="article">
 <meta property="og:title" content="文件包含漏洞小结">
 <meta property="og:url" content="http://yoursite.com/2020/02/10/文件包含漏洞小结/index.html">
 <meta property="og:site_name" content="obsetear">
-<meta property="og:description" content="0x01、什么是文件包含?为了更好地使用代码的重用性，引入了文件包含函数，通过文件包含函数将文件包含进来，直接使用包含文件的代码，简单点来说就是一个文件里面包含另外一个或多个文件。 0x02、漏洞成因文件包含函数加载的参数没有经过过滤或者严格的定义，可以被用户控制，包含其他恶意文件，导致了执行了非预期的代码。 0x03、php引发文件包含漏洞的四个函数12345678include()includ">
+<meta property="og:description" content="0x01、什么是文件包含?">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/webshell/filein1.jpg">
 <meta property="og:image" content="http://yoursite.com/webshell/filein2.jpg">
@@ -35,10 +35,10 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20200202194324952.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20200202195842222.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20200202200713939.jpg">
-<meta property="og:updated_time" content="2020-02-24T13:36:51.075Z">
+<meta property="og:updated_time" content="2020-02-24T13:45:45.533Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="文件包含漏洞小结">
-<meta name="twitter:description" content="0x01、什么是文件包含?为了更好地使用代码的重用性，引入了文件包含函数，通过文件包含函数将文件包含进来，直接使用包含文件的代码，简单点来说就是一个文件里面包含另外一个或多个文件。 0x02、漏洞成因文件包含函数加载的参数没有经过过滤或者严格的定义，可以被用户控制，包含其他恶意文件，导致了执行了非预期的代码。 0x03、php引发文件包含漏洞的四个函数12345678include()includ">
+<meta name="twitter:description" content="0x01、什么是文件包含?">
 <meta name="twitter:image" content="http://yoursite.com/webshell/filein1.jpg">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -307,7 +307,8 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="0x01、什么是文件包含"><a href="#0x01、什么是文件包含" class="headerlink" title="0x01、什么是文件包含?"></a>0x01、什么是文件包含?</h2><p>为了更好地使用代码的重用性，引入了文件包含函数，通过文件包含函数将文件包含进来，直接使用包含文件的代码，简单点来说就是一个文件里面包含另外一个或多个文件。</p>
+        <h2 id="0x01、什么是文件包含"><a href="#0x01、什么是文件包含" class="headerlink" title="0x01、什么是文件包含?"></a>0x01、什么是文件包含?</h2><a id="more"></a>
+<p>为了更好地使用代码的重用性，引入了文件包含函数，通过文件包含函数将文件包含进来，直接使用包含文件的代码，简单点来说就是一个文件里面包含另外一个或多个文件。</p>
 <h2 id="0x02、漏洞成因"><a href="#0x02、漏洞成因" class="headerlink" title="0x02、漏洞成因"></a>0x02、漏洞成因</h2><p>文件包含函数加载的参数没有经过过滤或者严格的定义，可以被用户控制，包含其他恶意文件，导致了执行了非预期的代码。</p>
 <h2 id="0x03、php引发文件包含漏洞的四个函数"><a href="#0x03、php引发文件包含漏洞的四个函数" class="headerlink" title="0x03、php引发文件包含漏洞的四个函数"></a>0x03、php引发文件包含漏洞的四个函数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">include()</span><br><span class="line">include_once()</span><br><span class="line">require()</span><br><span class="line">require_once()</span><br><span class="line"></span><br><span class="line">include()和require()的区别：</span><br><span class="line">require()如果在包含过程中出错，就会直接退出，不执行后续语句</span><br><span class="line">require()如果在包含过程中出错，只会提出警告，但不影响后续语句的执行</span><br></pre></td></tr></table></figure>
 
@@ -362,7 +363,7 @@
         <p><span>本文标题:</span><a href="/2020/02/10/文件包含漏洞小结/">文件包含漏洞小结</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">obsem</a></p>
         <p><span>发布时间:</span>2020-02-10, 00:00:00</p>
-        <p><span>最后更新:</span>2020-02-24, 21:36:51</p>
+        <p><span>最后更新:</span>2020-02-24, 21:45:45</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2020/02/10/文件包含漏洞小结/" title="文件包含漏洞小结">http://yoursite.com/2020/02/10/文件包含漏洞小结/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/02/10/文件包含漏洞小结/　　作者: obsem" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
