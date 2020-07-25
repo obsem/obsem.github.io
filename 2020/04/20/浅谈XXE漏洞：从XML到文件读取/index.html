@@ -17,7 +17,7 @@
 
 <meta name="description" content="一、什么是XXE漏洞？XXE漏洞全称是XML External Entity Injection，即XML外部实体注入漏洞，当XML允许引用外部实体并解析时，攻击者就可以构造恶意实体的payload进行注入攻击，造成文件读取、命令执行、攻击内网网站及SSRF等危害。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SSRF漏洞">
+<meta property="og:title" content="浅谈XXE漏洞：从XML到文件读取">
 <meta property="og:url" content="http://yoursite.com/2020/04/20/浅谈XXE漏洞：从XML到文件读取/index.html">
 <meta property="og:site_name" content="obsetear">
 <meta property="og:description" content="一、什么是XXE漏洞？XXE漏洞全称是XML External Entity Injection，即XML外部实体注入漏洞，当XML允许引用外部实体并解析时，攻击者就可以构造恶意实体的payload进行注入攻击，造成文件读取、命令执行、攻击内网网站及SSRF等危害。">
@@ -34,9 +34,9 @@
 <meta property="og:image" content="http://yoursite.com/web/xxe10.jpg">
 <meta property="og:image" content="http://yoursite.com/web/xxe11.jpg">
 <meta property="og:image" content="http://yoursite.com/web/xxe12.jpg">
-<meta property="og:updated_time" content="2020-07-25T09:17:25.585Z">
+<meta property="og:updated_time" content="2020-07-25T09:18:30.499Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SSRF漏洞">
+<meta name="twitter:title" content="浅谈XXE漏洞：从XML到文件读取">
 <meta name="twitter:description" content="一、什么是XXE漏洞？XXE漏洞全称是XML External Entity Injection，即XML外部实体注入漏洞，当XML允许引用外部实体并解析时，攻击者就可以构造恶意实体的payload进行注入攻击，造成文件读取、命令执行、攻击内网网站及SSRF等危害。">
 <meta name="twitter:image" content="http://yoursite.com/web/xxe1.jpg">
 
@@ -70,7 +70,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>SSRF漏洞 | obsetear</title>
+<title>浅谈XXE漏洞：从XML到文件读取 | obsetear</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -289,7 +289,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      SSRF漏洞
+      浅谈XXE漏洞：从XML到文件读取
     </h1>
   
 
@@ -423,12 +423,12 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2020/04/20/浅谈XXE漏洞：从XML到文件读取/">SSRF漏洞</a></p>
+        <p><span>本文标题:</span><a href="/2020/04/20/浅谈XXE漏洞：从XML到文件读取/">浅谈XXE漏洞：从XML到文件读取</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">obsem</a></p>
         <p><span>发布时间:</span>2020-04-20, 00:00:00</p>
-        <p><span>最后更新:</span>2020-07-25, 17:17:25</p>
+        <p><span>最后更新:</span>2020-07-25, 17:18:30</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2020/04/20/浅谈XXE漏洞：从XML到文件读取/" title="SSRF漏洞">http://yoursite.com/2020/04/20/浅谈XXE漏洞：从XML到文件读取/</a>
+            <span>原始链接:</span><a class="post-url" href="/2020/04/20/浅谈XXE漏洞：从XML到文件读取/" title="浅谈XXE漏洞：从XML到文件读取">http://yoursite.com/2020/04/20/浅谈XXE漏洞：从XML到文件读取/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/04/20/浅谈XXE漏洞：从XML到文件读取/　　作者: obsem" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -498,7 +498,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"SSRF漏洞　| obsetear　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"浅谈XXE漏洞：从XML到文件读取　| obsetear　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -532,7 +532,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/07/25/内网渗透之windows基础/">Windows基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/20/浅谈XXE漏洞：从XML到文件读取/">SSRF漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/04/SSRF漏洞/">SSRF漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/23/csrf漏洞小结/">CSRF漏洞小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/Mysql报错函数小结/">Mysql报错函数小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/10/文件包含漏洞小结/">文件包含漏洞小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/21/浅谈php一句话木马/">浅谈一句话木马</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/03/宽字节注入/">宽字节注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/23/攻防世界web系列/">攻防世界web系列</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/07/25/内网渗透之windows基础/">Windows基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/20/浅谈XXE漏洞：从XML到文件读取/">浅谈XXE漏洞：从XML到文件读取</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/04/SSRF漏洞/">SSRF漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/23/csrf漏洞小结/">CSRF漏洞小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/Mysql报错函数小结/">Mysql报错函数小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/10/文件包含漏洞小结/">文件包含漏洞小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/21/浅谈php一句话木马/">浅谈一句话木马</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/03/宽字节注入/">宽字节注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/23/攻防世界web系列/">攻防世界web系列</a></li></ul>
 
 
 
