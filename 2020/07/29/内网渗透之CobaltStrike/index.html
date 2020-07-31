@@ -15,12 +15,12 @@
 
 
 
-<meta name="description" content="##1、CobaltStrike的启动 先开启服务端：./teamserver 192.168.0.108 123456  再启动客户端进行连接：./start.sh  也可以在windows上启动客户端进行连接      javaw -Dfile.encoding=UTF-8 -javaagent:CobaltStrikeCN.jar -XX:ParallelGCThreads=4 -XX:+A">
+<meta name="description" content="1、CobaltStrike的启动先开启服务端：./teamserver 192.168.0.108 123456">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CobaltStrike">
 <meta property="og:url" content="http://yoursite.com/2020/07/29/内网渗透之CobaltStrike/index.html">
 <meta property="og:site_name" content="obsetear">
-<meta property="og:description" content="##1、CobaltStrike的启动 先开启服务端：./teamserver 192.168.0.108 123456  再启动客户端进行连接：./start.sh  也可以在windows上启动客户端进行连接      javaw -Dfile.encoding=UTF-8 -javaagent:CobaltStrikeCN.jar -XX:ParallelGCThreads=4 -XX:+A">
+<meta property="og:description" content="1、CobaltStrike的启动先开启服务端：./teamserver 192.168.0.108 123456">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/internet/cs1.jpg">
 <meta property="og:image" content="http://yoursite.com/internet/cs2.jpg">
@@ -33,10 +33,10 @@
 <meta property="og:image" content="http://yoursite.com/internet/cs9.jpg">
 <meta property="og:image" content="http://yoursite.com/internet/cs10.jpg">
 <meta property="og:image" content="http://yoursite.com/internet/cs11.jpg">
-<meta property="og:updated_time" content="2020-07-31T10:36:00.885Z">
+<meta property="og:updated_time" content="2020-07-31T10:42:21.120Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CobaltStrike">
-<meta name="twitter:description" content="##1、CobaltStrike的启动 先开启服务端：./teamserver 192.168.0.108 123456  再启动客户端进行连接：./start.sh  也可以在windows上启动客户端进行连接      javaw -Dfile.encoding=UTF-8 -javaagent:CobaltStrikeCN.jar -XX:ParallelGCThreads=4 -XX:+A">
+<meta name="twitter:description" content="1、CobaltStrike的启动先开启服务端：./teamserver 192.168.0.108 123456">
 <meta name="twitter:image" content="http://yoursite.com/internet/cs1.jpg">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -305,8 +305,8 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>##1、CobaltStrike的启动</p>
-<pre><code>先开启服务端：./teamserver 192.168.0.108 123456</code></pre><img src="/internet/cs1.jpg">
+        <h2 id="1、CobaltStrike的启动"><a href="#1、CobaltStrike的启动" class="headerlink" title="1、CobaltStrike的启动"></a>1、CobaltStrike的启动</h2><pre><code>先开启服务端：./teamserver 192.168.0.108 123456</code></pre><a id="more"></a>    
+<img src="/internet/cs1.jpg">
 
 <pre><code>再启动客户端进行连接：./start.sh</code></pre><img src="/internet/cs2.jpg">
 
@@ -396,7 +396,7 @@ cs ——&gt; msf
 
     2）用msf开启一个监听</code></pre><img src="/internet/cs6.jpg">
 
-<pre><code>3）新建一个foreign htt类型的监听</code></pre><img src="/internet/cs7.jpg">
+<pre><code>3）在cs中新建一个foreign htt类型的监听</code></pre><img src="/internet/cs7.jpg">
 
 <pre><code>4）然后cs会话派生给新建的msfshell监听</code></pre><img src="/internet/cs8.jpg">    
 
@@ -503,7 +503,7 @@ cs ——&gt; msf
         <p><span>本文标题:</span><a href="/2020/07/29/内网渗透之CobaltStrike/">CobaltStrike</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">obsem</a></p>
         <p><span>发布时间:</span>2020-07-29, 00:00:00</p>
-        <p><span>最后更新:</span>2020-07-31, 18:36:00</p>
+        <p><span>最后更新:</span>2020-07-31, 18:42:21</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2020/07/29/内网渗透之CobaltStrike/" title="CobaltStrike">http://yoursite.com/2020/07/29/内网渗透之CobaltStrike/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/07/29/内网渗透之CobaltStrike/　　作者: obsem" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -533,7 +533,7 @@ cs ——&gt; msf
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#2、工具条"><span class="toc-number">1.</span> <span class="toc-text">2、工具条</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、后渗透命令"><span class="toc-number">2.</span> <span class="toc-text">3、后渗透命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、联动msf（mc联动）"><span class="toc-number">3.</span> <span class="toc-text">4、联动msf（mc联动）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5、cs流量加密（免杀）"><span class="toc-number">4.</span> <span class="toc-text">5、cs流量加密（免杀）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6、CS插件"><span class="toc-number">5.</span> <span class="toc-text">6、CS插件</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、CobaltStrike的启动"><span class="toc-number">1.</span> <span class="toc-text">1、CobaltStrike的启动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、工具条"><span class="toc-number">2.</span> <span class="toc-text">2、工具条</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、后渗透命令"><span class="toc-number">3.</span> <span class="toc-text">3、后渗透命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、联动msf（mc联动）"><span class="toc-number">4.</span> <span class="toc-text">4、联动msf（mc联动）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5、cs流量加密（免杀）"><span class="toc-number">5.</span> <span class="toc-text">5、cs流量加密（免杀）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6、CS插件"><span class="toc-number">6.</span> <span class="toc-text">6、CS插件</span></a></li></ol>
         
     </div>
     <style>
