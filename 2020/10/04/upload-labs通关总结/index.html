@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="obsem">
+
+
+
+<meta name="description" content="准备阶段upload-labs下载地址：https://github.com/c0ny1/upload-labs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux基础（笔记）">
+<meta property="og:url" content="http://yoursite.com/2020/10/04/upload-labs通关总结/index.html">
+<meta property="og:site_name" content="obsetear">
+<meta property="og:description" content="准备阶段upload-labs下载地址：https://github.com/c0ny1/upload-labs">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload1.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload2.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload3.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload4.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload5.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload6.1.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload6.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload6.1.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload7.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload8.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload9.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload10.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload11.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload12.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload13.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload14.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload15.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload16.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload17.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload18.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload19.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload20.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload21.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload22.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload23.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload24.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload25.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload26.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload27.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload28.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload29.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload30.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload31.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload32.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload33.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload34.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload35.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload36.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload37.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload38.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload39.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload40.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload41.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload42.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload43.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload44.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload45.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload46.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload47.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload48.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload49.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload50.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload51.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload52.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload53.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload54.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload55.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/upload-labs/upload56.jpg">
+<meta property="og:updated_time" content="2020-11-18T12:25:01.555Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux基础（笔记）">
+<meta name="twitter:description" content="准备阶段upload-labs下载地址：https://github.com/c0ny1/upload-labs">
+<meta name="twitter:image" content="http://yoursite.com/img/web/upload-labs/upload1.jpg">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="obsetear" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Linux基础（笔记） | obsetear</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: false
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/2.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">obsem</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">obsem</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/2.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">obsem</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-upload-labs通关总结" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/10/04/upload-labs通关总结/" class="article-date">
+      <time datetime="2020-10-03T16:00:00.000Z" itemprop="datePublished">2020-10-04</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Linux基础（笔记）
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="准备阶段"><a href="#准备阶段" class="headerlink" title="准备阶段"></a>准备阶段</h2><p><strong>upload-labs下载地址</strong>：<a href="https://github.com/c0ny1/upload-labs" target="_blank" rel="noopener">https://github.com/c0ny1/upload-labs</a></p>
+<a id="more"></a>
+
+<p>推荐使用php-5.2.17版本，使用其他版本可能会导致页面报错。</p>
+<img src="/img/web/upload-labs/upload1.jpg">
+
+<p><strong>提示：</strong> upload-labs目录下需要手动建一个名为upload的文件夹，用于存放以后上传的文件。</p>
+<img src="/img/web/upload-labs/upload2.jpg">
+
+<h2 id="Pass-01"><a href="#Pass-01" class="headerlink" title="Pass-01"></a>Pass-01</h2><p>JS验证绕过<br>直接上传php文件，提示只能上传jpg，png，gif</p>
+<img src="/img/web/upload-labs/upload3.jpg">
+
+<p>可以直接右击网页查看到源码</p>
+<img src="/img/web/upload-labs/upload4.jpg">
+
+<p>绕过方法：</p>
+<p>方法一：把源码复制下来，然后建一个.html文件，把代码粘贴进去，把最下面 js 验证的相关代码删掉，给 form 表单添加一个属性 action ，值为我们要上传到的网址，这样我们就可以用自己写的代码向目标网页上传文件了。</p>
+<img src="/img/web/upload-labs/upload5.jpg">
+
+<p>然后打开这个HTML文件（由于缺少css代码，所以界面可能不太美观，不过不影响功能）直接上传.php文件就可以了。</p>
+<p>方法二：复制 js代码到控制台，然后修改上传文件的类型，然后执行，再上传 .php 文件就可以了。</p>
+<img src="/img/web/upload-labs/upload6.1.jpg">
+
+<p>不过这种方法是一次性的，下次上传前需要再次执行</p>
+<p>方法三：以.jpg后缀上传，然后再抓包，修改后缀</p>
+<img src="/img/web/upload-labs/upload6.jpg">
+
+<h2 id="Pass-02"><a href="#Pass-02" class="headerlink" title="Pass-02"></a>Pass-02</h2><p>content-type验证绕过</p>
+<p>提示说只检查MIME</p>
+<img src="/img/web/upload-labs/upload6.1.jpg">
+
+<p>修改文件的MIME即可绕过<br>先把以.jpg后缀上传，然后抓包，修改后缀为.php，放包</p>
+<img src="/img/web/upload-labs/upload7.jpg">
+
+<p>最后访问</p>
+<img src="/img/web/upload-labs/upload8.jpg">
+
+<h2 id="Pass-03"><a href="#Pass-03" class="headerlink" title="Pass-03"></a>Pass-03</h2><p>黑名单绕过</p>
+<img src="/img/web/upload-labs/upload9.jpg">
+
+<p>提示不能上传.asp，.aspx，.php，.jsp后缀文件，但我们可以上传php5（2,3,4），phtml，phps，pht都行</p>
+<p>由于我搭建upload-labs时用的是phpstudy，所以无法解析以上后缀</p>
+<p>其他扩展名的部分绕过方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Php: php5(2,3,4) phtml phps等</span><br><span class="line">Asp: asa cer cdx</span><br><span class="line">Aspx: ashx asmx ascx</span><br><span class="line">Jsp: jspx jspf</span><br></pre></td></tr></table></figure>
+
+<h2 id="Pass-04"><a href="#Pass-04" class="headerlink" title="Pass-04"></a>Pass-04</h2><p>.htaccess绕过</p>
+<img src="/img/web/upload-labs/upload10.jpg">
+
+<p>黑名单几乎过滤了所有能上传的后缀，但却没有过滤.htaccess文件</p>
+<p>先上传一个.htaccess文件，内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SetHandler application/x-httpd-php</span><br></pre></td></tr></table></figure>
+
+<p>然后再上传我们的图片马，这时所有的图片都会服务器被当成php文件来解析</p>
+<img src="/img/web/upload-labs/upload11.jpg">
+
+<h2 id="Pass-05"><a href="#Pass-05" class="headerlink" title="Pass-05"></a>Pass-05</h2><p>大小写绕过</p>
+<img src="/img/web/upload-labs/upload12.jpg">
+
+<p>这次的黑名单不仅过滤了几乎所有能上传的文件，还过滤了.htaccess，但是这次没有对后缀统一大小，我们可以把后缀改为.PHP，.pHP等进行绕过</p>
+<img src="/img/web/upload-labs/upload13.jpg">
+
+<h2 id="Pass-06"><a href="#Pass-06" class="headerlink" title="Pass-06"></a>Pass-06</h2><p>空格绕过</p>
+<img src="/img/web/upload-labs/upload14.jpg">
+
+<p>还是之前的黑名单，而且这次还统一了大小写，但是没有对后缀名进行去空处理，因此可以利用windows的命名规则，在后缀名加空格进行绕过</p>
+<img src="/img/web/upload-labs/upload15.jpg">
+
+<h2 id="Pass-07"><a href="#Pass-07" class="headerlink" title="Pass-07"></a>Pass-07</h2><p>点绕过</p>
+<img src="/img/web/upload-labs/upload16.jpg">
+
+<p>跟前几关一样，但是这次没有对后缀名的”.”进行处理，我们可以利用windows特性，让其自动去掉后缀名中最后的”.”，然后绕过：</p>
+<img src="/img/web/upload-labs/upload17.jpg">
+
+<p>最后访问eval.php</p>
+<img src="/img/web/upload-labs/upload18.jpg">
+
+<h2 id="Pass-08"><a href="#Pass-08" class="headerlink" title="Pass-08"></a>Pass-08</h2><p><code>::$DATA</code>绕过</p>
+<img src="/img/web/upload-labs/upload19.jpg">
+
+<p>一样的黑名单，但这次没有过滤<code>::$DATA</code><br><code>::$DATA</code>的有关知识：在windows+php的环境下，如果文件为：文件名+”<code>::$DATA</code>“，<code>::$DATA</code>之后的数据会被当成文件流处理，不仅不会检测文件的后缀名，还会保持”<code>::$DATA</code>“之前的文件名不变。</p>
+<p>因此在文件名后加”<code>::$DATA</code>“就可进行绕过</p>
+<img src="/img/web/upload-labs/upload20.jpg">
+
+<h2 id="Pass-09"><a href="#Pass-09" class="headerlink" title="Pass-09"></a>Pass-09</h2><p>点+空格+点绕过</p>
+<img src="/img/web/upload-labs/upload21.jpg">
+
+<p>经过审计发现，代码先是删除了文件名末尾的点，又去除了文件名前后的空格。所以我们可以通过构造文件名+点+空格+点（<code>eval.php. .</code>）的形式来进行绕过，经过程序过滤后变成<code>eval.php.</code>，又利用windows的特性自动去除后缀中最后的点即可绕过。</p>
+<img src="/img/web/upload-labs/upload22.jpg">
+
+<h2 id="Pass-10"><a href="#Pass-10" class="headerlink" title="Pass-10"></a>Pass-10</h2><p>双写后缀名绕过</p>
+<p>先上传一个正常的php文件，发现后缀名被替换为空</p>
+<img src="/img/web/upload-labs/upload23.jpg">
+
+<p>查看源码</p>
+<img src="/img/web/upload-labs/upload24.jpg">
+
+<p>可以看出str_ireplace()方法把文件后缀替换成了空，直接双写后缀名（eval.pphphp）即可绕过</p>
+<img src="/img/web/upload-labs/upload25.jpg">
+
+<h2 id="Pass-11"><a href="#Pass-11" class="headerlink" title="Pass-11"></a>Pass-11</h2><p>%00截断上传（get型）</p>
+<img src="/img/web/upload-labs/upload26.jpg">
+
+<p>这次是白名单，而且是用<code>$img_path</code>函数进行拼接的，所以可以使用%00进行截断上传</p>
+<img src="/img/web/upload-labs/upload27.jpg">
+
+<p>然后访问eval.php</p>
+<img src="/img/web/upload-labs/upload28.jpg">
+
+<p><strong>提示</strong></p>
+<p>使用%00截断的条件</p>
+<p>（1）php版本要小于5.3.4<br>（2）要将php-ini配置文件中的magic_quotes_gpc的值设置为Off</p>
+<img src="/img/web/upload-labs/upload29.jpg">
+
+<h2 id="Pass-12"><a href="#Pass-12" class="headerlink" title="Pass-12"></a>Pass-12</h2><p>%00截断上传（post型）</p>
+<img src="/img/web/upload-labs/upload30.jpg">
+
+<p>这关也是%00截断上传，但与11不同的是这里传送save_path时用的是post方法，由于post不会像get对%00进行自动解码，所以需要我们对其进行手动解码。</p>
+<p>（1）第一种方法是对%00进行urldecode的操作，选中%00然后右击，然后依次选择/convert selection/URL/URL-decode</p>
+<img src="/img/web/upload-labs/upload31.jpg">
+
+<p>解码后貌似什么都没有，但截断的效果还是有的，直接发包即可绕过</p>
+<img src="/img/web/upload-labs/upload32.jpg">
+
+<p>（2）第二种方法是在eval.php后面打一个空格，别的字符也行，主要是为了占位，然后再在hex里找到eval.php后面的的那个字符的16进制码（20）然后改成%00对应的16进制码00</p>
+<img src="/img/web/upload-labs/upload33.jpg">
+
+<p>最后访问eval.php</p>
+<img src="/img/web/upload-labs/upload34.jpg">
+
+<h2 id="Pass-13"><a href="#Pass-13" class="headerlink" title="Pass-13"></a>Pass-13</h2><p>图片马（1）</p>
+<img src="/img/web/upload-labs/upload35.jpg">
+
+<p>代码会根据文件的前两个字节来判断文件的类型，先制作图片马，新建文件eval.gif，内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GIF89a //gif文件标识头</span><br><span class="line">&lt;?php phpinfo();?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>然后抓包上传修改后缀</p>
+<img src="/img/web/upload-labs/upload36.jpg">
+
+<p>虽然上传成功，但文件名已被更改，不过好在内容没有被感染</p>
+<img src="/img/web/upload-labs/upload37.jpg">
+
+<p>接下来要想利用的话就需要结合文件包含漏洞了，为了展示效果，我在/upload/目录下简单建一个有包含漏洞的文件include.php，内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">    $filein  = $_GET[&apos;file&apos;];</span><br><span class="line">    include($filein);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>访问<code>/upload/include.php?file=文件名</code></p>
+<img src="/img/web/upload-labs/upload38.jpg">
+
+<h2 id="Pass-14"><a href="#Pass-14" class="headerlink" title="Pass-14"></a>Pass-14</h2><p>图片马（2）</p>
+<img src="/img/web/upload-labs/upload39.jpg">
+
+<p>这里用getimagesize函数来获取文件类型，不过还可以用刚才的方法进行绕过</p>
+<p>getimagesize函数：<br><code>getimagesize() 函数用于获取图像大小及相关信息，成功返回一个数组，失败则返回 FALSE并产生一条 E_WARNING 级的错误信息。</code></p>
+<p>其实构造完图片马后不用抓包直接上传也行，内容也不会被感染</p>
+<img src="/img/web/upload-labs/upload40.jpg">
+
+<p>访问</p>
+<img src="/img/web/upload-labs/upload41.jpg">
+
+<h2 id="Pass-15"><a href="#Pass-15" class="headerlink" title="Pass-15"></a>Pass-15</h2><p>图片马（3）</p>
+<img src="/img/web/upload-labs/upload42.jpg">
+
+<p>这里用了exif_imagetype()来判断上传的文件是否为图片，不过还可以用上面的eval.gif进行绕过</p>
+<h2 id="Pass-16"><a href="#Pass-16" class="headerlink" title="Pass-16"></a>Pass-16</h2><p>图片马（4）</p>
+<img src="/img/web/upload-labs/upload43.jpg">
+
+<p>这次虽然检测了后缀名，content-type，并且还用imagecreatefromgif判断文件是否为图片，但是还可以用前几关的方法直接上传eval.gif进行绕过</p>
+<p>eval.gif内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GIF89a</span><br><span class="line">&lt;?php phpinfo();?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>直接上传即可</p>
+<img src="/img/web/upload-labs/upload44.jpg">
+
+<p>访问</p>
+<img src="/img/web/upload-labs/upload45.jpg">
+
+<h2 id="Pass-17"><a href="#Pass-17" class="headerlink" title="Pass-17"></a>Pass-17</h2><p>条件竞争（1）</p>
+<img src="/img/web/upload-labs/upload46.jpg">
+
+<p>文件上传到服务器后先被rename重命名，再被unlink删除，因此需要通过条件竞争的方式在文件被unlink删除之前，访问到我们的马。</p>
+<p>我们先把eval.php的内容改为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php fputs(fopen(&apos;shell.php&apos;,&apos;w&apos;),&apos;&lt;?php phpinfo();?&gt;&apos;); ?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>然后用burp不断的向其发包，只要eval.php被访问到，就会在目录下写入木马shell.php</p>
+<p>具体做法：</p>
+<p>先抓包</p>
+<img src="/img/web/upload-labs/upload47.jpg">
+
+<p>然后Send to lntruder，并且进行以下的设置：</p>
+<img src="/img/web/upload-labs/upload48.jpg">
+
+<img src="/img/web/upload-labs/upload49.jpg">
+
+<img src="/img/web/upload-labs/upload50.jpg">
+
+<p>最后start attack，然后不停地刷新<a href="http://127.0.0.1/upload-labs/upload/eval.php" target="_blank" rel="noopener">http://127.0.0.1/upload-labs/upload/eval.php</a></p>
+<img src="/img/web/upload-labs/upload51.jpg">
+
+<p>只要eval.php被访问到，目录下就会有shell.php</p>
+<img src="/img/web/upload-labs/upload52.jpg">
+
+<h2 id="Pass-18"><a href="#Pass-18" class="headerlink" title="Pass-18"></a>Pass-18</h2><p>条件竞争（2）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br></pre></td><td class="code"><pre><span class="line">//index.php</span><br><span class="line">$is_upload = false;</span><br><span class="line">$msg = null;</span><br><span class="line">if (isset($_POST[&apos;submit&apos;]))</span><br><span class="line">&#123;</span><br><span class="line">    require_once(&quot;./myupload.php&quot;);</span><br><span class="line">    $imgFileName =time();</span><br><span class="line">    $u = new MyUpload($_FILES[&apos;upload_file&apos;][&apos;name&apos;], $_FILES[&apos;upload_file&apos;][&apos;tmp_name&apos;], $_FILES[&apos;upload_file&apos;][&apos;size&apos;],$imgFileName);</span><br><span class="line">    $status_code = $u-&gt;upload($UPLOAD_ADDR);</span><br><span class="line">    switch ($status_code) &#123;</span><br><span class="line">        case 1:</span><br><span class="line">            $is_upload = true;</span><br><span class="line">            $img_path = $u-&gt;cls_upload_dir . $u-&gt;cls_file_rename_to;</span><br><span class="line">            break;</span><br><span class="line">        case 2:</span><br><span class="line">            $msg = &apos;文件已经被上传，但没有重命名。&apos;;</span><br><span class="line">            break; </span><br><span class="line">        case -1:</span><br><span class="line">            $msg = &apos;这个文件不能上传到服务器的临时文件存储目录。&apos;;</span><br><span class="line">            break; </span><br><span class="line">        case -2:</span><br><span class="line">            $msg = &apos;上传失败，上传目录不可写。&apos;;</span><br><span class="line">            break; </span><br><span class="line">        case -3:</span><br><span class="line">            $msg = &apos;上传失败，无法上传该类型文件。&apos;;</span><br><span class="line">            break; </span><br><span class="line">        case -4:</span><br><span class="line">            $msg = &apos;上传失败，上传的文件过大。&apos;;</span><br><span class="line">            break; </span><br><span class="line">        case -5:</span><br><span class="line">            $msg = &apos;上传失败，服务器已经存在相同名称文件。&apos;;</span><br><span class="line">            break; </span><br><span class="line">        case -6:</span><br><span class="line">            $msg = &apos;文件无法上传，文件不能复制到目标目录。&apos;;</span><br><span class="line">            break;      </span><br><span class="line">        default:</span><br><span class="line">            $msg = &apos;未知错误！&apos;;</span><br><span class="line">            break;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//myupload.php</span><br><span class="line">class MyUpload&#123;</span><br><span class="line">......</span><br><span class="line">......</span><br><span class="line">...... </span><br><span class="line">  var $cls_arr_ext_accepted = array(</span><br><span class="line">      &quot;.doc&quot;, &quot;.xls&quot;, &quot;.txt&quot;, &quot;.pdf&quot;, &quot;.gif&quot;, &quot;.jpg&quot;, &quot;.zip&quot;, &quot;.rar&quot;, &quot;.7z&quot;,&quot;.ppt&quot;,</span><br><span class="line">      &quot;.html&quot;, &quot;.xml&quot;, &quot;.tiff&quot;, &quot;.jpeg&quot;, &quot;.png&quot; );</span><br><span class="line"></span><br><span class="line">......</span><br><span class="line">......</span><br><span class="line">......  </span><br><span class="line"></span><br><span class="line">  function upload( $dir )&#123;</span><br><span class="line">    </span><br><span class="line">    $ret = $this-&gt;isUploadedFile();</span><br><span class="line">    </span><br><span class="line">    if( $ret != 1 )&#123;</span><br><span class="line">      return $this-&gt;resultUpload( $ret );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    $ret = $this-&gt;setDir( $dir );</span><br><span class="line">    if( $ret != 1 )&#123;</span><br><span class="line">      return $this-&gt;resultUpload( $ret );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    $ret = $this-&gt;checkExtension();</span><br><span class="line">    if( $ret != 1 )&#123;</span><br><span class="line">      return $this-&gt;resultUpload( $ret );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    $ret = $this-&gt;checkSize();</span><br><span class="line">    if( $ret != 1 )&#123;</span><br><span class="line">      return $this-&gt;resultUpload( $ret );    </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // if flag to check if the file exists is set to 1</span><br><span class="line">    </span><br><span class="line">    if( $this-&gt;cls_file_exists == 1 )&#123;</span><br><span class="line">      </span><br><span class="line">      $ret = $this-&gt;checkFileExists();</span><br><span class="line">      if( $ret != 1 )&#123;</span><br><span class="line">        return $this-&gt;resultUpload( $ret );    </span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // if we are here, we are ready to move the file to destination</span><br><span class="line"></span><br><span class="line">    $ret = $this-&gt;move();</span><br><span class="line">    if( $ret != 1 )&#123;</span><br><span class="line">      return $this-&gt;resultUpload( $ret );    </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // check if we need to rename the file</span><br><span class="line"></span><br><span class="line">    if( $this-&gt;cls_rename_file == 1 )&#123;</span><br><span class="line">      $ret = $this-&gt;renameFile();</span><br><span class="line">      if( $ret != 1 )&#123;</span><br><span class="line">        return $this-&gt;resultUpload( $ret );    </span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">    return $this-&gt;resultUpload( &quot;SUCCESS&quot; );</span><br><span class="line">  </span><br><span class="line">  &#125;</span><br><span class="line">......</span><br><span class="line">......</span><br><span class="line">...... </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>文件在上传时会先检查后缀名，然后重新命名，这里也有条件竞争，也可以用刚才的方法用burp不断的向服务器进行发包，这样会由于条件竞争，会使程序来不及重命名而上传成功。</p>
+<h2 id="Pass-19"><a href="#Pass-19" class="headerlink" title="Pass-19"></a>Pass-19</h2><p>%00截断上传 </p>
+<img src="/img/web/upload-labs/upload53.jpg">
+
+<p>上传文件时可自定义文件名，move_uploaded_file()函数中有个img_path，并且还是由post参数的save_name控制的，因此可以进行上传截断</p>
+<img src="/img/web/upload-labs/upload54.jpg">
+
+<p>这里由于是post传参，%00需要手动解码，解码可以用前面的/convert selection/URL/URL-decode，或者修改hex里的编码</p>
+<img src="/img/web/upload-labs/upload55.jpg">
+
+<p>最后访问</p>
+<img src="/img/web/upload-labs/upload56.jpg">
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2020/10/04/upload-labs通关总结/">Linux基础（笔记）</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">obsem</a></p>
+        <p><span>发布时间:</span>2020-10-04, 00:00:00</p>
+        <p><span>最后更新:</span>2020-11-18, 20:25:01</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2020/10/04/upload-labs通关总结/" title="Linux基础（笔记）">http://yoursite.com/2020/10/04/upload-labs通关总结/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/10/04/upload-labs通关总结/　　作者: obsem" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2020/10/04/linux基础知识（笔记）/">
+                    Linux基础（笔记）
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2020/08/26/内网渗透之Linux提权姿势/">
+                    Linux提权
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#准备阶段"><span class="toc-number">1.</span> <span class="toc-text">准备阶段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pass-01"><span class="toc-number">2.</span> <span class="toc-text">Pass-01</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pass-02"><span class="toc-number">3.</span> <span class="toc-text">Pass-02</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pass-03"><span class="toc-number">4.</span> <span class="toc-text">Pass-03</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pass-04"><span class="toc-number">5.</span> <span class="toc-text">Pass-04</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pass-05"><span class="toc-number">6.</span> <span class="toc-text">Pass-05</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pass-06"><span class="toc-number">7.</span> <span class="toc-text">Pass-06</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pass-07"><span class="toc-number">8.</span> <span class="toc-text">Pass-07</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pass-08"><span class="toc-number">9.</span> <span class="toc-text">Pass-08</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pass-09"><span class="toc-number">10.</span> <span class="toc-text">Pass-09</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pass-10"><span class="toc-number">11.</span> <span class="toc-text">Pass-10</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pass-11"><span class="toc-number">12.</span> <span class="toc-text">Pass-11</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pass-12"><span class="toc-number">13.</span> <span class="toc-text">Pass-12</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pass-13"><span class="toc-number">14.</span> <span class="toc-text">Pass-13</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pass-14"><span class="toc-number">15.</span> <span class="toc-text">Pass-14</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pass-15"><span class="toc-number">16.</span> <span class="toc-text">Pass-15</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pass-16"><span class="toc-number">17.</span> <span class="toc-text">Pass-16</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pass-17"><span class="toc-number">18.</span> <span class="toc-text">Pass-17</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pass-18"><span class="toc-number">19.</span> <span class="toc-text">Pass-18</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pass-19"><span class="toc-number">20.</span> <span class="toc-text">Pass-19</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"Linux基础（笔记）　| obsetear　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2020/10/04/linux基础知识（笔记）/" title="上一篇: Linux基础（笔记）">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2020/08/26/内网渗透之Linux提权姿势/" title="下一篇: Linux提权">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/10/10/python 正则表达式小结（笔记）/">python正则表达式小结（笔记）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/04/linux基础知识（笔记）/">Linux基础（笔记）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/04/upload-labs通关总结/">Linux基础（笔记）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/26/内网渗透之Linux提权姿势/">Linux提权</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/16/内网渗透之windows提权的几种姿势/">windows提权</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/06/内网渗透之免杀/">免杀</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/29/内网渗透之CobaltStrike/">CobaltStrike</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/26/内网渗透之Metasploit/">Metasploit</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/25/内网渗透之windows基础/">Windows基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/20/浅谈XXE漏洞：从XML到文件读取/">浅谈XXE漏洞：从XML到文件读取</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/04/SSRF漏洞/">SSRF漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/03/宽字节注入/">宽字节注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/23/攻防世界web系列/">攻防世界web系列</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2020 obsem
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
