@@ -22,15 +22,15 @@
 <meta property="og:site_name" content="obsetear">
 <meta property="og:description" content="0x01前言之前学基本注入的时候，就没有考虑过单引号或双引号被转义的情况，今天就来补充一下这方面的知识。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/web/ws1.jpg">
-<meta property="og:image" content="http://yoursite.com/web/ws2.jpg">
-<meta property="og:image" content="http://yoursite.com/web/ws3.jpg">
-<meta property="og:image" content="http://yoursite.com/web/ws4.jpg">
-<meta property="og:updated_time" content="2020-02-24T13:39:44.661Z">
+<meta property="og:image" content="http://yoursite.com/img/web/ws/ws1.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/ws/ws2.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/ws/ws3.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/ws/ws4.jpg">
+<meta property="og:updated_time" content="2020-11-15T12:02:18.137Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="宽字节注入">
 <meta name="twitter:description" content="0x01前言之前学基本注入的时候，就没有考虑过单引号或双引号被转义的情况，今天就来补充一下这方面的知识。">
-<meta name="twitter:image" content="http://yoursite.com/web/ws1.jpg">
+<meta name="twitter:image" content="http://yoursite.com/img/web/ws/ws1.jpg">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -306,10 +306,10 @@
 
 <p>在sql注入时，这个函数会把你输入的sql语句中的单引号（’），双引号（”）等特殊字符转义掉，使之变成字符串，这个时候就需要用到宽字节注入。</p>
 <h2 id="0x02宽字节注入原理"><a href="#0x02宽字节注入原理" class="headerlink" title="0x02宽字节注入原理"></a>0x02宽字节注入原理</h2><p>宽字节注入是利用MySQL的一个特性，MySQL在使用GBK编码时，会认为两个字符是一个汉字（前一个ascii码要大于128，才到汉字的范围）</p>
-<p>例：<br><img src="/web/ws1.jpg"><br>%df%5C会被当成一个汉字，此时单引号%27就会逃过一劫。</p>
+<p>例：<br><img src="/img/web/ws/ws1.jpg"><br>%df%5C会被当成一个汉字，此时单引号%27就会逃过一劫。</p>
 <h2 id="0x03实践"><a href="#0x03实践" class="headerlink" title="0x03实践"></a>0x03实践</h2><p>实践链接：<a href="http://chinalover.sinaapp.com/SQL-GBK/index.php?id=1" target="_blank" rel="noopener">http://chinalover.sinaapp.com/SQL-GBK/index.php?id=1</a></p>
 <p>当输入<code>id=1%27</code>时，根据回显内容可知，单引号（’）被转义成了<code>\&#39;</code></p>
-<img src="/web/ws2.jpg">
+<img src="/img/web/ws/ws2.jpg">
 
 <p>这时就要宽字节注入了，输入<code>id=1%df%27</code>,这时sql语句为</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select id,title from news where id = &apos;1%df%5C&apos;&apos;</span><br></pre></td></tr></table></figure>
@@ -317,10 +317,10 @@
 <p>MySQL使用GBK编码时,把%df%5C当成了一个汉字，因此sql语句就变成了</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select id,title from news where id = &apos;1運&apos;&apos;</span><br></pre></td></tr></table></figure>
 
-<img src="/web/ws3.jpg">
+<img src="/img/web/ws/ws3.jpg">
 
 <p>输入<code>id=1%df%27%23</code>，发现页面回显正常，这时就可以正常注入了。</p>
-<img src="/web/ws4.jpg">
+<img src="/img/web/ws/ws4.jpg">
 
 <p>接下来就是正常的基本注入：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=1%df%27 order by 2 %23</span><br></pre></td></tr></table></figure>
@@ -348,7 +348,7 @@
         <p><span>本文标题:</span><a href="/2019/10/03/宽字节注入/">宽字节注入</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">obsem</a></p>
         <p><span>发布时间:</span>2019-10-03, 00:00:00</p>
-        <p><span>最后更新:</span>2020-02-24, 21:39:44</p>
+        <p><span>最后更新:</span>2020-11-15, 20:02:18</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/10/03/宽字节注入/" title="宽字节注入">http://yoursite.com/2019/10/03/宽字节注入/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/10/03/宽字节注入/　　作者: obsem" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -364,8 +364,8 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2019/12/21/浅谈php一句话木马/">
-                    浅谈一句话木马
+                <a href="/2020/04/04/SSRF漏洞/">
+                    SSRF漏洞
                 </a>
             </div>
         
@@ -440,7 +440,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2019/12/21/浅谈php一句话木马/" title="上一篇: 浅谈一句话木马">
+            <a href="/2020/04/04/SSRF漏洞/" title="上一篇: SSRF漏洞">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -454,7 +454,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/07/29/内网渗透之CobaltStrike/">CobaltStrike</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/26/内网渗透之Metasploit/">Metasploit</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/25/内网渗透之windows基础/">Windows基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/20/浅谈XXE漏洞：从XML到文件读取/">浅谈XXE漏洞：从XML到文件读取</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/04/SSRF漏洞/">SSRF漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/23/csrf漏洞小结/">CSRF漏洞小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/Mysql报错函数小结/">Mysql报错函数小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/10/文件包含漏洞小结/">文件包含漏洞小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/21/浅谈php一句话木马/">浅谈一句话木马</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/03/宽字节注入/">宽字节注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/23/攻防世界web系列/">攻防世界web系列</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/10/10/python 正则表达式小结（笔记）/">python正则表达式小结（笔记）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/04/linux基础知识（笔记）/">Linux基础（笔记）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/26/内网渗透之Linux提权姿势/">Linux提权</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/16/内网渗透之windows提权的几种姿势/">windows提权</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/06/内网渗透之免杀/">免杀</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/29/内网渗透之CobaltStrike/">CobaltStrike</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/26/内网渗透之Metasploit/">Metasploit</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/25/内网渗透之windows基础/">Windows基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/20/浅谈XXE漏洞：从XML到文件读取/">浅谈XXE漏洞：从XML到文件读取</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/04/SSRF漏洞/">SSRF漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/03/宽字节注入/">宽字节注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/23/攻防世界web系列/">攻防世界web系列</a></li></ul>
 
 
 

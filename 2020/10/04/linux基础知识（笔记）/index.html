@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="obsem">
+
+
+
+<meta name="description" content="0x01、linux目录">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux基础（笔记）">
+<meta property="og:url" content="http://yoursite.com/2020/10/04/linux基础知识（笔记）/index.html">
+<meta property="og:site_name" content="obsetear">
+<meta property="og:description" content="0x01、linux目录">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/img/linux/Lin/linux1.jpg">
+<meta property="og:image" content="http://yoursite.com/img/linux/Lin/linux2.jpg">
+<meta property="og:image" content="http://yoursite.com/img/linux/Lin/linux3.jpg">
+<meta property="og:image" content="http://yoursite.com/img/linux/Lin/linux4.jpg">
+<meta property="og:image" content="http://yoursite.com/img/linux/Lin/linux5.jpg">
+<meta property="og:image" content="http://yoursite.com/img/linux/Lin/linux6.jpg">
+<meta property="og:image" content="http://yoursite.com/img/linux/Lin/linux7.jpg">
+<meta property="og:image" content="http://yoursite.com/img/linux/Lin/linux8.jpg">
+<meta property="og:image" content="http://yoursite.com/img/linux/Lin/linux9.jpg">
+<meta property="og:updated_time" content="2020-11-18T11:28:51.106Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux基础（笔记）">
+<meta name="twitter:description" content="0x01、linux目录">
+<meta name="twitter:image" content="http://yoursite.com/img/linux/Lin/linux1.jpg">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="obsetear" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Linux基础（笔记） | obsetear</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: false
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/2.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">obsem</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">obsem</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/2.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">obsem</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-linux基础知识（笔记）" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/10/04/linux基础知识（笔记）/" class="article-date">
+      <time datetime="2020-10-03T16:00:00.000Z" itemprop="datePublished">2020-10-04</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Linux基础（笔记）
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="0x01、linux目录"><a href="#0x01、linux目录" class="headerlink" title="0x01、linux目录"></a>0x01、linux目录</h2><a id="more"></a>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">/bin：bin 是 Binaries (二进制文件) 的缩写, 这个目录存放着最经常使用的命令。</span><br><span class="line"></span><br><span class="line">/etc：etc 是 Etcetera(等等) 的缩写,这个目录用来存放所有的系统管理所需要的配置文件和子目录。</span><br><span class="line"></span><br><span class="line">/home： 用户的主目录，在 Linux 中，每个用户都有一个自己的目录，一般该目录名是以用户的账号命名的</span><br><span class="line"></span><br><span class="line">/mnt： 系统提供该目录是为了让用户临时挂载别的文件系统的，我们可以将光驱挂载在 /mnt/ 上，然后进入该目录就可以查看光驱里的内容了。</span><br><span class="line"></span><br><span class="line">/root： 该目录为系统管理员，也称作超级权限者的用户主目录。</span><br><span class="line"></span><br><span class="line">/tmp：tmp 是 temporary(临时) 的缩写这个目录是用来存放一些临时文件的。</span><br><span class="line"></span><br><span class="line">/usr： usr 是 unix shared resources(共享资源) 的缩写，这是一个非常重要的目录，用户的很多应用程序和文件都放在这个目录下，类似于 windows 下的 program files 目录。</span><br><span class="line"></span><br><span class="line">/usr/bin：系统用户使用的应用程序。</span><br><span class="line"></span><br><span class="line">/var： var 是 variable(变量) 的缩写，这个目录中存放着在不断扩充着的东西，我们习惯将那些经常被修改的目录放在这个目录下。包括各种日志文件。</span><br><span class="line"></span><br><span class="line">/boot： 这里存放的是启动 Linux 时使用的一些核心文件，包括一些连接文件以及镜像文件。</span><br><span class="line"></span><br><span class="line">/lib：lib 是 Library(库) 的缩写这个目录里存放着系统最基本的动态连接共享库，其作用类似于 Windows 里的 DLL 文件。几乎所有的应用程序都需要用到这些共享库。</span><br></pre></td></tr></table></figure>
+
+<h2 id="0x02、linux常用命令"><a href="#0x02、linux常用命令" class="headerlink" title="0x02、linux常用命令"></a>0x02、linux常用命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cp 源文件或目录 目标目录</span><br><span class="line"></span><br><span class="line">-a 复制目录及其所有属性</span><br></pre></td></tr></table></figure>
+
+<img src="/img/linux/Lin/linux1.jpg">
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">whereis 加命令名 //搜索命令位置的命令</span><br></pre></td></tr></table></figure>
+
+<img src="/img/linux/Lin/linux2.jpg">
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">find 搜索范围 搜索条件</span><br><span class="line"></span><br><span class="line">例：find / -name flag.txt //从根目录下开始搜索flag.txt</span><br><span class="line"></span><br><span class="line">find / -iname flag.&quot;*&quot;</span><br><span class="line"></span><br><span class="line">-iname是搜索时候不区分大小写</span><br><span class="line"></span><br><span class="line">-a等于and，-o等于or</span><br></pre></td></tr></table></figure>
+
+<img src="/img/linux/Lin/linux3.jpg">
+
+<img src="/img/linux/Lin/linux4.jpg">
+
+<p>linux里的通配符</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">*  匹配任意内容</span><br><span class="line">？ 匹配任意一个字符</span><br><span class="line">[] 匹配任意一个中括号内的字符</span><br><span class="line">echo f*输出当前目录下以f开头的文件</span><br><span class="line">搜索需要加通配符的话 需要用&quot;&quot;括起来</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">grep也是搜索命令，用于在文件中搜索指定字符串</span><br><span class="line"></span><br><span class="line">grep &quot;flag&quot; 123.txt  //在123.txt中搜索flag</span><br><span class="line"></span><br><span class="line">-v的话是 排除包含指定字符串</span><br><span class="line"></span><br><span class="line">-n是显示行号</span><br><span class="line"></span><br><span class="line">-i是忽略大小写</span><br></pre></td></tr></table></figure>
+
+<img src="/img/linux/Lin/linux5.jpg">
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">alias设置临时命令，重启后失效</span><br><span class="line"></span><br><span class="line">alias getflag=&apos;echo flag&#123;123456&#125;&apos;</span><br><span class="line"></span><br><span class="line">unalias 命令名 //删除临时命令</span><br></pre></td></tr></table></figure>
+
+<img src="/img/linux/Lin/linux6.jpg">
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tail -f 实时显示日志动态</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; 一般代表写入到什么文件里并且覆盖内容</span><br><span class="line">&gt; &gt;表示追加写入</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt autoremove //卸载所有自动安装且不再使用的软件包</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">history //查看之前输入的命令</span><br><span class="line">！！ //执行上一个执行过的命令</span><br><span class="line">！编号 //执行该标号对应的命令</span><br></pre></td></tr></table></figure>
+
+<img src="/img/linux/Lin/linux7.jpg">
+
+<p><strong>终端快捷键</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ctrl+l 清屏</span><br><span class="line">ctrl+a 光标移动的命令行首</span><br><span class="line">ctrl+e 光标移动到命令行尾</span><br><span class="line">ctrl+r 在历史命令中搜索</span><br><span class="line">ctrl+c 结束</span><br></pre></td></tr></table></figure>
+
+<p>查看端口进程情况</p>
+<p><code>netstat -tunlp</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-t (tcp) 仅显示tcp相关选项</span><br><span class="line"></span><br><span class="line">-u (udp)仅显示udp相关选项</span><br><span class="line"></span><br><span class="line">-n 拒绝显示别名，能显示数字的全部转化为数字</span><br><span class="line"></span><br><span class="line">-l 仅列出在Listen(监听)的服务状态</span><br><span class="line"></span><br><span class="line">-p 显示建立相关链接的程序名</span><br></pre></td></tr></table></figure>
+
+<p><code>netstat -tunlp | grep 端口</code> //查看指定的端口号是否开启</p>
+<p>查看某一端口的占用情况： <code>lsof -i:端口号</code></p>
+<p><code>kill -9 PID</code> //杀死某进程</p>
+<p>想要关闭端口就要关闭端口对应的进程</p>
+<h2 id="0x03、-sh文件的简单编写"><a href="#0x03、-sh文件的简单编写" class="headerlink" title="0x03、.sh文件的简单编写"></a>0x03、.sh文件的简单编写</h2><p><code>vim test.sh</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#! /bin/bash</span><br><span class="line">echo &quot;This is a test&quot;</span><br><span class="line">pwd</span><br><span class="line">ls</span><br></pre></td></tr></table></figure>
+
+<p><code>chmod 777 test.sh</code><br><code>./test.sh</code></p>
+<img src="/img/linux/Lin/linux8.jpg">
+
+<p>.sh的简单语法</p>
+<p><code>#!/bin/sh</code> 这行代码必须在程序的第一行，符号<code>#!</code>用来告诉系统它后面的参数是用来执行该文件的程序。</p>
+<p>注释：以#开头的句子表示注释</p>
+<p>变量：在shell编程中，所有的变量都是字符串，所以不需要声明</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a=&quot;hello&quot;</span><br><span class="line">echo &quot;$&#123;a&#125;world&quot;</span><br></pre></td></tr></table></figure>
+
+<p>流程控制：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">if ….; then</span><br><span class="line">….</span><br><span class="line">elif ….; then</span><br><span class="line">….</span><br><span class="line">else</span><br><span class="line">….</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">if [ num=1]      #方括号表示判断</span><br><span class="line">then</span><br><span class="line">  num=2</span><br><span class="line">elif [num=2]</span><br><span class="line">  num=3</span><br><span class="line">else</span><br><span class="line">  num=4</span><br><span class="line">fi      #结束语句</span><br></pre></td></tr></table></figure>
+
+<p>循环控制：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">while …; do</span><br><span class="line">….</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for var in ….; do</span><br><span class="line">….</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">for var in A B C ; do</span><br><span class="line">echo “var is $var”</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<h2 id="0x04、一些实用的软件"><a href="#0x04、一些实用的软件" class="headerlink" title="0x04、一些实用的软件"></a>0x04、一些实用的软件</h2><p>Stacer，类似于管家的功能，很方便</p>
+<img src="/img/linux/Lin/linux9.jpg">
+
+<h2 id="0x05、资源上锁"><a href="#0x05、资源上锁" class="headerlink" title="0x05、资源上锁"></a>0x05、资源上锁</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">E: 无法获得锁 /var/lib/dpkg/lock-frontend - open (11: 资源暂时不可用)</span><br><span class="line">E: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), is another process using it?</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -e | grep apt</span><br></pre></td></tr></table></figure>
+
+<p>然后kill进程</p>
+<h2 id="0x06、共享文件夹的设置"><a href="#0x06、共享文件夹的设置" class="headerlink" title="0x06、共享文件夹的设置"></a>0x06、共享文件夹的设置</h2><pre><code>1、先在vmware上开启共享文件夹
+
+2、安装VMware-Tools
+
+    apt-get install open-vm-tools-desktop fuse
+
+3、挂载共享文件夹
+
+    vmhgfs-fuse .host:/vwareshare /mnt/hgfs -o subtype=vmhgfs-fuse,allow_other
+
+4、如果上句命令报错，先执行umount /mnt/hgfs，再执行一次
+
+5、设置开机自动挂载共享文件夹
+
+    gedit /etc/fstab
+
+    在末尾添加这一行代码
+
+    .host:/vwareshare /mnt/hgfs fuse.vmhgfs-fuse allow_other 0 0</code></pre>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2020/10/04/linux基础知识（笔记）/">Linux基础（笔记）</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">obsem</a></p>
+        <p><span>发布时间:</span>2020-10-04, 00:00:00</p>
+        <p><span>最后更新:</span>2020-11-18, 19:28:51</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2020/10/04/linux基础知识（笔记）/" title="Linux基础（笔记）">http://yoursite.com/2020/10/04/linux基础知识（笔记）/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/10/04/linux基础知识（笔记）/　　作者: obsem" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2020/10/10/python 正则表达式小结（笔记）/">
+                    python正则表达式小结（笔记）
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2020/08/26/内网渗透之Linux提权姿势/">
+                    Linux提权
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01、linux目录"><span class="toc-number">1.</span> <span class="toc-text">0x01、linux目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02、linux常用命令"><span class="toc-number">2.</span> <span class="toc-text">0x02、linux常用命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03、-sh文件的简单编写"><span class="toc-number">3.</span> <span class="toc-text">0x03、.sh文件的简单编写</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x04、一些实用的软件"><span class="toc-number">4.</span> <span class="toc-text">0x04、一些实用的软件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x05、资源上锁"><span class="toc-number">5.</span> <span class="toc-text">0x05、资源上锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x06、共享文件夹的设置"><span class="toc-number">6.</span> <span class="toc-text">0x06、共享文件夹的设置</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"Linux基础（笔记）　| obsetear　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2020/10/10/python 正则表达式小结（笔记）/" title="上一篇: python正则表达式小结（笔记）">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2020/08/26/内网渗透之Linux提权姿势/" title="下一篇: Linux提权">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/10/10/python 正则表达式小结（笔记）/">python正则表达式小结（笔记）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/04/linux基础知识（笔记）/">Linux基础（笔记）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/26/内网渗透之Linux提权姿势/">Linux提权</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/16/内网渗透之windows提权的几种姿势/">windows提权</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/06/内网渗透之免杀/">免杀</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/29/内网渗透之CobaltStrike/">CobaltStrike</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/26/内网渗透之Metasploit/">Metasploit</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/25/内网渗透之windows基础/">Windows基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/20/浅谈XXE漏洞：从XML到文件读取/">浅谈XXE漏洞：从XML到文件读取</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/04/SSRF漏洞/">SSRF漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/03/宽字节注入/">宽字节注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/23/攻防世界web系列/">攻防世界web系列</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2020 obsem
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

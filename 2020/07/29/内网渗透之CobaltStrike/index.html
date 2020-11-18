@@ -15,29 +15,29 @@
 
 
 
-<meta name="description" content="1、CobaltStrike的启动先开启服务端：./teamserver 192.168.0.108 123456">
+<meta name="description" content="1、CobaltStrike的启动先开启服务端：./teamserver 192.168.1.112 123456">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CobaltStrike">
 <meta property="og:url" content="http://yoursite.com/2020/07/29/内网渗透之CobaltStrike/index.html">
 <meta property="og:site_name" content="obsetear">
-<meta property="og:description" content="1、CobaltStrike的启动先开启服务端：./teamserver 192.168.0.108 123456">
+<meta property="og:description" content="1、CobaltStrike的启动先开启服务端：./teamserver 192.168.1.112 123456">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/internet/cs1.jpg">
-<meta property="og:image" content="http://yoursite.com/internet/cs2.jpg">
-<meta property="og:image" content="http://yoursite.com/internet/cs3.jpg">
-<meta property="og:image" content="http://yoursite.com/internet/cs4.jpg">
-<meta property="og:image" content="http://yoursite.com/internet/cs5.jpg">
-<meta property="og:image" content="http://yoursite.com/internet/cs6.jpg">
-<meta property="og:image" content="http://yoursite.com/internet/cs7.jpg">
-<meta property="og:image" content="http://yoursite.com/internet/cs8.jpg">
-<meta property="og:image" content="http://yoursite.com/internet/cs9.jpg">
-<meta property="og:image" content="http://yoursite.com/internet/cs10.jpg">
-<meta property="og:image" content="http://yoursite.com/internet/cs11.jpg">
-<meta property="og:updated_time" content="2020-07-31T10:42:21.120Z">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/cs/cs1.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/cs/cs2.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/cs/cs3.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/cs/cs4.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/cs/cs5.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/cs/cs6.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/cs/cs7.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/cs/cs8.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/cs/cs9.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/cs/cs10.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/cs/cs11.jpg">
+<meta property="og:updated_time" content="2020-11-15T11:47:47.016Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CobaltStrike">
-<meta name="twitter:description" content="1、CobaltStrike的启动先开启服务端：./teamserver 192.168.0.108 123456">
-<meta name="twitter:image" content="http://yoursite.com/internet/cs1.jpg">
+<meta name="twitter:description" content="1、CobaltStrike的启动先开启服务端：./teamserver 192.168.1.112 123456">
+<meta name="twitter:image" content="http://yoursite.com/img/shentou/internet/cs/cs1.jpg">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -305,16 +305,16 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="1、CobaltStrike的启动"><a href="#1、CobaltStrike的启动" class="headerlink" title="1、CobaltStrike的启动"></a>1、CobaltStrike的启动</h2><pre><code>先开启服务端：./teamserver 192.168.0.108 123456</code></pre><a id="more"></a>    
-<img src="/internet/cs1.jpg">
+        <h2 id="1、CobaltStrike的启动"><a href="#1、CobaltStrike的启动" class="headerlink" title="1、CobaltStrike的启动"></a>1、CobaltStrike的启动</h2><pre><code>先开启服务端：./teamserver 192.168.1.112 123456</code></pre><a id="more"></a>    
+<img src="/img/shentou/internet/cs/cs1.jpg">
 
-<pre><code>再启动客户端进行连接：./start.sh</code></pre><img src="/internet/cs2.jpg">
+<pre><code>再启动客户端进行连接：./start.sh</code></pre><img src="/img/shentou/internet/cs/cs2.jpg">
 
 <pre><code>也可以在windows上启动客户端进行连接
 
-    javaw -Dfile.encoding=UTF-8 -javaagent:CobaltStrikeCN.jar -XX:ParallelGCThreads=4 -XX:+AggressiveHeap -XX:+UseParallelGC -jar cobaltstrike.jar</code></pre><img src="/internet/cs3.jpg">
+    javaw -Dfile.encoding=UTF-8 -javaagent:CobaltStrikeCN.jar -XX:ParallelGCThreads=4 -XX:+AggressiveHeap -XX:+UseParallelGC -jar cobaltstrike.jar</code></pre><img src="/img/shentou/internet/cs/cs3.jpg">
 
-<h2 id="2、工具条"><a href="#2、工具条" class="headerlink" title="2、工具条"></a>2、工具条</h2><img src="/internet/cs4.jpg">
+<h2 id="2、工具条"><a href="#2、工具条" class="headerlink" title="2、工具条"></a>2、工具条</h2><img src="/img/shentou/internet/cs/cs4.jpg">
 
 <pre><code>连接另一个服务器
 
@@ -386,7 +386,7 @@ argue：参数欺骗（绕过杀软）
     2）使用msf中的指定模块
         use exploit/windows/local/payload_inject
 
-    3）设置payload等配置，设置payload时，最后的协议要与cs中的一样，端口也要一样</code></pre><img src="/internet/cs5.jpg">
+    3）设置payload等配置，设置payload时，最后的协议要与cs中的一样，端口也要一样</code></pre><img src="/img/shentou/internet/cs/cs5.jpg">
 
 <pre><code>    4）然后cs就能接收到msf传来的监听了
 
@@ -394,16 +394,16 @@ cs ——&gt; msf
 
     1)首先要有一个cs的监听会话
 
-    2）用msf开启一个监听</code></pre><img src="/internet/cs6.jpg">
+    2）用msf开启一个监听</code></pre><img src="/img/shentou/internet/cs/cs6.jpg">
 
-<pre><code>3）在cs中新建一个foreign htt类型的监听</code></pre><img src="/internet/cs7.jpg">
+<pre><code>3）在cs中新建一个foreign htt类型的监听</code></pre><img src="/img/shentou/internet/cs/cs7.jpg">
 
-<pre><code>4）然后cs会话派生给新建的msfshell监听</code></pre><img src="/internet/cs8.jpg">    
+<pre><code>4）然后cs会话派生给新建的msfshell监听</code></pre><img src="/img/shentou/internet/cs/cs8.jpg">    
 
 <pre><code>5）最后msf就会收到监听了</code></pre><h2 id="5、cs流量加密（免杀）"><a href="#5、cs流量加密（免杀）" class="headerlink" title="5、cs流量加密（免杀）"></a>5、cs流量加密（免杀）</h2><pre><code>C2-profile
 
     1）使用keytool生成.store文件
-        keytool -genkey -alias demo -keyalg RSA -validity 36500 -keystore demo.store</code></pre><img src="/internet/cs9.jpg">    
+        keytool -genkey -alias demo -keyalg RSA -validity 36500 -keystore demo.store</code></pre><img src="/img/shentou/internet/cs/cs9.jpg">    
 
 <pre><code>    2）创建C2.profile文件，加入以下内容
 
@@ -488,9 +488,9 @@ cs ——&gt; msf
         }
     }
 
-3）使用 ./c2lint C2.profile 命令测试profile文件是否可用（没有保错就是可用的）</code></pre><img src="/internet/cs10.jpg">
+3）使用 ./c2lint C2.profile 命令测试profile文件是否可用（没有保错就是可用的）</code></pre><img src="/img/shentou/internet/cs/cs10.jpg">
 
-<pre><code>4）重新启动cs：./teamserver 192.168.0.108 123456 ./C2.profile</code></pre><img src="/internet/cs11.jpg">
+<pre><code>4）重新启动cs：./teamserver 192.168.0.108 123456 ./C2.profile</code></pre><img src="/img/shentou/internet/cs/cs11.jpg">
 
 <pre><code>5）之后再生成payload，监听就可以达到免杀的效果了</code></pre><h2 id="6、CS插件"><a href="#6、CS插件" class="headerlink" title="6、CS插件"></a>6、CS插件</h2><pre><code>https://www.cobaltstrike.com/aggressor-script/index.html</code></pre>
       
@@ -503,7 +503,7 @@ cs ——&gt; msf
         <p><span>本文标题:</span><a href="/2020/07/29/内网渗透之CobaltStrike/">CobaltStrike</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">obsem</a></p>
         <p><span>发布时间:</span>2020-07-29, 00:00:00</p>
-        <p><span>最后更新:</span>2020-07-31, 18:42:21</p>
+        <p><span>最后更新:</span>2020-11-15, 19:47:47</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2020/07/29/内网渗透之CobaltStrike/" title="CobaltStrike">http://yoursite.com/2020/07/29/内网渗透之CobaltStrike/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/07/29/内网渗透之CobaltStrike/　　作者: obsem" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -517,6 +517,12 @@ cs ——&gt; msf
 
 
     <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2020/08/06/内网渗透之免杀/">
+                    免杀
+                </a>
+            </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
@@ -589,7 +595,9 @@ cs ——&gt; msf
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a href="/2020/08/06/内网渗透之免杀/" title="上一篇: 免杀">
+                <i class="fa fa-angle-left"></i>
+            </a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
@@ -601,7 +609,7 @@ cs ——&gt; msf
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/07/29/内网渗透之CobaltStrike/">CobaltStrike</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/26/内网渗透之Metasploit/">Metasploit</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/25/内网渗透之windows基础/">Windows基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/20/浅谈XXE漏洞：从XML到文件读取/">浅谈XXE漏洞：从XML到文件读取</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/04/SSRF漏洞/">SSRF漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/23/csrf漏洞小结/">CSRF漏洞小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/Mysql报错函数小结/">Mysql报错函数小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/10/文件包含漏洞小结/">文件包含漏洞小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/21/浅谈php一句话木马/">浅谈一句话木马</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/03/宽字节注入/">宽字节注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/23/攻防世界web系列/">攻防世界web系列</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/10/10/python 正则表达式小结（笔记）/">python正则表达式小结（笔记）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/04/linux基础知识（笔记）/">Linux基础（笔记）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/26/内网渗透之Linux提权姿势/">Linux提权</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/16/内网渗透之windows提权的几种姿势/">windows提权</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/06/内网渗透之免杀/">免杀</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/29/内网渗透之CobaltStrike/">CobaltStrike</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/26/内网渗透之Metasploit/">Metasploit</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/25/内网渗透之windows基础/">Windows基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/20/浅谈XXE漏洞：从XML到文件读取/">浅谈XXE漏洞：从XML到文件读取</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/04/SSRF漏洞/">SSRF漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/03/宽字节注入/">宽字节注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/23/攻防世界web系列/">攻防世界web系列</a></li></ul>
 
 
 

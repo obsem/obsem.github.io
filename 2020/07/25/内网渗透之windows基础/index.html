@@ -22,23 +22,23 @@
 <meta property="og:site_name" content="obsetear">
 <meta property="og:description" content="一、用户及用户组1、用户权限的划分">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/internet/win1.jpg">
-<meta property="og:image" content="http://yoursite.com/internet/win2.jpg">
-<meta property="og:image" content="http://yoursite.com/internet/win3.jpg">
-<meta property="og:image" content="http://yoursite.com/internet/win4.jpg">
-<meta property="og:image" content="http://yoursite.com/internet/win5.jpg">
-<meta property="og:image" content="http://yoursite.com/internet/win6.jpg">
-<meta property="og:image" content="http://yoursite.com/internet/win7.jpg">
-<meta property="og:image" content="http://yoursite.com/internet/win8.jpg">
-<meta property="og:image" content="http://yoursite.com/internet/win9.jpg">
-<meta property="og:image" content="http://yoursite.com/internet/win10.jpg">
-<meta property="og:image" content="http://yoursite.com/internet/win11.jpg">
-<meta property="og:image" content="http://yoursite.com/internet/win12.jpg">
-<meta property="og:updated_time" content="2020-07-25T09:11:22.712Z">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/win/win1.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/win/win2.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/win/win3.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/win/win4.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/win/win5.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/win/win6.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/win/win7.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/win/win8.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/win/win9.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/win/win10.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/win/win11.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/internet/win/win12.jpg">
+<meta property="og:updated_time" content="2020-11-18T11:28:47.314Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Windows基础">
 <meta name="twitter:description" content="一、用户及用户组1、用户权限的划分">
-<meta name="twitter:image" content="http://yoursite.com/internet/win1.jpg">
+<meta name="twitter:image" content="http://yoursite.com/img/shentou/internet/win/win1.jpg">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -317,7 +317,7 @@
 <p>​        adminstrator</p>
 <p>​        Guest来宾用户</p>
 <p>​        <code>net user：查看系统所有用户</code></p>
-<img src="/internet/win1.jpg">
+<img src="/img/shentou/internet/win/win1.jpg">
 
 <p>4、用户组</p>
 <p>  ​用户组的特性</p>
@@ -338,23 +338,23 @@
 
 6）print Users组：打印机组，组内成员可以操作打印机
 
- `查看所有用户组：net localgroup`</code></pre><img src="/internet/win2.jpg">
+ `查看所有用户组：net localgroup`</code></pre><img src="/img/shentou/internet/win/win2.jpg">
 
 <p>5、SID（Security Identifiers） 安全标识符</p>
 <p><code>查看Sid：whoami /user</code></p>
-<img src="/internet/win3.jpg">
+<img src="/img/shentou/internet/win/win3.jpg">
 
 <p>6、常用命令</p>
 <p>  用户命令</p>
 <pre><code>1） `whoami：查看当前用户权限`
 
-2） `net user + 用户名：查看具体用户信息`</code></pre><img src="/internet/win4.jpg">
+2） `net user + 用户名：查看具体用户信息`</code></pre><img src="/img/shentou/internet/win/win4.jpg">
 
 <pre><code>3） `net user + 用户名 + 密码 /add：添加一个用户（需要管理员权限）`
 
 4） `net user + 用户名 /delete`
 
-5） `query user：查询在线用户`</code></pre><img src="/internet/win5.jpg">
+5） `query user：查询在线用户`</code></pre><img src="/img/shentou/internet/win/win5.jpg">
 
 <p>​    用户组命令</p>
 <pre><code>1）`net localgroup 组名 /add：添加一个用户组`
@@ -379,9 +379,9 @@
 
 3） `netstat -ano | findstr &quot;3389&quot; ：查看3389是否开启`
 
-4） 开启3389（需要管理员权限）：REG ADD HKLM\SYSTEM\CurrentControlSet\Control\Terminal&quot; &quot;Server /v fDenyTSConnections /t REG_DWORD /d 00000000 /f</code></pre><img src="/internet/win6.jpg">
+4） 开启3389（需要管理员权限）：REG ADD HKLM\SYSTEM\CurrentControlSet\Control\Terminal&quot; &quot;Server /v fDenyTSConnections /t REG_DWORD /d 00000000 /f</code></pre><img src="/img/shentou/internet/win/win6.jpg">
 
-<pre><code>5） 关闭3389（需要管理员权限）：REG ADD HKLM\SYSTEM\CurrentControlSet\Control\Terminal&quot; &quot;Server /v fDenyTSConnections /t REG_DWORD /d 11111111 /f</code></pre><img src="/internet/win7.jpg">
+<pre><code>5） 关闭3389（需要管理员权限）：REG ADD HKLM\SYSTEM\CurrentControlSet\Control\Terminal&quot; &quot;Server /v fDenyTSConnections /t REG_DWORD /d 11111111 /f</code></pre><img src="/img/shentou/internet/win/win7.jpg">
 
 <p>  系统命令：</p>
 <pre><code>ver：查看版本信息
@@ -396,11 +396,11 @@
 
   windows 10——&gt;win10
 
-systeminfo：查看windows详细信息</code></pre><img src="/internet/win8.jpg">
+systeminfo：查看windows详细信息</code></pre><img src="/img/shentou/internet/win/win8.jpg">
 
 <h2 id="二、uac、asr和applocker"><a href="#二、uac、asr和applocker" class="headerlink" title="二、uac、asr和applocker"></a>二、uac、asr和applocker</h2><p>1、windows认证及密码</p>
 <p>  密码存储文件SAM：C:\windows\system32\config</p>
-<img src="/internet/win9.jpg">
+<img src="/img/shentou/internet/win/win9.jpg">
 
 <p>  密码加密类型</p>
 <pre><code>1）ntlm hash
@@ -443,7 +443,7 @@ apk攻击</code></pre><p>  查看asr</p>
 <p>​        5)windows defender防病毒</p>
 <p>​        6)windows denfender攻击防护</p>
 <p>​        7)攻击面减少</p>
-<img src="/internet/win10.jpg">
+<img src="/img/shentou/internet/win/win10.jpg">
 
 <p>  asr规则</p>
 <pre><code>1）未配置：禁用asr --&gt; 0
@@ -458,12 +458,12 @@ apk攻击</code></pre><p>  查看asr</p>
 <p>  启用applocker</p>
 <pre><code>services.msc
 
-application identity</code></pre>  <img src="/internet/win11.jpg">
+application identity</code></pre>  <img src="/img/shentou/internet/win/win11.jpg">
 
 <p>  查看applocer</p>
 <pre><code>secpol.msc
 
-application control Policies（应用程序控制）</code></pre><img src="/internet/win12.jpg">
+application control Policies（应用程序控制）</code></pre><img src="/img/shentou/internet/win/win12.jpg">
 
 <p>  applocker规则</p>
 <pre><code>1）可执行文件: .exe、.com
@@ -566,7 +566,7 @@ Get-NetComputer：获取域内机器</code></pre><p>​<br>​<br>​<br>​<br>
         <p><span>本文标题:</span><a href="/2020/07/25/内网渗透之windows基础/">Windows基础</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">obsem</a></p>
         <p><span>发布时间:</span>2020-07-25, 00:00:00</p>
-        <p><span>最后更新:</span>2020-07-25, 17:11:22</p>
+        <p><span>最后更新:</span>2020-11-18, 19:28:47</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2020/07/25/内网渗透之windows基础/" title="Windows基础">http://yoursite.com/2020/07/25/内网渗透之windows基础/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/07/25/内网渗透之windows基础/　　作者: obsem" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -672,7 +672,7 @@ Get-NetComputer：获取域内机器</code></pre><p>​<br>​<br>​<br>​<br>
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/07/29/内网渗透之CobaltStrike/">CobaltStrike</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/26/内网渗透之Metasploit/">Metasploit</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/25/内网渗透之windows基础/">Windows基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/20/浅谈XXE漏洞：从XML到文件读取/">浅谈XXE漏洞：从XML到文件读取</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/04/SSRF漏洞/">SSRF漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/23/csrf漏洞小结/">CSRF漏洞小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/Mysql报错函数小结/">Mysql报错函数小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/10/文件包含漏洞小结/">文件包含漏洞小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/21/浅谈php一句话木马/">浅谈一句话木马</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/03/宽字节注入/">宽字节注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/23/攻防世界web系列/">攻防世界web系列</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/10/10/python 正则表达式小结（笔记）/">python正则表达式小结（笔记）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/04/linux基础知识（笔记）/">Linux基础（笔记）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/26/内网渗透之Linux提权姿势/">Linux提权</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/16/内网渗透之windows提权的几种姿势/">windows提权</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/06/内网渗透之免杀/">免杀</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/29/内网渗透之CobaltStrike/">CobaltStrike</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/26/内网渗透之Metasploit/">Metasploit</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/25/内网渗透之windows基础/">Windows基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/20/浅谈XXE漏洞：从XML到文件读取/">浅谈XXE漏洞：从XML到文件读取</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/04/SSRF漏洞/">SSRF漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/03/宽字节注入/">宽字节注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/23/攻防世界web系列/">攻防世界web系列</a></li></ul>
 
 
 
