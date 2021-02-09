@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="obsem">
+
+
+
+<meta name="description" content="前言： 这几天学了上传漏洞，真是涨姿势了，之前在web方面模糊的地方在这里得到了一些补充，为了加深印象，特地写一篇博客来记录一下。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="文件上传漏洞总结">
+<meta property="og:url" content="http://yoursite.com/2019/07/31/文件上传漏洞总结/index.html">
+<meta property="og:site_name" content="obsetear">
+<meta property="og:description" content="前言： 这几天学了上传漏洞，真是涨姿势了，之前在web方面模糊的地方在这里得到了一些补充，为了加深印象，特地写一篇博客来记录一下。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190730225615531.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190731100919788.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190731101259513.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190731102007233.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190731115938204.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2021-02-08T13:09:32.560Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="文件上传漏洞总结">
+<meta name="twitter:description" content="前言： 这几天学了上传漏洞，真是涨姿势了，之前在web方面模糊的地方在这里得到了一些补充，为了加深印象，特地写一篇博客来记录一下。">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190730225615531.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="obsetear" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>文件上传漏洞总结 | obsetear</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: false
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/2.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">obsem</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">obsem</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/2.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">obsem</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-文件上传漏洞总结" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/07/31/文件上传漏洞总结/" class="article-date">
+      <time datetime="2019-07-30T16:00:00.000Z" itemprop="datePublished">2019-07-31</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      文件上传漏洞总结
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><strong>前言：</strong> 这几天学了上传漏洞，真是涨姿势了，之前在web方面模糊的地方在这里得到了一些补充，为了加深印象，特地写一篇博客来记录一下。</p>
+<a id="more"></a>
+<p>视频来源：<a href="https://www.bilibili.com/video/av51024187?from=search&amp;seid=8932804059051724310" target="_blank" rel="noopener">https://www.bilibili.com/video/av51024187?from=search&amp;seid=8932804059051724310</a></p>
+<h2 id="0x01-概要说明"><a href="#0x01-概要说明" class="headerlink" title="0x01 概要说明"></a>0x01 概要说明</h2><p><strong>上传漏洞：</strong> 是很常见的一个漏洞，这个漏洞有时是服务器本身存在的漏洞，有时又是代码中某个函数本身存在的漏洞，hacker平时用这个漏洞来上传一句话木马，然后用菜刀或蚁剑连接，之后就能获得整个服务器的权限。</p>
+<h2 id="0x02上传流程"><a href="#0x02上传流程" class="headerlink" title="0x02上传流程"></a>0x02上传流程</h2><p>1、图片是否正常上传</p>
+<p>2、图片上传内容是否被感染。（感染分两种，前端替换和后端替换）</p>
+<p>3、上传的域名是否是目标服务器，如果不是那么判断图片服务器是否解析 php asp aspx jsp cfm shtml等（一般情况下默认是不会解析的）</p>
+<p>4、上传的目录是否支持解析（php asp aspx jsp cfm shtml等）</p>
+<p>5、判断是否黑白名单验证</p>
+<h2 id="0x03-文件上传黑白名单验证"><a href="#0x03-文件上传黑白名单验证" class="headerlink" title="0x03 文件上传黑白名单验证"></a>0x03 文件上传黑白名单验证</h2><p><strong>白名单验证：</strong><br>只能上传某某某文件</p>
+<p><strong>黑名单验证：</strong><br>不能上传某某某文件</p>
+<h2 id="0x04-JS检测绕过"><a href="#0x04-JS检测绕过" class="headerlink" title="0x04 JS检测绕过"></a>0x04 JS检测绕过</h2><p>绕过js验证的方法有很多，比如抓包绕过或者通过一些插件修改js代码（例如火狐的firebug）等方式也可以绕过。</p>
+<h2 id="0x05-MIME类型绕过"><a href="#0x05-MIME类型绕过" class="headerlink" title="0x05 MIME类型绕过"></a>0x05 MIME类型绕过</h2><p>常见的MIME类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">超文本标记语言文本 .html,.html text/html </span><br><span class="line">　　普通文本 .txt text/plain </span><br><span class="line">　　RTF文本 .rtf application/rtf </span><br><span class="line">　　GIF图形 .gif image/gif </span><br><span class="line">　　JPEG图形 .jpeg,.jpg image/jpeg </span><br><span class="line">　　au声音文件 .au audio/basic </span><br><span class="line">　　MIDI音乐文件 mid,.midi audio/midi,audio/x-midi </span><br><span class="line">　　RealAudio音乐文件 .ra, .ram audio/x-pn-realaudio </span><br><span class="line">　　MPEG文件 .mpg,.mpeg video/mpeg </span><br><span class="line">　　AVI文件 .avi video/x-msvideo </span><br><span class="line">　　GZIP文件 .gz application/x-gzip </span><br><span class="line">　　TAR文件 .tar application/x-tar</span><br></pre></td></tr></table></figure>
+
+<p>在上传时，mime类型会被记录在HTTP包的Conent-Type里面，然后上传到服务端PHP的<code>$_FILES</code>超全局变量里面，所以一般通过抓包修改Conent-Type后面的mime类型进行绕过。<br><img src="https://img-blog.csdnimg.cn/20190730225615531.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="0x06-00截断上传"><a href="#0x06-00截断上传" class="headerlink" title="0x06 %00截断上传"></a>0x06 %00截断上传</h2><p>我们先来了解一下什么是空字节，字符串中的<code>%00</code>（也就是空字节），会被服务器视作为结束符，也就是说当你在字符串中加入空字节就会被服务器提前结束该字符串，产生空字节漏洞的原因有两个，一是一些函数本身的漏洞，二是服务器的漏洞。<br><img src="https://img-blog.csdnimg.cn/20190731100919788.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>第一种方法是把%00进行urldecode的操作，选中%00然后右击，/convert selection/URL/URL-decode<br><img src="https://img-blog.csdnimg.cn/20190731101259513.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>第二种方法是在1.php后面打一个空格，别的字符也行主要是为了占位，然后再在hex里找到1.php后面的的那个字符的编码然后改成%00对应ascii码00<br><img src="https://img-blog.csdnimg.cn/20190731102007233.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>当上传不上php文件时，可以试着上传.php3, .php4, .php5, .phtml 等可能会被解析成php文件，也可以使用服务解析漏洞等。</p>
+<h2 id="0x07-lIS解析漏洞"><a href="#0x07-lIS解析漏洞" class="headerlink" title="0x07 lIS解析漏洞"></a>0x07 lIS解析漏洞</h2><p>使用iis5.x-6.x版本的服务器，大多为Windows server2003，网站比较古老，开发语句一般为asp；改解析漏洞只能解析asp文件，而不能解析aspx文件。</p>
+<p><strong>目录解析（iis6.0）</strong><br>形式：<code>www.xxx.com/xx.asp/xx.jpg</code><br>原理：服务器默认把.asp , .asa目录下的文件都解析成asp文件。</p>
+<p><strong>文件解析</strong><br>形式：<code>www.xxx.com/xx.asp; .jpg</code><br>原理：服务器默认不解析;号后面的内容，因此xx.asp;.jpg会被解析成asp文件</p>
+<p><strong>解析文件类型</strong><br>IIS6.0默认的可执行文件除了asp还包含着三种：asa文件, cer文件和cdx文件</p>
+<h2 id="0x08-apache解析漏洞"><a href="#0x08-apache解析漏洞" class="headerlink" title="0x08 apache解析漏洞"></a>0x08 apache解析漏洞</h2><p>Apache解析文件的规则是从右到左开始判断解析，如果后缀名为不可识别文件解析，就再往左判断。比如test.php.owf.rar  ，  “.owf”和”.rar”这两种后缀是apache不可识别解析的，apache就会把test.php.owf.rar解析成test.php</p>
+<p><strong>其余配置问题导致漏洞</strong><br>（1）如果在Apache的conf里有这样一行配置AddHandler php5-script.php这时只要文件名里包含.php即使文件名是test2.php.jpg也会以php来执行。</p>
+<p>（2）如果在Apache的conf里有这样一行配置AddType application/x-httpd-php.jpg，即使拓展名是.jpg，一样能以php方式执行</p>
+<h2 id="0x09-nginx解析漏洞"><a href="#0x09-nginx解析漏洞" class="headerlink" title="0x09 nginx解析漏洞"></a>0x09 nginx解析漏洞</h2><p>Nginx默认是以CGI的方式支持PHP解析的，普遍的做法是在Nginx配置文件中通过正则匹配设置SCRIPT_FILENAME。</p>
+<p>当访问 <code>www.xx.com/phpinfo.jpg/1.php</code> 这个URL时，$fastcqi_script_name会被设置为“phpinfo.jpg/1.php”，然后构造SCRIPT_FILENAME传递给PHPCGI。</p>
+<p>如果此时PHP开启了fix_pathinfo选项，那么就会触发在PHP中的以下逻辑：PHP会认为SCRIPT_FILENAME是phpinfo.jpg，而1.php是PATH_INFO，所以就会将phpinfo.jpg/1.php作为PHP文件来解析了。</p>
+<p>漏洞形式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">www.xxx.com/uploadfiles/1.jpg/1.php</span><br><span class="line">www.xxx.com/uploadfiles/1.jpg/.php</span><br></pre></td></tr></table></figure>
+
+<h2 id="0x10-iis7-5解析漏洞"><a href="#0x10-iis7-5解析漏洞" class="headerlink" title="0x10 iis7.5解析漏洞"></a>0x10 iis7.5解析漏洞</h2><p>is7.5的漏洞与nginx的类似，都是由于php配置文件中，开启了cgi.fix_pathinfo，而这并不是nginx或者iis7.5本身的漏洞。</p>
+<h2 id="0x11-net上传"><a href="#0x11-net上传" class="headerlink" title="0x11  .net上传"></a>0x11  .net上传</h2><p>一般支持aspx默认都会支持ashx</p>
+<p>上传一个.ashx文件然后写入以下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ WebHander Language=&quot;C#&quot;Class=&quot;Handler&quot;%&gt;</span><br><span class="line"></span><br><span class="line">using System;</span><br><span class="line">using System.Web;</span><br><span class="line">using System.IO;</span><br><span class="line">public class Hander : IHttpHandler&#123;</span><br><span class="line">public void ProcessRequest(HttpContext context)&#123;</span><br><span class="line">context.Response.ContentType = &quot;text/plain&quot;;</span><br><span class="line"></span><br><span class="line">StreamWriter file1 = File.CreateText(context.Server.MapPath(&quot;root.asp&quot;));</span><br><span class="line">file1.Write(&quot;&lt;%response.clear.execute request(\&quot;root\&quot;):response.End%&gt;&quot;);</span><br><span class="line">file1.Flush();</span><br><span class="line">file1.Close();</span><br><span class="line">&#125;</span><br><span class="line">public bool IsReusable &#123;</span><br><span class="line">get&#123;</span><br><span class="line">return false;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后访问该文件，就会生成一个root.asp的文件，内容为&lt;%response.clear.execute request(&quot;root&quot;):response.End%&gt;，然后就可以用工具进行连接了，当然也可以生成别的类型的文件，只需要更改代码中相应的部分<br><img src="https://img-blog.csdnimg.cn/20190731115938204.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="0x12-phtml上传"><a href="#0x12-phtml上传" class="headerlink" title="0x12 phtml上传"></a>0x12 phtml上传</h2><p>在apache配置文件（一般是httpd.conf）里添加AddType application/x-httpd-php.phtml</p>
+<p>这样phtml后缀的文件就会按照php去解析，也可以设置成其他后缀。</p>
+<h2 id="0x13-htaccess上传"><a href="#0x13-htaccess上传" class="headerlink" title="0x13 .htaccess上传"></a>0x13 .htaccess上传</h2><p>在当前目录中加入.htaccess文件并把以下代码写入其中，该目录下的.jpg文件都会被解析成.php文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;Files *.jpg&gt;</span><br><span class="line">ForceType application/x-httpd-php</span><br><span class="line">SetHandler application/x-httpd-php</span><br><span class="line">&lt;/Files&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>总结：</strong> 目前小白知道的上传漏洞就这么点，应该还有很多漏洞是小白没有见过的，以上是小白对上传漏洞的理解，应该有偏差和不完整的地方，不过小白以后会努力完善的。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2019/07/31/文件上传漏洞总结/">文件上传漏洞总结</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">obsem</a></p>
+        <p><span>发布时间:</span>2019-07-31, 00:00:00</p>
+        <p><span>最后更新:</span>2021-02-08, 21:09:32</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2019/07/31/文件上传漏洞总结/" title="文件上传漏洞总结">http://yoursite.com/2019/07/31/文件上传漏洞总结/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/07/31/文件上传漏洞总结/　　作者: obsem" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2019/08/04/i春秋-misc系列/">
+                    i春秋-misc系列
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2019/07/28/隐写术/">
+                    隐写术
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01-概要说明"><span class="toc-number">1.</span> <span class="toc-text">0x01 概要说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02上传流程"><span class="toc-number">2.</span> <span class="toc-text">0x02上传流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03-文件上传黑白名单验证"><span class="toc-number">3.</span> <span class="toc-text">0x03 文件上传黑白名单验证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x04-JS检测绕过"><span class="toc-number">4.</span> <span class="toc-text">0x04 JS检测绕过</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x05-MIME类型绕过"><span class="toc-number">5.</span> <span class="toc-text">0x05 MIME类型绕过</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x06-00截断上传"><span class="toc-number">6.</span> <span class="toc-text">0x06 %00截断上传</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x07-lIS解析漏洞"><span class="toc-number">7.</span> <span class="toc-text">0x07 lIS解析漏洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x08-apache解析漏洞"><span class="toc-number">8.</span> <span class="toc-text">0x08 apache解析漏洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x09-nginx解析漏洞"><span class="toc-number">9.</span> <span class="toc-text">0x09 nginx解析漏洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x10-iis7-5解析漏洞"><span class="toc-number">10.</span> <span class="toc-text">0x10 iis7.5解析漏洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x11-net上传"><span class="toc-number">11.</span> <span class="toc-text">0x11  .net上传</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x12-phtml上传"><span class="toc-number">12.</span> <span class="toc-text">0x12 phtml上传</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x13-htaccess上传"><span class="toc-number">13.</span> <span class="toc-text">0x13 .htaccess上传</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"文件上传漏洞总结　| obsetear　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2019/08/04/i春秋-misc系列/" title="上一篇: i春秋-misc系列">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2019/07/28/隐写术/" title="下一篇: 隐写术">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/11/21/从文件上传到浅谈.htaccess文件的作用/">从文件上传到浅谈.htaccess文件的作用</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/19/记一次简单的渗透练习/">记一次简单的渗透练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/10/python 正则表达式小结（笔记）/">python正则表达式小结（笔记）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/08/upload-labs通关总结/">upload-labs通关小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/04/linux基础知识（笔记）/">Linux基础（笔记）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/03/BUUCTFweb部分解题思路2/">BUUCTFweb部分解题思路（PHP、Babysql、Upload、CheckIn）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/15/BUUCTF部分web题解/">BUUCTF部分web题解（easysql，easy_tornado，Ping Ping Ping）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/26/内网渗透之Linux提权姿势/">Linux提权</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/16/内网渗透之windows提权的几种姿势/">windows提权</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/06/内网渗透之免杀/">免杀</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/29/内网渗透之CobaltStrike/">CobaltStrike</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/26/内网渗透之Metasploit/">Metasploit</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/25/内网渗透之windows基础/">Windows基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/20/浅谈XXE漏洞：从XML到文件读取/">浅谈XXE漏洞：从XML到文件读取</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/04/SSRF漏洞/">SSRF漏洞小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/23/csrf漏洞小结/">CSRF漏洞小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/Mysql报错函数小结/">Mysql报错函数小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/10/文件包含漏洞小结/">浅谈文件包含漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/21/浅谈php一句话木马/">浅谈一句话木马</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/03/宽字节注入/">宽字节注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/23/攻防世界web系列/">攻防世界web系列</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/10/Owasp juice shop(一)/">Owasp juice shop(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/24/PHP代码审计之危险函数/">PHP代码审计之危险函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/22/PHP超级全局变量/">PHP超级全局变量</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/21/一些常见的编码/">一些常见的编码</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/17/命令执行&代码执行漏洞/">命令执行&代码执行漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Web常见的源码泄露/">Web常见的源码泄露</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/09/RSA算法小结/">RSA算法小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/08/PHP反序列化/">PHP反序列化学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/04/i春秋-misc系列/">i春秋-misc系列</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/31/文件上传漏洞总结/">文件上传漏洞总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/28/隐写术/">隐写术</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/25/SQL注入一些过滤及绕过总结/">SQL注入一些过滤及绕过总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/21/SQL简单注入/">SQL简单注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/20/图片隐写/">图片隐写术</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/18/攻防世界——Misc系列/">攻防世界——Misc系列</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/14/Web——爆破wp/">WEB——爆破wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/10/WEB——php大法wp/">WEB——php大法wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/08/图片隐写——小苹果wp/">图片隐写——小苹果wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/10/xss挑战之旅学习笔记/">xss挑战之旅学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/07/xss学习总结/">xxs学习总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/25/SQL注入姿势（3）/">SQL注入姿势（3）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/12/SQL注入姿势（2）/">SQL注入姿势（2）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/10/SQL注入姿势（1）/">SQL注入姿势（1）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/06/PHP学习笔记（5）/">PHP学习笔记（5）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/05/PHP学习笔记（4）/">PHP学习笔记（4）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/28/php登录界面小结/">PHP登录界面小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/25/PHP学习笔记（3）/">PHP学习笔记（3）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/15/PHP学习笔记（2）/">PHP学习笔记（2）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/07/PHP学习笔记（1）/">PHP学习笔记（1）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/05/哈弗曼树/">哈弗曼树</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/27/css学习笔记/">CSS学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/25/HTML学习笔记/">HTML学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/25/MySQL的一些常用命令行总结/">MySQL的一些常用命令行总结</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2021 obsem
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

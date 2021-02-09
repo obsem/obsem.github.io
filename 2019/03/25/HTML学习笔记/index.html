@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="obsem">
+
+
+
+<meta name="description" content="HTML学习笔记一、html的基本结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTML学习笔记">
+<meta property="og:url" content="http://yoursite.com/2019/03/25/HTML学习笔记/index.html">
+<meta property="og:site_name" content="obsetear">
+<meta property="og:description" content="HTML学习笔记一、html的基本结构">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-02-08T07:45:24.984Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HTML学习笔记">
+<meta name="twitter:description" content="HTML学习笔记一、html的基本结构">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="obsetear" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>HTML学习笔记 | obsetear</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: false
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/2.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">obsem</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">obsem</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/2.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">obsem</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-HTML学习笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/03/25/HTML学习笔记/" class="article-date">
+      <time datetime="2019-03-24T16:00:00.000Z" itemprop="datePublished">2019-03-25</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      HTML学习笔记
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="HTML学习笔记"><a href="#HTML学习笔记" class="headerlink" title="HTML学习笔记"></a>HTML学习笔记</h1><h4 id="一、html的基本结构"><a href="#一、html的基本结构" class="headerlink" title="一、html的基本结构"></a>一、html的基本结构</h4><a id="more"></a>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;!DOCTYPE html&gt;						&lt;!--声明文档的解析类型避免浏览器的怪异模式--&gt;</span><br><span class="line">&lt;html&gt;								&lt;!--根标签（开始）--&gt;</span><br><span class="line">&lt;head&gt;								&lt;!--头标签（开始）--&gt;</span><br><span class="line">&lt;title&gt;html的基本结构&lt;/title&gt;		&lt;!--标题标签--&gt;</span><br><span class="line">&lt;/head&gt;								&lt;!--头标签（结束）--&gt;</span><br><span class="line">&lt;body&gt;								&lt;!--主体标签--&gt;</span><br><span class="line">主体内容								&lt;!--浏览器显示的主体内容区域--&gt;</span><br><span class="line">&lt;/body&gt;								&lt;!--主体标签（结束）--&gt;</span><br><span class="line">&lt;/html&gt;								&lt;!--跟标签（结束）--&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;!--以上标签均为双标签--&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="二、常用标签"><a href="#二、常用标签" class="headerlink" title="二、常用标签"></a>二、常用标签</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;hr /&gt;						&lt;!--水平线标签（单标签）--&gt;&lt;br /&gt;</span><br><span class="line"></span><br><span class="line">&lt;h1&gt;一级标题&lt;/h1&gt;</span><br><span class="line">&lt;h2&gt;二级标题&lt;/h2&gt;</span><br><span class="line">&lt;h3&gt;三级标题&lt;/h3&gt;</span><br><span class="line">&lt;h4&gt;四级标题&lt;/h4&gt;</span><br><span class="line">&lt;h5&gt;五级标题&lt;/h5&gt;			&lt;!--主体内容的标题标签（双标签）--&gt;&lt;br /&gt;</span><br><span class="line"></span><br><span class="line">&lt;p&gt;我是一个段落&lt;/p&gt;</span><br><span class="line">&lt;p&gt;我是另一个段落&lt;/p&gt;		&lt;!--段落标签（双标签）--&gt;</span><br><span class="line"></span><br><span class="line">&lt;br /&gt;						&lt;!--换行标签（单标签）--&gt;</span><br><span class="line"></span><br><span class="line">&amp;nbsp						&lt;!--空格（特殊符号）--&gt;</span><br><span class="line"></span><br><span class="line">&lt;ul&gt;</span><br><span class="line">&lt;li&gt;相貌特点&lt;/li&gt;</span><br><span class="line">&lt;li&gt;性格特点&lt;/li&gt;</span><br><span class="line">&lt;li&gt;能力特点&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;						&lt;!--无序列表（双标签）--&gt;&lt;br /&gt;</span><br><span class="line"></span><br><span class="line">&lt;ol&gt;</span><br><span class="line">&lt;li&gt;相貌特点&lt;/li&gt;</span><br><span class="line">&lt;li&gt;性格特点&lt;/li&gt;</span><br><span class="line">&lt;li&gt;能力特点&lt;/li&gt;</span><br><span class="line">&lt;/ol&gt;						&lt;!--有序列表（双标签）--&gt;&lt;br /&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--注释内容--&gt;				&lt;!--注释标签--&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="三、常用标签——超链接及表格"><a href="#三、常用标签——超链接及表格" class="headerlink" title="三、常用标签——超链接及表格"></a>三、常用标签——超链接及表格</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;title&gt;常用标签&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--一、定义列表--&gt;</span><br><span class="line">&lt;dl&gt;</span><br><span class="line">	&lt;dt&gt;</span><br><span class="line">	苹果</span><br><span class="line">	&lt;/dt&gt;</span><br><span class="line">	&lt;dd&gt;</span><br><span class="line">	苹果是重低热能的食物，每千克只产生60千卡的热量；</span><br><span class="line">	苹果中营养成分可溶性大，易被人体吸收，故有“活水”</span><br><span class="line">	之称，有利于溶解硫元素，使皮肤润滑柔嫩。</span><br><span class="line">	&lt;/dd&gt;				</span><br><span class="line">&lt;/dl&gt;</span><br><span class="line">&lt;br /&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--二、插入图片--&gt;													</span><br><span class="line">&lt;img src=&quot;&quot; alt=&quot;&quot; width=&quot;&quot; heigt=&quot;&quot; /&gt;	</span><br><span class="line">&lt;!--</span><br><span class="line">属性src里填写图片路径</span><br><span class="line">属性alt里填写图片的说明信息</span><br><span class="line">属性width里填写图片的长度度，可用百分比表示</span><br><span class="line">属性height里填写图片的高度，可用百分比表示</span><br><span class="line">--&gt;</span><br><span class="line">&lt;br /&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--三、超链接--&gt;</span><br><span class="line">&lt;a href=&quot;&quot; title=&quot;&quot; target=&quot;_blank&quot; / &gt;</span><br><span class="line">&lt;!--</span><br><span class="line">属性href里填写要链接的地址</span><br><span class="line">属性title里填写的内容在鼠标悬停时会显示</span><br><span class="line">属性target设置成&quot;_blank&quot;时可在新窗口打开链接</span><br><span class="line">--&gt;</span><br><span class="line">&lt;br /&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--四、给图片的指定区域加超链接--&gt;</span><br><span class="line">&lt;img src=&quot;&quot; alt=&quot;&quot; width=&quot;&quot; heigt=&quot;&quot; usemap=&quot;#id&apos; /&gt;	</span><br><span class="line">&lt;map id=&quot;&quot; name=&quot;&quot;&gt;</span><br><span class="line">	&lt;area shape=&quot;&quot; coords=&quot;&quot; href=&quot;&quot; alt=&quot;&quot; target= &quot;_blank&quot; /&gt;</span><br><span class="line">&lt;/map&gt;</span><br><span class="line">&lt;!--</span><br><span class="line">map标签的使用方法：</span><br><span class="line">	1.属性id和属性name的值要相同且唯一，不得与其他值重复</span><br><span class="line">	2.为要map标签要作用的图片加上usemap属性，值为#id</span><br><span class="line">	3.map标签里嵌套area标签</span><br><span class="line">	4.area标签里的一些属性：</span><br><span class="line">		属性shape：链接区域的形状，常用值rect、circle</span><br><span class="line">		属性coords:填写坐标以确定链接的精确位置</span><br><span class="line">		属性href:要链接的地址</span><br><span class="line">		属性alt:链接的一些说明信息	</span><br><span class="line">--&gt;</span><br><span class="line">&lt;br /&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--五、表格--&gt;</span><br><span class="line">&lt;table border cellpadding=&quot;10&quot; cellspacing=&quot;10&quot;&gt;</span><br><span class="line">	&lt;tr&gt;</span><br><span class="line">	&lt;th&gt;姓名&lt;/th&gt;</span><br><span class="line">	&lt;th&gt;语文&lt;/th&gt;</span><br><span class="line">	&lt;th&gt;数学&lt;/th&gt;</span><br><span class="line">	&lt;/tr&gt;</span><br><span class="line">	&lt;tr&gt;</span><br><span class="line">	&lt;td&gt;小王&lt;/td&gt;</span><br><span class="line">	&lt;td&gt;90&lt;/td</span><br><span class="line">	&lt;td&gt;60&lt;/td&gt;</span><br><span class="line">	&lt;/tr&gt;</span><br><span class="line">	&lt;tr&gt;</span><br><span class="line">	&lt;td&gt;小里&lt;/td&gt;</span><br><span class="line">	&lt;td&gt;60&lt;/td&gt;</span><br><span class="line">	&lt;td&gt;80&lt;/td&gt;</span><br><span class="line">	&lt;/tr&gt;</span><br><span class="line">&lt;/table&gt;</span><br><span class="line">&lt;!--</span><br><span class="line">table的几个属性：</span><br><span class="line">	1.border属性：规定表格的边框的宽度</span><br><span class="line">	2.cellpadding属性：规定表格中数据与边框的距离</span><br><span class="line">	3.cellspacing属性：规定表格中单元格与单元格之间的距离</span><br><span class="line">th标签创建表头单元格的列</span><br><span class="line">td标签创建普通单元格的列</span><br><span class="line">tr标签创建单元格的行</span><br><span class="line">--&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="四、常用标签——表单"><a href="#四、常用标签——表单" class="headerlink" title="四、常用标签——表单"></a>四、常用标签——表单</h4><p>表单是由form标签（双标签）及嵌套在其中的input标签（单标签）和一些其他的标签组成。</p>
+<p>以注册账号为例，基本结构如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE HTML&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;title&gt;常用标签——表单&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt; </span><br><span class="line">&lt;h1&gt;账号注册&lt;/h1&gt;</span><br><span class="line">&lt;form&gt;										&lt;!--form标签--&gt;</span><br><span class="line">	账号：&lt;input type=&quot;text&quot;/&gt;				&lt;!--普通文本框--&gt;</span><br><span class="line">	&lt;br /&gt;&lt;br /&gt;</span><br><span class="line">	密码：&lt;input type=&quot;password&quot; /&gt;			&lt;!--密码框--&gt;</span><br><span class="line">	&lt;br /&gt;&lt;br /&gt;</span><br><span class="line">	选择头像：&lt;input type=&quot;file&quot;&gt;			&lt;!--文件上传--&gt;</span><br><span class="line">	&lt;br /&gt;&lt;br /&gt;</span><br><span class="line">	&lt;input type=&quot;hidden&quot; /&gt; 				&lt;!--隐藏的input（我暂时还没发现它有什么用）--&gt;</span><br><span class="line">	&lt;input type=&quot;button&quot; value=&quot;点击进入&quot; /&gt;	&lt;!--普通按钮--&gt;</span><br><span class="line">	&lt;br /&gt;&lt;br /&gt;</span><br><span class="line">	性别：&lt;input type=&quot;radio&quot; name=&quot;six&quot; id=&quot;boy&quot; /&gt;&lt;label for=&quot;boy&quot;&gt;男&lt;/label&gt;	</span><br><span class="line">		  &lt;input type=&quot;radio&quot; name=&quot;six&quot; id=&quot;gid&quot; /&gt;&lt;label for=&quot;gid&quot;&gt;女&lt;/label&gt;</span><br><span class="line">		  									&lt;!--单选--&gt;</span><br><span class="line">		  &lt;br /&gt;&lt;br /&gt;</span><br><span class="line">	爱好：&lt;input type=&quot;checkbox&quot; checked=&quot;checked&quot;&gt;打羽毛球</span><br><span class="line">	&lt;input type=&quot;checkbox&quot;&gt;打篮球</span><br><span class="line">	&lt;input type=&quot;checkbox&quot;&gt;打乒乓球			&lt;!--多选--&gt;</span><br><span class="line">	&lt;br /&gt;&lt;br /&gt;</span><br><span class="line">	性格特点：</span><br><span class="line">	&lt;textarea &gt;&lt;/textarea&gt;					&lt;!--多行输入框--&gt;</span><br><span class="line">	&lt;br /&gt;&lt;br /&gt;</span><br><span class="line">	所在地：</span><br><span class="line">	&lt;select&gt;</span><br><span class="line">		&lt;optgroup label=&quot;广东&quot;&gt;</span><br><span class="line">			&lt;option&gt;广州&lt;/option&gt;</span><br><span class="line">			&lt;option&gt;东莞&lt;/option&gt;</span><br><span class="line">			&lt;option&gt;佛山&lt;/option&gt;</span><br><span class="line">		&lt;/optgroup&gt;</span><br><span class="line">		&lt;optgroup label=&quot;江苏&quot;&gt;</span><br><span class="line">			&lt;option&gt;苏州&lt;/option&gt;</span><br><span class="line">			&lt;option&gt;湖州&lt;/option&gt;</span><br><span class="line">		&lt;/optgroup&gt;</span><br><span class="line">	&lt;/select&gt;								&lt;!--select标签配合option标签来实现下拉菜单--&gt;</span><br><span class="line">	&lt;br /&gt; &lt;br /&gt;</span><br><span class="line">	&lt;input type=&quot;submit&quot; value=&quot;确认提交&quot;&gt;&lt;br /&gt;	&lt;!--提交--&gt;</span><br><span class="line">	&lt;input type=&quot;reset&quot; /&gt;					&lt;!--重置--&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>form标签的几个属性：<br>    1.action：向何处发送表单数据<br>    2.name：单表的命名<br>    3.target：_blank，在新窗口打开链接<br>    4.method：提交方式，值为post或get<br>input标签的几个属性：<br>    1.checked=|”checked”，实现默认选择<br>    2.disabled=”disable”，不可输入<br>    3.name：输入界面的命名<br>    4.readonly=”readonly”，使输入界面为只读状态<br>    5.size：设置输入框的长度<br>    6.value：设置默认值<br>optgroup标签的几个属性：<br>    1.label：给选项组命名<br>    2.disabled：经用该选项组</p>
+<p>其实这里面有的标签还有一些属性，但因为它们不常用，所以就没写。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2019/03/25/HTML学习笔记/">HTML学习笔记</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">obsem</a></p>
+        <p><span>发布时间:</span>2019-03-25, 00:00:00</p>
+        <p><span>最后更新:</span>2021-02-08, 15:45:24</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2019/03/25/HTML学习笔记/" title="HTML学习笔记">http://yoursite.com/2019/03/25/HTML学习笔记/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/03/25/HTML学习笔记/　　作者: obsem" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2019/03/27/css学习笔记/">
+                    CSS学习笔记
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2019/01/25/MySQL的一些常用命令行总结/">
+                    MySQL的一些常用命令行总结
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#HTML学习笔记"><span class="toc-number">1.</span> <span class="toc-text">HTML学习笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一、html的基本结构"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">一、html的基本结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二、常用标签"><span class="toc-number">1.0.0.2.</span> <span class="toc-text">二、常用标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三、常用标签——超链接及表格"><span class="toc-number">1.0.0.3.</span> <span class="toc-text">三、常用标签——超链接及表格</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#四、常用标签——表单"><span class="toc-number">1.0.0.4.</span> <span class="toc-text">四、常用标签——表单</span></a></li></ol></li></ol></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"HTML学习笔记　| obsetear　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2019/03/27/css学习笔记/" title="上一篇: CSS学习笔记">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2019/01/25/MySQL的一些常用命令行总结/" title="下一篇: MySQL的一些常用命令行总结">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/11/21/从文件上传到浅谈.htaccess文件的作用/">从文件上传到浅谈.htaccess文件的作用</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/19/记一次简单的渗透练习/">记一次简单的渗透练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/10/python 正则表达式小结（笔记）/">python正则表达式小结（笔记）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/08/upload-labs通关总结/">upload-labs通关小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/04/linux基础知识（笔记）/">Linux基础（笔记）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/03/BUUCTFweb部分解题思路2/">BUUCTFweb部分解题思路（PHP、Babysql、Upload、CheckIn）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/15/BUUCTF部分web题解/">BUUCTF部分web题解（easysql，easy_tornado，Ping Ping Ping）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/26/内网渗透之Linux提权姿势/">Linux提权</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/16/内网渗透之windows提权的几种姿势/">windows提权</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/06/内网渗透之免杀/">免杀</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/29/内网渗透之CobaltStrike/">CobaltStrike</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/26/内网渗透之Metasploit/">Metasploit</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/25/内网渗透之windows基础/">Windows基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/20/浅谈XXE漏洞：从XML到文件读取/">浅谈XXE漏洞：从XML到文件读取</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/04/SSRF漏洞/">SSRF漏洞小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/23/csrf漏洞小结/">CSRF漏洞小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/Mysql报错函数小结/">Mysql报错函数小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/10/文件包含漏洞小结/">浅谈文件包含漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/21/浅谈php一句话木马/">浅谈一句话木马</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/03/宽字节注入/">宽字节注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/23/攻防世界web系列/">攻防世界web系列</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/10/Owasp juice shop(一)/">Owasp juice shop(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/24/PHP代码审计之危险函数/">PHP代码审计之危险函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/22/PHP超级全局变量/">PHP超级全局变量</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/21/一些常见的编码/">一些常见的编码</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/17/命令执行&代码执行漏洞/">命令执行&代码执行漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Web常见的源码泄露/">Web常见的源码泄露</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/09/RSA算法小结/">RSA算法小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/08/PHP反序列化/">PHP反序列化学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/04/i春秋-misc系列/">i春秋-misc系列</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/31/文件上传漏洞总结/">文件上传漏洞总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/28/隐写术/">隐写术</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/25/SQL注入一些过滤及绕过总结/">SQL注入一些过滤及绕过总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/21/SQL简单注入/">SQL简单注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/20/图片隐写/">图片隐写术</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/18/攻防世界——Misc系列/">攻防世界——Misc系列</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/14/Web——爆破wp/">WEB——爆破wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/10/WEB——php大法wp/">WEB——php大法wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/08/图片隐写——小苹果wp/">图片隐写——小苹果wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/10/xss挑战之旅学习笔记/">xss挑战之旅学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/07/xss学习总结/">xxs学习总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/25/SQL注入姿势（3）/">SQL注入姿势（3）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/12/SQL注入姿势（2）/">SQL注入姿势（2）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/10/SQL注入姿势（1）/">SQL注入姿势（1）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/06/PHP学习笔记（5）/">PHP学习笔记（5）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/05/PHP学习笔记（4）/">PHP学习笔记（4）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/28/php登录界面小结/">PHP登录界面小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/25/PHP学习笔记（3）/">PHP学习笔记（3）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/15/PHP学习笔记（2）/">PHP学习笔记（2）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/07/PHP学习笔记（1）/">PHP学习笔记（1）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/05/哈弗曼树/">哈弗曼树</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/27/css学习笔记/">CSS学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/25/HTML学习笔记/">HTML学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/25/MySQL的一些常用命令行总结/">MySQL的一些常用命令行总结</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2021 obsem
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

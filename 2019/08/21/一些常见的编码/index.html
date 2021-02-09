@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="obsem">
+
+
+
+<meta name="description" content="前言： 学了那么久的编码，之前一直都没有时间整理，现在来总结一下。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一些常见的编码">
+<meta property="og:url" content="http://yoursite.com/2019/08/21/一些常见的编码/index.html">
+<meta property="og:site_name" content="obsetear">
+<meta property="og:description" content="前言： 学了那么久的编码，之前一直都没有时间整理，现在来总结一下。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190821140256708.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190821153653265.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190821172631122.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190821173743446.jpg">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190821173846113.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2019082118102033.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190821190815486.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2021-02-08T13:24:52.957Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一些常见的编码">
+<meta name="twitter:description" content="前言： 学了那么久的编码，之前一直都没有时间整理，现在来总结一下。">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190821140256708.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="obsetear" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>一些常见的编码 | obsetear</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: false
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/2.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">obsem</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">obsem</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/2.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">obsem</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-一些常见的编码" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/08/21/一些常见的编码/" class="article-date">
+      <time datetime="2019-08-20T16:00:00.000Z" itemprop="datePublished">2019-08-21</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      一些常见的编码
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><strong>前言：</strong> 学了那么久的编码，之前一直都没有时间整理，现在来总结一下。</p>
+<a id="more"></a>
+<h2 id="1、base家族"><a href="#1、base家族" class="headerlink" title="1、base家族"></a>1、base家族</h2><p> <strong>1.1、base16</strong></p>
+<p>就是16进制，编码内容只有数字0-9，和大写英文字母A-F</p>
+<p><strong>1.2、base32</strong></p>
+<p>编码内容只有大写英文字母A-Z，和数字234567</p>
+<p><strong>1.3、base64</strong></p>
+<p>编码内容主要有大写英文字母A-Z，小写英文字母a-z，数字0-9，+和/<br><img src="https://img-blog.csdnimg.cn/20190821140256708.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="2、凯撒密码"><a href="#2、凯撒密码" class="headerlink" title="2、凯撒密码"></a>2、凯撒密码</h2><p>凯撒密码主要通过偏移来实现加密，偏移量是几，密文就是明文在字母表上向后移几位所对应的字母，由于凯撒密码所操作的范围只有字母表上的26个英文字母，所以当偏移量大于26时，密文就会在字母表上绕一圈绕回来。</p>
+<pre><code>加密公式：f(a) = (a+N) % 26
+
+解密公式：f(a) = (a+(a-N)) % 26</code></pre><h2 id="3、栅栏密码"><a href="#3、栅栏密码" class="headerlink" title="3、栅栏密码"></a>3、栅栏密码</h2><p>栅栏密码是一种简单的移动字符位置的加密方法，规则简单，容易破解。栅栏密码的加密方式：把文本按照一定的字数分成多个组，取每组第一个字连起来得到密文1，再取每组第二个字连起来得到密文2……最后把密文1、密文2……连成整段密文。</p>
+<p>例：<br>明文：abcdefgh<br>每组字数：4</p>
+<p>把明文分组：<br>abcd<br>efgh</p>
+<p>取每组第一个字符：ae<br>取每组第二个字符：bf<br>取每组第三个字符：cg<br>取每组第四个字符：dh</p>
+<p>所以密文为：aebfcgdh</p>
+<p>解密过程反推即可</p>
+<h2 id="4、ROT编码"><a href="#4、ROT编码" class="headerlink" title="4、ROT编码"></a>4、ROT编码</h2><p>ROT编码是一种简单的码元位置顺序替换暗码。此类编码具有可逆性，可以自我解密。</p>
+<p>ROT5：只对数字进行编码，用当前数字往后数的第5个数字替换当前数字。<br>例：1——&gt;6。</p>
+<p>ROT13：只对字母进行编码，用当前字母往后数的第13个字母替换当前字母。<br>例：A——&gt;N</p>
+<p>ROT18：这是一个异类，本来没有，它是将ROT5和ROT13组合在一起。<br>例：1a——&gt;6n</p>
+<p>ROT47：对数字、字母、常用符号进行编码，按照它们的ASCII值进行位置替换，用当前字符ASCII值往前或后数的第47位对应字符替换当前字符。<br>例：0——&gt;_  ，z——K</p>
+<h2 id="5、摩尔斯电码"><a href="#5、摩尔斯电码" class="headerlink" title="5、摩尔斯电码"></a>5、摩尔斯电码</h2><p>摩尔斯电码（又译为摩斯密码，Morse code）是一种时通时断的信号代码，通过不同的排列顺序来表达不同的英文字母、数字和标点符号。它的代码包括五种： 点、划、点和划之间的停顿、每个字符之间短的停顿、每个词之间中等的停顿以及句子之间长的停顿。</p>
+<p><img src="https://img-blog.csdnimg.cn/20190821153653265.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="6、XXencode编码"><a href="#6、XXencode编码" class="headerlink" title="6、XXencode编码"></a>6、XXencode编码</h2><p>XXencode是一种二进制到文字的编码！它跟UUencode以及Base64编码方法很类似。它也是定义了用可打印字符表示二进制文字一种方法，不是一种新的编码集合。XXencode将输入文本以每三个字节为单位进行编码，如果最后剩下的资料少于三个字节，不够的部份用零补齐。三个字节共有24个Bit，以6-bit为单位分为4个组，每个组以十进制来表示所出现的字节的数值。这个数值只会落在0到63之间。它64可打印字符固定字符范围及顺序！包括大小写字母、数字以及+-字符。它较UUencode编码优点在于它64字符是常见字符，没有任何特殊字符！</p>
+<p>例：I am XXEncode</p>
+<pre><code>BGG-VPG-MK2JiMqxYNE++</code></pre><p>解密网站：<a href="http://www.atoolbox.net/Tool.php?Id=780" target="_blank" rel="noopener">http://www.atoolbox.net/Tool.php?Id=780</a></p>
+<h2 id="7、Quoted-printable编码"><a href="#7、Quoted-printable编码" class="headerlink" title="7、Quoted-printable编码"></a>7、Quoted-printable编码</h2><p>Quoted-printable 可译为“可打印字符引用编码”、“使用可打印字符的编码”，我们收邮件，查看信件原始信息，经常会看到这种类型的编码！</p>
+<p>Quoted-printable是使用可打印的ASCII字符（如字母、数字与“=”）表示各种编码格式下的字符，以便能在7-bit数据通路上传输8-bit数据, 或者更一般地说在非8-bit clean媒体上正确处理数据[注 1]。这被定义为MIME content transfer encoding，用于e-mail。QP使用“=”开头的转义字符. 一般限制行宽为76，因为有些软件限制了行宽.</p>
+<p>例：这就是可打印字符引用编码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">=E8=BF=99=E5=B0=B1=E6=98=AF=E5=8F=AF=E6=89=93=E5=8D=B0=E5=AD=97=E7=AC=A6=E5=</span><br><span class="line">=BC=95=E7=94=A8=E7=BC=96=E7=A0=81</span><br></pre></td></tr></table></figure>
+
+<p>解密网站：<a href="http://ctf.ssleye.com/quoted.html" target="_blank" rel="noopener">http://ctf.ssleye.com/quoted.html</a></p>
+<h2 id="8、培根密码"><a href="#8、培根密码" class="headerlink" title="8、培根密码"></a>8、培根密码</h2><p>培根密码，又名倍康尼密码（英语：Bacon’s cipher）是由法兰西斯·培根发明的一种隐写术。培根密码本质上是将二进制信息通过样式的区别，加在了正常书写之上。</p>
+<p>加密原理：<br><img src="https://img-blog.csdnimg.cn/20190821172631122.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>例：pengeniscool</p>
+<p><code>ABBBBAABAAABBABAABBAAABAAABBABABAAABAABAAAABAABBBAABBBAABABB</code></p>
+<p>解密网站：<a href="https://tool.bugku.com/peigen/" target="_blank" rel="noopener">https://tool.bugku.com/peigen/</a></p>
+<h2 id="9、猪圈密码"><a href="#9、猪圈密码" class="headerlink" title="9、猪圈密码"></a>9、猪圈密码</h2><p>猪圈密码（亦称朱高密码、共济会暗号、共济会密码或共济会员密码），是一种以格子为基础的简单替代式密码。即使使用符号，也不会影响密码分析，亦可用在其它替代式的方法。</p>
+<p>加密方法：<br><img src="https://img-blog.csdnimg.cn/20190821173743446.jpg" alt="在这里插入图片描述"><br>下图，是猪圈密码用符号与26个字母作的密码配对。<br><img src="https://img-blog.csdnimg.cn/20190821173846113.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="10、BrainFuck编码"><a href="#10、BrainFuck编码" class="headerlink" title="10、BrainFuck编码"></a>10、BrainFuck编码</h2><p>Brainfuck是一种极小化的计算机语言，目标是建立一种简单的、可以用最小的编译器来实现的、符合图灵完全思想的编程语言。BrainFuck 语言只有八种符号，所有的操作都由这八种符号(<code>&gt; &lt; + – . , [ ]</code>)的组合来完成。</p>
+<p>例：this is brainfuck</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">+++++ +++++ [-&gt;++ +++++ +++&lt;] &gt;++++ +++++ +++++ ++.&lt;+ ++[-&gt; ---&lt;] &gt;---.</span><br><span class="line">+.&lt;++ +[-&gt;+ ++&lt;]&gt; +.&lt;++ +++++ ++[-&gt; ----- ----&lt; ]&gt;--. &lt;++++ ++++[ -&gt;+++</span><br><span class="line">+++++ &lt;]&gt;++ +++++ ++.&lt;+ ++[-&gt; +++&lt;] &gt;+.&lt;+ +++++ +++[- &gt;---- ----- &lt;]&gt;--</span><br><span class="line">.&lt;+++ +++++ [-&gt;++ +++++ +&lt;]&gt;+ +.&lt;++ ++[-&gt; ++++&lt; ]&gt;.&lt;+ +++[- &gt;---- &lt;]&gt;-.</span><br><span class="line">+++++ +++.+ ++++. ----- ---.&lt; +++[- &gt;+++&lt; ]&gt;+++ +++.&lt; ++++[ -&gt;--- -&lt;]&gt;-</span><br><span class="line">-.+++ +++++ .&lt;</span><br></pre></td></tr></table></figure>
+
+<p>解密网站：<a href="https://www.splitbrain.org/services/ook" target="_blank" rel="noopener">https://www.splitbrain.org/services/ook</a></p>
+<h2 id="11、波利比奥斯棋盘"><a href="#11、波利比奥斯棋盘" class="headerlink" title="11、波利比奥斯棋盘"></a>11、波利比奥斯棋盘</h2><p>波利比奥斯棋盘（Polybius Checkerboard）是棋盘密码的一种，是利用波利比奥斯方阵(Polybius Square)进行加密的密码方式，简单的来说就是把字母排列好，用坐标的形式表现出来。字母是密文，明文便是字母的坐标。</p>
+<p><img src="https://img-blog.csdnimg.cn/2019082118102033.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="12、JSFuck编码"><a href="#12、JSFuck编码" class="headerlink" title="12、JSFuck编码"></a>12、JSFuck编码</h2><p>JSFuck是一种深奥的 JavaScript 编程风格。以这种风格写成的代码中仅使用 [、]、(、)、! 和 + 六种字符。此编程风格的名字派生自仅使用较少符号写代码的Brainfuck语言。JSFuck的标志：( ) + [ ] !</p>
+<p>这种编码的唯一特点就是长，特别长。</p>
+<p>例：j</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(!![]+[])[+[]]+(!![]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+!+[]]][([][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(!![]+[])[+[]]+(!![]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+!+[]]]+[])[!+[]+!+[]+!+[]]+(!![]+[][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(!![]+[])[+[]]+(!![]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+!+[]]])[+!+[]+[+[]]]+([][[]]+[])[+!+[]]+(![]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+[]]+(!![]+[])[+!+[]]+([][[]]+[])[+[]]+([][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(!![]+[])[+[]]+(!![]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+!+[]]]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+[]]+(!![]+[][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(!![]+[])[+[]]+(!![]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+!+[]]])[+!+[]+[+[]]]+(!![]+[])[+!+[]]]((+(!+[]+!+[]+!+[]+!+[]+[+[]]))[(!![]+[])[+[]]+(!![]+[][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(!![]+[])[+[]]+(!![]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+!+[]]])[+!+[]+[+[]]]+(+![]+([]+[])[([][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(!![]+[])[+[]]+(!![]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+!+[]]]+[])[!+[]+!+[]+!+[]]+(!![]+[][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(!![]+[])[+[]]+(!![]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+!+[]]])[+!+[]+[+[]]]+([][[]]+[])[+!+[]]+(![]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+[]]+(!![]+[])[+!+[]]+([][[]]+[])[+[]]+([][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(!![]+[])[+[]]+(!![]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+!+[]]]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+[]]+(!![]+[][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(!![]+[])[+[]]+(!![]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+!+[]]])[+!+[]+[+[]]]+(!![]+[])[+!+[]]])[+!+[]+[+[]]]+(!![]+[])[+[]]+(!![]+[])[+!+[]]+([![]]+[][[]])[+!+[]+[+[]]]+([][[]]+[])[+!+[]]+(+![]+[![]]+([]+[])[([][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(!![]+[])[+[]]+(!![]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+!+[]]]+[])[!+[]+!+[]+!+[]]+(!![]+[][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(!![]+[])[+[]]+(!![]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+!+[]]])[+!+[]+[+[]]]+([][[]]+[])[+!+[]]+(![]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+[]]+(!![]+[])[+!+[]]+([][[]]+[])[+[]]+([][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(!![]+[])[+[]]+(!![]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+!+[]]]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+[]]+(!![]+[][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(!![]+[])[+[]]+(!![]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+!+[]]])[+!+[]+[+[]]]+(!![]+[])[+!+[]]])[!+[]+!+[]+[+[]]]](!+[]+!+[]+[+!+[]])[+!+[]])()</span><br></pre></td></tr></table></figure>
+
+<p>解密网站：<a href="http://www.jsfuck.com/" target="_blank" rel="noopener">http://www.jsfuck.com/</a></p>
+<h2 id="13、Unicode-编码"><a href="#13、Unicode-编码" class="headerlink" title="13、Unicode 编码"></a>13、Unicode 编码</h2><p>Unicode 编码是一种力求容纳世界上所有字符的编码格式，因此也被称为万国码、统一码等等。Unicode 编码给每一个字符都指定了统一且唯一的编码，这使得不同种类的文字可以跨语言、跨平台的应用。</p>
+<p>例：this is Unicode</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&amp;#116;&amp;#104;&amp;#105;&amp;#115;&amp;#32;&amp;#105;&amp;#115;&amp;#32;&amp;#85;&amp;#110;&amp;#105;&amp;#99;&amp;#111;&amp;#100;&amp;#101;</span><br></pre></td></tr></table></figure>
+
+<p>解密网站：<a href="https://www.qqxiuzi.cn/bianma/Unicode.htm" target="_blank" rel="noopener">https://www.qqxiuzi.cn/bianma/Unicode.htm</a></p>
+<h2 id="14、HTML实体编码"><a href="#14、HTML实体编码" class="headerlink" title="14、HTML实体编码"></a>14、HTML实体编码</h2><p>在HTML中，有些字符是预留的，例如需要在网页上显示小于号（&lt;）和大于号（&gt;），由于它们是HTML的预留标签，可能会被误解析从而无法在浏览器上显示。这时就需要将小于号和大于号写成字符实体。</p>
+<p>常见的HTML实体字符<br><img src="https://img-blog.csdnimg.cn/20190821190815486.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>解密网站：<a href="https://www.qqxiuzi.cn/bianma/zifushiti.php" target="_blank" rel="noopener">https://www.qqxiuzi.cn/bianma/zifushiti.php</a></p>
+<p><strong>总结：</strong> 以上是目前小白做ctf题时遇到过的一些编码，肯定还有没有总结到的，不过以后遇到会补上的。</p>
+<p>最后分享两个在线解码网站：</p>
+<p><a href="http://ctf.ssleye.com/" target="_blank" rel="noopener">http://ctf.ssleye.com/</a></p>
+<p><a href="https://www.qqxiuzi.cn/daohang.htm" target="_blank" rel="noopener">https://www.qqxiuzi.cn/daohang.htm</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2019/08/21/一些常见的编码/">一些常见的编码</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">obsem</a></p>
+        <p><span>发布时间:</span>2019-08-21, 00:00:00</p>
+        <p><span>最后更新:</span>2021-02-08, 21:24:52</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2019/08/21/一些常见的编码/" title="一些常见的编码">http://yoursite.com/2019/08/21/一些常见的编码/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/08/21/一些常见的编码/　　作者: obsem" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2019/08/22/PHP超级全局变量/">
+                    PHP超级全局变量
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2019/08/17/命令执行&代码执行漏洞/">
+                    命令执行&amp;代码执行漏洞
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、base家族"><span class="toc-number">1.</span> <span class="toc-text">1、base家族</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、凯撒密码"><span class="toc-number">2.</span> <span class="toc-text">2、凯撒密码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、栅栏密码"><span class="toc-number">3.</span> <span class="toc-text">3、栅栏密码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、ROT编码"><span class="toc-number">4.</span> <span class="toc-text">4、ROT编码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5、摩尔斯电码"><span class="toc-number">5.</span> <span class="toc-text">5、摩尔斯电码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6、XXencode编码"><span class="toc-number">6.</span> <span class="toc-text">6、XXencode编码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7、Quoted-printable编码"><span class="toc-number">7.</span> <span class="toc-text">7、Quoted-printable编码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8、培根密码"><span class="toc-number">8.</span> <span class="toc-text">8、培根密码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9、猪圈密码"><span class="toc-number">9.</span> <span class="toc-text">9、猪圈密码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10、BrainFuck编码"><span class="toc-number">10.</span> <span class="toc-text">10、BrainFuck编码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11、波利比奥斯棋盘"><span class="toc-number">11.</span> <span class="toc-text">11、波利比奥斯棋盘</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12、JSFuck编码"><span class="toc-number">12.</span> <span class="toc-text">12、JSFuck编码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13、Unicode-编码"><span class="toc-number">13.</span> <span class="toc-text">13、Unicode 编码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14、HTML实体编码"><span class="toc-number">14.</span> <span class="toc-text">14、HTML实体编码</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"一些常见的编码　| obsetear　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2019/08/22/PHP超级全局变量/" title="上一篇: PHP超级全局变量">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2019/08/17/命令执行&代码执行漏洞/" title="下一篇: 命令执行&amp;代码执行漏洞">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/11/21/从文件上传到浅谈.htaccess文件的作用/">从文件上传到浅谈.htaccess文件的作用</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/19/记一次简单的渗透练习/">记一次简单的渗透练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/10/python 正则表达式小结（笔记）/">python正则表达式小结（笔记）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/08/upload-labs通关总结/">upload-labs通关小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/04/linux基础知识（笔记）/">Linux基础（笔记）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/03/BUUCTFweb部分解题思路2/">BUUCTFweb部分解题思路（PHP、Babysql、Upload、CheckIn）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/15/BUUCTF部分web题解/">BUUCTF部分web题解（easysql，easy_tornado，Ping Ping Ping）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/26/内网渗透之Linux提权姿势/">Linux提权</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/16/内网渗透之windows提权的几种姿势/">windows提权</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/06/内网渗透之免杀/">免杀</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/29/内网渗透之CobaltStrike/">CobaltStrike</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/26/内网渗透之Metasploit/">Metasploit</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/25/内网渗透之windows基础/">Windows基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/20/浅谈XXE漏洞：从XML到文件读取/">浅谈XXE漏洞：从XML到文件读取</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/04/SSRF漏洞/">SSRF漏洞小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/23/csrf漏洞小结/">CSRF漏洞小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/Mysql报错函数小结/">Mysql报错函数小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/10/文件包含漏洞小结/">浅谈文件包含漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/21/浅谈php一句话木马/">浅谈一句话木马</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/03/宽字节注入/">宽字节注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/23/攻防世界web系列/">攻防世界web系列</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/10/Owasp juice shop(一)/">Owasp juice shop(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/24/PHP代码审计之危险函数/">PHP代码审计之危险函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/22/PHP超级全局变量/">PHP超级全局变量</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/21/一些常见的编码/">一些常见的编码</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/17/命令执行&代码执行漏洞/">命令执行&代码执行漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Web常见的源码泄露/">Web常见的源码泄露</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/09/RSA算法小结/">RSA算法小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/08/PHP反序列化/">PHP反序列化学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/04/i春秋-misc系列/">i春秋-misc系列</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/31/文件上传漏洞总结/">文件上传漏洞总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/28/隐写术/">隐写术</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/25/SQL注入一些过滤及绕过总结/">SQL注入一些过滤及绕过总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/21/SQL简单注入/">SQL简单注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/20/图片隐写/">图片隐写术</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/18/攻防世界——Misc系列/">攻防世界——Misc系列</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/14/Web——爆破wp/">WEB——爆破wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/10/WEB——php大法wp/">WEB——php大法wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/08/图片隐写——小苹果wp/">图片隐写——小苹果wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/10/xss挑战之旅学习笔记/">xss挑战之旅学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/07/xss学习总结/">xxs学习总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/25/SQL注入姿势（3）/">SQL注入姿势（3）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/12/SQL注入姿势（2）/">SQL注入姿势（2）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/10/SQL注入姿势（1）/">SQL注入姿势（1）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/06/PHP学习笔记（5）/">PHP学习笔记（5）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/05/PHP学习笔记（4）/">PHP学习笔记（4）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/28/php登录界面小结/">PHP登录界面小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/25/PHP学习笔记（3）/">PHP学习笔记（3）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/15/PHP学习笔记（2）/">PHP学习笔记（2）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/07/PHP学习笔记（1）/">PHP学习笔记（1）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/05/哈弗曼树/">哈弗曼树</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/27/css学习笔记/">CSS学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/25/HTML学习笔记/">HTML学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/25/MySQL的一些常用命令行总结/">MySQL的一些常用命令行总结</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2021 obsem
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

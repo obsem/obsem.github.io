@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="obsem">
+
+
+
+<meta name="description" content="前言： 前几天总结了一下命令执行漏洞和代码执行漏洞，在其中发现了一些危险函数，其实危险函数还有很多，今天就来总结一下，之前总结过的就一笔带过，着重写之前没总结过的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP代码审计之危险函数">
+<meta property="og:url" content="http://yoursite.com/2019/08/24/PHP代码审计之危险函数/index.html">
+<meta property="og:site_name" content="obsetear">
+<meta property="og:description" content="前言： 前几天总结了一下命令执行漏洞和代码执行漏洞，在其中发现了一些危险函数，其实危险函数还有很多，今天就来总结一下，之前总结过的就一笔带过，着重写之前没总结过的。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190823154217612.jpg">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190823173346839.jpg">
+<meta property="og:updated_time" content="2021-02-08T13:36:33.571Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PHP代码审计之危险函数">
+<meta name="twitter:description" content="前言： 前几天总结了一下命令执行漏洞和代码执行漏洞，在其中发现了一些危险函数，其实危险函数还有很多，今天就来总结一下，之前总结过的就一笔带过，着重写之前没总结过的。">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190823154217612.jpg">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="obsetear" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>PHP代码审计之危险函数 | obsetear</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: false
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/2.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">obsem</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">obsem</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/2.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">obsem</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-PHP代码审计之危险函数" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/08/24/PHP代码审计之危险函数/" class="article-date">
+      <time datetime="2019-08-23T16:00:00.000Z" itemprop="datePublished">2019-08-24</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      PHP代码审计之危险函数
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><strong>前言：</strong> 前几天总结了一下命令执行漏洞和代码执行漏洞，在其中发现了一些危险函数，其实危险函数还有很多，今天就来总结一下，之前总结过的就一笔带过，着重写之前没总结过的。</p>
+<a id="more"></a>
+<h2 id="0x01-命令执行函数"><a href="#0x01-命令执行函数" class="headerlink" title="0x01 命令执行函数"></a>0x01 命令执行函数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">system() — 执行外部命令，并且输出执行结果</span><br><span class="line"></span><br><span class="line">passthru() — 执行外部命令并且显示原始输出</span><br><span class="line"></span><br><span class="line">exec() — 执行一个外部命令，不输出</span><br><span class="line"></span><br><span class="line">shell_exec() — 执行一个外部命令，不输出</span><br><span class="line"></span><br><span class="line">反引号(``) — 与shell_exec()函数一样</span><br></pre></td></tr></table></figure>
+
+<p><code>popen()</code> — 通过 popen() 的参数传递一条命令，并对 popen() 所打开的文件进行执行</p>
+<p><code>proc_open()</code> — 执行一个命令，并且打开用来输入/输出的文件指针。</p>
+<h2 id="0x02-代码执行函数"><a href="#0x02-代码执行函数" class="headerlink" title="0x02 代码执行函数"></a>0x02 代码执行函数</h2><h4 id="1-1-eval-函数"><a href="#1-1-eval-函数" class="headerlink" title="1.1 eval 函数"></a>1.1 eval 函数</h4><p>eval函数可以把字符串当作php代码来执行，最常见的操作就是一句话木马：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php @eval($_POST[&apos;ps&apos;]);?&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-2-assert函数"><a href="#1-2-assert函数" class="headerlink" title="1.2 assert函数"></a>1.2 assert函数</h4><p>assert函数的作用与eval的差不多，也可以把字符串当作 php 代码来执行。</p>
+<h4 id="1-3-preg-replace函数"><a href="#1-3-preg-replace函数" class="headerlink" title="1.3 preg_replace函数"></a>1.3 preg_replace函数</h4><p>如果有/e模式修正符，也可以执行代码</p>
+<h4 id="1-4-creat-function匿名函数"><a href="#1-4-creat-function匿名函数" class="headerlink" title="1.4 creat_function匿名函数"></a>1.4 creat_function匿名函数</h4><p>根据传递的参数创建匿名函数，并为其返回唯一名称。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">string create_function ( string $args , string $code )</span><br><span class="line"></span><br><span class="line">string $args 要向我们创建的函数中传入的变量</span><br><span class="line"></span><br><span class="line">string $code 要创建函数的代码部分</span><br></pre></td></tr></table></figure>
+
+<p>例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">//用普通函数实现执行命令</span><br><span class="line">function func($cmd)</span><br><span class="line">&#123;</span><br><span class="line">	return system($cmd);</span><br><span class="line">&#125;</span><br><span class="line">func(&apos;whoami&apos;);</span><br><span class="line">echo &quot;&lt;br /&gt;&quot;;</span><br><span class="line"></span><br><span class="line">//以上函数可以用匿名函数表示</span><br><span class="line">$func = create_function(&apos;$cmd&apos;,&apos;return system($cmd);&apos;);</span><br><span class="line">$func (&apos;whoami&apos;);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20190823154217612.jpg" alt="在这里插入图片描述"></p>
+<h4 id="1-5-func-’sys’-’tem’"><a href="#1-5-func-’sys’-’tem’" class="headerlink" title="1.5 $func=’sys’.’tem’"></a>1.5 $func=’sys’.’tem’</h4><p>将字符串拼接，然后赋值给函数，直接调用即可执行命令</p>
+<p>例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$func = &apos;sys&apos;.&apos;tem&apos;;</span><br><span class="line">$func(&apos;whoami&apos;);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>以上代码也会执行whoami</p>
+<h4 id="1-6-回调函数"><a href="#1-6-回调函数" class="headerlink" title="1.6 回调函数"></a>1.6 回调函数</h4><p><code>call_user_func()、call_user_func_array()、array_map()</code> 都可以调用其他函数。</p>
+<p>例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">call_user_func(&apos;system&apos;, &quot;whoami&quot;);</span><br><span class="line">echo &quot;&lt;br /&gt;&quot;;</span><br><span class="line">call_user_func_array(&apos;system&apos;, array(&quot;whoami&quot;));</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这样也可以执行whoami命令<br><img src="https://img-blog.csdnimg.cn/20190823173346839.jpg" alt="在这里插入图片描述"></p>
+<h2 id="0x03-文件包含函数"><a href="#0x03-文件包含函数" class="headerlink" title="0x03 文件包含函数"></a>0x03 文件包含函数</h2><p>文件包含是比较危险的，可以导致被getshell</p>
+<h4 id="3-1-include和require语句"><a href="#3-1-include和require语句" class="headerlink" title="3.1 include和require语句"></a>3.1 include和require语句</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">语法：	include &apos;filename&apos;;</span><br><span class="line">		require &apos;filename&apos;;</span><br></pre></td></tr></table></figure>
+
+<p>include 和 require 语句是相同的，通过 include 或 require 语句，可以把指定的文件复制一份，然后使用到<code>include</code>或<code>require</code>语句的文本中。</p>
+<h4 id="3-2-require-once和include-once语句"><a href="#3-2-require-once和include-once语句" class="headerlink" title="3.2 require_once和include_once语句"></a>3.2 require_once和include_once语句</h4><p>require_once语句（或include_once）和require语句（或include）完全相同，唯一区别是 PHP 会检查该文件是否已经被包含过，如果是则不会再次包含。</p>
+<h2 id="0x04-文件操作函数"><a href="#0x04-文件操作函数" class="headerlink" title="0x04 文件操作函数"></a>0x04 文件操作函数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">copy 拷贝文件</span><br><span class="line"></span><br><span class="line">file_get_contents 将整个文件读入为字符串</span><br><span class="line"></span><br><span class="line">file_put_contents 将整个字符串写入文件</span><br><span class="line"></span><br><span class="line">file 将文件读入数组中</span><br><span class="line"></span><br><span class="line">fopen 打开文件或者url</span><br><span class="line"></span><br><span class="line">move_upload_file将上传文件移动到新的位置</span><br><span class="line"></span><br><span class="line">readfile 输出文件</span><br><span class="line"></span><br><span class="line">rename 重命名</span><br><span class="line"></span><br><span class="line">rmdir 删除目录</span><br><span class="line"></span><br><span class="line">unlink delete 删除文件</span><br></pre></td></tr></table></figure>
+
+<h2 id="0x05-特殊函数"><a href="#0x05-特殊函数" class="headerlink" title="0x05 特殊函数"></a>0x05 特殊函数</h2><h4 id="5-1-phpinfo"><a href="#5-1-phpinfo" class="headerlink" title="5.1 phpinfo"></a>5.1 phpinfo</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bool phpinfo ([ int $what = INFO_ALL ] )</span><br></pre></td></tr></table></figure>
+
+<p>输出关于 PHP 配置的信息</p>
+<h4 id="5-2-获取变量信息的函数"><a href="#5-2-获取变量信息的函数" class="headerlink" title="5.2 获取变量信息的函数"></a>5.2 获取变量信息的函数</h4><p>1、get_defined_vars函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array get_defined_vars ( void )</span><br></pre></td></tr></table></figure>
+
+<p>此函数返回一个包含所有已定义变量列表的多维数组，这些变量包括环境变量、服务器变量和用户定义的变量。<br>2、get_defined_constants函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array get_defined_constants ([ bool $categorize = false ] )</span><br></pre></td></tr></table></figure>
+
+<p>返回当前所有已定义的常量名和值。 这包含 define() 函数所创建的，也包含了所有扩展所创建的。</p>
+<p>3、get_defined_functions</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array get_defined_functions ( void )</span><br></pre></td></tr></table></figure>
+
+<p>返回一个包含所有已定义函数列表的多维数组</p>
+<p>4、get_included_files</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array get_included_files ( void )</span><br></pre></td></tr></table></figure>
+
+<p>返回所有被 include、 include_once、 require 和 require_once 的文件名。</p>
+<h4 id="5-3-使用软连接读取文件内容"><a href="#5-3-使用软连接读取文件内容" class="headerlink" title="5.3 使用软连接读取文件内容"></a>5.3 使用软连接读取文件内容</h4><p>1、symlink</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bool symlink ( string $target , string $link )</span><br><span class="line"></span><br><span class="line">target		连接的目标</span><br><span class="line"></span><br><span class="line">link		连接的名称</span><br></pre></td></tr></table></figure>
+
+<p>对于已有的 target 建立一个名为 link 的符号连接。</p>
+<p>2、readlink</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">string readlink ( string $path )</span><br><span class="line"></span><br><span class="line">path		链接符号的路径</span><br></pre></td></tr></table></figure>
+
+<p>readlink() 和同名的 C 函数做同样的事，返回符号连接的内容。</p>
+<h4 id="5-4-配置函数"><a href="#5-4-配置函数" class="headerlink" title="5.4 配置函数"></a>5.4 配置函数</h4><p>1、ini_get </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">string ini_get ( string $varname )</span><br></pre></td></tr></table></figure>
+
+<p>成功时返回配置选项的值。</p>
+<p>2、ini_set </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">string ini_set ( string $varname , string $newvalue )</span><br></pre></td></tr></table></figure>
+
+<p>设置指定配置选项的值。这个选项会在脚本运行时保持新的值，并在脚本结束时恢复。</p>
+<p>3、ini_alter </p>
+<p>此函数是in_set函数的别名。</p>
+<h4 id="5-5-数字判断"><a href="#5-5-数字判断" class="headerlink" title="5.5 数字判断"></a>5.5 数字判断</h4><p>1、is_numeric</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bool is_numeric ( mixed $var )</span><br></pre></td></tr></table></figure>
+
+<p>如果 var 是数字和数字字符串则返回 TRUE，否则返回 FALSE。<br>如果仅用is_numeric判断而不用intval函数转换，就有可能插入16进制的字符串到数据库，进而可能导致sql二次注入。</p>
+<p>2、in_array</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bool in_array ( mixed $needle , array $haystack [, bool $strict = FALSE ] )</span><br><span class="line"></span><br><span class="line">needle			待搜索的值</span><br><span class="line"></span><br><span class="line">haystack		待搜索的数组</span><br></pre></td></tr></table></figure>
+
+<p> 检查数组中是否存在某个值</p>
+<p>该函数有一个特性，在搜索之前会进行自动类型转换。 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$a = &apos;1abc&apos;; </span><br><span class="line"></span><br><span class="line">in_array($a,array(1,2,3))的返回值会是真</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-6、glob——列出匹配文件路径"><a href="#5-6、glob——列出匹配文件路径" class="headerlink" title="5.6、glob——列出匹配文件路径"></a>5.6、glob——列出匹配文件路径</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array glob ( string $pattern [, int $flags = 0 ] )</span><br></pre></td></tr></table></figure>
+
+<p>寻找与<code>$pattern</code>模式匹配的文件路径</p>
+<h4 id="5-7、dl——载入扩展"><a href="#5-7、dl——载入扩展" class="headerlink" title="5.7、dl——载入扩展"></a>5.7、dl——载入扩展</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bool putenv ( string $setting )</span><br></pre></td></tr></table></figure>
+
+<p>载入指定参数 library 的 PHP 扩展。</p>
+<h4 id="5-8-环境变量"><a href="#5-8-环境变量" class="headerlink" title="5.8 环境变量"></a>5.8 环境变量</h4><p>1、getenv</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">string getenv ( string $varname )</span><br></pre></td></tr></table></figure>
+
+<p>获取一个环境变量的值。</p>
+<p>2、putenv</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bool putenv ( string $setting )</span><br></pre></td></tr></table></figure>
+
+<p>添加 setting 到服务器环境变量。 环境变量仅存活于当前请求期间。 在请求结束时环境会恢复到初始状态。</p>
+<h4 id="5-9-变量覆盖"><a href="#5-9-变量覆盖" class="headerlink" title="5.9 变量覆盖"></a>5.9 变量覆盖</h4><p>1、parse_str</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void parse_str ( string $encoded_string [, array &amp;$result ] )</span><br></pre></td></tr></table></figure>
+
+<p>如果 encoded_string 是 URL 传递入的查询字符串（query string），则将它解析为变量并设置到当前作用域（如果提供了 result 则会设置到该数组里 ）。</p>
+<p>2、extract</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int extract ( array &amp;$array [, int $flags = EXTR_OVERWRITE [, string $prefix = NULL ]] )</span><br></pre></td></tr></table></figure>
+
+<p>本函数用来将变量从数组中导入到当前的符号表中。检查每个键名看是否可以作为一个合法的变量名，同时也检查和符号表中已有的变量名的冲突。</p>
+<p>3、mb_parse_str</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bool mb_parse_str ( string $encoded_string [, array &amp;$result ] )</span><br></pre></td></tr></table></figure>
+
+<p>解析 <code>GET/POST/COOKIE</code> 数据并设置全局变量。 由于 PHP 不提供原始 <code>POST/COOKIE</code> 数据，目前它仅能够用于 GET 数据。 它解析了 URL 编码过的数据，检测其编码，并转换编码为内部编码，然后设置其值为 array 的 result 或者全局变量。</p>
+<p>4、import_request_variables</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bool import_request_variables ( string $types [, string $prefix ] )</span><br></pre></td></tr></table></figure>
+
+<p>将 <code>GET／POST／Cookie</code> 变量导入到全局作用域中。如果你禁止了 <code>register_globals</code>，但又想用到一些全局变量，那么此函数就很有用。</p>
+<p>参考文献：<br><a href="https://www.jianshu.com/p/b9db30cb4c54" target="_blank" rel="noopener">https://www.jianshu.com/p/b9db30cb4c54</a><br><a href="https://www.bilibili.com/video/av56030160/" target="_blank" rel="noopener">https://www.bilibili.com/video/av56030160/</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2019/08/24/PHP代码审计之危险函数/">PHP代码审计之危险函数</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">obsem</a></p>
+        <p><span>发布时间:</span>2019-08-24, 00:00:00</p>
+        <p><span>最后更新:</span>2021-02-08, 21:36:33</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2019/08/24/PHP代码审计之危险函数/" title="PHP代码审计之危险函数">http://yoursite.com/2019/08/24/PHP代码审计之危险函数/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/08/24/PHP代码审计之危险函数/　　作者: obsem" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2019/09/10/Owasp juice shop(一)/">
+                    Owasp juice shop(一)
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2019/08/22/PHP超级全局变量/">
+                    PHP超级全局变量
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01-命令执行函数"><span class="toc-number">1.</span> <span class="toc-text">0x01 命令执行函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-代码执行函数"><span class="toc-number">2.</span> <span class="toc-text">0x02 代码执行函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-eval-函数"><span class="toc-number">2.0.1.</span> <span class="toc-text">1.1 eval 函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-assert函数"><span class="toc-number">2.0.2.</span> <span class="toc-text">1.2 assert函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-preg-replace函数"><span class="toc-number">2.0.3.</span> <span class="toc-text">1.3 preg_replace函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4-creat-function匿名函数"><span class="toc-number">2.0.4.</span> <span class="toc-text">1.4 creat_function匿名函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-5-func-’sys’-’tem’"><span class="toc-number">2.0.5.</span> <span class="toc-text">1.5 $func=’sys’.’tem’</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-6-回调函数"><span class="toc-number">2.0.6.</span> <span class="toc-text">1.6 回调函数</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03-文件包含函数"><span class="toc-number">3.</span> <span class="toc-text">0x03 文件包含函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-include和require语句"><span class="toc-number">3.0.1.</span> <span class="toc-text">3.1 include和require语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-require-once和include-once语句"><span class="toc-number">3.0.2.</span> <span class="toc-text">3.2 require_once和include_once语句</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x04-文件操作函数"><span class="toc-number">4.</span> <span class="toc-text">0x04 文件操作函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x05-特殊函数"><span class="toc-number">5.</span> <span class="toc-text">0x05 特殊函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1-phpinfo"><span class="toc-number">5.0.1.</span> <span class="toc-text">5.1 phpinfo</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-2-获取变量信息的函数"><span class="toc-number">5.0.2.</span> <span class="toc-text">5.2 获取变量信息的函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-3-使用软连接读取文件内容"><span class="toc-number">5.0.3.</span> <span class="toc-text">5.3 使用软连接读取文件内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-4-配置函数"><span class="toc-number">5.0.4.</span> <span class="toc-text">5.4 配置函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-5-数字判断"><span class="toc-number">5.0.5.</span> <span class="toc-text">5.5 数字判断</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-6、glob——列出匹配文件路径"><span class="toc-number">5.0.6.</span> <span class="toc-text">5.6、glob——列出匹配文件路径</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-7、dl——载入扩展"><span class="toc-number">5.0.7.</span> <span class="toc-text">5.7、dl——载入扩展</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-8-环境变量"><span class="toc-number">5.0.8.</span> <span class="toc-text">5.8 环境变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-9-变量覆盖"><span class="toc-number">5.0.9.</span> <span class="toc-text">5.9 变量覆盖</span></a></li></ol></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"PHP代码审计之危险函数　| obsetear　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2019/09/10/Owasp juice shop(一)/" title="上一篇: Owasp juice shop(一)">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2019/08/22/PHP超级全局变量/" title="下一篇: PHP超级全局变量">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/11/21/从文件上传到浅谈.htaccess文件的作用/">从文件上传到浅谈.htaccess文件的作用</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/19/记一次简单的渗透练习/">记一次简单的渗透练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/10/python 正则表达式小结（笔记）/">python正则表达式小结（笔记）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/08/upload-labs通关总结/">upload-labs通关小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/04/linux基础知识（笔记）/">Linux基础（笔记）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/03/BUUCTFweb部分解题思路2/">BUUCTFweb部分解题思路（PHP、Babysql、Upload、CheckIn）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/15/BUUCTF部分web题解/">BUUCTF部分web题解（easysql，easy_tornado，Ping Ping Ping）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/26/内网渗透之Linux提权姿势/">Linux提权</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/16/内网渗透之windows提权的几种姿势/">windows提权</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/06/内网渗透之免杀/">免杀</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/29/内网渗透之CobaltStrike/">CobaltStrike</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/26/内网渗透之Metasploit/">Metasploit</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/25/内网渗透之windows基础/">Windows基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/20/浅谈XXE漏洞：从XML到文件读取/">浅谈XXE漏洞：从XML到文件读取</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/04/SSRF漏洞/">SSRF漏洞小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/23/csrf漏洞小结/">CSRF漏洞小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/Mysql报错函数小结/">Mysql报错函数小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/10/文件包含漏洞小结/">浅谈文件包含漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/21/浅谈php一句话木马/">浅谈一句话木马</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/03/宽字节注入/">宽字节注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/23/攻防世界web系列/">攻防世界web系列</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/10/Owasp juice shop(一)/">Owasp juice shop(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/24/PHP代码审计之危险函数/">PHP代码审计之危险函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/22/PHP超级全局变量/">PHP超级全局变量</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/21/一些常见的编码/">一些常见的编码</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/17/命令执行&代码执行漏洞/">命令执行&代码执行漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Web常见的源码泄露/">Web常见的源码泄露</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/09/RSA算法小结/">RSA算法小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/08/PHP反序列化/">PHP反序列化学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/04/i春秋-misc系列/">i春秋-misc系列</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/31/文件上传漏洞总结/">文件上传漏洞总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/28/隐写术/">隐写术</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/25/SQL注入一些过滤及绕过总结/">SQL注入一些过滤及绕过总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/21/SQL简单注入/">SQL简单注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/20/图片隐写/">图片隐写术</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/18/攻防世界——Misc系列/">攻防世界——Misc系列</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/14/Web——爆破wp/">WEB——爆破wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/10/WEB——php大法wp/">WEB——php大法wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/08/图片隐写——小苹果wp/">图片隐写——小苹果wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/10/xss挑战之旅学习笔记/">xss挑战之旅学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/07/xss学习总结/">xxs学习总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/25/SQL注入姿势（3）/">SQL注入姿势（3）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/12/SQL注入姿势（2）/">SQL注入姿势（2）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/10/SQL注入姿势（1）/">SQL注入姿势（1）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/06/PHP学习笔记（5）/">PHP学习笔记（5）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/05/PHP学习笔记（4）/">PHP学习笔记（4）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/28/php登录界面小结/">PHP登录界面小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/25/PHP学习笔记（3）/">PHP学习笔记（3）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/15/PHP学习笔记（2）/">PHP学习笔记（2）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/07/PHP学习笔记（1）/">PHP学习笔记（1）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/05/哈弗曼树/">哈弗曼树</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/27/css学习笔记/">CSS学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/25/HTML学习笔记/">HTML学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/25/MySQL的一些常用命令行总结/">MySQL的一些常用命令行总结</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2021 obsem
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

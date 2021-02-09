@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="obsem">
+
+
+
+<meta name="description" content="0x01 全局变量和局部变量全局变量：定义在函数外部变量的就是全局变量，它的作用域是从定义处一直到文件结尾。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP超级全局变量">
+<meta property="og:url" content="http://yoursite.com/2019/08/22/PHP超级全局变量/index.html">
+<meta property="og:site_name" content="obsetear">
+<meta property="og:description" content="0x01 全局变量和局部变量全局变量：定义在函数外部变量的就是全局变量，它的作用域是从定义处一直到文件结尾。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190822165723708.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190822183725276.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190822184746524.jpg">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190822175706622.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190822192903942.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190822203438334.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190822210703724.jpg">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190822214336416.jpg">
+<meta property="og:updated_time" content="2021-02-08T13:35:07.335Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PHP超级全局变量">
+<meta name="twitter:description" content="0x01 全局变量和局部变量全局变量：定义在函数外部变量的就是全局变量，它的作用域是从定义处一直到文件结尾。">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190822165723708.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="obsetear" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>PHP超级全局变量 | obsetear</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: false
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/2.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">obsem</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">obsem</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/2.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">obsem</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-PHP超级全局变量" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/08/22/PHP超级全局变量/" class="article-date">
+      <time datetime="2019-08-21T16:00:00.000Z" itemprop="datePublished">2019-08-22</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      PHP超级全局变量
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="0x01-全局变量和局部变量"><a href="#0x01-全局变量和局部变量" class="headerlink" title="0x01 全局变量和局部变量"></a>0x01 全局变量和局部变量</h2><p>全局变量：定义在函数外部变量的就是全局变量，它的作用域是从定义处一直到文件结尾。</p>
+<a id="more"></a>
+<p>局部变量：函数内定义的变量就是局部变量，它的作用域为函数内。</p>
+<p>函数内，一般情况下是访问不了全局变量的</p>
+<p>例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$a=9;</span><br><span class="line">$b=6;</span><br><span class="line">function add()</span><br><span class="line">&#123;</span><br><span class="line">	echo $a+$b;//输出0</span><br><span class="line">&#125;</span><br><span class="line">add();</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>在函数内要是需要访问全局变量就需要使用<code>global</code>关键字或使用 <code>$GLOBALS[index]</code>数组（超全局变量）。</p>
+<p>例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$a=9;</span><br><span class="line">$b=6;</span><br><span class="line">function add()</span><br><span class="line">&#123;</span><br><span class="line">	//使用global关键字</span><br><span class="line">	global $a,$b;</span><br><span class="line">	echo $a+$b;//输出15</span><br><span class="line">	echo &quot;&lt;br /&gt;&quot;;</span><br><span class="line">	//使用$GLOBALS[]数组</span><br><span class="line">	echo $GLOBALS[&apos;a&apos;]+$GLOBALS[&apos;b&apos;];//输出15</span><br><span class="line">&#125;</span><br><span class="line">add();</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="0x02-超级全局变量"><a href="#0x02-超级全局变量" class="headerlink" title="0x02 超级全局变量"></a>0x02 超级全局变量</h2><p>PHP中预定义了几个超级全局变量（superglobals） ，这意味着它们在一个脚本的全部作用域中都可用。你不需要特别说明，就可以在函数及类中使用。</p>
+<p>PHP中的超全局变量：</p>
+<pre><code>$GLOBALS
+$_SERVER
+$_POST
+$_GET
+$_REQUEST
+$_FILES
+$_ENV
+$_COOKIE
+$_SESSION</code></pre><h4 id="1、-GLOBALS"><a href="#1、-GLOBALS" class="headerlink" title="1、$GLOBALS"></a>1、<code>$GLOBALS</code></h4><p>一个包含了全部变量的全局组合数组。变量的名字就是数组的键，变量的值就是键对应的值。</p>
+<p>例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$a=9;</span><br><span class="line">$b=6;</span><br><span class="line">function add()</span><br><span class="line">&#123;</span><br><span class="line">	$GLOBALS[&apos;c&apos;]=$GLOBALS[&apos;a&apos;]+$GLOBALS[&apos;b&apos;];</span><br><span class="line">	//c被定义成了超全局变量，在函数外也可以访问</span><br><span class="line">&#125;</span><br><span class="line">add();</span><br><span class="line">echo $c;//输出15</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、-SERVER"><a href="#2、-SERVER" class="headerlink" title="2、$_SERVER"></a>2、<code>$_SERVER</code></h4><p><code>$_SERVER</code> 是一个包含了诸如头信息(header)、路径(path)、以及脚本位置(script locations)等等信息的数组。</p>
+<p>例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">echo &quot;&lt;pre&gt;&quot;;</span><br><span class="line">var_dump($_SERVER);</span><br><span class="line">echo &quot;&lt;/pre&gt;&quot;;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20190822165723708.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h4 id="3、-POST"><a href="#3、-POST" class="headerlink" title="3、$_POST"></a>3、<code>$_POST</code></h4><p><code>$_POST</code>用于接收浏览器以post形式传递过来的数据，主要用于收集表单数据。</p>
+<p>例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">if(isset($_POST[&apos;submit&apos;]))</span><br><span class="line">&#123;</span><br><span class="line">	var_dump($_POST[&apos;name&apos;]);</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line">&lt;form method=&quot;post&quot;&gt;</span><br><span class="line">	&lt;input type=&quot;text&quot; name=&quot;name&quot;&gt;</span><br><span class="line">	&lt;input type=&quot;submit&quot; name=&quot;submit&quot;&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20190822183725276.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h4 id="4、-GET"><a href="#4、-GET" class="headerlink" title="4、$_GET"></a>4、<code>$_GET</code></h4><p><code>$_GET</code>用于接收浏览器以get形式传递过来的数据，也主要用于接收表单数据，不过get的传递方式相对于post而言安全性较低。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">if(isset($_GET[&apos;submit&apos;]))</span><br><span class="line">&#123;</span><br><span class="line">	var_dump($_GET[&apos;name&apos;]);</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line">&lt;form method=&quot;get&quot;&gt;</span><br><span class="line">	&lt;input type=&quot;text&quot; name=&quot;name&quot;&gt;</span><br><span class="line">	&lt;input type=&quot;submit&quot; name=&quot;submit&quot;&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20190822184746524.jpg" alt="在这里插入图片描述"></p>
+<h4 id="5、-REQUEST"><a href="#5、-REQUEST" class="headerlink" title="5、$_REQUEST"></a>5、<code>$_REQUEST</code></h4><p><code>$_REQUEST</code>是一个默认情况下包含了 <code>$_GET</code>，<code>$_POST</code> 和 <code>$_COOKIE</code> 的数组。</p>
+<p>例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">setcookie(&quot;c&quot;,&apos;cookie&apos;,time()+3600);</span><br><span class="line">$_GET[&apos;g&apos;];</span><br><span class="line">$_POST[&apos;p&apos;];</span><br><span class="line">echo &quot;&lt;pre&gt;&quot;;</span><br><span class="line">var_dump($_REQUEST);</span><br><span class="line">echo &quot;&lt;/pre&gt;&quot;;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20190822175706622.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h4 id="6、-FILES"><a href="#6、-FILES" class="headerlink" title="6、$_FILES"></a>6、<code>$_FILES</code></h4><p><code>$_FILES</code>主要用于接收上传过来的文件的各项信息，是一个二维数组。第一维用于储存<code>input</code>标签中<code>type</code>类型为<code>file</code>的<code>name</code>属性的值，第二维用于储存文件的各项信息。</p>
+<p>例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">if(isset($_POST[&apos;submit&apos;]))</span><br><span class="line">&#123;</span><br><span class="line">	echo &quot;&lt;pre&gt;&quot;;</span><br><span class="line">	var_dump($_FILES[&apos;myfile&apos;]);</span><br><span class="line">	echo &quot;&lt;/pre&gt;&quot;;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line">&lt;meta charset=&quot;utf-8&quot; /&gt;</span><br><span class="line">&lt;form method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;</span><br><span class="line">	&lt;input type=&quot;file&quot; name=&quot;myfile&quot;&gt;</span><br><span class="line">	&lt;input type=&quot;submit&quot; name=&quot;submit&quot; value=&quot;文件上传&quot;&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20190822192903942.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><code>$_FILES</code>数组内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">$_FILES[&apos;myfile&apos;][&apos;name&apos;] //客户端文件的原名称。 </span><br><span class="line"></span><br><span class="line">$_FILES[&apos;myfile&apos;][&apos;type&apos;] //文件的 MIME 类型，需要浏览器提供该信息的支持。 </span><br><span class="line"></span><br><span class="line">$_FILES[&apos;myfile&apos;][&apos;size&apos;] //已上传文件的大小，单位为字节。 </span><br><span class="line"></span><br><span class="line">$_FILES[&apos;myfile&apos;][&apos;tmp_name&apos;] //文件被上传后在服务端储存的临时文件名，一般是系统默认。可以在php.ini的upload_tmp_dir 指定，但 用 putenv() 函数设置是不起作用的。 </span><br><span class="line"></span><br><span class="line">$_FILES[&apos;myfile&apos;][&apos;error&apos;] //和该文件上传相关的错误代码。</span><br><span class="line">有关error值的说明：</span><br><span class="line"></span><br><span class="line">值：0; 没有错误发生，文件上传成功。</span><br><span class="line"></span><br><span class="line">值：1; 上传的文件超过了 php.ini 中 upload_max_filesize 选项限制的值。</span><br><span class="line"></span><br><span class="line">值：2; 上传文件的大小超过了 HTML 表单中 MAX_FILE_SIZE 选项指定的值。</span><br><span class="line"></span><br><span class="line">值：3; 文件只有部分被上传。</span><br><span class="line"></span><br><span class="line">值：4; 没有文件被上传。</span><br><span class="line"></span><br><span class="line">值：5; 上传文件大小为0。</span><br></pre></td></tr></table></figure>
+
+<h4 id="7、-ENV"><a href="#7、-ENV" class="headerlink" title="7、$_ENV"></a>7、<code>$_ENV</code></h4><p><code>$_ENV</code>是一个包含服务器端环境变量的数组。<code>$_ENV</code>只是被动的接受服务器端的环境变量并把它们转换为数组元素，你可以尝试直接输出它。</p>
+<p>例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">//print_r($_ENV);</span><br><span class="line">var_dump($_ENV);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20190822203438334.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMwMDI4Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>如果打印输出 <code>$_ENV</code> 为空，可能是 php.ini 的配置的原因：</p>
+<pre><code>variables_order = &quot;GPCS&quot;</code></pre><p>要想让<code>$_ENV</code>的值不为空，则需要修改variables_orde为：</p>
+<pre><code>variables_order = &quot;EGPCS&quot;</code></pre><p>上述配置表示 PHP 接受的外部变量来源及顺序，EGPCS 是 Environment、Get、Post、Cookies 和 Server 的缩写。如果 variables_order 的配置中缺少 E ，则 PHP 无法接受环境变量，那么 <code>$_ENV</code> 也就为空了。</p>
+<h4 id="8、-COOKIE"><a href="#8、-COOKIE" class="headerlink" title="8、$_COOKIE"></a>8、<code>$_COOKIE</code></h4><p><code>$_COOKIE</code>用来存储cookie的值，如果使用了setcookie()函数，只有在cookie的存活时间内，都可以在<code>$_COOKIE</code>中访问到。而且只要在一个脚本中执行了setcookie()函数，在其他脚本中都可以访问到。</p>
+<p>例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//文件test1中</span><br><span class="line">&lt;?php</span><br><span class="line">setcookie(&apos;name&apos;,&apos;xiaoming&apos;,time()+3600);</span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line">//文件test2中</span><br><span class="line">&lt;?php</span><br><span class="line">var_dump($_COOKIE);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>先访问test1，让浏览器执行setcookie()函数，然后再访问test2。</p>
+<p><img src="https://img-blog.csdnimg.cn/20190822210703724.jpg" alt="在这里插入图片描述"></p>
+<h4 id="9、-SESSION"><a href="#9、-SESSION" class="headerlink" title="9、$_SESSION"></a>9、<code>$_SESSION</code></h4><p><code>$_SESSION</code>用于接收session的值，session的设置与cookie不同，要想在不同脚本里访问到<code>$_SESSION</code>里的值，在使用前得先使用<code>session_start()</code>函数创建一个会话，</p>
+<p>例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//文件test1中</span><br><span class="line">&lt;?php</span><br><span class="line">session_start();</span><br><span class="line">$_SESSION[&apos;name&apos;]=&quot;lihua&quot;;</span><br><span class="line">$_SESSION[&apos;age&apos;]=18;</span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line">//文件test2中</span><br><span class="line">&lt;?php</span><br><span class="line">session_start();</span><br><span class="line">var_dump($_SESSION);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20190822214336416.jpg" alt="在这里插入图片描述"></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2019/08/22/PHP超级全局变量/">PHP超级全局变量</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">obsem</a></p>
+        <p><span>发布时间:</span>2019-08-22, 00:00:00</p>
+        <p><span>最后更新:</span>2021-02-08, 21:35:07</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2019/08/22/PHP超级全局变量/" title="PHP超级全局变量">http://yoursite.com/2019/08/22/PHP超级全局变量/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/08/22/PHP超级全局变量/　　作者: obsem" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2019/08/24/PHP代码审计之危险函数/">
+                    PHP代码审计之危险函数
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2019/08/21/一些常见的编码/">
+                    一些常见的编码
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01-全局变量和局部变量"><span class="toc-number">1.</span> <span class="toc-text">0x01 全局变量和局部变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-超级全局变量"><span class="toc-number">2.</span> <span class="toc-text">0x02 超级全局变量</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、-GLOBALS"><span class="toc-number">2.0.1.</span> <span class="toc-text">1、$GLOBALS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、-SERVER"><span class="toc-number">2.0.2.</span> <span class="toc-text">2、$_SERVER</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、-POST"><span class="toc-number">2.0.3.</span> <span class="toc-text">3、$_POST</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4、-GET"><span class="toc-number">2.0.4.</span> <span class="toc-text">4、$_GET</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5、-REQUEST"><span class="toc-number">2.0.5.</span> <span class="toc-text">5、$_REQUEST</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6、-FILES"><span class="toc-number">2.0.6.</span> <span class="toc-text">6、$_FILES</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7、-ENV"><span class="toc-number">2.0.7.</span> <span class="toc-text">7、$_ENV</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8、-COOKIE"><span class="toc-number">2.0.8.</span> <span class="toc-text">8、$_COOKIE</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9、-SESSION"><span class="toc-number">2.0.9.</span> <span class="toc-text">9、$_SESSION</span></a></li></ol></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"PHP超级全局变量　| obsetear　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2019/08/24/PHP代码审计之危险函数/" title="上一篇: PHP代码审计之危险函数">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2019/08/21/一些常见的编码/" title="下一篇: 一些常见的编码">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/11/21/从文件上传到浅谈.htaccess文件的作用/">从文件上传到浅谈.htaccess文件的作用</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/19/记一次简单的渗透练习/">记一次简单的渗透练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/10/python 正则表达式小结（笔记）/">python正则表达式小结（笔记）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/08/upload-labs通关总结/">upload-labs通关小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/04/linux基础知识（笔记）/">Linux基础（笔记）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/03/BUUCTFweb部分解题思路2/">BUUCTFweb部分解题思路（PHP、Babysql、Upload、CheckIn）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/15/BUUCTF部分web题解/">BUUCTF部分web题解（easysql，easy_tornado，Ping Ping Ping）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/26/内网渗透之Linux提权姿势/">Linux提权</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/16/内网渗透之windows提权的几种姿势/">windows提权</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/06/内网渗透之免杀/">免杀</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/29/内网渗透之CobaltStrike/">CobaltStrike</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/26/内网渗透之Metasploit/">Metasploit</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/25/内网渗透之windows基础/">Windows基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/20/浅谈XXE漏洞：从XML到文件读取/">浅谈XXE漏洞：从XML到文件读取</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/04/SSRF漏洞/">SSRF漏洞小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/23/csrf漏洞小结/">CSRF漏洞小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/Mysql报错函数小结/">Mysql报错函数小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/10/文件包含漏洞小结/">浅谈文件包含漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/21/浅谈php一句话木马/">浅谈一句话木马</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/03/宽字节注入/">宽字节注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/23/攻防世界web系列/">攻防世界web系列</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/10/Owasp juice shop(一)/">Owasp juice shop(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/24/PHP代码审计之危险函数/">PHP代码审计之危险函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/22/PHP超级全局变量/">PHP超级全局变量</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/21/一些常见的编码/">一些常见的编码</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/17/命令执行&代码执行漏洞/">命令执行&代码执行漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Web常见的源码泄露/">Web常见的源码泄露</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/09/RSA算法小结/">RSA算法小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/08/PHP反序列化/">PHP反序列化学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/04/i春秋-misc系列/">i春秋-misc系列</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/31/文件上传漏洞总结/">文件上传漏洞总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/28/隐写术/">隐写术</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/25/SQL注入一些过滤及绕过总结/">SQL注入一些过滤及绕过总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/21/SQL简单注入/">SQL简单注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/20/图片隐写/">图片隐写术</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/18/攻防世界——Misc系列/">攻防世界——Misc系列</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/14/Web——爆破wp/">WEB——爆破wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/10/WEB——php大法wp/">WEB——php大法wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/08/图片隐写——小苹果wp/">图片隐写——小苹果wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/10/xss挑战之旅学习笔记/">xss挑战之旅学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/07/xss学习总结/">xxs学习总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/25/SQL注入姿势（3）/">SQL注入姿势（3）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/12/SQL注入姿势（2）/">SQL注入姿势（2）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/10/SQL注入姿势（1）/">SQL注入姿势（1）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/06/PHP学习笔记（5）/">PHP学习笔记（5）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/05/PHP学习笔记（4）/">PHP学习笔记（4）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/28/php登录界面小结/">PHP登录界面小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/25/PHP学习笔记（3）/">PHP学习笔记（3）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/15/PHP学习笔记（2）/">PHP学习笔记（2）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/07/PHP学习笔记（1）/">PHP学习笔记（1）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/05/哈弗曼树/">哈弗曼树</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/27/css学习笔记/">CSS学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/25/HTML学习笔记/">HTML学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/25/MySQL的一些常用命令行总结/">MySQL的一些常用命令行总结</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2021 obsem
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

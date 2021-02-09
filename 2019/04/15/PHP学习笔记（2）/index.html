@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="obsem">
+
+
+
+<meta name="description" content="一、自定义函数1234function 函数名（）&amp;#123;	return 表达式；//也可以不返回，如果不写返回的表达式，则默认返回null&amp;#125;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP学习笔记（2）">
+<meta property="og:url" content="http://yoursite.com/2019/04/15/PHP学习笔记（2）/index.html">
+<meta property="og:site_name" content="obsetear">
+<meta property="og:description" content="一、自定义函数1234function 函数名（）&amp;#123;	return 表达式；//也可以不返回，如果不写返回的表达式，则默认返回null&amp;#125;">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-02-08T08:57:47.811Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PHP学习笔记（2）">
+<meta name="twitter:description" content="一、自定义函数1234function 函数名（）&amp;#123;	return 表达式；//也可以不返回，如果不写返回的表达式，则默认返回null&amp;#125;">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="obsetear" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>PHP学习笔记（2） | obsetear</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: false
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/2.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">obsem</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">obsem</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/2.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">obsem</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-PHP学习笔记（2）" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/04/15/PHP学习笔记（2）/" class="article-date">
+      <time datetime="2019-04-14T16:00:00.000Z" itemprop="datePublished">2019-04-15</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      PHP学习笔记（2）
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="一、自定义函数"><a href="#一、自定义函数" class="headerlink" title="一、自定义函数"></a>一、自定义函数</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function 函数名（）</span><br><span class="line">&#123;</span><br><span class="line">	return 表达式；//也可以不返回，如果不写返回的表达式，则默认返回null</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>    
+<p>函数的调用：<br>调用函数时应与写的函数相对应</p>
+<h1 id="二、php变量范围"><a href="#二、php变量范围" class="headerlink" title="二、php变量范围"></a>二、php变量范围</h1><h2 id="1、局部变量"><a href="#1、局部变量" class="headerlink" title="1、局部变量"></a>1、局部变量</h2><p>在函数内定义，仅在某个函数内有效</p>
+<h2 id="2、全局变量"><a href="#2、全局变量" class="headerlink" title="2、全局变量"></a>2、全局变量</h2><p>在函数外定义，从定义处开始到整个php的末尾都可以使用，但如果在函数内使用必须用global声明变量</p>
+<h2 id="3、静态变量"><a href="#3、静态变量" class="headerlink" title="3、静态变量"></a>3、静态变量</h2><p>在函数内定义，使用static关键字来定义</p>
+<h1 id="三、参数的传递"><a href="#三、参数的传递" class="headerlink" title="三、参数的传递"></a>三、参数的传递</h1><h2 id="1、按值传递参数"><a href="#1、按值传递参数" class="headerlink" title="1、按值传递参数"></a>1、按值传递参数</h2><p>对形式参数的操作，根本不会影响到实际参数的值</p>
+<h2 id="2、按引用传递参数"><a href="#2、按引用传递参数" class="headerlink" title="2、按引用传递参数"></a>2、按引用传递参数</h2><p>对形参的操作就等于对实参的操作</p>
+<h2 id="3、函数的默认参数"><a href="#3、函数的默认参数" class="headerlink" title="3、函数的默认参数"></a>3、函数的默认参数</h2><p>在形参传入时直接给其赋值，赋值的方法是从从右往左赋值，先给右边的参数赋值，才能给左边的赋值。</p>
+<h2 id="4、可变长度参数列表"><a href="#4、可变长度参数列表" class="headerlink" title="4、可变长度参数列表"></a>4、可变长度参数列表</h2><p>PHP自己提供的，可直接使用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">func_get_args();//显示传入各个参数的值和类型，也可进行其他的操作</span><br><span class="line">func_get_arg();//调用时可以传入一个值表示获取第几个传入的实际参数</span><br><span class="line">func_num_args();//返回传入自定义函数的参数的个数</span><br></pre></td></tr></table></figure>
+
+<p>这三个函数可以使用在我们自定义函数内，能返回一些有关参数的信息    </p>
+<h1 id="四、可变函数（变量函数）"><a href="#四、可变函数（变量函数）" class="headerlink" title="四、可变函数（变量函数）"></a>四、可变函数（变量函数）</h1><p>直接把函数赋值给变量</p>
+<h1 id="五、递归函数"><a href="#五、递归函数" class="headerlink" title="五、递归函数"></a>五、递归函数</h1><p>递归函数即在函数内自己调用自己的函数。</p>
+<p>1、函数在被调用的执行过程中会在内存里面分配空间用于存储临时数据，所以函数在执行过程中默认他们之间没有联系，里面的变量默认是局部变量，相互没有影响</p>
+<p>2、递归函数在函数内部需要有适时结束函数运行的条件</p>
+<h1 id="六、内置函数"><a href="#六、内置函数" class="headerlink" title="六、内置函数"></a>六、内置函数</h1><p>PHP提供的函数或结构</p>
+<h1 id="七、数组-1-数组的定义"><a href="#七、数组-1-数组的定义" class="headerlink" title="七、数组[1]-数组的定义"></a>七、数组[1]-数组的定义</h1><p>数组定义方法一：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$变量名[索引值]=具体的值</span><br><span class="line">（索引值可以为数字也可以为字符串）</span><br><span class="line"></span><br><span class="line">如果省略索引值不写，则默认索引值从0开始，依次增大</span><br><span class="line">需要用print_r()来输出</span><br></pre></td></tr></table></figure>
+
+<p>数组定义方法二：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$变量名=array(值1.值2,....)；</span><br><span class="line">给某个索引值对应的变量赋值</span><br><span class="line">$变量名=array(</span><br><span class="line">索引值1=&gt;值1,</span><br><span class="line">索引值2=&gt;值2，</span><br><span class="line">索引值3=&gt;值3,</span><br><span class="line">	)</span><br></pre></td></tr></table></figure>
+
+
+<p>二维数组：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#变量名=array(</span><br><span class="line">	索引值1=&gt;array(值1-1,值1-2,值1-3,...)</span><br><span class="line">	索引值2=&gt;array(值2-1,值2-2,值2-3,...)</span><br><span class="line">	索引值3=&gt;array(值3-1,值3-2,值3-3,...)</span><br><span class="line">	...</span><br><span class="line">	//索引值也可省略不写，则默认从0开始，依次增大</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">访问数值的方法</span><br><span class="line">变量名称[索引值][索引值]</span><br></pre></td></tr></table></figure>
+
+<h1 id="八、数组-2-数组的遍历"><a href="#八、数组-2-数组的遍历" class="headerlink" title="八、数组[2]-数组的遍历"></a>八、数组[2]-数组的遍历</h1><p>遍历数组：每个都经历一遍的意思<br>    1）for循环</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for($i=0;$i&lt;count($arr);$i++)//count(数组)，返回数组里的数据的个数</span><br><span class="line">	&#123;</span><br><span class="line">	echo $arr[$i].&apos;&lt;br /&gt;&apos;;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>但这种方法有bug，没法遍历关联数组，所以不常用。</p>
+<p>2）foreach语句    </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">foreach(数组变量 as 变量1)</span><br><span class="line">		&#123;</span><br><span class="line">		//每次循环执行的语句</span><br><span class="line">		变量1代表当前正在经历（访问）的数据</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		foreach($arr1 as $value)</span><br><span class="line">		&#123;</span><br><span class="line">		echo $value.&apos;&lt;br /&gt;&apos;;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		foreach(数组变量 as 变量1=&gt;变量2)</span><br><span class="line">		&#123;</span><br><span class="line">		//每次循环执行的语句</span><br><span class="line">		变量1代表当前正在经历（访问）的数据的索引值</span><br><span class="line">		变量2代表当前正在经历（访问）的数据</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		foreach($arr1 as $key=&gt;$value)</span><br><span class="line">		&#123;</span><br><span class="line">		echo $key.&apos;=&gt;&apos;.$value.&apos;&lt;br /&gt;&apos;;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		遍历有规律的二维数组时，用foreach嵌套即可</span><br><span class="line">		foreach($arr as $val1)</span><br><span class="line">			foreach($val1 as $val2)</span><br><span class="line">			&#123;</span><br><span class="line">			echo $val2.&apos;&lt;br /&gt;&apos;;</span><br><span class="line">			&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>以表格的形式打印二维数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$students=array(</span><br><span class="line">	array(&apos;姓名1&apos;,1,男,60.5),</span><br><span class="line">	array(&apos;姓名2&apos;,2,女,70.5),</span><br><span class="line">	array(&apos;姓名3&apos;,3,男,80.5),</span><br><span class="line">	);</span><br><span class="line">	echo &apos;&lt;table border=1&gt;&apos;;</span><br><span class="line">	foreach($students as $val)</span><br><span class="line">	&#123;</span><br><span class="line">	echo &quot;&lt;tr&gt;&lt;td&gt;&#123;$val[0]&#125;&lt;/td&gt;</span><br><span class="line">			&lt;td&gt;&#123;$val[1]&#125;&lt;/td&gt;</span><br><span class="line">			&lt;td&gt;&#123;$val[2]&#125;&lt;/td&gt;</span><br><span class="line">			&lt;td&gt;&#123;$val[3]&#125;&lt;/td&gt;</span><br><span class="line">			&lt;/tr&gt;&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">	echo &apos;&lt;/table&gt;&apos;;</span><br></pre></td></tr></table></figure>
+
+<h1 id="九、数组-3-预定义超全局数组变量"><a href="#九、数组-3-预定义超全局数组变量" class="headerlink" title="九、数组[3]-预定义超全局数组变量"></a>九、数组[3]-预定义超全局数组变量</h1><p>已经定义好了（存在）的变量（存放的数据的类型是数组）。<br>超全局：超级全局变量，作用域（有效区域）！</p>
+<p>传递数据（提交数据）给服务器端主要两种方式：</p>
+<p> 1、get方式</p>
+<p>传递方法：<br>在域名后输入<code>?</code>参数名=参数值<br>接受方法：<br>在服务器端（请求的php文件这边）可以通过<code>$_GET</code>来获取到<br>（但这种方法不安全，适合传输一些比较小的数据）</p>
+<p>2、post方式</p>
+<p>一般用<code>$_POST</code>来获取</p>
+<h1 id="十、数组-4-处理数组的相关函数"><a href="#十、数组-4-处理数组的相关函数" class="headerlink" title="十、数组[4]-处理数组的相关函数"></a>十、数组[4]-处理数组的相关函数</h1><p>这些函数都是PHP为已经为我们提供的，不需要背，只要会通过查手册来使用即可<br>数组函数手册网址：<a href="https://www.php.net/manual/zh/ref.array.php" target="_blank" rel="noopener">https://www.php.net/manual/zh/ref.array.php</a></p>
+<h1 id="十一、字符串处理"><a href="#十一、字符串处理" class="headerlink" title="十一、字符串处理"></a>十一、字符串处理</h1><h2 id="1、去除字符串首尾处的空白或其他字符函数"><a href="#1、去除字符串首尾处的空白或其他字符函数" class="headerlink" title="1、去除字符串首尾处的空白或其他字符函数"></a>1、去除字符串首尾处的空白或其他字符函数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1）trim()</span><br><span class="line"></span><br><span class="line">trim($字符串名称,&quot;char&quot;);</span><br><span class="line">char为你要去除的字符，如果省略，就是去除首尾的空白</span><br><span class="line"></span><br><span class="line">2）ltrim()//去除字符串左边的字符或空白</span><br><span class="line"></span><br><span class="line">3）rtrim()//去除字符串右边的字符或空白</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="2、大小写转换函数"><a href="#2、大小写转换函数" class="headerlink" title="2、大小写转换函数"></a>2、大小写转换函数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1）strtoupper()//将字符串转化为大写</span><br><span class="line">	</span><br><span class="line">	strtoupper($字符串名称);</span><br><span class="line">		</span><br><span class="line">2）strtolower()//将字符串转化为小写</span><br><span class="line">	</span><br><span class="line">	strtolower($字符串名称);</span><br></pre></td></tr></table></figure>
+
+<h2 id="3、字符串查找函数"><a href="#3、字符串查找函数" class="headerlink" title="3、字符串查找函数"></a>3、字符串查找函数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">1）substr_count()//计算字串出现的次数</span><br><span class="line">		</span><br><span class="line">		substr_count($字符串,$needle);</span><br><span class="line">		substr_count($字符串,$needle,$offset,$length)</span><br><span class="line">		</span><br><span class="line">		/*</span><br><span class="line">		needle(char)：要查找的字符或字符串</span><br><span class="line">		offset(int)：从第第几位开始查找（从0开始数）</span><br><span class="line">		length(int)：从开始查找的位置开始向后查多少位</span><br><span class="line">		该函数返回的是整型</span><br><span class="line">		*/</span><br><span class="line">		</span><br><span class="line">		2）strpos()//查找字符串首次出现的位置</span><br><span class="line">		</span><br><span class="line">		strpos($字符串名称,$needle)</span><br><span class="line">		strpos($字符串名称,$needle,$offset)</span><br><span class="line">		</span><br><span class="line">		/*</span><br><span class="line">		needle(char)：要查找的字符或字符串</span><br><span class="line">		offset(int)：从第第几位开始查找（从0开始数）</span><br><span class="line">		该函数返回的值可能是整型，也可能是布尔类型的false（当返回的值为0时）</span><br><span class="line">		*/</span><br><span class="line">		</span><br><span class="line">		3）strstr()//查找字符串的首次出现</span><br><span class="line">		</span><br><span class="line">		strstr($字符串名称,$needle)</span><br><span class="line">		strstr($字符串名称,$needle,before_needle)</span><br><span class="line">		</span><br><span class="line">		/*</span><br><span class="line">		needle(char)：要查找的字符或字符串</span><br><span class="line">		该函数返回字符串，该字符串为needle(char)及其后面的内容</span><br><span class="line">		before_needle：如果为true,则返回needle(char)之前的内容（不包括needle(char)）</span><br><span class="line">		*/</span><br></pre></td></tr></table></figure>
+
+<h2 id="4、字符串替换函数"><a href="#4、字符串替换函数" class="headerlink" title="4、字符串替换函数"></a>4、字符串替换函数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">1）str_replace()//子字符串替换</span><br><span class="line">		</span><br><span class="line">		str_replace($search,$replace,$str)</span><br><span class="line">		str_replace($search,$replace,$str,$count)</span><br><span class="line">		</span><br><span class="line">		/*</span><br><span class="line">		search(char)：要替换的字符</span><br><span class="line">		replace(char)：要替换成的字符</span><br><span class="line">		count(int)：替换的次数</span><br><span class="line">		也可以用数组一次替换多个字符</span><br><span class="line">		str_replace(array(&apos;c1&apos;,&apos;c2&apos;,&apos;c3&apos;),array(&apos;d1&apos;,&apos;d2&apos;,&apos;d3&apos;),$str)</span><br><span class="line">		str字符串中的c1,c2,c3会被替换成d1,d2,d3</span><br><span class="line">		该函数返回字符串</span><br><span class="line">		*/</span><br></pre></td></tr></table></figure>
+
+<h2 id="5、与html标签相关的函数"><a href="#5、与html标签相关的函数" class="headerlink" title="5、与html标签相关的函数"></a>5、与html标签相关的函数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1）htmlspecialchars()//将特殊字符转换为 HTML 实体</span><br><span class="line"></span><br><span class="line">2）strip_tags()//从字符串中去除 HTML 和 PHP 标记</span><br></pre></td></tr></table></figure>
+
+<h2 id="6、字符串截取函数"><a href="#6、字符串截取函数" class="headerlink" title="6、字符串截取函数"></a>6、字符串截取函数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1）substr()//返回字符串的子串</span><br><span class="line"></span><br><span class="line">substr($str,$start)</span><br><span class="line">substr($str,$start,$length)</span><br><span class="line">/*</span><br><span class="line">str：传入的字符串</span><br><span class="line">start(int)：从此处开始截取（从0开始数），若为负数则从尾开始数</span><br><span class="line">length(int)：返回的字符串的长度</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+
+<h2 id="7、字符串分隔函数"><a href="#7、字符串分隔函数" class="headerlink" title="7、字符串分隔函数"></a>7、字符串分隔函数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">1）explode()//使用一个字符串分割另一个字符串</span><br><span class="line"></span><br><span class="line">explode($delimiter,$字符串名称)</span><br><span class="line">explode($delimiter,$字符串名称,$limit)</span><br><span class="line">/*</span><br><span class="line">delimiter(char)：从此字符处分割</span><br><span class="line">limit(int)：限制分割的次数，分割limit-1次</span><br><span class="line">*/</span><br><span class="line">2）str_split()//将字符串转换为数组</span><br><span class="line"></span><br><span class="line">str_split($字符串名称,$split_length)</span><br><span class="line">/*</span><br><span class="line">split_length：每个转换成的数组中的元素有多少个字符</span><br><span class="line">返回一个数组</span><br><span class="line">*/</span><br><span class="line">字符串处理手册网址：https://www.php.net/manual/zh/book.strings.php</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2019/04/15/PHP学习笔记（2）/">PHP学习笔记（2）</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">obsem</a></p>
+        <p><span>发布时间:</span>2019-04-15, 00:00:00</p>
+        <p><span>最后更新:</span>2021-02-08, 16:57:47</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2019/04/15/PHP学习笔记（2）/" title="PHP学习笔记（2）">http://yoursite.com/2019/04/15/PHP学习笔记（2）/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/04/15/PHP学习笔记（2）/　　作者: obsem" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2019/04/25/PHP学习笔记（3）/">
+                    PHP学习笔记（3）
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2019/04/07/PHP学习笔记（1）/">
+                    PHP学习笔记（1）
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、自定义函数"><span class="toc-number">1.</span> <span class="toc-text">一、自定义函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、php变量范围"><span class="toc-number">2.</span> <span class="toc-text">二、php变量范围</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、局部变量"><span class="toc-number">2.1.</span> <span class="toc-text">1、局部变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、全局变量"><span class="toc-number">2.2.</span> <span class="toc-text">2、全局变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、静态变量"><span class="toc-number">2.3.</span> <span class="toc-text">3、静态变量</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、参数的传递"><span class="toc-number">3.</span> <span class="toc-text">三、参数的传递</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、按值传递参数"><span class="toc-number">3.1.</span> <span class="toc-text">1、按值传递参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、按引用传递参数"><span class="toc-number">3.2.</span> <span class="toc-text">2、按引用传递参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、函数的默认参数"><span class="toc-number">3.3.</span> <span class="toc-text">3、函数的默认参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、可变长度参数列表"><span class="toc-number">3.4.</span> <span class="toc-text">4、可变长度参数列表</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#四、可变函数（变量函数）"><span class="toc-number">4.</span> <span class="toc-text">四、可变函数（变量函数）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#五、递归函数"><span class="toc-number">5.</span> <span class="toc-text">五、递归函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#六、内置函数"><span class="toc-number">6.</span> <span class="toc-text">六、内置函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#七、数组-1-数组的定义"><span class="toc-number">7.</span> <span class="toc-text">七、数组[1]-数组的定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#八、数组-2-数组的遍历"><span class="toc-number">8.</span> <span class="toc-text">八、数组[2]-数组的遍历</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#九、数组-3-预定义超全局数组变量"><span class="toc-number">9.</span> <span class="toc-text">九、数组[3]-预定义超全局数组变量</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#十、数组-4-处理数组的相关函数"><span class="toc-number">10.</span> <span class="toc-text">十、数组[4]-处理数组的相关函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#十一、字符串处理"><span class="toc-number">11.</span> <span class="toc-text">十一、字符串处理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、去除字符串首尾处的空白或其他字符函数"><span class="toc-number">11.1.</span> <span class="toc-text">1、去除字符串首尾处的空白或其他字符函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、大小写转换函数"><span class="toc-number">11.2.</span> <span class="toc-text">2、大小写转换函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、字符串查找函数"><span class="toc-number">11.3.</span> <span class="toc-text">3、字符串查找函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、字符串替换函数"><span class="toc-number">11.4.</span> <span class="toc-text">4、字符串替换函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5、与html标签相关的函数"><span class="toc-number">11.5.</span> <span class="toc-text">5、与html标签相关的函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6、字符串截取函数"><span class="toc-number">11.6.</span> <span class="toc-text">6、字符串截取函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7、字符串分隔函数"><span class="toc-number">11.7.</span> <span class="toc-text">7、字符串分隔函数</span></a></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"PHP学习笔记（2）　| obsetear　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2019/04/25/PHP学习笔记（3）/" title="上一篇: PHP学习笔记（3）">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2019/04/07/PHP学习笔记（1）/" title="下一篇: PHP学习笔记（1）">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/11/21/从文件上传到浅谈.htaccess文件的作用/">从文件上传到浅谈.htaccess文件的作用</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/19/记一次简单的渗透练习/">记一次简单的渗透练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/10/python 正则表达式小结（笔记）/">python正则表达式小结（笔记）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/08/upload-labs通关总结/">upload-labs通关小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/04/linux基础知识（笔记）/">Linux基础（笔记）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/03/BUUCTFweb部分解题思路2/">BUUCTFweb部分解题思路（PHP、Babysql、Upload、CheckIn）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/15/BUUCTF部分web题解/">BUUCTF部分web题解（easysql，easy_tornado，Ping Ping Ping）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/26/内网渗透之Linux提权姿势/">Linux提权</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/16/内网渗透之windows提权的几种姿势/">windows提权</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/06/内网渗透之免杀/">免杀</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/29/内网渗透之CobaltStrike/">CobaltStrike</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/26/内网渗透之Metasploit/">Metasploit</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/25/内网渗透之windows基础/">Windows基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/20/浅谈XXE漏洞：从XML到文件读取/">浅谈XXE漏洞：从XML到文件读取</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/04/SSRF漏洞/">SSRF漏洞小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/23/csrf漏洞小结/">CSRF漏洞小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/Mysql报错函数小结/">Mysql报错函数小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/10/文件包含漏洞小结/">浅谈文件包含漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/21/浅谈php一句话木马/">浅谈一句话木马</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/03/宽字节注入/">宽字节注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/23/攻防世界web系列/">攻防世界web系列</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/10/Owasp juice shop(一)/">Owasp juice shop(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/24/PHP代码审计之危险函数/">PHP代码审计之危险函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/22/PHP超级全局变量/">PHP超级全局变量</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/21/一些常见的编码/">一些常见的编码</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/17/命令执行&代码执行漏洞/">命令执行&代码执行漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Web常见的源码泄露/">Web常见的源码泄露</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/09/RSA算法小结/">RSA算法小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/08/PHP反序列化/">PHP反序列化学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/04/i春秋-misc系列/">i春秋-misc系列</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/31/文件上传漏洞总结/">文件上传漏洞总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/28/隐写术/">隐写术</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/25/SQL注入一些过滤及绕过总结/">SQL注入一些过滤及绕过总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/21/SQL简单注入/">SQL简单注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/20/图片隐写/">图片隐写术</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/18/攻防世界——Misc系列/">攻防世界——Misc系列</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/14/Web——爆破wp/">WEB——爆破wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/10/WEB——php大法wp/">WEB——php大法wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/08/图片隐写——小苹果wp/">图片隐写——小苹果wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/10/xss挑战之旅学习笔记/">xss挑战之旅学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/07/xss学习总结/">xxs学习总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/25/SQL注入姿势（3）/">SQL注入姿势（3）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/12/SQL注入姿势（2）/">SQL注入姿势（2）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/10/SQL注入姿势（1）/">SQL注入姿势（1）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/06/PHP学习笔记（5）/">PHP学习笔记（5）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/05/PHP学习笔记（4）/">PHP学习笔记（4）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/28/php登录界面小结/">PHP登录界面小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/25/PHP学习笔记（3）/">PHP学习笔记（3）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/15/PHP学习笔记（2）/">PHP学习笔记（2）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/07/PHP学习笔记（1）/">PHP学习笔记（1）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/05/哈弗曼树/">哈弗曼树</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/27/css学习笔记/">CSS学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/25/HTML学习笔记/">HTML学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/25/MySQL的一些常用命令行总结/">MySQL的一些常用命令行总结</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2021 obsem
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

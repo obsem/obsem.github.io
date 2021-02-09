@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="obsem">
+
+
+
+<meta name="description" content="一、正则表达式正则表达式是由普通字符和特殊字符组成的字符串，描述了一类字符串的特征，然后通过这个特征可以配合一些特定的函数，来完成对字符串更加复杂的一系列操作！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP学习笔记（3）">
+<meta property="og:url" content="http://yoursite.com/2019/04/25/PHP学习笔记（3）/index.html">
+<meta property="og:site_name" content="obsetear">
+<meta property="og:description" content="一、正则表达式正则表达式是由普通字符和特殊字符组成的字符串，描述了一类字符串的特征，然后通过这个特征可以配合一些特定的函数，来完成对字符串更加复杂的一系列操作！">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-02-08T09:09:27.890Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PHP学习笔记（3）">
+<meta name="twitter:description" content="一、正则表达式正则表达式是由普通字符和特殊字符组成的字符串，描述了一类字符串的特征，然后通过这个特征可以配合一些特定的函数，来完成对字符串更加复杂的一系列操作！">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="obsetear" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>PHP学习笔记（3） | obsetear</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: false
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/2.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">obsem</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">obsem</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/2.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">obsem</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-PHP学习笔记（3）" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/04/25/PHP学习笔记（3）/" class="article-date">
+      <time datetime="2019-04-24T16:00:00.000Z" itemprop="datePublished">2019-04-25</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      PHP学习笔记（3）
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="一、正则表达式"><a href="#一、正则表达式" class="headerlink" title="一、正则表达式"></a>一、正则表达式</h1><p>正则表达式是由普通字符和特殊字符组成的字符串，描述了一类字符串的特征，然后通过这个特征可以配合一些特定的函数，来完成对字符串更加复杂的一系列操作！</p>
+<a id="more"></a>
+<p>例如： <code>/ a /</code> 就是一个正则表达式</p>
+<h1 id="二、定界符"><a href="#二、定界符" class="headerlink" title="二、定界符"></a>二、定界符</h1><p>一般习惯使用正斜线<code>/</code>作为定界符</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">除了字母、数字、和反斜线以外的字符都可以作为定界符，如：</span><br><span class="line">#</span><br><span class="line">!</span><br><span class="line">&#123;&#125;</span><br><span class="line">|</span><br></pre></td></tr></table></figure>
+
+<p>定界符要放在表达式的起始位置，前后一致</p>
+<h1 id="三、普通字符"><a href="#三、普通字符" class="headerlink" title="三、普通字符"></a>三、普通字符</h1><p>如：a-z、A-Z、单引号，双引号</p>
+<h1 id="四、元字符"><a href="#四、元字符" class="headerlink" title="四、元字符"></a>四、元字符</h1><p>元字符是指正则表达式中有特殊含义的字符</p>
+<p>常见的一些元字符：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">\d 	匹配任意一个十进制数字，等价于0-9</span><br><span class="line"></span><br><span class="line">\D 	匹配任意一个除十进制数字以外的字符</span><br><span class="line"></span><br><span class="line">\s 	匹配任意一个空白字符，如：换页符、换行符、回车符、制表符、垂直制表符</span><br><span class="line"></span><br><span class="line">\S 	匹配除空白字符以外的任意一个字符</span><br><span class="line"></span><br><span class="line">\w 	匹配任意一个数字或字母或下划线</span><br><span class="line"></span><br><span class="line">\W 	匹配除数字或字母或下划线的任意一个字符</span><br><span class="line"></span><br><span class="line">. 	匹配除换行符以外的任意一个字符</span><br><span class="line"></span><br><span class="line">* 	匹配0次、或1次、或多次其前面的字符</span><br><span class="line">* </span><br><span class="line">+ 	匹配1次或多次其前面的字符</span><br><span class="line">+ </span><br><span class="line">? 	匹配0次或1次其前面的字符</span><br><span class="line"></span><br><span class="line">&#123;n&#125; 	表示其前面的字符恰好出现n次</span><br><span class="line"></span><br><span class="line">&#123;n,&#125; 	表示其前面的字符出现的次数不少于n次</span><br><span class="line"></span><br><span class="line">&#123;n,m&#125;	 表示其前面的字符至少出现n次,最多出现m次</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">.*配合使用，默认情况下是贪婪匹配（尽可能多的去匹配字符）</span><br><span class="line"></span><br><span class="line">.*后面加一个 ? 可以解决贪婪匹配的问题，懒惰匹配</span><br><span class="line"></span><br><span class="line">^ 或 \A 匹配字符串开始位置（该符号应放在开头）（目标字符串在开头时才能匹配到）</span><br><span class="line"></span><br><span class="line">$ 或 \Z 匹配字符串结束位置（该符号应放在末尾）（目标字符串在末尾时才能匹配到）</span><br><span class="line"></span><br><span class="line">^和$配合使用 只能匹配到^和$中间的字符串</span><br><span class="line"></span><br><span class="line">| （或），可以匹配到|连接的任意一个字符串</span><br><span class="line"></span><br><span class="line">[] 可以匹配括号中任意的一个字符</span><br><span class="line"></span><br><span class="line">[^] 可以匹配除括号中的字符以外的任意一个字符 </span><br><span class="line"></span><br><span class="line">() 把括号中的内容作为一个整体以便获取</span><br><span class="line"></span><br><span class="line">在末尾加\\数字，\\数字代表第几个括号里的内容</span><br></pre></td></tr></table></figure>
+
+<h1 id="五、模式修正符"><a href="#五、模式修正符" class="headerlink" title="五、模式修正符"></a>五、模式修正符</h1><p>模式修正符是放在正则表达式的定界符之后的，用于增强正则表达式的处理能力，可多个搭配使用。</p>
+<h2 id="常见模式修正符"><a href="#常见模式修正符" class="headerlink" title="常见模式修正符"></a>常见模式修正符</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">i 匹配时不分大小写</span><br><span class="line"></span><br><span class="line"> m 多行匹配</span><br><span class="line"> 	</span><br><span class="line"> 	使用条件：</span><br><span class="line"> 		1）目标字符串中必须包含&quot;\n&quot;（字符串中的&quot;\n&quot;表示新一行的开始）</span><br><span class="line"> 		2）正则表达式中必须出现^或$</span><br><span class="line"> 	</span><br><span class="line"> 	基础知识：</span><br><span class="line"> 		Windows中的换行是通过(\r\n)来实现的</span><br><span class="line"> 		Linux中的换行是通过(\n)来完成的</span><br><span class="line">		</span><br><span class="line">s 可以让 . 匹配所有字符包括换行符(\n)</span><br><span class="line"></span><br><span class="line">U 禁止贪婪匹配</span><br></pre></td></tr></table></figure>
+
+<h1 id="六、与正则表达式配合的函数"><a href="#六、与正则表达式配合的函数" class="headerlink" title="六、与正则表达式配合的函数"></a>六、与正则表达式配合的函数</h1><p>1、<code>preg_match()</code>//执行一次正则表达式匹配（只要匹配到第一个符合要求的，就结束匹配）<br>    第一个参数：正则表达式<br>    第二个参数：目标字符串<br>    第三个参数（可选）：如果传入则会被填充为搜索结果<br>    第四个参数（可选）：可以传PREG_OFFSET_CAPTURE进入<br>    第五个参数（可选）：可以传一个数字，来表示从目标字符串的哪个位置开始搜索（从0开始数）</p>
+<p>2、<code>preg_match_all()</code>//执行一个全局表达式匹配（从字符串开头匹配到末尾，把符合的要求的全都匹配出来）</p>
+<p>3、<code>preg_replace()</code>//执行一个正则表达式的搜索和替换<br>    第一个参数：正则表达式<br>    第二个参数：要替换成的字符串<br>    第三个参数：目标字符串<br>    第四个参数（可选）：默认是-1，就是替换所以符合特征的部分<br>    第五个参数（可选）：可以放一个变量在里面，将会被填充为完成的替换次数</p>
+<h1 id="七、时间和日期"><a href="#七、时间和日期" class="headerlink" title="七、时间和日期"></a>七、时间和日期</h1><p>1、设置时区</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">deta_default_timezone_set(&apos;Asia/Shanghai&apos;);</span><br></pre></td></tr></table></figure>
+
+<p>2、获取当前Unix时间戳</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">time();//返回自从Unix纪元（格林威治时间1970年1月1日00:00:00到当前时间的秒数</span><br></pre></td></tr></table></figure>
+
+<p>3、获得指定时间点的时间戳</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mktime($hour,$minute,$second,$month,$day,$year);</span><br></pre></td></tr></table></figure>
+
+
+<p>4、从Unix时间戳取得时间日期信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">date()//格式化一个本地时间/日期</span><br></pre></td></tr></table></figure>
+
+<p>第一个参数（必填）：写上你需要的时间日期格式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data(&apos;Y-m-d G:i:s&apos;)</span><br></pre></td></tr></table></figure>
+
+<p>5、获取Unix时间和微妙数    </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">microtime()//返回当前Unix时间戳和微妙数</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="八、图像处理"><a href="#八、图像处理" class="headerlink" title="八、图像处理"></a>八、图像处理</h1><h2 id="1、创建图像"><a href="#1、创建图像" class="headerlink" title="1、创建图像"></a>1、创建图像</h2><h3 id="1）新建一个图像"><a href="#1）新建一个图像" class="headerlink" title="1）新建一个图像"></a>1）新建一个图像</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">imagecreatetruecolor($width,$height)//新建一个真彩色图像</span><br><span class="line"></span><br><span class="line">width:图像的宽</span><br><span class="line"></span><br><span class="line">height:图像的高</span><br></pre></td></tr></table></figure>
+
+<h3 id="2）打开服务器或网络文件中已经存在的GIF-PNG-JPEG-WBMP"><a href="#2）打开服务器或网络文件中已经存在的GIF-PNG-JPEG-WBMP" class="headerlink" title="2）打开服务器或网络文件中已经存在的GIF,PNG,JPEG,WBMP"></a>2）打开服务器或网络文件中已经存在的GIF,PNG,JPEG,WBMP</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">imahecreatefromjpeg();</span><br><span class="line"></span><br><span class="line">imahecreatefrompng();</span><br><span class="line"></span><br><span class="line">imahecreatefromgif();</span><br><span class="line"></span><br><span class="line">imahecreatefromwbmp();</span><br><span class="line">创建或打开失败时会返回空字符串，并且输出一条错误信息</span><br><span class="line"></span><br><span class="line">imahesx()//输出画布宽度</span><br><span class="line"></span><br><span class="line">imahesy()//输出画布高度</span><br><span class="line"></span><br><span class="line">getimagesize()//取得图像大小</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="2、绘制图像"><a href="#2、绘制图像" class="headerlink" title="2、绘制图像"></a>2、绘制图像</h2><p>绘图函数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">1）imagecolorallocate($img,$red,$green,$blue)//分配颜色</span><br><span class="line"></span><br><span class="line">2）imagefill()//区域填充</span><br><span class="line"></span><br><span class="line">3）imagesetpixel()//画一个单一像素</span><br><span class="line"></span><br><span class="line">4）imageline()//画一条线段</span><br><span class="line"></span><br><span class="line">5）imagerectangle()//画一个矩形</span><br><span class="line"></span><br><span class="line">6）imagestring()//水平低画一行字符串</span><br><span class="line"></span><br><span class="line">7）imagettftext()//用TrueType文字所占区域</span><br><span class="line"></span><br><span class="line">8）imagettfbbox()//计算TrueType文字所占区域</span><br><span class="line"></span><br><span class="line">9）imagecopy()//拷贝图像的一部分</span><br><span class="line"></span><br><span class="line">10）imagecopymere()//拷贝并合并图像的一部分</span><br><span class="line"></span><br><span class="line">11）imagecopyresampled()//从采样拷贝部分图像并调整大小</span><br></pre></td></tr></table></figure>
+
+<h2 id="3、生成图像"><a href="#3、生成图像" class="headerlink" title="3、生成图像"></a>3、生成图像</h2><p><code>header(&#39;Content-type:image/jpeg&#39;)</code>;（在此函数之前不能输出任何内容，该函数放在开头，告诉浏览器以image/jpeg的方式来读）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">imagegif()</span><br><span class="line"></span><br><span class="line">imagejpeg($img,&apos;图像要保存的名字&apos;)（还可以写要保存的路径）</span><br><span class="line"></span><br><span class="line">imagepng()</span><br><span class="line"></span><br><span class="line">imagewbmp()</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-释放资源"><a href="#4-释放资源" class="headerlink" title="4.释放资源"></a>4.释放资源</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">imagedestroy($img)</span><br></pre></td></tr></table></figure>
+
+<h1 id="九、文件与目录操作"><a href="#九、文件与目录操作" class="headerlink" title="九、文件与目录操作"></a>九、文件与目录操作</h1><h2 id="1、判断文件和目录"><a href="#1、判断文件和目录" class="headerlink" title="1、判断文件和目录"></a>1、判断文件和目录</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1）is_file()//判断给等文件名是否为一个正常文件</span><br><span class="line"></span><br><span class="line">2）is_dir()//判断给定文件名是否是一个目录</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、文件属性"><a href="#2、文件属性" class="headerlink" title="2、文件属性"></a>2、文件属性</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">1）file_exists()//检查文件或目录是否存在</span><br><span class="line"></span><br><span class="line">2）filesize()//取得普通文件大小</span><br><span class="line"></span><br><span class="line">3）is_readable()//判断给定文件名是否可读</span><br><span class="line"></span><br><span class="line">4）is_writable()//判断给定文件名是否可写</span><br><span class="line"></span><br><span class="line">5）filectime()//获取文件的创建时间</span><br><span class="line"></span><br><span class="line">6）filemtime()//获取文件的修改时间</span><br><span class="line"></span><br><span class="line">7）fileatime()//取得文件的上次访问时间</span><br><span class="line"></span><br><span class="line">8）stat()//获取文件大部分属性值</span><br></pre></td></tr></table></figure>
+
+<h2 id="3、目录的基本操作"><a href="#3、目录的基本操作" class="headerlink" title="3、目录的基本操作"></a>3、目录的基本操作</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">1）basename()//返回路径中的文件名部分</span><br><span class="line"></span><br><span class="line">2）dirname()//返回路径中的目录部分</span><br><span class="line"></span><br><span class="line">3）pathinfo()//返回文件路径的信息</span><br><span class="line"></span><br><span class="line">4）opendir()//打开目录句柄</span><br><span class="line"></span><br><span class="line">5）readdir()//从目录句柄中读取条目，返回目录中下一个文件的文件名</span><br><span class="line"></span><br><span class="line">6）rewinddir()//倒回目录句柄</span><br><span class="line"></span><br><span class="line">7）closedir()//关闭目录句柄</span><br><span class="line"></span><br><span class="line">8）mkdir()//新建目录</span><br><span class="line"></span><br><span class="line">9）rmdir()//删除指定的空目录</span><br><span class="line"></span><br><span class="line">10）scandir()//列出指定路径中的文件和目录</span><br></pre></td></tr></table></figure>
+
+<h2 id="4、文件的基本操作"><a href="#4、文件的基本操作" class="headerlink" title="4、文件的基本操作"></a>4、文件的基本操作</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">1）fopen()//打开文件或URL</span><br><span class="line"></span><br><span class="line">2）fread()//读取文件</span><br><span class="line"></span><br><span class="line">3）fgets()//从文件指针中读取一行</span><br><span class="line"></span><br><span class="line">4）feof()//测试文件指针是否到了文件结束位置</span><br><span class="line"></span><br><span class="line">5）fwrite()//写入文件</span><br><span class="line"></span><br><span class="line">6）rewind()//倒回文件指针的位置</span><br><span class="line"></span><br><span class="line">7）flock()//轻便的咨询文件锁定</span><br><span class="line"></span><br><span class="line">8）ftruncate()//将文件截断到给定的长度</span><br><span class="line"></span><br><span class="line">9）fclose()//关闭一个已打开的文件指针</span><br><span class="line"></span><br><span class="line">10）file()//把整个文件读入一个数组中</span><br><span class="line"></span><br><span class="line">11）copy()//拷贝文件</span><br><span class="line"></span><br><span class="line">12）unlink()//删除文件</span><br><span class="line"></span><br><span class="line">13）file_get_contents()//将整个文件读入一个字符串</span><br><span class="line"></span><br><span class="line">14）file_put_contents()//将字符串写入文件中</span><br><span class="line"></span><br><span class="line">15）rename()//重命名一个文件或目录</span><br><span class="line"></span><br><span class="line">16）readfile()//读入一个文件并写入到输出缓冲</span><br></pre></td></tr></table></figure>
+
+<h2 id="五、文件上传"><a href="#五、文件上传" class="headerlink" title="五、文件上传"></a>五、文件上传</h2><h2 id="1、与上传有关的php配置选项（php-ini）"><a href="#1、与上传有关的php配置选项（php-ini）" class="headerlink" title="1、与上传有关的php配置选项（php.ini）"></a>1、与上传有关的php配置选项（php.ini）</h2><p><code>file_uploads</code>（默认为on）：确定服务器上的PHP脚本是否可以接受HTTP文件上传</p>
+<p><code>memory_limit</code>：设置脚本可以分批的最大内存量（防止失控的脚本独占服务器内存）</p>
+<p><code>upload_max_filesize</code>：限制上传文件的最大值，此值必须小于post_max_size的值</p>
+<p><code>post_max_size</code>：限制通过POST方法可以接受的最大信息量</p>
+<p><code>upload_tmp_dir</code>（默认为NULL）：上传文件存放的临时路径</p>
+<h2 id="2、-FILES多维数组，用于存储各种与上传有关的信息"><a href="#2、-FILES多维数组，用于存储各种与上传有关的信息" class="headerlink" title="2、$_FILES多维数组，用于存储各种与上传有关的信息"></a>2、<code>$_FILES</code>多维数组，用于存储各种与上传有关的信息</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$_FILES[&apos;file&apos;][&apos;name&apos;]  文件的原名称，拓展名</span><br><span class="line"></span><br><span class="line">$_FILES[&apos;file&apos;][&apos;size&apos;]  上传文件的大小</span><br><span class="line"></span><br><span class="line">$_FILES[&apos;file&apos;][&apos;tmp_name&apos;]  文件上传后的临时名称</span><br><span class="line"></span><br><span class="line">$_FILES[&apos;file&apos;][&apos;error&apos;]    文件上传时产生的错误</span><br><span class="line">0：没有错误</span><br><span class="line">1：上传文件的大小超出了upload_max_filesize的值</span><br><span class="line">2：上传文件的大小超出了html表单中MAX_FILE_SIZE的值</span><br><span class="line">3：文件只被部分上传</span><br><span class="line">4：没有上传文件</span><br><span class="line">$_FILES[&apos;file&apos;][&apos;type&apos;]//获取上传文件的MIME类型</span><br></pre></td></tr></table></figure>
+
+<h2 id="3、有关php文件上传处理的函数"><a href="#3、有关php文件上传处理的函数" class="headerlink" title="3、有关php文件上传处理的函数"></a>3、有关php文件上传处理的函数</h2><p>1）<code>is_upload_file()</code>判断文件是否是通过POST上传的</p>
+<p>2）<code>move_upload_file()</code>文件上传后，可以使用该函数将文件移动到指定位置</p>
+<h2 id="4、文件上传"><a href="#4、文件上传" class="headerlink" title="4、文件上传"></a>4、文件上传</h2><p>文件的上传是通过html标签中的from标签来实现的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">header(&apos;Content-type:text/html;charset=utf-8&apos;);</span><br><span class="line">var_dump($_FILES);</span><br><span class="line">?&gt;</span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">	&lt;title&gt;文件上传&lt;/title&gt;</span><br><span class="line">	&lt;meta charset=&quot;utf-8&quot; /&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;form action=&quot;&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;</span><br><span class="line">	&lt;input type=&quot;file&quot; name=&quot;myfile&quot; /&gt;</span><br><span class="line">	&lt;input type=&quot;submit&quot; name=&quot;submit&quot; value=&quot;文件上传&quot; /&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="六、文件下载"><a href="#六、文件下载" class="headerlink" title="六、文件下载"></a>六、文件下载</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$file=&apos;&apos;;//里面填下载的文件的名称</span><br><span class="line"></span><br><span class="line">$fileinfo=finfo_open(FILEINFO_MIME_TYPE);</span><br><span class="line"></span><br><span class="line">$mineType=finfo_file($fileinfo, $file);</span><br><span class="line"></span><br><span class="line">finfo_close($fileinfo);</span><br><span class="line"></span><br><span class="line">header(&apos;Content-type:&apos;.$mineType);//发生指定的文件MIME类型的头信息</span><br><span class="line"></span><br><span class="line">header(&apos;Content-Disposition:attachement;filename=&apos;.basename($file));//指定下载文件的描述</span><br><span class="line"></span><br><span class="line">header(&apos;Content-Length:&apos;.filesize($file));//指定文件的大小</span><br><span class="line"></span><br><span class="line">readfile($file);//读取文件内容至输出缓冲区，返回这个文件</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2019/04/25/PHP学习笔记（3）/">PHP学习笔记（3）</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">obsem</a></p>
+        <p><span>发布时间:</span>2019-04-25, 00:00:00</p>
+        <p><span>最后更新:</span>2021-02-08, 17:09:27</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2019/04/25/PHP学习笔记（3）/" title="PHP学习笔记（3）">http://yoursite.com/2019/04/25/PHP学习笔记（3）/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/04/25/PHP学习笔记（3）/　　作者: obsem" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2019/04/28/php登录界面小结/">
+                    PHP登录界面小结
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2019/04/15/PHP学习笔记（2）/">
+                    PHP学习笔记（2）
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、正则表达式"><span class="toc-number">1.</span> <span class="toc-text">一、正则表达式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、定界符"><span class="toc-number">2.</span> <span class="toc-text">二、定界符</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、普通字符"><span class="toc-number">3.</span> <span class="toc-text">三、普通字符</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#四、元字符"><span class="toc-number">4.</span> <span class="toc-text">四、元字符</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#五、模式修正符"><span class="toc-number">5.</span> <span class="toc-text">五、模式修正符</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#常见模式修正符"><span class="toc-number">5.1.</span> <span class="toc-text">常见模式修正符</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#六、与正则表达式配合的函数"><span class="toc-number">6.</span> <span class="toc-text">六、与正则表达式配合的函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#七、时间和日期"><span class="toc-number">7.</span> <span class="toc-text">七、时间和日期</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#八、图像处理"><span class="toc-number">8.</span> <span class="toc-text">八、图像处理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、创建图像"><span class="toc-number">8.1.</span> <span class="toc-text">1、创建图像</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1）新建一个图像"><span class="toc-number">8.1.1.</span> <span class="toc-text">1）新建一个图像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2）打开服务器或网络文件中已经存在的GIF-PNG-JPEG-WBMP"><span class="toc-number">8.1.2.</span> <span class="toc-text">2）打开服务器或网络文件中已经存在的GIF,PNG,JPEG,WBMP</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、绘制图像"><span class="toc-number">8.2.</span> <span class="toc-text">2、绘制图像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、生成图像"><span class="toc-number">8.3.</span> <span class="toc-text">3、生成图像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-释放资源"><span class="toc-number">8.4.</span> <span class="toc-text">4.释放资源</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#九、文件与目录操作"><span class="toc-number">9.</span> <span class="toc-text">九、文件与目录操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、判断文件和目录"><span class="toc-number">9.1.</span> <span class="toc-text">1、判断文件和目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、文件属性"><span class="toc-number">9.2.</span> <span class="toc-text">2、文件属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、目录的基本操作"><span class="toc-number">9.3.</span> <span class="toc-text">3、目录的基本操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、文件的基本操作"><span class="toc-number">9.4.</span> <span class="toc-text">4、文件的基本操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五、文件上传"><span class="toc-number">9.5.</span> <span class="toc-text">五、文件上传</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1、与上传有关的php配置选项（php-ini）"><span class="toc-number">9.6.</span> <span class="toc-text">1、与上传有关的php配置选项（php.ini）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、-FILES多维数组，用于存储各种与上传有关的信息"><span class="toc-number">9.7.</span> <span class="toc-text">2、$_FILES多维数组，用于存储各种与上传有关的信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、有关php文件上传处理的函数"><span class="toc-number">9.8.</span> <span class="toc-text">3、有关php文件上传处理的函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、文件上传"><span class="toc-number">9.9.</span> <span class="toc-text">4、文件上传</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#六、文件下载"><span class="toc-number">10.</span> <span class="toc-text">六、文件下载</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"PHP学习笔记（3）　| obsetear　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2019/04/28/php登录界面小结/" title="上一篇: PHP登录界面小结">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2019/04/15/PHP学习笔记（2）/" title="下一篇: PHP学习笔记（2）">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/11/21/从文件上传到浅谈.htaccess文件的作用/">从文件上传到浅谈.htaccess文件的作用</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/19/记一次简单的渗透练习/">记一次简单的渗透练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/10/python 正则表达式小结（笔记）/">python正则表达式小结（笔记）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/08/upload-labs通关总结/">upload-labs通关小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/04/linux基础知识（笔记）/">Linux基础（笔记）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/03/BUUCTFweb部分解题思路2/">BUUCTFweb部分解题思路（PHP、Babysql、Upload、CheckIn）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/15/BUUCTF部分web题解/">BUUCTF部分web题解（easysql，easy_tornado，Ping Ping Ping）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/26/内网渗透之Linux提权姿势/">Linux提权</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/16/内网渗透之windows提权的几种姿势/">windows提权</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/06/内网渗透之免杀/">免杀</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/29/内网渗透之CobaltStrike/">CobaltStrike</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/26/内网渗透之Metasploit/">Metasploit</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/25/内网渗透之windows基础/">Windows基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/20/浅谈XXE漏洞：从XML到文件读取/">浅谈XXE漏洞：从XML到文件读取</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/04/SSRF漏洞/">SSRF漏洞小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/23/csrf漏洞小结/">CSRF漏洞小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/Mysql报错函数小结/">Mysql报错函数小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/10/文件包含漏洞小结/">浅谈文件包含漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/21/浅谈php一句话木马/">浅谈一句话木马</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/03/宽字节注入/">宽字节注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/23/攻防世界web系列/">攻防世界web系列</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/10/Owasp juice shop(一)/">Owasp juice shop(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/24/PHP代码审计之危险函数/">PHP代码审计之危险函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/22/PHP超级全局变量/">PHP超级全局变量</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/21/一些常见的编码/">一些常见的编码</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/17/命令执行&代码执行漏洞/">命令执行&代码执行漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Web常见的源码泄露/">Web常见的源码泄露</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/09/RSA算法小结/">RSA算法小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/08/PHP反序列化/">PHP反序列化学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/04/i春秋-misc系列/">i春秋-misc系列</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/31/文件上传漏洞总结/">文件上传漏洞总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/28/隐写术/">隐写术</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/25/SQL注入一些过滤及绕过总结/">SQL注入一些过滤及绕过总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/21/SQL简单注入/">SQL简单注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/20/图片隐写/">图片隐写术</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/18/攻防世界——Misc系列/">攻防世界——Misc系列</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/14/Web——爆破wp/">WEB——爆破wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/10/WEB——php大法wp/">WEB——php大法wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/08/图片隐写——小苹果wp/">图片隐写——小苹果wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/10/xss挑战之旅学习笔记/">xss挑战之旅学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/07/xss学习总结/">xxs学习总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/25/SQL注入姿势（3）/">SQL注入姿势（3）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/12/SQL注入姿势（2）/">SQL注入姿势（2）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/10/SQL注入姿势（1）/">SQL注入姿势（1）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/06/PHP学习笔记（5）/">PHP学习笔记（5）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/05/PHP学习笔记（4）/">PHP学习笔记（4）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/28/php登录界面小结/">PHP登录界面小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/25/PHP学习笔记（3）/">PHP学习笔记（3）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/15/PHP学习笔记（2）/">PHP学习笔记（2）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/07/PHP学习笔记（1）/">PHP学习笔记（1）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/05/哈弗曼树/">哈弗曼树</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/27/css学习笔记/">CSS学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/25/HTML学习笔记/">HTML学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/25/MySQL的一些常用命令行总结/">MySQL的一些常用命令行总结</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2021 obsem
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

