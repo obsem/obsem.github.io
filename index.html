@@ -263,6 +263,250 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-vulhub靶场struts2漏洞复现（四）" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/01/27/vulhub靶场struts2漏洞复现（四）/" class="article-date">
+      <time datetime="2021-01-26T16:00:00.000Z" itemprop="datePublished">2021-01-27</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/01/27/vulhub靶场struts2漏洞复现（四）/">vuhub靶场struts2漏洞复现（四）</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h2 id="0x01、S2-052-远程代码执行漏洞"><a href="#0x01、S2-052-远程代码执行漏洞" class="headerlink" title="0x01、S2-052 远程代码执行漏洞"></a>0x01、S2-052 远程代码执行漏洞</h2><p><strong>原理</strong></p>
+<p>Struts2-Rest-Plugin是让Struts2能够实现Restful API的一个插件，其根据Content-Type或URI扩展名来判断用户传入的数据包类型，有如下映射表：</p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+        <p class="article-more-link">
+          <a href="/2021/01/27/vulhub靶场struts2漏洞复现（四）/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-vulhub靶场struts2漏洞复现（三）" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/01/24/vulhub靶场struts2漏洞复现（三）/" class="article-date">
+      <time datetime="2021-01-23T16:00:00.000Z" itemprop="datePublished">2021-01-24</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/01/24/vulhub靶场struts2漏洞复现（三）/">vuhub靶场struts2漏洞复现（三）</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h2 id="0x01、S2-045-远程代码执行漏洞"><a href="#0x01、S2-045-远程代码执行漏洞" class="headerlink" title="0x01、S2-045 远程代码执行漏洞"></a>0x01、S2-045 远程代码执行漏洞</h2><p><strong>原理</strong></p>
+<p> 当基于Jakarta插件上传文件时，可导致远程代码执行。例如在系统中获得管理员权限，执行添加用户。可任意查看、修改或删除文件。造成机密数据泄露，重要信息遭到篡改等重大危害。 </p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+        <p class="article-more-link">
+          <a href="/2021/01/24/vulhub靶场struts2漏洞复现（三）/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-vulhub靶场struts2漏洞复现（二）" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/01/23/vulhub靶场struts2漏洞复现（二）/" class="article-date">
+      <time datetime="2021-01-22T16:00:00.000Z" itemprop="datePublished">2021-01-23</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/01/23/vulhub靶场struts2漏洞复现（二）/">vuhub靶场struts2漏洞复现（二）</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h2 id="0x01、S2-012远程代码执行漏洞"><a href="#0x01、S2-012远程代码执行漏洞" class="headerlink" title="0x01、S2-012远程代码执行漏洞"></a>0x01、S2-012远程代码执行漏洞</h2><p><strong>原理</strong></p>
+<p>如果在配置 Action 中 Result 时使用了重定向类型，并且还使用 ${param_name} 作为重定向变量例如：</p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+        <p class="article-more-link">
+          <a href="/2021/01/23/vulhub靶场struts2漏洞复现（二）/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-vulhub靶场struts2漏洞复现（一）" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/01/20/vulhub靶场struts2漏洞复现（一）/" class="article-date">
+      <time datetime="2021-01-19T16:00:00.000Z" itemprop="datePublished">2021-01-20</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/01/20/vulhub靶场struts2漏洞复现（一）/">vuhub靶场struts2漏洞复现（一）</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h2 id="0x01、S2-001远程代码执行漏洞"><a href="#0x01、S2-001远程代码执行漏洞" class="headerlink" title="0x01、S2-001远程代码执行漏洞"></a>0x01、S2-001远程代码执行漏洞</h2><p><strong>原理</strong></p>
+<p>该漏洞因为用户提交表单数据并且验证失败时，后端会将用户之前提交的参数值使用 OGNL 表达式 %{value} 进行解析，然后重新填充到对应的表单数据中。例如注册或登录页面，提交失败后端一般会默认返回之前提交的数据，由于后端使用 %{value} 对提交的数据执行了一次 OGNL 表达式解析，所以可以直接构造 Payload 进行命令执行</p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+        <p class="article-more-link">
+          <a href="/2021/01/20/vulhub靶场struts2漏洞复现（一）/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-从文件上传到浅谈.htaccess文件的作用" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -607,247 +851,6 @@
       
         <p class="article-more-link">
           <a href="/2020/10/03/BUUCTFweb部分解题思路2/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-BUUCTF部分web题解" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/09/15/BUUCTF部分web题解/" class="article-date">
-      <time datetime="2020-09-14T16:00:00.000Z" itemprop="datePublished">2020-09-15</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/09/15/BUUCTF部分web题解/">BUUCTF部分web题解（easysql，easy_tornado，Ping Ping Ping）</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h4 id="easysql"><a href="#easysql" class="headerlink" title="easysql"></a>easysql</h4><p>经过测试，发现过滤了很多东西，但有堆叠注入</p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-        <p class="article-more-link">
-          <a href="/2020/09/15/BUUCTF部分web题解/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-内网渗透之Linux提权姿势" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/08/26/内网渗透之Linux提权姿势/" class="article-date">
-      <time datetime="2020-08-25T16:00:00.000Z" itemprop="datePublished">2020-08-26</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/08/26/内网渗透之Linux提权姿势/">Linux提权</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h2 id="0x01、前言："><a href="#0x01、前言：" class="headerlink" title="0x01、前言："></a>0x01、前言：</h2><p>linux的权限划分没有windows的那么复杂，提权只用从普通权限提升到root权限就可以了。</p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-        <p class="article-more-link">
-          <a href="/2020/08/26/内网渗透之Linux提权姿势/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-内网渗透之windows提权的几种姿势" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/08/16/内网渗透之windows提权的几种姿势/" class="article-date">
-      <time datetime="2020-08-15T16:00:00.000Z" itemprop="datePublished">2020-08-16</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/08/16/内网渗透之windows提权的几种姿势/">windows提权</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h2 id="一、工具提权"><a href="#一、工具提权" class="headerlink" title="一、工具提权"></a>一、工具提权</h2><p><strong>1、msf提权</strong></p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-        <p class="article-more-link">
-          <a href="/2020/08/16/内网渗透之windows提权的几种姿势/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-内网渗透之免杀" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/08/06/内网渗透之免杀/" class="article-date">
-      <time datetime="2020-08-05T16:00:00.000Z" itemprop="datePublished">2020-08-06</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/08/06/内网渗透之免杀/">免杀</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h2 id="1、杀软-AV"><a href="#1、杀软-AV" class="headerlink" title="1、杀软(AV)"></a>1、杀软(AV)</h2><p><strong>检测技术</strong></p>
-<p>扫描技术(静态)</p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-        <p class="article-more-link">
-          <a href="/2020/08/06/内网渗透之免杀/#more">阅读全文 >></a>
         </p>
       
       <div class="clearfix"></div>

